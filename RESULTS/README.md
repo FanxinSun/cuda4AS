@@ -2,11 +2,34 @@
 
 Empty until a drop comes back.
 
-## Putting a tarball here
+## Sending results back — the repository is the transport both ways
 
-`run.sh` on the Mac leaves a file called
-`results-<hostname>-<UTC date>.tgz` next to itself. Unpack it under a
-directory named for the machine that produced it:
+This repository is private and exists partly so the drops can reach a machine
+outside this tree. The same path brings the answers home, which beats copying
+a tarball around by hand. On the Mac, once `./run.sh` has finished:
+
+```sh
+cd <the cuda4AS clone>
+mkdir -p RESULTS/as-phase0/$(hostname -s)
+tar xzf drop/as-phase0/results-*.tgz -C RESULTS/as-phase0/$(hostname -s) --strip-components=1
+cp drop/as-phase0/results-*.tgz RESULTS/as-phase0/$(hostname -s)/
+git add RESULTS
+git commit -m "as-phase0 results from $(hostname -s), $(sw_vers -productVersion)"
+git push
+```
+
+A few tens of KB. `.gitignore` keeps the drop's own working `results/` and
+`build/` directories and the loose tarball out of the repository, so only what
+is copied under `RESULTS/` is committed — nothing sweeps up build products by
+accident.
+
+Then, back here, `git pull` and read.
+
+## Putting a tarball here by hand
+
+If the Mac has no push access, `run.sh` leaves a file called
+`results-<hostname>-<UTC date>.tgz` next to itself; copy it across and unpack
+it under a directory named for the machine that produced it:
 
 ```sh
 mkdir -p cuda4AS/RESULTS/as-phase0/<hostname>

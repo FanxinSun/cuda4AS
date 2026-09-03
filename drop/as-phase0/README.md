@@ -88,6 +88,11 @@ results/
 
 Roughly 22 MB goes to the Mac; the tarball coming back is a few tens of KB.
 
+If you cloned the cuda4AS repository rather than copying this directory
+across, the quickest way to send the results home is to commit them: the
+`RESULTS/README.md` at the top of that repository has the four commands.
+Otherwise just send the tarball.
+
 ## What is in here
 
 ```
