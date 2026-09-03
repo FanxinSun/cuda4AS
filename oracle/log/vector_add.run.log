@@ -1,0 +1,3 @@
+ORACLE_JSON {"kernel": "vector_add", "dtype": "f32", "shape": [1048576], "bytes": 4194304, "compare": "exact", "notes": "c=a+b; inputs are exact multiples of 1/256"}
+
+---- stderr ----

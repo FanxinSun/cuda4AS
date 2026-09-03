@@ -1,0 +1,3 @@
+ORACLE_JSON {"kernel": "saxpy", "dtype": "f32", "shape": [1048576], "bytes": 4194304, "compare": "exact", "notes": "y=2.5*x+y; exact whether or not the multiply-add is contracted"}
+
+---- stderr ----

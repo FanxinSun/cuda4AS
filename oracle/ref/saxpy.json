@@ -1,0 +1,25 @@
+{
+  "kernel": "saxpy",
+  "dtype": "f32",
+  "shape": [
+    1048576
+  ],
+  "bytes": 4194304,
+  "compare": "exact",
+  "notes": "y=2.5*x+y; exact whether or not the multiply-add is contracted",
+  "sha256": "70949ff55979f4a3eaebb6d904fa2115d90328cf4f2d7040460159057f2462ca",
+  "bytes_on_disk": 4194304,
+  "build_command": "/usr/local/cuda-13/bin/nvcc -O2 -arch=sm_120 -std=c++17 -I /home/rog/business/YFCE/cuda4AS/oracle/src /home/rog/business/YFCE/cuda4AS/oracle/src/saxpy.cu -o /home/rog/business/YFCE/cuda4AS/oracle/build/saxpy",
+  "arch": "sm_120",
+  "machine": {
+    "role": "correctness oracle only -- not a performance target, not an envelope; see YFCE CLAUDE.md rule 1",
+    "collected_utc": "2026-09-03T07:21:13+00:00",
+    "host": "DESKTOP-V6NN9KI",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "platform": "Linux 6.18.33.2-microsoft-standard-WSL2",
+    "gpu": "NVIDIA GeForce RTX 5080, 610.88, 16303 MiB, 12.0",
+    "nvcc": "Build cuda_13.2.r13.2/compiler.37953736_0",
+    "nvcc_path": "/usr/local/cuda-13/bin/nvcc"
+  },
+  "stderr": null
+}

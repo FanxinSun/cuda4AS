@@ -1,0 +1,2 @@
+/usr/local/cuda-13/bin/nvcc -O2 -arch=sm_120 -std=c++17 -I /home/rog/business/YFCE/cuda4AS/oracle/src /home/rog/business/YFCE/cuda4AS/oracle/src/reduce_sum.cu -o /home/rog/business/YFCE/cuda4AS/oracle/build/reduce_sum
+

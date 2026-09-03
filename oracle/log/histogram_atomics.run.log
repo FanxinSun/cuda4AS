@@ -1,0 +1,3 @@
+ORACLE_JSON {"kernel": "histogram_atomics", "dtype": "u32", "shape": [256], "bytes": 1024, "compare": "exact", "notes": "shared then global atomicAdd over 4 Mi bytes"}
+
+---- stderr ----

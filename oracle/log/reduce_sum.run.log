@@ -1,0 +1,3 @@
+ORACLE_JSON {"kernel": "reduce_sum", "dtype": "f32", "shape": [4096], "bytes": 16384, "compare": "exact", "notes": "per-block partial sums; shared memory + __shfl_down_sync; exact by construction"}
+
+---- stderr ----

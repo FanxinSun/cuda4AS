@@ -1,0 +1,3 @@
+ORACLE_JSON {"kernel": "double_dot", "dtype": "f64", "shape": [4096], "bytes": 32768, "compare": "exact", "notes": "per-block FP64 dot products; exact by construction"}
+
+---- stderr ----

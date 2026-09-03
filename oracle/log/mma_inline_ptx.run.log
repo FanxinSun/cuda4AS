@@ -1,0 +1,3 @@
+ORACLE_JSON {"kernel": "mma_inline_ptx", "dtype": "f32", "shape": [16, 8], "bytes": 512, "compare": "exact", "notes": "one mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32 in inline asm"}
+
+---- stderr ----

@@ -1,0 +1,4 @@
+ORACLE_JSON {"kernel": "grid_sync", "dtype": "u32", "shape": [504], "bytes": 2016, "compare": "exact", "notes": "cooperative launch; block count is occupancy-derived on the oracle card and is NOT a target constant"}
+
+---- stderr ----
+grid_sync: 504 blocks (6 per SM x 84 SMs, capped)

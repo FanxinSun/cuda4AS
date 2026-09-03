@@ -1,0 +1,26 @@
+{
+  "kernel": "matmul_tiled",
+  "dtype": "f32",
+  "shape": [
+    512,
+    512
+  ],
+  "bytes": 1048576,
+  "compare": "exact",
+  "notes": "32x32 shared tiles; exact by construction, order-independent",
+  "sha256": "97f09e437a4f24d2cd22fd5eece3374cc68365fa537c43ee01e859d34472b102",
+  "bytes_on_disk": 1048576,
+  "build_command": "/usr/local/cuda-13/bin/nvcc -O2 -arch=sm_120 -std=c++17 -I /home/rog/business/YFCE/cuda4AS/oracle/src /home/rog/business/YFCE/cuda4AS/oracle/src/matmul_tiled.cu -o /home/rog/business/YFCE/cuda4AS/oracle/build/matmul_tiled",
+  "arch": "sm_120",
+  "machine": {
+    "role": "correctness oracle only -- not a performance target, not an envelope; see YFCE CLAUDE.md rule 1",
+    "collected_utc": "2026-09-03T07:21:13+00:00",
+    "host": "DESKTOP-V6NN9KI",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "platform": "Linux 6.18.33.2-microsoft-standard-WSL2",
+    "gpu": "NVIDIA GeForce RTX 5080, 610.88, 16303 MiB, 12.0",
+    "nvcc": "Build cuda_13.2.r13.2/compiler.37953736_0",
+    "nvcc_path": "/usr/local/cuda-13/bin/nvcc"
+  },
+  "stderr": null
+}

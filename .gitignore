@@ -1,0 +1,10 @@
+# nvcc's output for the oracle harness -- rebuilt by oracle/run_oracle.py in
+# about 15 seconds, and ~10 MB of x86-64 binaries has no business in a repo
+# whose whole point is that it targets someone else's hardware.
+oracle/build/
+
+# Produced on the Mac by drop/as-phase0/run.sh; the returned tarball is
+# unpacked under RESULTS/ instead.
+drop/as-phase0/results/
+drop/as-phase0/build/
+drop/as-phase0/*.tgz

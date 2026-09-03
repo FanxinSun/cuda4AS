@@ -1,0 +1,78 @@
+{
+  "machine": {
+    "role": "correctness oracle only -- not a performance target, not an envelope; see YFCE CLAUDE.md rule 1",
+    "collected_utc": "2026-09-03T07:21:13+00:00",
+    "host": "DESKTOP-V6NN9KI",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "platform": "Linux 6.18.33.2-microsoft-standard-WSL2",
+    "gpu": "NVIDIA GeForce RTX 5080, 610.88, 16303 MiB, 12.0",
+    "nvcc": "Build cuda_13.2.r13.2/compiler.37953736_0",
+    "nvcc_path": "/usr/local/cuda-13/bin/nvcc"
+  },
+  "arch": "sm_120",
+  "kernels": [
+    {
+      "kernel": "vector_add",
+      "status": "ok",
+      "sha256": "ed551637cf393112d0093037a0b41b9d1e9bd213c6037e8efcde30cf480f0332",
+      "bytes": 4194304,
+      "compare": "exact"
+    },
+    {
+      "kernel": "saxpy",
+      "status": "ok",
+      "sha256": "70949ff55979f4a3eaebb6d904fa2115d90328cf4f2d7040460159057f2462ca",
+      "bytes": 4194304,
+      "compare": "exact"
+    },
+    {
+      "kernel": "reduce_sum",
+      "status": "ok",
+      "sha256": "1e9a9b2b2a225e70b13ed112181d70b6d6be1cad00577bd0986907fffa3e12b0",
+      "bytes": 16384,
+      "compare": "exact"
+    },
+    {
+      "kernel": "matmul_tiled",
+      "status": "ok",
+      "sha256": "97f09e437a4f24d2cd22fd5eece3374cc68365fa537c43ee01e859d34472b102",
+      "bytes": 1048576,
+      "compare": "exact"
+    },
+    {
+      "kernel": "histogram_atomics",
+      "status": "ok",
+      "sha256": "1c3febdc0e0a6affa4a2d05ba1f98d0fe1604d3c3cfdf398a84da96f651ead4c",
+      "bytes": 1024,
+      "compare": "exact"
+    },
+    {
+      "kernel": "shared_48kb",
+      "status": "ok",
+      "sha256": "02de6cdeaee2558edd7d428420a539a1e9bc68a12722a49d91a522d0098886dc",
+      "bytes": 65536,
+      "compare": "exact"
+    },
+    {
+      "kernel": "mma_inline_ptx",
+      "status": "ok",
+      "sha256": "a1ca504830bd3182aa3a4bdad30e51985fb2ab0cb98c205a74f518dae1e75319",
+      "bytes": 512,
+      "compare": "exact"
+    },
+    {
+      "kernel": "grid_sync",
+      "status": "ok",
+      "sha256": "4fbd942528ebeb6cb546cbbbd2177efc399f9ec609356d727d864368cb66b089",
+      "bytes": 2016,
+      "compare": "exact"
+    },
+    {
+      "kernel": "double_dot",
+      "status": "ok",
+      "sha256": "10857aa39522c523ccdbc34ff62c041e07c6ae239034003f84bb695942b7891b",
+      "bytes": 32768,
+      "compare": "exact"
+    }
+  ]
+}

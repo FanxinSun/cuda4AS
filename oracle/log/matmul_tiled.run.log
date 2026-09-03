@@ -1,0 +1,3 @@
+ORACLE_JSON {"kernel": "matmul_tiled", "dtype": "f32", "shape": [512, 512], "bytes": 1048576, "compare": "exact", "notes": "32x32 shared tiles; exact by construction, order-independent"}
+
+---- stderr ----

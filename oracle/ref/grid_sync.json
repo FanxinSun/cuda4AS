@@ -1,0 +1,25 @@
+{
+  "kernel": "grid_sync",
+  "dtype": "u32",
+  "shape": [
+    504
+  ],
+  "bytes": 2016,
+  "compare": "exact",
+  "notes": "cooperative launch; block count is occupancy-derived on the oracle card and is NOT a target constant",
+  "sha256": "4fbd942528ebeb6cb546cbbbd2177efc399f9ec609356d727d864368cb66b089",
+  "bytes_on_disk": 2016,
+  "build_command": "/usr/local/cuda-13/bin/nvcc -O2 -arch=sm_120 -std=c++17 -I /home/rog/business/YFCE/cuda4AS/oracle/src /home/rog/business/YFCE/cuda4AS/oracle/src/grid_sync.cu -o /home/rog/business/YFCE/cuda4AS/oracle/build/grid_sync -rdc=true -lcudadevrt",
+  "arch": "sm_120",
+  "machine": {
+    "role": "correctness oracle only -- not a performance target, not an envelope; see YFCE CLAUDE.md rule 1",
+    "collected_utc": "2026-09-03T07:21:13+00:00",
+    "host": "DESKTOP-V6NN9KI",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "platform": "Linux 6.18.33.2-microsoft-standard-WSL2",
+    "gpu": "NVIDIA GeForce RTX 5080, 610.88, 16303 MiB, 12.0",
+    "nvcc": "Build cuda_13.2.r13.2/compiler.37953736_0",
+    "nvcc_path": "/usr/local/cuda-13/bin/nvcc"
+  },
+  "stderr": "grid_sync: 504 blocks (6 per SM x 84 SMs, capped)"
+}

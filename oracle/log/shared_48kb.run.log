@@ -1,0 +1,3 @@
+ORACLE_JSON {"kernel": "shared_48kb", "dtype": "u32", "shape": [64, 256], "bytes": 65536, "compare": "exact", "notes": "static 49152 B __shared__; the >32 KiB spill case of blueprint 2.3"}
+
+---- stderr ----
