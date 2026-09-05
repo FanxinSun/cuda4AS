@@ -81,16 +81,56 @@ fetched.
 it with provenance recorded (`drop/as-phase0/lmz/PROVENANCE.md`); it is never
 edited, never committed inside, and its gitlink is never staged.
 
-## Where the blueprint's gates stand
+## Priority — compatibility first, speed second
 
-| gate | asks | phase 0a status |
+Set by the user on 2026-09-05: **"Our main purpose is to make sure all CUDA
+scripts/programs can smoothly run on AS, the speed is the second issue."**
+
+That sequences the gates. *Does it build and run, unmodified* comes before
+*how fast it goes*, so **G-C1** and **G-C3** lead and **G-C2** follows. The
+performance work still has to happen — §2.6 defines smoothness as a table of
+measurable things and "runs at all" is its first row, not its only one — but it
+is not what the next months are spent on.
+
+It also changes how a result is read. A construct that is **refused or absent**
+is a correctness blocker and outranks any throughput number from the same run.
+
+| gate | asks | status |
 |---|---|---|
-| **G-C0** probes | the alias, the heap ceiling, co-residency, BF16 on the accelerators | the drop is built and asks all four; unanswered until a Mac runs it |
-| **G-C1** compiler | cuda-samples, CUTLASS, llama.cpp build unchanged through a reused front-end | phase 0b; gated on the clang fetch |
-| **G-C2** matrix units | a cuBLAS-ABI GEMM at ≥ 80 % of MLX on the same chip | after G-C0's tensor-op answer |
-| **G-C6** coded tier | lmz's Metal decoder verifies byte-identical | in the drop as `p8`; first Apple-GPU run of it, ever |
+| **G-C0** probes | the alias, the heap ceiling, co-residency, BF16 on the accelerators | **PASSED** on an M1 Pro, 2026-09-05. Two forks taken, the BF16 question deferred to M5-class hardware. `RESULTS/as-phase0/Studio/` |
+| **G-C1** compiler | cuda-samples, the CUTLASS Ampere examples and llama.cpp `GGML_CUDA=ON` build with **zero edits** and run correctly | **now the top gate.** Blocked only on the clang fetch; needs no Apple GPU beyond the one already in hand |
+| **G-C3** smoothness | drop-in `nvcc` for CMake/setuptools/PyTorch; PyTorch from source; `pip install flash-attn` | second. The other half of "runs smoothly" |
+| **G-C6** coded tier | lmz's Metal decoder verifies byte-identical | needs its own host harness — lmz's `bench.swift` dies on `MTLCreateSystemDefaultDevice()`, which returns nil on the test machine |
+| **G-C2** matrix units | a cuBLAS-ABI GEMM at ≥ 80 % of MLX on the same chip | after the compatibility gates. Needs M5-class hardware to be worth measuring |
 
-`oracle/ref/` holds the bit-exact reference outputs for the nine-kernel
-corpus that G-C1's translator will be checked against. They were produced on
-the RTX 5080 in this box, which is a **correctness oracle only** — no timing
-was recorded and no performance target is set from that card.
+### What G-C0 found, under this priority
+
+Six things that **already work**, and cost the translator nothing:
+
+- warp ↔ SIMD-group is **1:1 at 32 lanes**, so the whole `__shfl_*` /
+  `__ballot_sync` / `__any` / `__all` family maps directly
+- `simd_ballot` + `popcount` are exact
+- `simdgroup_barrier` fences memory correctly inside a divergent branch
+- `makeBuffer(bytesNoCopy:)` is coherent, so host allocations are kernel-bindable
+- `atomic_float` add is native — `atomicAdd(float*)` needs no emulation
+- a 1024-thread block maps 1:1 to a threadgroup
+
+Seven that are **correctness blockers**, every one of which must be built
+before a real CUDA program runs unmodified:
+
+| found | consequence |
+|---|---|
+| threadgroup memory is exactly 32,768 B | a 48 KB static `__shared__` array cannot launch; §2.3's spill transform is **mandatory** |
+| `atomic_ulong` has no operations at all | 64-bit atomics are **absent**, not partial; the lock-backed fallback is required |
+| `double` refused: *"'double' is not supported in Metal"* | the FP64 software path or the CPU device is required |
+| no independent thread scheduling — 3 lanes of 256 acquired | CUDA intra-warp spin locks **deadlock**; the translator must detect and reject them with a diagnostic |
+| `vm_remap` and `mach_vm_remap` both `KERN_NO_SPACE` | `cudaMallocManaged` pointer identity must be reconstructed by compiler rebasing |
+| `maxBufferLength` = 8.00 GiB = 50 % of RAM | `cudaMalloc` past that fails until the §2.7 tiers exist |
+| `MTLCreateSystemDefaultDevice()` returns nil in a normal Aqua session | the runtime must never acquire its device through the system default alone |
+
+**Nothing found is impossible.** Every blocker has a known mechanism in the
+blueprint; they are work, not walls.
+
+`oracle/ref/` holds the bit-exact reference outputs for the nine-kernel corpus
+G-C1's translator will be checked against — produced on the RTX 5080 in this
+box, which is a **correctness oracle only**.
