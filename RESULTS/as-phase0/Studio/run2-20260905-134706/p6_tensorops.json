@@ -1,0 +1,264 @@
+{
+  "probe": "p6_tensorops",
+  "schema": 1,
+  "machine": {
+    "collected_utc": "2026-09-05T13:46:57Z",
+    "hostname": "fanxins-macbook-pro.local",
+    "os_product": "macOS",
+    "os_version": "14.4",
+    "os_build": "23E214",
+    "os_version_string": "Version 14.4 (Build 23E214)",
+    "arch": "arm64",
+    "cpu_brand": "Apple M1 Pro",
+    "cpu_logical": 8,
+    "cpu_perf_cores": 6,
+    "cpu_eff_cores": 2,
+    "ram_bytes": 17179869184,
+    "ram_bytes_sysctl": 17179869184,
+    "page_size": 16384,
+    "developer_dir": "/Applications/Xcode.app/Contents/Developer",
+    "swiftc_version": "Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)\nTarget: arm64-apple-macosx14.0",
+    "sdk_version": null,
+    "metal_compiler": "Apple metal version 32023.101 (metalfe-32023.101)\nTarget: air64-apple-darwin23.4.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/metal/macos/bin",
+    "gpu_core_count": 14,
+    "device_acquisition_route": "MTLCopyAllDevices().first -- the system default was nil, which means this session has no window server but IOKit enumeration works",
+    "session": {
+      "launchctl_managername": "Aqua",
+      "is_aqua_session": true,
+      "ssh_env_present": false,
+      "ssh_connection": null,
+      "ssh_tty": null,
+      "term_program": "Apple_Terminal",
+      "metal_device_count": 1,
+      "reading": "a window-server session; a nil device here would be a real finding"
+    },
+    "gpu_name": "Apple M1 Pro",
+    "gpu_registry_id": 4294969587,
+    "has_unified_memory": true,
+    "recommended_max_working_set_size": 11453251584,
+    "max_buffer_length": 8589934592,
+    "max_threadgroup_memory_length": 32768,
+    "max_threads_per_threadgroup": {
+      "width": 1024,
+      "height": 1024,
+      "depth": 1024
+    },
+    "gpu_families": [
+      {
+        "raw": 1001,
+        "name": "apple1",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1002,
+        "name": "apple2",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1003,
+        "name": "apple3",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1004,
+        "name": "apple4",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1005,
+        "name": "apple5",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1006,
+        "name": "apple6",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1007,
+        "name": "apple7",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1008,
+        "name": "apple8",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 1009,
+        "name": "apple9",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 1010,
+        "name": "apple10",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 1011,
+        "name": "apple11",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 2001,
+        "name": "mac1",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 2002,
+        "name": "mac2",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 3001,
+        "name": "common1",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 3002,
+        "name": "common2",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 3003,
+        "name": "common3",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 4001,
+        "name": "macCatalyst1",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 4002,
+        "name": "macCatalyst2",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 5001,
+        "name": "metal3",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 5002,
+        "name": "metal4",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 5003,
+        "name": "metal5",
+        "known_to_sdk": true,
+        "supported": false
+      }
+    ]
+  },
+  "shape": {
+    "m": 1024,
+    "n": 1024,
+    "k": 1024
+  },
+  "tile": {
+    "m": 64,
+    "n": 32,
+    "simdgroups": 4
+  },
+  "flop_per_matmul": 2147483648.0,
+  "reference_spelling": "github.com/liuliu/example_matmul_metal4 Sources/matmul/shader.metal, checked 2026-09-03; mpp::tensor_ops::matmul2d over tensor_inline views, static slices",
+  "gpu_family_metal4_supported": false,
+  "language_versions": {
+    "msl_4_0": {
+      "accepted": false,
+      "error": "Error Domain=MTLLibraryErrorDomain Code=3 \"error: invalid value 'metal4.0' in '-std=metal4.0'\nnote: use 'ios-metal1.0' for 'Metal 1.0 (iOS)' standard\nnote: use 'ios-metal1.1' for 'Metal 1.1 (iOS)' standard\nnote: use 'ios-metal1.2' for 'Metal 1.2 (iOS)' standard\nnote: use 'ios-metal2.0' for 'Metal 2.0 (iOS)' standard\nnote: use 'ios-metal2.1' for 'Metal 2.1 (iOS)' standard\nnote: use 'ios-metal2.2' for 'Metal 2.2 (iOS)' standard\nnote: use 'ios-metal2.3' for 'Metal 2.3 (iOS)' standard\nnote: use 'ios-metal2.4' for 'Metal 2.4 (iOS)' standard\nnote: use 'macos-metal1.0' or 'osx-metal1.0' for 'Metal 1.0 (macOS)' standard\nnote: use 'macos-metal1.1' or 'osx-metal1.1' for 'Metal 1.1 (macOS)' standard\nnote: use 'macos-metal1.2' or 'osx-metal1.2' for 'Metal 1.2 (macOS)' standard\nnote: use 'macos-metal2.0' or 'osx-metal2.0' for 'Metal 2.0 (macOS)' standard\nnote: use 'macos-metal2.1' for 'Metal 2.1 (macOS)' standard\nnote: use 'macos-metal2.2' for 'Metal 2.2 (macOS)' standard\nnote: use 'macos-metal2.3' for 'Metal 2.3 (macOS)' standard\nnote: use 'macos-metal2.4' for 'Metal 2.4 (macOS)' standard\nnote: use 'metal3.0' for 'Metal 3.0' standard\nnote: use 'metal3.1' for 'Metal 3.1' standard\n\" UserInfo={NSLocalizedDescription=error: invalid value 'metal4.0' in '-std=metal4.0'\nnote: use 'ios-metal1.0' for 'Metal 1.0 (iOS)' standard\nnote: use 'ios-metal1.1' for 'Metal 1.1 (iOS)' standard\nnote: use 'ios-metal1.2' for 'Metal 1.2 (iOS)' standard\nnote: use 'ios-metal2.0' for 'Metal 2.0 (iOS)' standard\nnote: use 'ios-metal2.1' for 'Metal 2.1 (iOS)' standard\nnote: use 'ios-metal2.2' for 'Metal 2.2 (iOS)' standard\nnote: use 'ios-metal2.3' for 'Metal 2.3 (iOS)' standard\nnote: use 'ios-metal2.4' for 'Metal 2.4 (iOS)' standard\nnote: use 'macos-metal1.0' or 'osx-metal1.0' for 'Metal 1.0 (macOS)' standard\nnote: use 'macos-metal1.1' or 'osx-metal1.1' for 'Metal 1.1 (macOS)' standard\nnote: use 'macos-metal1.2' or 'osx-metal1.2' for 'Metal 1.2 (macOS)' standard\nnote: use 'macos-metal2.0' or 'osx-metal2.0' for 'Metal 2.0 (macOS)' standard\nnote: use 'macos-metal2.1' for 'Metal 2.1 (macOS)' standard\nnote: use 'macos-metal2.2' for 'Metal 2.2 (macOS)' standard\nnote: use 'macos-metal2.3' for 'Metal 2.3 (macOS)' standard\nnote: use 'macos-metal2.4' for 'Metal 2.4 (macOS)' standard\nnote: use 'metal3.0' for 'Metal 3.0' standard\nnote: use 'metal3.1' for 'Metal 3.1' standard\n}"
+    },
+    "msl_4_1": {
+      "accepted": false,
+      "error": "Error Domain=MTLLibraryErrorDomain Code=3 \"error: invalid value 'metal4.1' in '-std=metal4.1'\nnote: use 'ios-metal1.0' for 'Metal 1.0 (iOS)' standard\nnote: use 'ios-metal1.1' for 'Metal 1.1 (iOS)' standard\nnote: use 'ios-metal1.2' for 'Metal 1.2 (iOS)' standard\nnote: use 'ios-metal2.0' for 'Metal 2.0 (iOS)' standard\nnote: use 'ios-metal2.1' for 'Metal 2.1 (iOS)' standard\nnote: use 'ios-metal2.2' for 'Metal 2.2 (iOS)' standard\nnote: use 'ios-metal2.3' for 'Metal 2.3 (iOS)' standard\nnote: use 'ios-metal2.4' for 'Metal 2.4 (iOS)' standard\nnote: use 'macos-metal1.0' or 'osx-metal1.0' for 'Metal 1.0 (macOS)' standard\nnote: use 'macos-metal1.1' or 'osx-metal1.1' for 'Metal 1.1 (macOS)' standard\nnote: use 'macos-metal1.2' or 'osx-metal1.2' for 'Metal 1.2 (macOS)' standard\nnote: use 'macos-metal2.0' or 'osx-metal2.0' for 'Metal 2.0 (macOS)' standard\nnote: use 'macos-metal2.1' for 'Metal 2.1 (macOS)' standard\nnote: use 'macos-metal2.2' for 'Metal 2.2 (macOS)' standard\nnote: use 'macos-metal2.3' for 'Metal 2.3 (macOS)' standard\nnote: use 'macos-metal2.4' for 'Metal 2.4 (macOS)' standard\nnote: use 'metal3.0' for 'Metal 3.0' standard\nnote: use 'metal3.1' for 'Metal 3.1' standard\n\" UserInfo={NSLocalizedDescription=error: invalid value 'metal4.1' in '-std=metal4.1'\nnote: use 'ios-metal1.0' for 'Metal 1.0 (iOS)' standard\nnote: use 'ios-metal1.1' for 'Metal 1.1 (iOS)' standard\nnote: use 'ios-metal1.2' for 'Metal 1.2 (iOS)' standard\nnote: use 'ios-metal2.0' for 'Metal 2.0 (iOS)' standard\nnote: use 'ios-metal2.1' for 'Metal 2.1 (iOS)' standard\nnote: use 'ios-metal2.2' for 'Metal 2.2 (iOS)' standard\nnote: use 'ios-metal2.3' for 'Metal 2.3 (iOS)' standard\nnote: use 'ios-metal2.4' for 'Metal 2.4 (iOS)' standard\nnote: use 'macos-metal1.0' or 'osx-metal1.0' for 'Metal 1.0 (macOS)' standard\nnote: use 'macos-metal1.1' or 'osx-metal1.1' for 'Metal 1.1 (macOS)' standard\nnote: use 'macos-metal1.2' or 'osx-metal1.2' for 'Metal 1.2 (macOS)' standard\nnote: use 'macos-metal2.0' or 'osx-metal2.0' for 'Metal 2.0 (macOS)' standard\nnote: use 'macos-metal2.1' for 'Metal 2.1 (macOS)' standard\nnote: use 'macos-metal2.2' for 'Metal 2.2 (macOS)' standard\nnote: use 'macos-metal2.3' for 'Metal 2.3 (macOS)' standard\nnote: use 'macos-metal2.4' for 'Metal 2.4 (macOS)' standard\nnote: use 'metal3.0' for 'Metal 3.0' standard\nnote: use 'metal3.1' for 'Metal 3.1' standard\n}"
+    }
+  },
+  "fp16": {
+    "source_path": "/Users/yaminocellist/git_repos/as-phase0/probes/p6_matmul_fp16.metal",
+    "metallib_path": "/Users/yaminocellist/git_repos/as-phase0/build/p6_matmul_fp16.metallib",
+    "runtime_compile": {
+      "source_found": true,
+      "attempts": [
+        {
+          "language_version": "default",
+          "compiled": false,
+          "error": "Error Domain=MTLLibraryErrorDomain Code=3 \"program_source:29:10: fatal error: 'metal_tensor' file not found\n#include <metal_tensor>\n         ^~~~~~~~~~~~~~\n\" UserInfo={NSLocalizedDescription=program_source:29:10: fatal error: 'metal_tensor' file not found\n#include <metal_tensor>\n         ^~~~~~~~~~~~~~\n}"
+        },
+        {
+          "language_version": "4.0",
+          "compiled": false,
+          "error": "Error Domain=MTLLibraryErrorDomain Code=3 \"error: invalid value 'metal4.0' in '-std=metal4.0'\nnote: use 'ios-metal1.0' for 'Metal 1.0 (iOS)' standard\nnote: use 'ios-metal1.1' for 'Metal 1.1 (iOS)' standard\nnote: use 'ios-metal1.2' for 'Metal 1.2 (iOS)' standard\nnote: use 'ios-metal2.0' for 'Metal 2.0 (iOS)' standard\nnote: use 'ios-metal2.1' for 'Metal 2.1 (iOS)' standard\nnote: use 'ios-metal2.2' for 'Metal 2.2 (iOS)' standard\nnote: use 'ios-metal2.3' for 'Metal 2.3 (iOS)' standard\nnote: use 'ios-metal2.4' for 'Metal 2.4 (iOS)' standard\nnote: use 'macos-metal1.0' or 'osx-metal1.0' for 'Metal 1.0 (macOS)' standard\nnote: use 'macos-metal1.1' or 'osx-metal1.1' for 'Metal 1.1 (macOS)' standard\nnote: use 'macos-metal1.2' or 'osx-metal1.2' for 'Metal 1.2 (macOS)' standard\nnote: use 'macos-metal2.0' or 'osx-metal2.0' for 'Metal 2.0 (macOS)' standard\nnote: use 'macos-metal2.1' for 'Metal 2.1 (macOS)' standard\nnote: use 'macos-metal2.2' for 'Metal 2.2 (macOS)' standard\nnote: use 'macos-metal2.3' for 'Metal 2.3 (macOS)' standard\nnote: use 'macos-metal2.4' for 'Metal 2.4 (macOS)' standard\nnote: use 'metal3.0' for 'Metal 3.0' standard\nnote: use 'metal3.1' for 'Metal 3.1' standard\n\" UserInfo={NSLocalizedDescription=error: invalid value 'metal4.0' in '-std=metal4.0'\nnote: use 'ios-metal1.0' for 'Metal 1.0 (iOS)' standard\nnote: use 'ios-metal1.1' for 'Metal 1.1 (iOS)' standard\nnote: use 'ios-metal1.2' for 'Metal 1.2 (iOS)' standard\nnote: use 'ios-metal2.0' for 'Metal 2.0 (iOS)' standard\nnote: use 'ios-metal2.1' for 'Metal 2.1 (iOS)' standard\nnote: use 'ios-metal2.2' for 'Metal 2.2 (iOS)' standard\nnote: use 'ios-metal2.3' for 'Metal 2.3 (iOS)' standard\nnote: use 'ios-metal2.4' for 'Metal 2.4 (iOS)' standard\nnote: use 'macos-metal1.0' or 'osx-metal1.0' for 'Metal 1.0 (macOS)' standard\nnote: use 'macos-metal1.1' or 'osx-metal1.1' for 'Metal 1.1 (macOS)' standard\nnote: use 'macos-metal1.2' or 'osx-metal1.2' for 'Metal 1.2 (macOS)' standard\nnote: use 'macos-metal2.0' or 'osx-metal2.0' for 'Metal 2.0 (macOS)' standard\nnote: use 'macos-metal2.1' for 'Metal 2.1 (macOS)' standard\nnote: use 'macos-metal2.2' for 'Metal 2.2 (macOS)' standard\nnote: use 'macos-metal2.3' for 'Metal 2.3 (macOS)' standard\nnote: use 'macos-metal2.4' for 'Metal 2.4 (macOS)' standard\nnote: use 'metal3.0' for 'Metal 3.0' standard\nnote: use 'metal3.1' for 'Metal 3.1' standard\n}"
+        },
+        {
+          "language_version": "4.1",
+          "compiled": false,
+          "error": "Error Domain=MTLLibraryErrorDomain Code=3 \"error: invalid value 'metal4.1' in '-std=metal4.1'\nnote: use 'ios-metal1.0' for 'Metal 1.0 (iOS)' standard\nnote: use 'ios-metal1.1' for 'Metal 1.1 (iOS)' standard\nnote: use 'ios-metal1.2' for 'Metal 1.2 (iOS)' standard\nnote: use 'ios-metal2.0' for 'Metal 2.0 (iOS)' standard\nnote: use 'ios-metal2.1' for 'Metal 2.1 (iOS)' standard\nnote: use 'ios-metal2.2' for 'Metal 2.2 (iOS)' standard\nnote: use 'ios-metal2.3' for 'Metal 2.3 (iOS)' standard\nnote: use 'ios-metal2.4' for 'Metal 2.4 (iOS)' standard\nnote: use 'macos-metal1.0' or 'osx-metal1.0' for 'Metal 1.0 (macOS)' standard\nnote: use 'macos-metal1.1' or 'osx-metal1.1' for 'Metal 1.1 (macOS)' standard\nnote: use 'macos-metal1.2' or 'osx-metal1.2' for 'Metal 1.2 (macOS)' standard\nnote: use 'macos-metal2.0' or 'osx-metal2.0' for 'Metal 2.0 (macOS)' standard\nnote: use 'macos-metal2.1' for 'Metal 2.1 (macOS)' standard\nnote: use 'macos-metal2.2' for 'Metal 2.2 (macOS)' standard\nnote: use 'macos-metal2.3' for 'Metal 2.3 (macOS)' standard\nnote: use 'macos-metal2.4' for 'Metal 2.4 (macOS)' standard\nnote: use 'metal3.0' for 'Metal 3.0' standard\nnote: use 'metal3.1' for 'Metal 3.1' standard\n\" UserInfo={NSLocalizedDescription=error: invalid value 'metal4.1' in '-std=metal4.1'\nnote: use 'ios-metal1.0' for 'Metal 1.0 (iOS)' standard\nnote: use 'ios-metal1.1' for 'Metal 1.1 (iOS)' standard\nnote: use 'ios-metal1.2' for 'Metal 1.2 (iOS)' standard\nnote: use 'ios-metal2.0' for 'Metal 2.0 (iOS)' standard\nnote: use 'ios-metal2.1' for 'Metal 2.1 (iOS)' standard\nnote: use 'ios-metal2.2' for 'Metal 2.2 (iOS)' standard\nnote: use 'ios-metal2.3' for 'Metal 2.3 (iOS)' standard\nnote: use 'ios-metal2.4' for 'Metal 2.4 (iOS)' standard\nnote: use 'macos-metal1.0' or 'osx-metal1.0' for 'Metal 1.0 (macOS)' standard\nnote: use 'macos-metal1.1' or 'osx-metal1.1' for 'Metal 1.1 (macOS)' standard\nnote: use 'macos-metal1.2' or 'osx-metal1.2' for 'Metal 1.2 (macOS)' standard\nnote: use 'macos-metal2.0' or 'osx-metal2.0' for 'Metal 2.0 (macOS)' standard\nnote: use 'macos-metal2.1' for 'Metal 2.1 (macOS)' standard\nnote: use 'macos-metal2.2' for 'Metal 2.2 (macOS)' standard\nnote: use 'macos-metal2.3' for 'Metal 2.3 (macOS)' standard\nnote: use 'macos-metal2.4' for 'Metal 2.4 (macOS)' standard\nnote: use 'metal3.0' for 'Metal 3.0' standard\nnote: use 'metal3.1' for 'Metal 3.1' standard\n}"
+        }
+      ],
+      "any_succeeded": false
+    },
+    "ahead_of_time": {
+      "metallib_present": false,
+      "note": "run.sh could not build it -- either the Metal toolchain is not installed (xcodebuild -downloadComponent MetalToolchain) or the compile failed; see the build log"
+    },
+    "library_route_used": "none",
+    "ran": false,
+    "reading": "no library for fp16 by either route on this machine and OS -- recorded as absent"
+  },
+  "bf16": {
+    "source_path": "/Users/yaminocellist/git_repos/as-phase0/probes/p6_matmul_bf16.metal",
+    "metallib_path": "/Users/yaminocellist/git_repos/as-phase0/build/p6_matmul_bf16.metallib",
+    "runtime_compile": {
+      "source_found": true,
+      "attempts": [
+        {
+          "language_version": "default",
+          "compiled": false,
+          "error": "Error Domain=MTLLibraryErrorDomain Code=3 \"program_source:31:10: fatal error: 'metal_tensor' file not found\n#include <metal_tensor>\n         ^~~~~~~~~~~~~~\n\" UserInfo={NSLocalizedDescription=program_source:31:10: fatal error: 'metal_tensor' file not found\n#include <metal_tensor>\n         ^~~~~~~~~~~~~~\n}"
+        },
+        {
+          "language_version": "4.0",
+          "compiled": false,
+          "error": "Error Domain=MTLLibraryErrorDomain Code=3 \"error: invalid value 'metal4.0' in '-std=metal4.0'\nnote: use 'ios-metal1.0' for 'Metal 1.0 (iOS)' standard\nnote: use 'ios-metal1.1' for 'Metal 1.1 (iOS)' standard\nnote: use 'ios-metal1.2' for 'Metal 1.2 (iOS)' standard\nnote: use 'ios-metal2.0' for 'Metal 2.0 (iOS)' standard\nnote: use 'ios-metal2.1' for 'Metal 2.1 (iOS)' standard\nnote: use 'ios-metal2.2' for 'Metal 2.2 (iOS)' standard\nnote: use 'ios-metal2.3' for 'Metal 2.3 (iOS)' standard\nnote: use 'ios-metal2.4' for 'Metal 2.4 (iOS)' standard\nnote: use 'macos-metal1.0' or 'osx-metal1.0' for 'Metal 1.0 (macOS)' standard\nnote: use 'macos-metal1.1' or 'osx-metal1.1' for 'Metal 1.1 (macOS)' standard\nnote: use 'macos-metal1.2' or 'osx-metal1.2' for 'Metal 1.2 (macOS)' standard\nnote: use 'macos-metal2.0' or 'osx-metal2.0' for 'Metal 2.0 (macOS)' standard\nnote: use 'macos-metal2.1' for 'Metal 2.1 (macOS)' standard\nnote: use 'macos-metal2.2' for 'Metal 2.2 (macOS)' standard\nnote: use 'macos-metal2.3' for 'Metal 2.3 (macOS)' standard\nnote: use 'macos-metal2.4' for 'Metal 2.4 (macOS)' standard\nnote: use 'metal3.0' for 'Metal 3.0' standard\nnote: use 'metal3.1' for 'Metal 3.1' standard\n\" UserInfo={NSLocalizedDescription=error: invalid value 'metal4.0' in '-std=metal4.0'\nnote: use 'ios-metal1.0' for 'Metal 1.0 (iOS)' standard\nnote: use 'ios-metal1.1' for 'Metal 1.1 (iOS)' standard\nnote: use 'ios-metal1.2' for 'Metal 1.2 (iOS)' standard\nnote: use 'ios-metal2.0' for 'Metal 2.0 (iOS)' standard\nnote: use 'ios-metal2.1' for 'Metal 2.1 (iOS)' standard\nnote: use 'ios-metal2.2' for 'Metal 2.2 (iOS)' standard\nnote: use 'ios-metal2.3' for 'Metal 2.3 (iOS)' standard\nnote: use 'ios-metal2.4' for 'Metal 2.4 (iOS)' standard\nnote: use 'macos-metal1.0' or 'osx-metal1.0' for 'Metal 1.0 (macOS)' standard\nnote: use 'macos-metal1.1' or 'osx-metal1.1' for 'Metal 1.1 (macOS)' standard\nnote: use 'macos-metal1.2' or 'osx-metal1.2' for 'Metal 1.2 (macOS)' standard\nnote: use 'macos-metal2.0' or 'osx-metal2.0' for 'Metal 2.0 (macOS)' standard\nnote: use 'macos-metal2.1' for 'Metal 2.1 (macOS)' standard\nnote: use 'macos-metal2.2' for 'Metal 2.2 (macOS)' standard\nnote: use 'macos-metal2.3' for 'Metal 2.3 (macOS)' standard\nnote: use 'macos-metal2.4' for 'Metal 2.4 (macOS)' standard\nnote: use 'metal3.0' for 'Metal 3.0' standard\nnote: use 'metal3.1' for 'Metal 3.1' standard\n}"
+        },
+        {
+          "language_version": "4.1",
+          "compiled": false,
+          "error": "Error Domain=MTLLibraryErrorDomain Code=3 \"error: invalid value 'metal4.1' in '-std=metal4.1'\nnote: use 'ios-metal1.0' for 'Metal 1.0 (iOS)' standard\nnote: use 'ios-metal1.1' for 'Metal 1.1 (iOS)' standard\nnote: use 'ios-metal1.2' for 'Metal 1.2 (iOS)' standard\nnote: use 'ios-metal2.0' for 'Metal 2.0 (iOS)' standard\nnote: use 'ios-metal2.1' for 'Metal 2.1 (iOS)' standard\nnote: use 'ios-metal2.2' for 'Metal 2.2 (iOS)' standard\nnote: use 'ios-metal2.3' for 'Metal 2.3 (iOS)' standard\nnote: use 'ios-metal2.4' for 'Metal 2.4 (iOS)' standard\nnote: use 'macos-metal1.0' or 'osx-metal1.0' for 'Metal 1.0 (macOS)' standard\nnote: use 'macos-metal1.1' or 'osx-metal1.1' for 'Metal 1.1 (macOS)' standard\nnote: use 'macos-metal1.2' or 'osx-metal1.2' for 'Metal 1.2 (macOS)' standard\nnote: use 'macos-metal2.0' or 'osx-metal2.0' for 'Metal 2.0 (macOS)' standard\nnote: use 'macos-metal2.1' for 'Metal 2.1 (macOS)' standard\nnote: use 'macos-metal2.2' for 'Metal 2.2 (macOS)' standard\nnote: use 'macos-metal2.3' for 'Metal 2.3 (macOS)' standard\nnote: use 'macos-metal2.4' for 'Metal 2.4 (macOS)' standard\nnote: use 'metal3.0' for 'Metal 3.0' standard\nnote: use 'metal3.1' for 'Metal 3.1' standard\n\" UserInfo={NSLocalizedDescription=error: invalid value 'metal4.1' in '-std=metal4.1'\nnote: use 'ios-metal1.0' for 'Metal 1.0 (iOS)' standard\nnote: use 'ios-metal1.1' for 'Metal 1.1 (iOS)' standard\nnote: use 'ios-metal1.2' for 'Metal 1.2 (iOS)' standard\nnote: use 'ios-metal2.0' for 'Metal 2.0 (iOS)' standard\nnote: use 'ios-metal2.1' for 'Metal 2.1 (iOS)' standard\nnote: use 'ios-metal2.2' for 'Metal 2.2 (iOS)' standard\nnote: use 'ios-metal2.3' for 'Metal 2.3 (iOS)' standard\nnote: use 'ios-metal2.4' for 'Metal 2.4 (iOS)' standard\nnote: use 'macos-metal1.0' or 'osx-metal1.0' for 'Metal 1.0 (macOS)' standard\nnote: use 'macos-metal1.1' or 'osx-metal1.1' for 'Metal 1.1 (macOS)' standard\nnote: use 'macos-metal1.2' or 'osx-metal1.2' for 'Metal 1.2 (macOS)' standard\nnote: use 'macos-metal2.0' or 'osx-metal2.0' for 'Metal 2.0 (macOS)' standard\nnote: use 'macos-metal2.1' for 'Metal 2.1 (macOS)' standard\nnote: use 'macos-metal2.2' for 'Metal 2.2 (macOS)' standard\nnote: use 'macos-metal2.3' for 'Metal 2.3 (macOS)' standard\nnote: use 'macos-metal2.4' for 'Metal 2.4 (macOS)' standard\nnote: use 'metal3.0' for 'Metal 3.0' standard\nnote: use 'metal3.1' for 'Metal 3.1' standard\n}"
+        }
+      ],
+      "any_succeeded": false
+    },
+    "ahead_of_time": {
+      "metallib_present": false,
+      "note": "run.sh could not build it -- either the Metal toolchain is not installed (xcodebuild -downloadComponent MetalToolchain) or the compile failed; see the build log"
+    },
+    "library_route_used": "none",
+    "ran": false,
+    "reading": "no library for bf16 by either route on this machine and OS -- recorded as absent"
+  },
+  "bf16_verdict_note": "if bf16 neither compiles nor runs here, §3's block-scaled FP16 GEMM is mandatory rather than optional, and that is the finding G-C0 needs",
+  "status": "ok"
+}

@@ -1,0 +1,223 @@
+{
+  "probe": "p5_simd",
+  "schema": 1,
+  "machine": {
+    "collected_utc": "2026-09-05T13:46:50Z",
+    "hostname": "fanxins-macbook-pro.local",
+    "os_product": "macOS",
+    "os_version": "14.4",
+    "os_build": "23E214",
+    "os_version_string": "Version 14.4 (Build 23E214)",
+    "arch": "arm64",
+    "cpu_brand": "Apple M1 Pro",
+    "cpu_logical": 8,
+    "cpu_perf_cores": 6,
+    "cpu_eff_cores": 2,
+    "ram_bytes": 17179869184,
+    "ram_bytes_sysctl": 17179869184,
+    "page_size": 16384,
+    "developer_dir": "/Applications/Xcode.app/Contents/Developer",
+    "swiftc_version": "Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)\nTarget: arm64-apple-macosx14.0",
+    "sdk_version": null,
+    "metal_compiler": "Apple metal version 32023.101 (metalfe-32023.101)\nTarget: air64-apple-darwin23.4.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/metal/macos/bin",
+    "gpu_core_count": 14,
+    "device_acquisition_route": "MTLCopyAllDevices().first -- the system default was nil, which means this session has no window server but IOKit enumeration works",
+    "session": {
+      "launchctl_managername": "Aqua",
+      "is_aqua_session": true,
+      "ssh_env_present": false,
+      "ssh_connection": null,
+      "ssh_tty": null,
+      "term_program": "Apple_Terminal",
+      "metal_device_count": 1,
+      "reading": "a window-server session; a nil device here would be a real finding"
+    },
+    "gpu_name": "Apple M1 Pro",
+    "gpu_registry_id": 4294969587,
+    "has_unified_memory": true,
+    "recommended_max_working_set_size": 11453251584,
+    "max_buffer_length": 8589934592,
+    "max_threadgroup_memory_length": 32768,
+    "max_threads_per_threadgroup": {
+      "width": 1024,
+      "height": 1024,
+      "depth": 1024
+    },
+    "gpu_families": [
+      {
+        "raw": 1001,
+        "name": "apple1",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1002,
+        "name": "apple2",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1003,
+        "name": "apple3",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1004,
+        "name": "apple4",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1005,
+        "name": "apple5",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1006,
+        "name": "apple6",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1007,
+        "name": "apple7",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1008,
+        "name": "apple8",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 1009,
+        "name": "apple9",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 1010,
+        "name": "apple10",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 1011,
+        "name": "apple11",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 2001,
+        "name": "mac1",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 2002,
+        "name": "mac2",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 3001,
+        "name": "common1",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 3002,
+        "name": "common2",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 3003,
+        "name": "common3",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 4001,
+        "name": "macCatalyst1",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 4002,
+        "name": "macCatalyst2",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 5001,
+        "name": "metal3",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 5002,
+        "name": "metal4",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 5003,
+        "name": "metal5",
+        "known_to_sdk": true,
+        "supported": false
+      }
+    ]
+  },
+  "threads": 1048576,
+  "chains_per_thread": 8,
+  "matrix_accumulators": 4,
+  "repeats": 5,
+  "method": "iteration count calibrated at run time to ~0.03 s on this chip; best of 5 GPU times; boost clock, not sustained",
+  "fp32_fma": {
+    "compiled": true,
+    "iterations": 901,
+    "calibration_seconds": 0.00213058,
+    "best_gpu_seconds": 0.008862,
+    "flop": 15116271616.0,
+    "tflops": 1.70574,
+    "max_total_threads_per_threadgroup": 1024,
+    "thread_execution_width": 32
+  },
+  "fp16_fma": {
+    "compiled": true,
+    "iterations": 4850,
+    "calibration_seconds": 0.000395875,
+    "best_gpu_seconds": 0.0288112,
+    "flop": 81369497600.0,
+    "tflops": 2.82423,
+    "max_total_threads_per_threadgroup": 1024,
+    "thread_execution_width": 32
+  },
+  "bf16_fma": {
+    "compiled": true,
+    "iterations": 993,
+    "calibration_seconds": 0.00193263,
+    "best_gpu_seconds": 0.0289776,
+    "flop": 16659775488.0,
+    "tflops": 0.574919,
+    "max_total_threads_per_threadgroup": 1024,
+    "thread_execution_width": 32
+  },
+  "bf16_note": "this is the ALU's bfloat, which MSL has had since Metal 3.1 -- NOT the Neural Accelerators' BF16 support, which p6 asks about and which §3's block-scaled FP16 strategy turns on",
+  "simdgroup_matrix_half8x8": {
+    "compiled": true,
+    "iterations": 3025,
+    "calibration_seconds": 0.000634667,
+    "best_gpu_seconds": 0.0286101,
+    "flop": 406008627200.0,
+    "tflops": 14.1911,
+    "max_total_threads_per_threadgroup": 1024,
+    "thread_execution_width": 32
+  },
+  "simdgroup_matrix_note": "FLOP counted as simdgroups x accumulators x iterations x 2*8*8*8; the SIMD-group count assumes 32 lanes, which p0 and p3 verify",
+  "status": "ok"
+}

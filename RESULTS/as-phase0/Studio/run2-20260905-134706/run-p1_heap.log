@@ -1,0 +1,5 @@
+largest shared buffer: 8589934592 B (8.0 GiB)
+largest private buffer: 8589934592 B (8.0 GiB)
+ordinary buffer: cpu=0x104e00000 gpu=0x1500000000
+bytesNoCopy coherence: GPU writes visible through the mmap pointer
+wrote /Users/yaminocellist/git_repos/as-phase0/results/p1_heap.json

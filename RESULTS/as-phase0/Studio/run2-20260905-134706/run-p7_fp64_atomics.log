@@ -1,0 +1,7 @@
+fp64_arithmetic: REFUSED
+atomic_uint_add: compiled and ran
+atomic_ulong_add: REFUSED
+atomic_ulong_min: REFUSED
+atomic_ulong_compare_exchange: REFUSED
+atomic_float_add: compiled and ran
+wrote /Users/yaminocellist/git_repos/as-phase0/results/p7_fp64_atomics.json

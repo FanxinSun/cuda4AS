@@ -1,0 +1,5 @@
+fp32 FMA: 1.71 TFLOPS (iters=901)
+fp16 FMA: 2.82 TFLOPS (iters=4850)
+bf16 FMA: 0.57 TFLOPS (iters=993)
+simdgroup_matrix half: 14.19 TFLOPS (iters=3025)
+wrote /Users/yaminocellist/git_repos/as-phase0/results/p5_simd.json

@@ -1,0 +1,10 @@
+device: Apple M1 Pro
+  MSL 2.4: accepted
+  MSL 3.0: accepted
+  MSL 3.1: accepted
+  MSL 3.2: refused
+  MSL 4.0: refused
+  MSL 4.1: refused
+  MSL 4.2: refused
+  threadExecutionWidth: 32
+wrote /Users/yaminocellist/git_repos/as-phase0/results/p0_device.json

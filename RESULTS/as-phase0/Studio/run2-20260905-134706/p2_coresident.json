@@ -1,0 +1,1041 @@
+{
+  "probe": "p2_coresident",
+  "schema": 1,
+  "machine": {
+    "collected_utc": "2026-09-05T13:46:32Z",
+    "hostname": "fanxins-macbook-pro.local",
+    "os_product": "macOS",
+    "os_version": "14.4",
+    "os_build": "23E214",
+    "os_version_string": "Version 14.4 (Build 23E214)",
+    "arch": "arm64",
+    "cpu_brand": "Apple M1 Pro",
+    "cpu_logical": 8,
+    "cpu_perf_cores": 6,
+    "cpu_eff_cores": 2,
+    "ram_bytes": 17179869184,
+    "ram_bytes_sysctl": 17179869184,
+    "page_size": 16384,
+    "developer_dir": "/Applications/Xcode.app/Contents/Developer",
+    "swiftc_version": "Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)\nTarget: arm64-apple-macosx14.0",
+    "sdk_version": null,
+    "metal_compiler": "Apple metal version 32023.101 (metalfe-32023.101)\nTarget: air64-apple-darwin23.4.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/metal/macos/bin",
+    "gpu_core_count": 14,
+    "device_acquisition_route": "MTLCopyAllDevices().first -- the system default was nil, which means this session has no window server but IOKit enumeration works",
+    "session": {
+      "launchctl_managername": "Aqua",
+      "is_aqua_session": true,
+      "ssh_env_present": false,
+      "ssh_connection": null,
+      "ssh_tty": null,
+      "term_program": "Apple_Terminal",
+      "metal_device_count": 1,
+      "reading": "a window-server session; a nil device here would be a real finding"
+    },
+    "gpu_name": "Apple M1 Pro",
+    "gpu_registry_id": 4294969587,
+    "has_unified_memory": true,
+    "recommended_max_working_set_size": 11453251584,
+    "max_buffer_length": 8589934592,
+    "max_threadgroup_memory_length": 32768,
+    "max_threads_per_threadgroup": {
+      "width": 1024,
+      "height": 1024,
+      "depth": 1024
+    },
+    "gpu_families": [
+      {
+        "raw": 1001,
+        "name": "apple1",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1002,
+        "name": "apple2",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1003,
+        "name": "apple3",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1004,
+        "name": "apple4",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1005,
+        "name": "apple5",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1006,
+        "name": "apple6",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1007,
+        "name": "apple7",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1008,
+        "name": "apple8",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 1009,
+        "name": "apple9",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 1010,
+        "name": "apple10",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 1011,
+        "name": "apple11",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 2001,
+        "name": "mac1",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 2002,
+        "name": "mac2",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 3001,
+        "name": "common1",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 3002,
+        "name": "common2",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 3003,
+        "name": "common3",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 4001,
+        "name": "macCatalyst1",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 4002,
+        "name": "macCatalyst2",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 5001,
+        "name": "metal3",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 5002,
+        "name": "metal4",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 5003,
+        "name": "metal5",
+        "known_to_sdk": true,
+        "supported": false
+      }
+    ]
+  },
+  "spin_cap_max": 1048576,
+  "spin_cap_min": 16384,
+  "method": "global-atomic arrival barrier; largest N where every threadgroup observed N",
+  "gpu_core_count": 14,
+  "group_limit": 896,
+  "max_total_threads_per_threadgroup": 1024,
+  "thread_execution_width": 32,
+  "sweep": [
+    {
+      "threadgroup_size": 64,
+      "threadgroup_memory_bytes": 16,
+      "threadgroup_memory_label": "16 B (minimum bindable, stands for 0)",
+      "coresident_threadgroups": 15,
+      "reached_search_ceiling": false,
+      "groups_per_gpu_core": 1.07143,
+      "threads_coresident": 960,
+      "dispatches": 8,
+      "command_buffer_error": null,
+      "search_trail": [
+        {
+          "n": 1,
+          "all_saw_n": true,
+          "min_seen": 1,
+          "max_seen": 1,
+          "seconds": 0.0013005,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 2,
+          "all_saw_n": true,
+          "min_seen": 2,
+          "max_seen": 2,
+          "seconds": 0.000262792,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 4,
+          "all_saw_n": true,
+          "min_seen": 4,
+          "max_seen": 4,
+          "seconds": 0.000223625,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 8,
+          "all_saw_n": true,
+          "min_seen": 8,
+          "max_seen": 8,
+          "seconds": 0.000251625,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 16,
+          "all_saw_n": false,
+          "min_seen": 8,
+          "max_seen": 16,
+          "seconds": 0.0887783,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 12,
+          "all_saw_n": true,
+          "min_seen": 12,
+          "max_seen": 12,
+          "seconds": 0.000308708,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 14,
+          "all_saw_n": true,
+          "min_seen": 14,
+          "max_seen": 14,
+          "seconds": 0.000219667,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 15,
+          "all_saw_n": true,
+          "min_seen": 15,
+          "max_seen": 15,
+          "seconds": 0.000211375,
+          "spin_cap": 1048576,
+          "error": null
+        }
+      ]
+    },
+    {
+      "threadgroup_size": 64,
+      "threadgroup_memory_bytes": 16384,
+      "threadgroup_memory_label": "16 KiB",
+      "coresident_threadgroups": 37,
+      "reached_search_ceiling": false,
+      "groups_per_gpu_core": 2.64286,
+      "threads_coresident": 2368,
+      "dispatches": 12,
+      "command_buffer_error": null,
+      "search_trail": [
+        {
+          "n": 1,
+          "all_saw_n": true,
+          "min_seen": 1,
+          "max_seen": 1,
+          "seconds": 0.000262292,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 2,
+          "all_saw_n": true,
+          "min_seen": 2,
+          "max_seen": 2,
+          "seconds": 0.0002235,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 4,
+          "all_saw_n": true,
+          "min_seen": 4,
+          "max_seen": 4,
+          "seconds": 0.000224667,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 8,
+          "all_saw_n": true,
+          "min_seen": 8,
+          "max_seen": 8,
+          "seconds": 0.000285417,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 16,
+          "all_saw_n": true,
+          "min_seen": 16,
+          "max_seen": 16,
+          "seconds": 0.000209583,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 32,
+          "all_saw_n": true,
+          "min_seen": 32,
+          "max_seen": 32,
+          "seconds": 0.000243375,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 64,
+          "all_saw_n": false,
+          "min_seen": 42,
+          "max_seen": 64,
+          "seconds": 0.0707402,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 48,
+          "all_saw_n": false,
+          "min_seen": 42,
+          "max_seen": 48,
+          "seconds": 0.0708902,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 40,
+          "all_saw_n": false,
+          "min_seen": 37,
+          "max_seen": 40,
+          "seconds": 0.0708493,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 36,
+          "all_saw_n": true,
+          "min_seen": 36,
+          "max_seen": 36,
+          "seconds": 0.000374792,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 38,
+          "all_saw_n": false,
+          "min_seen": 37,
+          "max_seen": 38,
+          "seconds": 0.0708197,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 37,
+          "all_saw_n": true,
+          "min_seen": 37,
+          "max_seen": 37,
+          "seconds": 0.000362375,
+          "spin_cap": 1048576,
+          "error": null
+        }
+      ]
+    },
+    {
+      "threadgroup_size": 64,
+      "threadgroup_memory_bytes": 32768,
+      "threadgroup_memory_label": "32 KiB",
+      "coresident_threadgroups": 7,
+      "reached_search_ceiling": false,
+      "groups_per_gpu_core": 0.5,
+      "threads_coresident": 448,
+      "dispatches": 6,
+      "command_buffer_error": null,
+      "search_trail": [
+        {
+          "n": 1,
+          "all_saw_n": true,
+          "min_seen": 1,
+          "max_seen": 1,
+          "seconds": 0.000290958,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 2,
+          "all_saw_n": true,
+          "min_seen": 2,
+          "max_seen": 2,
+          "seconds": 0.000258917,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 4,
+          "all_saw_n": true,
+          "min_seen": 4,
+          "max_seen": 4,
+          "seconds": 0.000358042,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 8,
+          "all_saw_n": false,
+          "min_seen": 7,
+          "max_seen": 8,
+          "seconds": 0.0707448,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 6,
+          "all_saw_n": true,
+          "min_seen": 6,
+          "max_seen": 6,
+          "seconds": 0.000387792,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 7,
+          "all_saw_n": true,
+          "min_seen": 7,
+          "max_seen": 7,
+          "seconds": 0.000274,
+          "spin_cap": 1048576,
+          "error": null
+        }
+      ]
+    },
+    {
+      "threadgroup_size": 256,
+      "threadgroup_memory_bytes": 16,
+      "threadgroup_memory_label": "16 B (minimum bindable, stands for 0)",
+      "coresident_threadgroups": 73,
+      "reached_search_ceiling": false,
+      "groups_per_gpu_core": 5.21429,
+      "threads_coresident": 18688,
+      "dispatches": 14,
+      "command_buffer_error": null,
+      "search_trail": [
+        {
+          "n": 1,
+          "all_saw_n": true,
+          "min_seen": 1,
+          "max_seen": 1,
+          "seconds": 0.000270875,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 2,
+          "all_saw_n": true,
+          "min_seen": 2,
+          "max_seen": 2,
+          "seconds": 0.000263792,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 4,
+          "all_saw_n": true,
+          "min_seen": 4,
+          "max_seen": 4,
+          "seconds": 0.000258542,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 8,
+          "all_saw_n": true,
+          "min_seen": 8,
+          "max_seen": 8,
+          "seconds": 0.000240042,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 16,
+          "all_saw_n": true,
+          "min_seen": 16,
+          "max_seen": 16,
+          "seconds": 0.000438875,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 32,
+          "all_saw_n": true,
+          "min_seen": 32,
+          "max_seen": 32,
+          "seconds": 0.000704417,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 64,
+          "all_saw_n": true,
+          "min_seen": 64,
+          "max_seen": 64,
+          "seconds": 0.00122379,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 128,
+          "all_saw_n": false,
+          "min_seen": 92,
+          "max_seen": 128,
+          "seconds": 0.071629,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 96,
+          "all_saw_n": false,
+          "min_seen": 79,
+          "max_seen": 96,
+          "seconds": 0.0708733,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 80,
+          "all_saw_n": false,
+          "min_seen": 68,
+          "max_seen": 80,
+          "seconds": 0.070927,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 72,
+          "all_saw_n": true,
+          "min_seen": 72,
+          "max_seen": 72,
+          "seconds": 0.000430125,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 76,
+          "all_saw_n": false,
+          "min_seen": 68,
+          "max_seen": 76,
+          "seconds": 0.0708025,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 74,
+          "all_saw_n": false,
+          "min_seen": 68,
+          "max_seen": 74,
+          "seconds": 0.0711128,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 73,
+          "all_saw_n": true,
+          "min_seen": 73,
+          "max_seen": 73,
+          "seconds": 0.000558417,
+          "spin_cap": 1048576,
+          "error": null
+        }
+      ]
+    },
+    {
+      "threadgroup_size": 256,
+      "threadgroup_memory_bytes": 16384,
+      "threadgroup_memory_label": "16 KiB",
+      "coresident_threadgroups": 37,
+      "reached_search_ceiling": false,
+      "groups_per_gpu_core": 2.64286,
+      "threads_coresident": 9472,
+      "dispatches": 12,
+      "command_buffer_error": null,
+      "search_trail": [
+        {
+          "n": 1,
+          "all_saw_n": true,
+          "min_seen": 1,
+          "max_seen": 1,
+          "seconds": 0.000291292,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 2,
+          "all_saw_n": true,
+          "min_seen": 2,
+          "max_seen": 2,
+          "seconds": 0.0002565,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 4,
+          "all_saw_n": true,
+          "min_seen": 4,
+          "max_seen": 4,
+          "seconds": 0.000249125,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 8,
+          "all_saw_n": true,
+          "min_seen": 8,
+          "max_seen": 8,
+          "seconds": 0.000255625,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 16,
+          "all_saw_n": true,
+          "min_seen": 16,
+          "max_seen": 16,
+          "seconds": 0.000271542,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 32,
+          "all_saw_n": true,
+          "min_seen": 32,
+          "max_seen": 32,
+          "seconds": 0.0002415,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 64,
+          "all_saw_n": false,
+          "min_seen": 42,
+          "max_seen": 64,
+          "seconds": 0.0707703,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 48,
+          "all_saw_n": false,
+          "min_seen": 42,
+          "max_seen": 48,
+          "seconds": 0.0709093,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 40,
+          "all_saw_n": false,
+          "min_seen": 37,
+          "max_seen": 40,
+          "seconds": 0.0707215,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 36,
+          "all_saw_n": true,
+          "min_seen": 36,
+          "max_seen": 36,
+          "seconds": 0.000212333,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 38,
+          "all_saw_n": false,
+          "min_seen": 37,
+          "max_seen": 38,
+          "seconds": 0.0707202,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 37,
+          "all_saw_n": true,
+          "min_seen": 37,
+          "max_seen": 37,
+          "seconds": 0.000209958,
+          "spin_cap": 1048576,
+          "error": null
+        }
+      ]
+    },
+    {
+      "threadgroup_size": 256,
+      "threadgroup_memory_bytes": 32768,
+      "threadgroup_memory_label": "32 KiB",
+      "coresident_threadgroups": 7,
+      "reached_search_ceiling": false,
+      "groups_per_gpu_core": 0.5,
+      "threads_coresident": 1792,
+      "dispatches": 6,
+      "command_buffer_error": null,
+      "search_trail": [
+        {
+          "n": 1,
+          "all_saw_n": true,
+          "min_seen": 1,
+          "max_seen": 1,
+          "seconds": 0.000184083,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 2,
+          "all_saw_n": true,
+          "min_seen": 2,
+          "max_seen": 2,
+          "seconds": 0.000181708,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 4,
+          "all_saw_n": true,
+          "min_seen": 4,
+          "max_seen": 4,
+          "seconds": 0.000166458,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 8,
+          "all_saw_n": false,
+          "min_seen": 7,
+          "max_seen": 8,
+          "seconds": 0.070678,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 6,
+          "all_saw_n": true,
+          "min_seen": 6,
+          "max_seen": 6,
+          "seconds": 0.000221667,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 7,
+          "all_saw_n": true,
+          "min_seen": 7,
+          "max_seen": 7,
+          "seconds": 0.000194667,
+          "spin_cap": 1048576,
+          "error": null
+        }
+      ]
+    },
+    {
+      "threadgroup_size": 1024,
+      "threadgroup_memory_bytes": 16,
+      "threadgroup_memory_label": "16 B (minimum bindable, stands for 0)",
+      "coresident_threadgroups": 37,
+      "reached_search_ceiling": false,
+      "groups_per_gpu_core": 2.64286,
+      "threads_coresident": 37888,
+      "dispatches": 12,
+      "command_buffer_error": null,
+      "search_trail": [
+        {
+          "n": 1,
+          "all_saw_n": true,
+          "min_seen": 1,
+          "max_seen": 1,
+          "seconds": 0.000201708,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 2,
+          "all_saw_n": true,
+          "min_seen": 2,
+          "max_seen": 2,
+          "seconds": 0.000197625,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 4,
+          "all_saw_n": true,
+          "min_seen": 4,
+          "max_seen": 4,
+          "seconds": 0.000195792,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 8,
+          "all_saw_n": true,
+          "min_seen": 8,
+          "max_seen": 8,
+          "seconds": 0.000189083,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 16,
+          "all_saw_n": true,
+          "min_seen": 16,
+          "max_seen": 16,
+          "seconds": 0.000189208,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 32,
+          "all_saw_n": true,
+          "min_seen": 32,
+          "max_seen": 32,
+          "seconds": 0.000499917,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 64,
+          "all_saw_n": false,
+          "min_seen": 41,
+          "max_seen": 64,
+          "seconds": 0.142385,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 48,
+          "all_saw_n": false,
+          "min_seen": 42,
+          "max_seen": 48,
+          "seconds": 0.141524,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 40,
+          "all_saw_n": false,
+          "min_seen": 37,
+          "max_seen": 40,
+          "seconds": 0.0710454,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 36,
+          "all_saw_n": true,
+          "min_seen": 36,
+          "max_seen": 36,
+          "seconds": 0.000268458,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 38,
+          "all_saw_n": false,
+          "min_seen": 37,
+          "max_seen": 38,
+          "seconds": 0.0710678,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 37,
+          "all_saw_n": true,
+          "min_seen": 37,
+          "max_seen": 37,
+          "seconds": 0.000219958,
+          "spin_cap": 1048576,
+          "error": null
+        }
+      ]
+    },
+    {
+      "threadgroup_size": 1024,
+      "threadgroup_memory_bytes": 16384,
+      "threadgroup_memory_label": "16 KiB",
+      "coresident_threadgroups": 7,
+      "reached_search_ceiling": false,
+      "groups_per_gpu_core": 0.5,
+      "threads_coresident": 7168,
+      "dispatches": 6,
+      "command_buffer_error": null,
+      "search_trail": [
+        {
+          "n": 1,
+          "all_saw_n": true,
+          "min_seen": 1,
+          "max_seen": 1,
+          "seconds": 0.000225875,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 2,
+          "all_saw_n": true,
+          "min_seen": 2,
+          "max_seen": 2,
+          "seconds": 0.000187333,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 4,
+          "all_saw_n": true,
+          "min_seen": 4,
+          "max_seen": 4,
+          "seconds": 0.000222083,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 8,
+          "all_saw_n": false,
+          "min_seen": 6,
+          "max_seen": 8,
+          "seconds": 0.0706755,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 6,
+          "all_saw_n": true,
+          "min_seen": 6,
+          "max_seen": 6,
+          "seconds": 0.000216708,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 7,
+          "all_saw_n": true,
+          "min_seen": 7,
+          "max_seen": 7,
+          "seconds": 0.000197375,
+          "spin_cap": 1048576,
+          "error": null
+        }
+      ]
+    },
+    {
+      "threadgroup_size": 1024,
+      "threadgroup_memory_bytes": 32768,
+      "threadgroup_memory_label": "32 KiB",
+      "coresident_threadgroups": 7,
+      "reached_search_ceiling": false,
+      "groups_per_gpu_core": 0.5,
+      "threads_coresident": 7168,
+      "dispatches": 6,
+      "command_buffer_error": null,
+      "search_trail": [
+        {
+          "n": 1,
+          "all_saw_n": true,
+          "min_seen": 1,
+          "max_seen": 1,
+          "seconds": 0.00020175,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 2,
+          "all_saw_n": true,
+          "min_seen": 2,
+          "max_seen": 2,
+          "seconds": 0.000196083,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 4,
+          "all_saw_n": true,
+          "min_seen": 4,
+          "max_seen": 4,
+          "seconds": 0.000190208,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 8,
+          "all_saw_n": false,
+          "min_seen": 7,
+          "max_seen": 8,
+          "seconds": 0.0707015,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 6,
+          "all_saw_n": true,
+          "min_seen": 6,
+          "max_seen": 6,
+          "seconds": 0.0001775,
+          "spin_cap": 1048576,
+          "error": null
+        },
+        {
+          "n": 7,
+          "all_saw_n": true,
+          "min_seen": 7,
+          "max_seen": 7,
+          "seconds": 0.0001785,
+          "spin_cap": 1048576,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "final_spin_cap": 1048576,
+  "status": "ok"
+}

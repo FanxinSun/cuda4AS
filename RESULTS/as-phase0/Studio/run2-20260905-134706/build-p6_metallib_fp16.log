@@ -1,0 +1,85 @@
+--- xcrun -sdk macosx metal -std=metal4.1 ---
+error: invalid value 'metal4.1' in '-std=metal4.1'
+note: use 'ios-metal1.0' for 'Metal 1.0 (iOS)' standard
+note: use 'ios-metal1.1' for 'Metal 1.1 (iOS)' standard
+note: use 'ios-metal1.2' for 'Metal 1.2 (iOS)' standard
+note: use 'ios-metal2.0' for 'Metal 2.0 (iOS)' standard
+note: use 'ios-metal2.1' for 'Metal 2.1 (iOS)' standard
+note: use 'ios-metal2.2' for 'Metal 2.2 (iOS)' standard
+note: use 'ios-metal2.3' for 'Metal 2.3 (iOS)' standard
+note: use 'ios-metal2.4' for 'Metal 2.4 (iOS)' standard
+note: use 'macos-metal1.0' or 'osx-metal1.0' for 'Metal 1.0 (macOS)' standard
+note: use 'macos-metal1.1' or 'osx-metal1.1' for 'Metal 1.1 (macOS)' standard
+note: use 'macos-metal1.2' or 'osx-metal1.2' for 'Metal 1.2 (macOS)' standard
+note: use 'macos-metal2.0' or 'osx-metal2.0' for 'Metal 2.0 (macOS)' standard
+note: use 'macos-metal2.1' for 'Metal 2.1 (macOS)' standard
+note: use 'macos-metal2.2' for 'Metal 2.2 (macOS)' standard
+note: use 'macos-metal2.3' for 'Metal 2.3 (macOS)' standard
+note: use 'macos-metal2.4' for 'Metal 2.4 (macOS)' standard
+note: use 'metal3.0' for 'Metal 3.0' standard
+note: use 'metal3.1' for 'Metal 3.1' standard
+--- xcrun -sdk macosx metal -std=metal4.0 ---
+error: invalid value 'metal4.0' in '-std=metal4.0'
+note: use 'ios-metal1.0' for 'Metal 1.0 (iOS)' standard
+note: use 'ios-metal1.1' for 'Metal 1.1 (iOS)' standard
+note: use 'ios-metal1.2' for 'Metal 1.2 (iOS)' standard
+note: use 'ios-metal2.0' for 'Metal 2.0 (iOS)' standard
+note: use 'ios-metal2.1' for 'Metal 2.1 (iOS)' standard
+note: use 'ios-metal2.2' for 'Metal 2.2 (iOS)' standard
+note: use 'ios-metal2.3' for 'Metal 2.3 (iOS)' standard
+note: use 'ios-metal2.4' for 'Metal 2.4 (iOS)' standard
+note: use 'macos-metal1.0' or 'osx-metal1.0' for 'Metal 1.0 (macOS)' standard
+note: use 'macos-metal1.1' or 'osx-metal1.1' for 'Metal 1.1 (macOS)' standard
+note: use 'macos-metal1.2' or 'osx-metal1.2' for 'Metal 1.2 (macOS)' standard
+note: use 'macos-metal2.0' or 'osx-metal2.0' for 'Metal 2.0 (macOS)' standard
+note: use 'macos-metal2.1' for 'Metal 2.1 (macOS)' standard
+note: use 'macos-metal2.2' for 'Metal 2.2 (macOS)' standard
+note: use 'macos-metal2.3' for 'Metal 2.3 (macOS)' standard
+note: use 'macos-metal2.4' for 'Metal 2.4 (macOS)' standard
+note: use 'metal3.0' for 'Metal 3.0' standard
+note: use 'metal3.1' for 'Metal 3.1' standard
+--- xcrun -sdk macosx metal -std=macos-metal4.0 ---
+error: invalid value 'macos-metal4.0' in '-std=macos-metal4.0'
+note: use 'ios-metal1.0' for 'Metal 1.0 (iOS)' standard
+note: use 'ios-metal1.1' for 'Metal 1.1 (iOS)' standard
+note: use 'ios-metal1.2' for 'Metal 1.2 (iOS)' standard
+note: use 'ios-metal2.0' for 'Metal 2.0 (iOS)' standard
+note: use 'ios-metal2.1' for 'Metal 2.1 (iOS)' standard
+note: use 'ios-metal2.2' for 'Metal 2.2 (iOS)' standard
+note: use 'ios-metal2.3' for 'Metal 2.3 (iOS)' standard
+note: use 'ios-metal2.4' for 'Metal 2.4 (iOS)' standard
+note: use 'macos-metal1.0' or 'osx-metal1.0' for 'Metal 1.0 (macOS)' standard
+note: use 'macos-metal1.1' or 'osx-metal1.1' for 'Metal 1.1 (macOS)' standard
+note: use 'macos-metal1.2' or 'osx-metal1.2' for 'Metal 1.2 (macOS)' standard
+note: use 'macos-metal2.0' or 'osx-metal2.0' for 'Metal 2.0 (macOS)' standard
+note: use 'macos-metal2.1' for 'Metal 2.1 (macOS)' standard
+note: use 'macos-metal2.2' for 'Metal 2.2 (macOS)' standard
+note: use 'macos-metal2.3' for 'Metal 2.3 (macOS)' standard
+note: use 'macos-metal2.4' for 'Metal 2.4 (macOS)' standard
+note: use 'metal3.0' for 'Metal 3.0' standard
+note: use 'metal3.1' for 'Metal 3.1' standard
+--- xcrun -sdk macosx metal -std=metal3.2 ---
+error: invalid value 'metal3.2' in '-std=metal3.2'
+note: use 'ios-metal1.0' for 'Metal 1.0 (iOS)' standard
+note: use 'ios-metal1.1' for 'Metal 1.1 (iOS)' standard
+note: use 'ios-metal1.2' for 'Metal 1.2 (iOS)' standard
+note: use 'ios-metal2.0' for 'Metal 2.0 (iOS)' standard
+note: use 'ios-metal2.1' for 'Metal 2.1 (iOS)' standard
+note: use 'ios-metal2.2' for 'Metal 2.2 (iOS)' standard
+note: use 'ios-metal2.3' for 'Metal 2.3 (iOS)' standard
+note: use 'ios-metal2.4' for 'Metal 2.4 (iOS)' standard
+note: use 'macos-metal1.0' or 'osx-metal1.0' for 'Metal 1.0 (macOS)' standard
+note: use 'macos-metal1.1' or 'osx-metal1.1' for 'Metal 1.1 (macOS)' standard
+note: use 'macos-metal1.2' or 'osx-metal1.2' for 'Metal 1.2 (macOS)' standard
+note: use 'macos-metal2.0' or 'osx-metal2.0' for 'Metal 2.0 (macOS)' standard
+note: use 'macos-metal2.1' for 'Metal 2.1 (macOS)' standard
+note: use 'macos-metal2.2' for 'Metal 2.2 (macOS)' standard
+note: use 'macos-metal2.3' for 'Metal 2.3 (macOS)' standard
+note: use 'macos-metal2.4' for 'Metal 2.4 (macOS)' standard
+note: use 'metal3.0' for 'Metal 3.0' standard
+note: use 'metal3.1' for 'Metal 3.1' standard
+--- xcrun -sdk macosx metal  ---
+/Users/yaminocellist/git_repos/as-phase0/probes/p6_matmul_fp16.metal:29:10: fatal error: 'metal_tensor' file not found
+#include <metal_tensor>
+         ^~~~~~~~~~~~~~
+1 error generated.

@@ -1,0 +1,10 @@
+tg=64 mem=16B -> 15 co-resident groups
+tg=64 mem=16384B -> 37 co-resident groups
+tg=64 mem=32768B -> 7 co-resident groups
+tg=256 mem=16B -> 73 co-resident groups
+tg=256 mem=16384B -> 37 co-resident groups
+tg=256 mem=32768B -> 7 co-resident groups
+tg=1024 mem=16B -> 37 co-resident groups
+tg=1024 mem=16384B -> 7 co-resident groups
+tg=1024 mem=32768B -> 7 co-resident groups
+wrote /Users/yaminocellist/git_repos/as-phase0/results/p2_coresident.json

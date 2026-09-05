@@ -1,0 +1,4 @@
+cpu=0x10294c000  gpu=0x1500000000
+vm_remap -> KERN_NO_SPACE (target 0x1500000000)
+wrote /Users/yaminocellist/git_repos/as-phase0/results/p1b_vmremap.json
+wrote /Users/yaminocellist/git_repos/as-phase0/results/p1b_vmremap.json
