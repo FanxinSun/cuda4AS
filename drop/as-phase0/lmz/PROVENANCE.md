@@ -10,10 +10,10 @@ gitlink).
 |---|---|
 | source path | `lmz/scratchpad/gpu/metal/bench.swift` |
 | | `lmz/scratchpad/gpu/metal/lmz_rans.metal` |
-| lmz commit | `5e904393fe0a6d3a4f6bbb15ea477c48d3cf005a` |
-| commit subject | Time the coders one at a time, and say which rows compare |
-| commit date | 2026-09-03T13:54:07+08:00 |
-| copied on | 2026-09-03 |
+| lmz commit | `34dadef47e0f70166ee27ba2eb733105740e2857` |
+| commit subject | Record the lmz that ran, not the one that was asked for |
+| commit date | 2026-09-04T21:49:55+08:00 |
+| copied on | 2026-09-05 |
 | modified | **no** — byte-for-byte as committed |
 
 Verify with, from an lmz checkout at that commit:
