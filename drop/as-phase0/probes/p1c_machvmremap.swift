@@ -51,7 +51,7 @@ func krName(_ kr: kern_return_t) -> String {
 
 func probeMain() {
     var body: [(String, J)] = []
-    let dev = MTLCreateSystemDefaultDevice()
+    let dev = acquireDevice()
     body.append(("machine", machineBlock(dev)))
     body.append(("api", .s("mach_vm_remap")))
     body.append(("alias_length", .i(ALIAS_LEN)))

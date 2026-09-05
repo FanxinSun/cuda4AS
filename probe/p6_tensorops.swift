@@ -68,7 +68,7 @@ func expectedC(_ m: Int, _ n: Int) -> Float {
 
 func probeMain() {
     var body: [(String, J)] = []
-    let dev = MTLCreateSystemDefaultDevice()
+    let dev = acquireDevice()
     body.append(("machine", machineBlock(dev)))
     body.append(("shape", .o([("m", .i(MDIM)), ("n", .i(NDIM)), ("k", .i(KDIM))])))
     body.append(("tile", .o([("m", .i(TILE_M)), ("n", .i(TILE_N)),

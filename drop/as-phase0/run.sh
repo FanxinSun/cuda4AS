@@ -69,7 +69,7 @@ say "=== environment ==="
     echo "gpu-core-count:"; ioreg -rd1 -c AGXAccelerator 2>/dev/null \
         | grep -i 'gpu-core-count' | sed 's/^/  /'
 } > "$RESULTS/env.txt" 2>&1
-sed -n '1,12p' "$RESULTS/env.txt"
+cat "$RESULTS/env.txt"
 say ""
 
 if ! xcrun swiftc --version > /dev/null 2>&1; then
@@ -114,6 +114,8 @@ p3_lockstep p4_bandwidth p5_simd p6_tensorops p7_fp64_atomics"
 
 # The probes read these: where to write JSON, and where p6 finds its .metal
 # sources and any ahead-of-time metallib run.sh managed to build.
+NO_GPU=0
+
 PROBE_RESULTS="$RESULTS"; export PROBE_RESULTS
 P6_SRC_DIR="$PROBES";     export P6_SRC_DIR
 P6_LIB_DIR="$BUILD";      export P6_LIB_DIR
@@ -162,8 +164,17 @@ for P in $PROBE_LIST; do
 
     if run_bounded "$PER_PROBE_TIMEOUT" "$RLOG" "$BIN"; then
         if [ -f "$RESULTS/$P.json" ]; then
-            row "$P" "ok" "built $ROUTE; $P.json written"
-            say "  $P: ok ($ROUTE)"
+            # "wrote a JSON" is not "measured something".  Every probe reports
+            # no_metal_device when Metal handed out no device, and that is a
+            # failed run whatever the exit status said.
+            if grep -q '"no_metal_device": true' "$RESULTS/$P.json"; then
+                row "$P" "NO GPU" "ran, but Metal gave no device -- measured nothing"
+                say "  $P: NO METAL DEVICE -- nothing measured"
+                NO_GPU=$((NO_GPU + 1))
+            else
+                row "$P" "ok" "built $ROUTE; $P.json written"
+                say "  $P: ok ($ROUTE)"
+            fi
         else
             row "$P" "ran, NO JSON" "built $ROUTE; see run-$P.log"
             say "  $P: ran but wrote no JSON"
@@ -223,6 +234,28 @@ fi
 say ""
 
 # ------------------------------------------------------------------------ pack
+if [ "$NO_GPU" -gt 0 ]; then
+    say "########################################################################"
+    say "#  $NO_GPU probes got NO METAL DEVICE.  Nothing below is a measurement."
+    say "#"
+    say "#  MTLCreateSystemDefaultDevice() and MTLCopyAllDevices() both came back"
+    say "#  empty.  That is almost never a fact about the GPU -- it is a fact"
+    say "#  about the session.  Metal hands out no device to a process with no"
+    say "#  window-server (Aqua) session, which means:"
+    say "#"
+    say "#    * over SSH                    -> run it from the Mac's own screen"
+    say "#    * from a launchd/cron job     -> run it from a Terminal"
+    say "#    * inside a sandboxed tool     -> run it from a plain Terminal"
+    say "#"
+    say "#  The session block in each JSON records launchctl managername and the"
+    say "#  SSH environment, so the results say which of these it was."
+    say "#"
+    say "#  Please rerun from Terminal.app or iTerm ON the Mac, logged in at the"
+    say "#  screen, and send the new tarball."
+    say "########################################################################"
+    say ""
+fi
+
 say "=== status ==="
 printf '%-22s %-14s %s\n' "probe" "outcome" "note"
 printf '%s\n' "--------------------------------------------------------------------------"

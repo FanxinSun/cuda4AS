@@ -130,6 +130,55 @@ func gpuCoreCount() -> Int? {
     return nil
 }
 
+// MARK: - getting a device at all
+
+/// Which call produced the device.  Recorded because on 2026-09-05 an M1 Pro
+/// returned nil from MTLCreateSystemDefaultDevice() for every probe in the
+/// drop, and a drop that cannot tell "no GPU on this chip" from "no GPU in
+/// this session" has wasted its round trip.
+var deviceRoute = "not attempted"
+
+/// Try the system default, then fall back to enumerating.  They fail
+/// independently: the system default needs a window-server session, while
+/// enumeration needs IOKit access to the GPU driver class, and a sandbox or a
+/// headless login can remove either one.  Whichever works is recorded.
+func acquireDevice() -> MTLDevice? {
+    if let d = MTLCreateSystemDefaultDevice() {
+        deviceRoute = "MTLCreateSystemDefaultDevice()"
+        return d
+    }
+    let all = MTLCopyAllDevices()
+    if let d = all.first {
+        deviceRoute = "MTLCopyAllDevices().first -- the system default was nil, "
+            + "which means this session has no window server but IOKit enumeration works"
+        return d
+    }
+    deviceRoute = "NONE: MTLCreateSystemDefaultDevice() was nil and "
+        + "MTLCopyAllDevices() was empty"
+    return nil
+}
+
+/// What kind of session this is.  The difference between an Aqua login and an
+/// SSH one decides whether a nil device is a fact about the chip or a fact
+/// about how the drop was launched, and only the second is fixable by rerunning.
+func sessionBlock() -> J {
+    let e = ProcessInfo.processInfo.environment
+    let manager = sh("/bin/launchctl", ["managername"])
+    let ssh = e["SSH_CONNECTION"] != nil || e["SSH_TTY"] != nil || e["SSH_CLIENT"] != nil
+    return .o([
+        ("launchctl_managername", jOptS(manager)),
+        ("is_aqua_session", manager == nil ? .null : .b(manager! == "Aqua")),
+        ("ssh_env_present", .b(ssh)),
+        ("ssh_connection", jOptS(e["SSH_CONNECTION"])),
+        ("ssh_tty", jOptS(e["SSH_TTY"])),
+        ("term_program", jOptS(e["TERM_PROGRAM"])),
+        ("metal_device_count", .i(MTLCopyAllDevices().count)),
+        ("reading", .s(ssh || (manager != nil && manager! != "Aqua")
+            ? "NOT a window-server (Aqua) session -- Metal device creation is expected to fail here, and a nil device says nothing about the hardware"
+            : "a window-server session; a nil device here would be a real finding")),
+    ])
+}
+
 // MARK: - the machine block
 
 /// Every MTLGPUFamily this build knows to ask about, by RAW VALUE rather than
@@ -186,6 +235,8 @@ func machineBlock(_ dev: MTLDevice?) -> J {
     kv.append(("sdk_version", jOptS(sh("/usr/bin/xcrun", ["--show-sdk-version"]))))
     kv.append(("metal_compiler", jOptS(sh("/usr/bin/xcrun", ["-sdk", "macosx", "metal", "--version"]))))
     kv.append(("gpu_core_count", jOptI(gpuCoreCount())))
+    kv.append(("device_acquisition_route", .s(deviceRoute)))
+    kv.append(("session", sessionBlock()))
 
     if let d = dev {
         kv.append(("gpu_name", .s(d.name)))
@@ -202,6 +253,11 @@ func machineBlock(_ dev: MTLDevice?) -> J {
     } else {
         kv.append(("gpu_name", .null))
         kv.append(("no_metal_device", .b(true)))
+        kv.append(("no_metal_device_reading", .s("NOTHING IN THIS FILE IS A MEASUREMENT. "
+            + "Metal handed out no device, so every probe below reports absence of a "
+            + "session, not absence of a capability. Check the `session` block: outside "
+            + "an Aqua login (over SSH, for instance) this is expected and the drop must "
+            + "be rerun from the Mac's own screen.")))
     }
     return .o(kv)
 }

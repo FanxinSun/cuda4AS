@@ -87,7 +87,7 @@ struct Attempt {
 
 func probeMain() {
     var body: [(String, J)] = []
-    let dev = MTLCreateSystemDefaultDevice()
+    let dev = acquireDevice()
     body.append(("machine", machineBlock(dev)))
     body.append(("spin_cap_max", .u(UInt64(SPIN_CAP_MAX))))
     body.append(("spin_cap_min", .u(UInt64(SPIN_CAP_MIN))))

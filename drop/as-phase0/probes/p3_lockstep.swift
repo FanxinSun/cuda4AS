@@ -122,7 +122,7 @@ kernel void c_ballot_prefix(device uint *ballotOut [[buffer(0)]],
 
 func probeMain() {
     var body: [(String, J)] = []
-    let dev = MTLCreateSystemDefaultDevice()
+    let dev = acquireDevice()
     body.append(("machine", machineBlock(dev)))
     body.append(("lock_spin_cap", .u(UInt64(LOCK_SPIN_CAP))))
     body.append(("threadgroup_size", .i(TG)))

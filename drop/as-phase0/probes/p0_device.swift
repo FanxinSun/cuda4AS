@@ -32,7 +32,7 @@ kernel void nop(device uint *out [[buffer(0)]],
 func probeMain() {
     var body: [(String, J)] = []
 
-    let dev = MTLCreateSystemDefaultDevice()
+    let dev = acquireDevice()
     body.append(("machine", machineBlock(dev)))
 
     guard let dev = dev else {

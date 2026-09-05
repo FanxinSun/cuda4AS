@@ -112,7 +112,7 @@ let cases: [(String, String, String, String)] = [
 
 func probeMain() {
     var body: [(String, J)] = []
-    let dev = MTLCreateSystemDefaultDevice()
+    let dev = acquireDevice()
     body.append(("machine", machineBlock(dev)))
     body.append(("threads", .i(THREADS)))
     body.append(("cas_cap", .u(UInt64(CAS_CAP))))

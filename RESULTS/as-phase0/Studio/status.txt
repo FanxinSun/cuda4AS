@@ -1,0 +1,13 @@
+p6.metallib.fp16       absent         no -std spelling worked; see build-p6_metallib_fp16.log
+p6.metallib.bf16       absent         no -std spelling worked; see build-p6_metallib_bf16.log
+p0_device              ok             built multi-file; p0_device.json written
+p1_heap                ok             built multi-file; p1_heap.json written
+p1b_vmremap            ok             built multi-file; p1b_vmremap.json written
+p1c_machvmremap        ok             built multi-file; p1c_machvmremap.json written
+p2_coresident          ok             built multi-file; p2_coresident.json written
+p3_lockstep            ok             built multi-file; p3_lockstep.json written
+p4_bandwidth           ok             built multi-file; p4_bandwidth.json written
+p5_simd                ok             built multi-file; p5_simd.json written
+p6_tensorops           ok             built multi-file; p6_tensorops.json written
+p7_fp64_atomics        ok             built multi-file; p7_fp64_atomics.json written
+p8_lmz_decoder         RUN FAILED rc=1 see run-p8_lmz_decoder.log

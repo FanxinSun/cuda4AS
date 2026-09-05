@@ -75,7 +75,7 @@ func largestBuffer(_ dev: MTLDevice, _ opts: MTLResourceOptions) -> (Int, Int) {
 
 func probeMain() {
     var body: [(String, J)] = []
-    let dev = MTLCreateSystemDefaultDevice()
+    let dev = acquireDevice()
     body.append(("machine", machineBlock(dev)))
     guard let dev = dev else {
         body.append(("status", .s("no Metal device")))

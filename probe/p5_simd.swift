@@ -104,7 +104,7 @@ kernel void sgmm(device half *out       [[buffer(0)]],
 
 func probeMain() {
     var body: [(String, J)] = []
-    let dev = MTLCreateSystemDefaultDevice()
+    let dev = acquireDevice()
     body.append(("machine", machineBlock(dev)))
     body.append(("threads", .i(THREADS)))
     body.append(("chains_per_thread", .i(CHAINS)))

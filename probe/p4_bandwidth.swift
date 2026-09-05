@@ -54,7 +54,7 @@ kernel void bw_read(device const uint4 *src [[buffer(0)]],
 
 func probeMain() {
     var body: [(String, J)] = []
-    let dev = MTLCreateSystemDefaultDevice()
+    let dev = acquireDevice()
     body.append(("machine", machineBlock(dev)))
     body.append(("repeats", .i(REPEATS)))
     body.append(("warmups", .i(WARMUPS)))
