@@ -1,12 +1,21 @@
 # cuda4AS — phase 0a probe drop for Apple silicon
 
-Copy this whole directory to an Apple silicon Mac, run one command, send back
-one tarball.
+Get this onto an Apple silicon Mac, run one command, send back one tarball.
 
 ```sh
+gh release download as-phase0 --repo FanxinSun/cuda4AS --pattern 'as-phase0.tgz*'
+shasum -a 256 -c as-phase0.tgz.sha256
+tar xzf as-phase0.tgz
 cd as-phase0
 ./run.sh
 ```
+
+**Download the release rather than cloning the repository.** The drop carries
+22.6 MB of generated lmz stream data; a `git clone` transfers its whole pack in
+one shot with no way to resume, and that failed repeatedly on the first Mac
+that tried it. A release asset is CDN-served and resumes. (If you want the
+repository too — for the results loop below — `git clone --depth 1` is a few
+hundred KB, because the data is not in git.)
 
 It takes a few minutes, installs nothing, writes nothing outside this
 directory, and never stops on a failure. When it finishes it prints a status
@@ -88,10 +97,9 @@ results/
 
 Roughly 22 MB goes to the Mac; the tarball coming back is a few tens of KB.
 
-If you cloned the cuda4AS repository rather than copying this directory
-across, the quickest way to send the results home is to commit them: the
-`RESULTS/README.md` at the top of that repository has the four commands.
-Otherwise just send the tarball.
+To send the results home, the neatest route is to commit them into the
+cuda4AS repository — `git clone --depth 1` it, and its `RESULTS/README.md` has
+the four commands. Otherwise just send the tarball itself.
 
 ## What is in here
 
@@ -103,7 +111,10 @@ lmz/                       lmz's decoder harness + shader, UNMODIFIED,
 data/                      22.6 MB of synthetic lmz streams (512 x 32 KiB
                            planes, ~2.8 bits/symbol, coded by lmz's own
                            encoder and verified through lmz's own decoder
-                           before shipping)
+                           before shipping).  In the release tarball but not
+                           in git -- data/README.md says why.  Only p8 needs
+                           it; if it is missing, p8 says so and the run
+                           carries on.
 ```
 
 Nothing in this directory refers to a path outside it.

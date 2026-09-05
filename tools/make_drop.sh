@@ -1,7 +1,7 @@
 #!/bin/sh
 # Assemble cuda4AS/drop/as-phase0/ from the sources of truth.
 #
-#     sh cuda4AS/tools/make_drop.sh [nstr] [plane]
+#     sh cuda4AS/tools/make_drop.sh [--package] [--publish TAG] [nstr] [plane]
 #
 # The drop is a COPY of probe/ plus a copy of two files out of lmz/ plus
 # generated data.  Assembling it by hand is how a drop ends up carrying a stale
@@ -10,6 +10,12 @@
 #
 # `run.sh` and `README.md` inside the drop are written by hand and are NOT
 # regenerated; this script leaves them alone.
+#
+# --package tars the drop into dist/ with a checksum.  --publish TAG uploads
+# that tarball to the named GitHub release.  The drop travels as a release
+# asset rather than inside the repository because a `git clone` sends its whole
+# pack in one unresumable shot: 30 MB of it failed repeatedly on the first Mac
+# that tried, and the third standing rule is that the network may be metered.
 #
 # Rule 4: `lmz/` is not ours.  Its two files are copied OUT, unmodified, and
 # PROVENANCE.md records the commit they came from.  Nothing is written into it.
@@ -20,6 +26,18 @@ CUDA4AS=$(dirname "$HERE")
 YFCE=$(dirname "$CUDA4AS")
 DROP="$CUDA4AS/drop/as-phase0"
 LMZSRC="$YFCE/lmz/scratchpad/gpu/metal"
+
+PACKAGE=no
+PUBLISH=""
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --package) PACKAGE=yes; shift ;;
+        --publish) PACKAGE=yes; PUBLISH=${2:?--publish needs a release tag}; shift 2 ;;
+        --) shift; break ;;
+        -*) echo "unknown option: $1" >&2; exit 2 ;;
+        *) break ;;
+    esac
+done
 
 NSTR=${1:-512}
 PLANE=${2:-32768}
@@ -91,3 +109,37 @@ echo
 printf "drop size: %s bytes (%.1f MB)\n" \
     "$(du -sb "$DROP" | cut -f1)" "$(echo "$(du -sb "$DROP" | cut -f1)/1000000" | bc -l)"
 echo "the user runs:  cd as-phase0 && ./run.sh"
+
+# ------------------------------------------------------------------ packaging
+if [ "$PACKAGE" = yes ]; then
+    DIST="$CUDA4AS/dist"
+    mkdir -p "$DIST"
+    TGZ="$DIST/as-phase0.tgz"
+    ( cd "$CUDA4AS/drop" && tar czf "$TGZ" as-phase0 )
+    ( cd "$DIST" && sha256sum as-phase0.tgz > as-phase0.tgz.sha256 )
+    echo
+    printf "packaged: %s (%.1f MB)\n" "$TGZ" \
+        "$(echo "$(wc -c < "$TGZ")/1000000" | bc -l)"
+    cat "$DIST/as-phase0.tgz.sha256" | sed 's/^/  /'
+
+    # Round-trip it before anyone downloads it: the tarball, not the directory,
+    # is what reaches the Mac, and an exec bit or a symlink lost in packing
+    # would not show up until the round trip had already been spent.
+    TMP=$(mktemp -d)
+    tar xzf "$TGZ" -C "$TMP"
+    if diff -r "$DROP" "$TMP/as-phase0" > /dev/null && [ -x "$TMP/as-phase0/run.sh" ]; then
+        echo "  round-trips to an identical tree, run.sh still executable"
+    else
+        echo "  FAILED: the tarball does not round-trip to the drop directory" >&2
+        rm -rf "$TMP"; exit 1
+    fi
+    rm -rf "$TMP"
+
+    if [ -n "$PUBLISH" ]; then
+        echo
+        echo "publishing to release $PUBLISH:"
+        gh release upload "$PUBLISH" "$TGZ" "$DIST/as-phase0.tgz.sha256" \
+            --repo FanxinSun/cuda4AS --clobber
+        echo "  uploaded"
+    fi
+fi

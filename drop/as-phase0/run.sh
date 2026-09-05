@@ -188,7 +188,19 @@ say ""
 say "=== p8: lmz rANS decoder on the Apple GPU ==="
 BLOG="$RESULTS/build-p8_lmz_decoder.log"
 RLOG="$RESULTS/run-p8_lmz_decoder.log"
-if xcrun swiftc -O "$HERE/lmz/bench.swift" -o "$BUILD/lmzmetal" > "$BLOG" 2>&1; then
+if [ ! -f "$HERE/data/streams.bin" ] || [ ! -f "$HERE/data/ref.bin" ]; then
+    # 22.6 MB of generated streams, shipped as a release asset rather than in
+    # git so this repository stays cloneable on a metered link.  Absent data is
+    # a reported result like any other -- p0 through p7 have already run.
+    row "p8_lmz_decoder" "DATA ABSENT" "22.6 MB not in git; see data/README.md"
+    say "  data/streams.bin and data/ref.bin are not here.  From this directory:"
+    say ""
+    say "    gh release download as-phase0 --repo FanxinSun/cuda4AS --pattern 'as-phase0.tgz*'"
+    say "    shasum -a 256 -c as-phase0.tgz.sha256"
+    say "    tar xzf as-phase0.tgz --strip-components=1 -C . as-phase0/data"
+    say ""
+    say "  Every probe above ran without them; only p8 needs them."
+elif xcrun swiftc -O "$HERE/lmz/bench.swift" -o "$BUILD/lmzmetal" > "$BLOG" 2>&1; then
     ( cd "$HERE/lmz" && run_bounded "$PER_PROBE_TIMEOUT" "$RLOG" \
         "$BUILD/lmzmetal" "$HERE/data" )
     RC=$?

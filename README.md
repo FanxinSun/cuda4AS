@@ -34,12 +34,20 @@ work moves in round trips, and each one is expensive:
 
 1. Everything is written and reviewed here, in `probe/`, `oracle/` and
    `tools/`.
-2. `drop/as-phase0/` is assembled: self-contained, ~23 MB, no path in it
-   points outside itself.
-3. The user copies that directory to a Mac and runs `./run.sh`. It builds and
-   runs every probe, **never stops on a failure**, and tars up one results
-   directory holding a JSON file per probe, every compiler message, and every
-   run log.
+2. `drop/as-phase0/` is assembled by `tools/make_drop.sh`: self-contained,
+   ~23 MB, no path in it points outside itself. `--package` tars it and
+   `--publish` attaches it to a GitHub release.
+3. It is published as a **release asset** — `gh release download as-phase0` —
+   and the user unpacks it on a Mac and runs `./run.sh`. It builds and runs
+   every probe, **never stops on a failure**, and tars up one results directory
+   holding a JSON file per probe, every compiler message, and every run log.
+
+   The drop travels as a release asset rather than through a clone because a
+   `git clone` sends its whole pack in one unresumable shot, and 30 MB of it
+   failed repeatedly on the first Mac that tried. Generated binaries — the
+   drop's stream data and the oracle's reference outputs — are therefore kept
+   out of git and attached to the release instead, so `git clone --depth 1` of
+   this repository is a few hundred KB and works on anything.
 4. The tarball comes back and is unpacked under
    `RESULTS/as-phase0/<hostname>/`.
 5. The results are read, the gate verdict is given, and the next drop is

@@ -3,6 +3,20 @@
 # whose whole point is that it targets someone else's hardware.
 oracle/build/
 
+# Generated binary payloads.  These are NOT in git on purpose: this repository
+# has to be cloneable over a link that may be metered, a git clone transfers
+# its whole pack with no way to resume, and 32 MB of it failed repeatedly on
+# the first Mac that tried.  Both are reproducible -- oracle/ref/*.bin from
+# oracle/run_oracle.py in 15 seconds, and the drop's data from
+# tools/prep_synth_shared.py -- and both ship as release assets instead, which
+# are CDN-served and resume.  See oracle/ref/README.md and
+# drop/as-phase0/data/README.md.
+oracle/ref/*.bin
+drop/as-phase0/data/*.bin
+
+# Release tarballs staged by tools/make_drop.sh --package.
+dist/
+
 # Produced on the Mac by drop/as-phase0/run.sh; the returned tarball is
 # unpacked under RESULTS/ instead.
 drop/as-phase0/results/
