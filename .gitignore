@@ -25,3 +25,10 @@ drop/as-phase0/*.tgz
 
 # Local codex-watermarked project plan and rendered review copies.
 /planning-codex/
+
+# M1 generated work and user-returned archives. Reproducible sources,
+# manifests, and analyzed result records remain tracked outside these paths.
+/.m1-work/
+/RESULTS/m1/incoming/
+/tools/m1/__pycache__/
+/tests/m1/__pycache__/

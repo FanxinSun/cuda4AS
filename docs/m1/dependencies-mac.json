@@ -1,0 +1,159 @@
+{
+  "schema": "cuda4as-m1-dependency-manifest-v1",
+  "manifest_id": "m1-native-mac",
+  "updated_utc": "2026-09-06T10:28:38Z",
+  "m1_baseline": "ce4a1c2e60688e9ea7641202cac3d2036529ffe6",
+  "status": "PENDING_USER_INVENTORY",
+  "readiness_assessment": {
+    "tool": "tools/m1/assess_mac_inventory.py",
+    "status": "PENDING",
+    "native_packaging_gate": "The bound native package is generated only when every runner prerequisite is observed ready."
+  },
+  "machine": {
+    "inventory_artifact": "cuda4as-m1-mac-inventory-v1",
+    "return_received": false,
+    "facts": null
+  },
+  "task_layout": {
+    "root": "~/cuda4as-m1/native-v1/cuda4as-m1-native-feasibility-v1",
+    "source": "~/cuda4as-m1/native-v1/cuda4as-m1-native-feasibility-v1/work/<RUN_UTC>/src/cuda-metal-f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+    "build": "~/cuda4as-m1/native-v1/cuda4as-m1-native-feasibility-v1/work/<RUN_UTC>/build/cumetal",
+    "cmake_adapter": "~/cuda4as-m1/native-v1/cuda4as-m1-native-feasibility-v1/work/<RUN_UTC>/build/cumetal/cumetal-cuda-toolkit",
+    "runtime_cache": "~/cuda4as-m1/native-v1/cuda4as-m1-native-feasibility-v1/work/<RUN_UTC>/cases/*-cache",
+    "results": "~/cuda4as-m1/native-v1/cuda4as-m1-native-feasibility-v1/results/<RUN_UTC>",
+    "returns": "~/cuda4as-m1/native-v1/cuda4as-m1-native-feasibility-v1/returns",
+    "install_prefix": null,
+    "install_policy": "Build-tree execution only for M1 feasibility; no global or task-local install is currently needed."
+  },
+  "candidate_sources": [
+    {
+      "name": "CuMetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "archive_bytes": 6694104,
+      "archive_sha256": "57358b123daece57e472a8bf2805a0919e6879e7a1a781d8d20866b12ffaafbd",
+      "expanded_blob_bytes": 15536441,
+      "delivery": "planned inside the native feasibility drop; no Mac network fetch"
+    },
+    {
+      "name": "VF64-metal submodule",
+      "repository": "https://github.com/Lulzx/VF64-metal.git",
+      "revision": "729021777455da72db8809d9ef1269c677d88b3f",
+      "archive_bytes": 134892,
+      "archive_sha256": "c9e0308a54a3beec0dba15a12b81a68cda9ad502a919a6dd1cfe193a4bd6e5a5",
+      "expanded_blob_bytes": 574689,
+      "delivery": "planned overlaid at third_party/VF64-metal inside the native feasibility drop; no Mac network fetch",
+      "license_status": "UNVERIFIED"
+    }
+  ],
+  "required_components": [
+    {
+      "id": "apple_silicon",
+      "constraint": "arm64 Apple Silicon",
+      "origin": "target hardware",
+      "inventory_state": "PENDING"
+    },
+    {
+      "id": "macos",
+      "constraint": "CuMetal declares macOS 14 or newer",
+      "origin": "installed OS",
+      "inventory_state": "PENDING",
+      "upgrade_authorized": false
+    },
+    {
+      "id": "xcode_sdk",
+      "constraint": "xcrun, macOS SDK, Metal compiler and metallib tools; full Xcode may be required for reference-tool validation",
+      "origin": "Apple developer tools",
+      "inventory_state": "PENDING",
+      "install_or_update_authorized": false
+    },
+    {
+      "id": "cmake",
+      "constraint": ">=3.28",
+      "origin": "existing path or a separately approved package route",
+      "inventory_state": "PENDING",
+      "install_authorized": false
+    },
+    {
+      "id": "llvm",
+      "constraint": ">=18 with LLVM CMake config and CUDA-capable clang++",
+      "origin": "existing path or a separately approved package route; upstream documents Homebrew llvm",
+      "inventory_state": "PENDING",
+      "install_authorized": false
+    },
+    {
+      "id": "lz4",
+      "constraint": "headers and linkable library",
+      "origin": "existing path or a separately approved package route; upstream documents Homebrew lz4",
+      "inventory_state": "PENDING",
+      "install_authorized": false
+    },
+    {
+      "id": "zstd",
+      "constraint": "headers and linkable library",
+      "origin": "existing path or a separately approved package route; upstream documents Homebrew zstd",
+      "inventory_state": "PENDING",
+      "install_authorized": false
+    },
+    {
+      "id": "build_driver",
+      "constraint": "Ninja is required by the M1 runner so object compilation, device link, and native link remain separately observable",
+      "origin": "existing tool only until inventory is reviewed",
+      "inventory_state": "PENDING",
+      "install_authorized": false
+    },
+    {
+      "id": "shell_archive_tools",
+      "constraint": "bash, tar, shasum",
+      "origin": "standard macOS tools",
+      "inventory_state": "PENDING"
+    }
+  ],
+  "selected_candidate_configuration": {
+    "build_type": "Release",
+    "CUMETAL_BUILD_TESTS": "OFF",
+    "CUMETAL_ENABLE_CUDA_REGISTRATION": "ON",
+    "CUMETAL_ENABLE_BINARY_SHIM": "OFF",
+    "CUDA_source_profile": "sm_86 hypothesis, expressed as CUMETAL_CUDA_ARCH=sm_86 and recorded per command",
+    "FP64_policy": "ieee64 for runtime registration and explicit direct-compiler calls; current fixtures do not exercise FP64",
+    "routes": [
+      "direct cumetalc typed native-AOT for oracle.vector_add",
+      "external M1 adapter derived from the pinned upstream source-toolkit script for unchanged CMake fixtures"
+    ],
+    "binary_sass_policy": "No prebuilt binary or SASS execution; no libcuda alias in the M1 adapter."
+  },
+  "resource_estimate": {
+    "source_archive_transfer_bytes": 6828996,
+    "expanded_source_blob_bytes": 16111130,
+    "native_drop_bytes": 8549126,
+    "native_drop_status": "PENDING_USER_INVENTORY; provisional artifact is not actionable",
+    "candidate_build_bytes": "UNKNOWN_UNTIL_MAC_RUN",
+    "dependency_download_bytes": "UNKNOWN_UNTIL_INVENTORY",
+    "free_bytes": "PENDING_INVENTORY",
+    "expected_runtime": "PENDING_INVENTORY_AND_PORTABLE_PACKAGE_CHECKS",
+    "limits": "The actionable drop will state stop limits before the user runs it."
+  },
+  "cache_state": {
+    "homebrew": "PENDING_INVENTORY",
+    "macports": "PENDING_INVENTORY",
+    "candidate_source": "will be supplied in drop",
+    "build_cache": "new task directory"
+  },
+  "approval_state": {
+    "inventory_run": "USER_ACTION_ALREADY_REQUESTED",
+    "candidate_source_reads_under_few_tens_mb": "CONSUMED_WITHIN_M1_SCOPE",
+    "dependency_downloads_or_installs": "NOT_AUTHORIZED",
+    "os_sdk_upgrade": "NOT_AUTHORIZED",
+    "native_build_run": "will be requested only with a complete actionable drop"
+  },
+  "rollback": {
+    "before_run": "Remove the transferred native drop if it is not used.",
+    "after_run": "Remove ~/cuda4as-m1/native-v1 to remove source, build tree, adapter and runtime cache. No shell startup or global loader setting is planned."
+  },
+  "retention": {
+    "return_archive": "retain unchanged under RESULTS/m1/incoming/",
+    "source_archive_hashes": "retain in docs/m1/upstream-evidence.json",
+    "build_and_run_logs": "return in the generated evidence archive",
+    "local_mac_build_tree": "user may remove after the returned archive is accepted"
+  }
+}

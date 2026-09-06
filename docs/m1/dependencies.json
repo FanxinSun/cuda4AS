@@ -1,0 +1,26 @@
+{
+  "schema": "cuda4as-m1-dependency-index-v1",
+  "updated_utc": "2026-09-06T10:28:38Z",
+  "m1_baseline": "ce4a1c2e60688e9ea7641202cac3d2036529ffe6",
+  "candidate_revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+  "manifests": [
+    {
+      "platform": "native Mac",
+      "path": "docs/m1/dependencies-mac.json",
+      "status": "PENDING_USER_INVENTORY"
+    },
+    {
+      "platform": "WSL reference/preparation",
+      "path": "docs/m1/dependencies-wsl.json",
+      "status": "RECORDED_NO_CHANGES"
+    }
+  ],
+  "decision_gate": "Review the returned Mac inventory before selecting or requesting any dependency acquisition. Existing suitable tools will be preferred. Any missing dependency install or download over a few tens of MB requires direct user action/approval with exact current sizes and targets.",
+  "readiness_tool": "tools/m1/assess_mac_inventory.py",
+  "current_blocker": "The native build route cannot be finalized until the user returns the already-requested Mac inventory archive.",
+  "no_change_assertions": [
+    "No package installation or OS/SDK upgrade has occurred.",
+    "No existing conda environment, system Python, CUDA toolkit, or package state was changed.",
+    "No candidate build or Mac native execution has occurred."
+  ]
+}

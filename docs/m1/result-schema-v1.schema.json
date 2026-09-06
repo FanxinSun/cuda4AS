@@ -1,0 +1,221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/FanxinSun/cuda4AS/blob/codex/m1-reuse-feasibility/docs/m1/result-schema-v1.schema.json",
+  "title": "cuda4AS M1 result record v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "run_id", "created_utc", "contract", "candidate", "machine", "cases", "summary"],
+  "properties": {
+    "schema": {"const": "cuda4as-m1-result-v1"},
+    "run_id": {"type": "string", "minLength": 1},
+    "created_utc": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"},
+    "contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "revision", "corpus_schema_version"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "revision": {"type": "string", "minLength": 1},
+        "corpus_schema_version": {"type": "integer", "minimum": 1}
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "revision", "source_state", "build_type", "options"],
+      "properties": {
+        "repository": {"type": "string", "minLength": 1},
+        "revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "source_state": {"enum": ["clean", "dirty", "not_present"]},
+        "build_type": {"type": "string", "minLength": 1},
+        "options": {"type": "object"}
+      }
+    },
+    "machine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["os_name", "os_version", "os_build", "arch", "model", "developer_directory", "xcode_version", "sdk_version", "metal_compiler", "metal_devices"],
+      "properties": {
+        "os_name": {"type": ["string", "null"]},
+        "os_version": {"type": ["string", "null"]},
+        "os_build": {"type": ["string", "null"]},
+        "arch": {"type": ["string", "null"]},
+        "model": {"type": ["string", "null"]},
+        "developer_directory": {"type": ["string", "null"]},
+        "xcode_version": {"type": ["string", "null"]},
+        "sdk_version": {"type": ["string", "null"]},
+        "metal_compiler": {"type": ["string", "null"]},
+        "metal_devices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "registry_id"],
+            "properties": {
+              "name": {"type": "string", "minLength": 1},
+              "registry_id": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/case"}
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_count", "counts", "required_failures", "all_required_attempted", "record_status"],
+      "properties": {
+        "case_count": {"type": "integer", "minimum": 1},
+        "counts": {"$ref": "#/$defs/counts"},
+        "required_failures": {"type": "integer", "minimum": 0},
+        "all_required_attempted": {"type": "boolean"},
+        "record_status": {"enum": ["COMPLETE", "INCOMPLETE", "FAIL"]}
+      }
+    }
+  },
+  "$defs": {
+    "nullableSha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["files", "application_source_unchanged", "application_build_unchanged", "diff_path"],
+      "properties": {
+        "files": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/file"}},
+        "application_source_unchanged": {"type": ["boolean", "null"]},
+        "application_build_unchanged": {"type": ["boolean", "null"]},
+        "diff_path": {"type": ["string", "null"]}
+      }
+    },
+    "stage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "exit_code", "log"],
+      "properties": {
+        "status": {"enum": ["PASS", "FAIL", "NOT_RUN", "NOT_APPLICABLE"]},
+        "exit_code": {"type": ["integer", "null"]},
+        "log": {"type": ["string", "null"]}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kernel", "device", "device_name", "source", "semantic_quality", "launch_success", "completed"],
+      "properties": {
+        "kernel": {"type": "string", "minLength": 1},
+        "device": {"type": "string", "minLength": 1},
+        "device_name": {"type": "string", "minLength": 1},
+        "source": {"type": "string", "minLength": 1},
+        "semantic_quality": {"type": "string", "minLength": 1},
+        "launch_success": {"type": "boolean"},
+        "completed": {"type": "boolean"}
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempted", "route", "explicit_cpu_selection", "exit_code", "backend_evidence_log", "gpu_provenance"],
+      "properties": {
+        "attempted": {"type": "boolean"},
+        "route": {"enum": ["apple_gpu", "cpu_explicit", "none"]},
+        "explicit_cpu_selection": {"type": "boolean"},
+        "exit_code": {"type": ["integer", "null"]},
+        "backend_evidence_log": {"type": ["string", "null"]},
+        "gpu_provenance": {"type": "array", "items": {"$ref": "#/$defs/provenance"}}
+      }
+    },
+    "side": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {
+        "bytes": {"type": ["integer", "null"], "minimum": 0},
+        "sha256": {"$ref": "#/$defs/nullableSha256"}
+      }
+    },
+    "assertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "passed"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "passed": {"type": "boolean"}
+      }
+    },
+    "diagnosticAssertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "passed", "source_location"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "passed": {"type": "boolean"},
+        "source_location": {"type": ["string", "null"]}
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempted", "status", "comparison", "expected", "actual", "assertions"],
+      "properties": {
+        "attempted": {"type": "boolean"},
+        "status": {"enum": ["PASS", "FAIL", "NOT_RUN"]},
+        "comparison": {"enum": ["exact", "declared", "none"]},
+        "expected": {"$ref": "#/$defs/side"},
+        "actual": {"$ref": "#/$defs/side"},
+        "assertions": {"type": "array", "items": {"$ref": "#/$defs/assertion"}}
+      }
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "case_type", "required", "classification", "source", "required_stages", "stages", "execution", "validation", "diagnostic_assertions", "environment_gaps", "reason"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "case_type": {"type": "string", "minLength": 1},
+        "required": {"type": "boolean"},
+        "classification": {"enum": ["PASS_GPU", "PASS_CPU_EXPLICIT", "FAIL", "UNSUPPORTED", "SKIP_ENVIRONMENT", "NOT_RUN"]},
+        "source": {"$ref": "#/$defs/source"},
+        "required_stages": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"enum": ["configure", "host_compile", "device_compile", "device_link", "native_link", "install", "loader_discovery", "launch", "validation"]}
+        },
+        "stages": {
+          "type": "object",
+          "additionalProperties": {"$ref": "#/$defs/stage"},
+          "propertyNames": {"enum": ["configure", "host_compile", "device_compile", "device_link", "native_link", "install", "loader_discovery", "launch", "validation"]}
+        },
+        "execution": {"$ref": "#/$defs/execution"},
+        "validation": {"$ref": "#/$defs/validation"},
+        "diagnostic_assertions": {"type": "array", "items": {"$ref": "#/$defs/diagnosticAssertion"}},
+        "environment_gaps": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "reason": {"type": "string", "minLength": 1}
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["PASS_GPU", "PASS_CPU_EXPLICIT", "FAIL", "UNSUPPORTED", "SKIP_ENVIRONMENT", "NOT_RUN"],
+      "properties": {
+        "PASS_GPU": {"type": "integer", "minimum": 0},
+        "PASS_CPU_EXPLICIT": {"type": "integer", "minimum": 0},
+        "FAIL": {"type": "integer", "minimum": 0},
+        "UNSUPPORTED": {"type": "integer", "minimum": 0},
+        "SKIP_ENVIRONMENT": {"type": "integer", "minimum": 0},
+        "NOT_RUN": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

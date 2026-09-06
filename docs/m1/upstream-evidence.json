@@ -1,0 +1,488 @@
+{
+  "schema": "cuda4as-m1-upstream-evidence-v1",
+  "collected_utc": "2026-09-06T09:45:33Z",
+  "method": {
+    "scope": "Small pinned primary-source and metadata reads plus two source archives; no upstream build or claim reproduction.",
+    "apis": [
+      "GitHub REST commits, refs, releases, repositories, and recursive Git trees",
+      "raw.githubusercontent.com pinned file bytes",
+      "codeload.github.com pinned source archives"
+    ],
+    "etag_note": "Codeload ETags are server metadata and are not treated as archive checksums.",
+    "network_headers_included_in_byte_counts": false
+  },
+  "candidate": {
+    "name": "CuMetal",
+    "repository": "https://github.com/Lulzx/cuda-metal.git",
+    "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+    "commit_utc": "2026-09-05T14:20:59Z",
+    "commit_subject": "scripts: link libwarp and run a Warp kernel on the Metal device",
+    "git_tree": "de688dbd5613d93b300bf749dcc865822d10288a",
+    "github_repository_size_kib_metadata": 9882,
+    "github_license_spdx": "Apache-2.0",
+    "tree": {
+      "tree_truncated": false,
+      "entries": 1089,
+      "blobs": 923,
+      "expanded_blob_bytes": 15536441,
+      "root_breakdown": {
+        ".gitignore": {
+          "blobs": 1,
+          "bytes": 881
+        },
+        ".gitmodules": {
+          "blobs": 1,
+          "bytes": 115
+        },
+        "AGENTS.md": {
+          "blobs": 1,
+          "bytes": 4488
+        },
+        "CHANGELOG.md": {
+          "blobs": 1,
+          "bytes": 31642
+        },
+        "CMakeLists.txt": {
+          "blobs": 1,
+          "bytes": 23520
+        },
+        "CONTRIBUTING.md": {
+          "blobs": 1,
+          "bytes": 7019
+        },
+        "LICENSE": {
+          "blobs": 1,
+          "bytes": 11357
+        },
+        "README.md": {
+          "blobs": 1,
+          "bytes": 2329
+        },
+        "SECURITY.md": {
+          "blobs": 1,
+          "bytes": 3654
+        },
+        "cmake": {
+          "blobs": 2,
+          "bytes": 3649
+        },
+        "compiler": {
+          "blobs": 44,
+          "bytes": 1648939
+        },
+        "demos": {
+          "blobs": 54,
+          "bytes": 5463857
+        },
+        "docs": {
+          "blobs": 35,
+          "bytes": 290586
+        },
+        "install": {
+          "blobs": 2,
+          "bytes": 5794
+        },
+        "runtime": {
+          "blobs": 167,
+          "bytes": 2017020
+        },
+        "samples": {
+          "blobs": 5,
+          "bytes": 9734
+        },
+        "scripts": {
+          "blobs": 47,
+          "bytes": 304251
+        },
+        "spec": {
+          "blobs": 7,
+          "bytes": 17186
+        },
+        "spec.md": {
+          "blobs": 1,
+          "bytes": 2108
+        },
+        "tests": {
+          "blobs": 354,
+          "bytes": 2247076
+        },
+        "third_party": {
+          "blobs": 182,
+          "bytes": 3348781
+        },
+        "tools": {
+          "blobs": 14,
+          "bytes": 92455
+        }
+      }
+    },
+    "source_archive": {
+      "url": "https://codeload.github.com/Lulzx/cuda-metal/tar.gz/f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "bytes": 6694104,
+      "sha256": "57358b123daece57e472a8bf2805a0919e6879e7a1a781d8d20866b12ffaafbd",
+      "server_etag": "6481dcc608b03bf55b7e9986902109b189be1e01c35daf8437e5a133e9e6ce5c",
+      "content_length_from_head": null,
+      "archive_matches_all_git_blobs": true,
+      "submodule_content_included": false
+    },
+    "submodules": [
+      {
+        "path": "third_party/VF64-metal",
+        "repository": "https://github.com/Lulzx/VF64-metal.git",
+        "revision": "729021777455da72db8809d9ef1269c677d88b3f",
+        "commit_utc": "2026-08-29T10:14:24Z",
+        "git_tree": "e18a46c2c6c35adfd26dbbd04767e30a2498b7b7",
+        "tree": {
+          "tree_truncated": false,
+          "entries": 195,
+          "blobs": 142,
+          "expanded_blob_bytes": 574689,
+          "root_breakdown": {
+            ".github": {
+              "blobs": 1,
+              "bytes": 2812
+            },
+            ".gitignore": {
+              "blobs": 1,
+              "bytes": 62
+            },
+            "Package.swift": {
+              "blobs": 1,
+              "bytes": 355
+            },
+            "README.md": {
+              "blobs": 1,
+              "bytes": 5286
+            },
+            "Sources": {
+              "blobs": 53,
+              "bytes": 337973
+            },
+            "docs": {
+              "blobs": 37,
+              "bytes": 100041
+            },
+            "examples": {
+              "blobs": 2,
+              "bytes": 349
+            },
+            "include": {
+              "blobs": 1,
+              "bytes": 3236
+            },
+            "results": {
+              "blobs": 22,
+              "bytes": 71468
+            },
+            "scripts": {
+              "blobs": 20,
+              "bytes": 45781
+            },
+            "tests": {
+              "blobs": 3,
+              "bytes": 7326
+            }
+          }
+        },
+        "source_archive": {
+          "url": "https://codeload.github.com/Lulzx/VF64-metal/tar.gz/729021777455da72db8809d9ef1269c677d88b3f",
+          "bytes": 134892,
+          "sha256": "c9e0308a54a3beec0dba15a12b81a68cda9ad502a919a6dd1cfe193a4bd6e5a5",
+          "archive_matches_all_git_blobs": true
+        },
+        "license_evidence": {
+          "github_license": null,
+          "license_named_files_in_tree": [],
+          "status": "UNVERIFIED",
+          "scope_note": "The parent repository license is not assumed to license separate submodule content."
+        }
+      }
+    ],
+    "vendored_components": [
+      {
+        "path": "third_party/VkFFT",
+        "declared_version": "1.3.4",
+        "license": "MIT",
+        "evidence_path": "third_party/VkFFT/README.Gromacs",
+        "modifications_declared": true
+      },
+      {
+        "path": "third_party/metal-cpp",
+        "license": "Apache-2.0",
+        "copyright": "Apple Inc. 2024",
+        "evidence_path": "third_party/metal-cpp/LICENSE.txt"
+      }
+    ]
+  },
+  "pytorch_audit_pin": {
+    "repository": "https://github.com/pytorch/pytorch.git",
+    "release_tag": "v2.14.0",
+    "release_name": "PyTorch 2.14.0 Release",
+    "release_published_utc": "2026-09-02T17:40:10Z",
+    "revision": "2b3ec34829036a65cd9d1398ea72a0167dc37470",
+    "tag_object_type": "commit",
+    "commit_utc": "2026-08-27T02:23:46Z",
+    "archive_url": "https://codeload.github.com/pytorch/pytorch/tar.gz/2b3ec34829036a65cd9d1398ea72a0167dc37470",
+    "archive_server_etag": "7a8219dc40db5043e40ba2d694b89a2e02df7b790a6fad4849eaa8024fc197a9",
+    "archive_content_length_from_head": null,
+    "archive_downloaded": false
+  },
+  "selected_primary_sources": [
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": ".gitmodules",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/.gitmodules",
+      "bytes": 115,
+      "sha256": "c4003668f6e19bcf958d2b8565396e1c7cf4b54435d8484470eb631eed718e91",
+      "git_blob_sha1": "e696e3421cc8778dfaf56634ba0e4e701c66e69b"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "CMakeLists.txt",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/CMakeLists.txt",
+      "bytes": 23520,
+      "sha256": "835ba3496acd5cb21c9872e3d9b850611350de52f829e496d6a031a9ecaa1034",
+      "git_blob_sha1": "5979b863becf0004092cfe9504d338dd333b8263"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "git_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/README.md",
+      "bytes": 2329,
+      "sha256": "65bcc636c7113ebb06433a6f0cb62b8b6be38649ad99ce3fd9d5e26326835d60",
+      "git_blob_sha1": "00f792fa05769c292f0efab609f742c0e73c7a76"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "cmake/CuMetalToolchain.cmake",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/cmake/CuMetalToolchain.cmake",
+      "bytes": 3039,
+      "sha256": "4c00c73571cfc5d5ec7b3e53e4b371b819f1179e056c0f26d08d0cb337f3f68a",
+      "git_blob_sha1": "c28833a6cbd12c749d1517d66784b5cd68df4ac3"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "compiler/cumetalc/README.md",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/compiler/cumetalc/README.md",
+      "bytes": 3068,
+      "sha256": "056bf05e36590e93d02b745079b711012078e2b3d21ed554fe37bddc47f0c5b7",
+      "git_blob_sha1": "7bd6ceef768fff3e19fd43d061634d26db39d6ee"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "compiler/cumetalc/main.cpp",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/compiler/cumetalc/main.cpp",
+      "bytes": 87081,
+      "sha256": "771ac545005fe30faf51792e1f5cf5dbf300b61f9368bf3889a224f8fbbfc4cd",
+      "git_blob_sha1": "acb363ed916a522ce7f98e6d6b740538247e2c9a"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "docs/apple-gpu-execution.md",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/docs/apple-gpu-execution.md",
+      "bytes": 10889,
+      "sha256": "686bb8ec8e4d3c92e75db8d8a40015a2732218ca7cb672551e2395a9f1eeb98e",
+      "git_blob_sha1": "5c6dbe61511f6f350090ff2668b31082de69185a"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "docs/build.md",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/docs/build.md",
+      "bytes": 6813,
+      "sha256": "eb102bb5ab805c234a90378bf994ee70cca59729f3ee1db21fe0c9ffe795d909",
+      "git_blob_sha1": "d508dc170582f6a1a707747c2e5ae9d960d70980"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "docs/known-gaps/compiler.md",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/docs/known-gaps/compiler.md",
+      "bytes": 6772,
+      "sha256": "142650b7683eeedb8a0f26c56c44fb3d2e33fbe1dfd37f25183fc58629f856d7",
+      "git_blob_sha1": "ed5d44d25a37e58bb500506f6cbbb134c4b2bd7d"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "docs/legal-notice.md",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/docs/legal-notice.md",
+      "bytes": 5948,
+      "sha256": "c8061f7aa9a41054bf122d94477ee59273494e0dd9fd43fafa7310a47ff617b8",
+      "git_blob_sha1": "67ade806ff5bec020c4c15d38e99d58d2c5a98a0"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "install/install.sh",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/install/install.sh",
+      "bytes": 2705,
+      "sha256": "573f8f7f9633704ce58bd8cee2a0175dea0615a60da05de60c5f997de9c2c94c",
+      "git_blob_sha1": "406f0512290549a6643fd227663812ed0fcb8746"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "install/uninstall.sh",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/install/uninstall.sh",
+      "bytes": 3089,
+      "sha256": "ace7e793f61ac36eded68e16cca1050b6fad25da67de0f0c4a1d8b404870bc1d",
+      "git_blob_sha1": "5a80900a4339fe757f98cb5597500c944b26a9e7"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "samples/vectorAdd/README.md",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/samples/vectorAdd/README.md",
+      "bytes": 1563,
+      "sha256": "a7e2aa709cc282c4c500231efd38f2b35e7fb04830424151faf63d4c5a09690f",
+      "git_blob_sha1": "d16cd40dccf96cfb2117c226c3de4b3de05f959c"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "scripts/build_llama_cpp_cumetal.sh",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/scripts/build_llama_cpp_cumetal.sh",
+      "bytes": 20598,
+      "sha256": "99a4c60ed9708baf59db4e669e8d4dd76627305b097435992fac7bc764f8d507",
+      "git_blob_sha1": "48c657cb18c526bdec9e488c570534e3189b32b5"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "tests/functional/run_cumetalc_link_executable.sh",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/tests/functional/run_cumetalc_link_executable.sh",
+      "bytes": 4642,
+      "sha256": "c98a8982a5efb820bbfcb522af2f2030f04e76d22bbe07f8d94c2444061250be",
+      "git_blob_sha1": "121860e041bb93ca0ebe7fffaba00619bd13d750"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "third_party/VkFFT/README.Gromacs",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/third_party/VkFFT/README.Gromacs",
+      "bytes": 1577,
+      "sha256": "bab823cd03d3f71a1ec949ebe5f592b791c1e8327a62d852cc91a0ad2c1899b5",
+      "git_blob_sha1": "5a2d4cfb78d4a8ab750c23a4bae1433db69ea77c"
+    },
+    {
+      "project": "cumetal",
+      "repository": "https://github.com/Lulzx/cuda-metal.git",
+      "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+      "path": "third_party/metal-cpp/LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/Lulzx/cuda-metal/f486e5ebcfd381d06e3297afd65dbcbd5006a902/third_party/metal-cpp/LICENSE.txt",
+      "bytes": 11344,
+      "sha256": "f4e92c7fe2aa066e294c0da9d08683dc9fb741ee6e6debbfad99a0c96e07c1f2",
+      "git_blob_sha1": "d07f885e7a86db8234f7e20f5ebb2adb921a92cb"
+    },
+    {
+      "project": "pytorch",
+      "repository": "https://github.com/pytorch/pytorch.git",
+      "revision": "2b3ec34829036a65cd9d1398ea72a0167dc37470",
+      "path": "CMakeLists.txt",
+      "url": "https://raw.githubusercontent.com/pytorch/pytorch/2b3ec34829036a65cd9d1398ea72a0167dc37470/CMakeLists.txt",
+      "bytes": 59103,
+      "sha256": "61bcd1b3b1d00a8fb32a6e7fa22b454e348d9f24b5d3ae0374a98f1e48b7d7bd",
+      "git_blob_sha1": null
+    },
+    {
+      "project": "pytorch",
+      "repository": "https://github.com/pytorch/pytorch.git",
+      "revision": "2b3ec34829036a65cd9d1398ea72a0167dc37470",
+      "path": "cmake/Dependencies.cmake",
+      "url": "https://raw.githubusercontent.com/pytorch/pytorch/2b3ec34829036a65cd9d1398ea72a0167dc37470/cmake/Dependencies.cmake",
+      "bytes": 67957,
+      "sha256": "385ed64146da313ccb4a9fb149b536e14186670e3260bb077f0f4834d09f18c9",
+      "git_blob_sha1": null
+    },
+    {
+      "project": "pytorch",
+      "repository": "https://github.com/pytorch/pytorch.git",
+      "revision": "2b3ec34829036a65cd9d1398ea72a0167dc37470",
+      "path": "cmake/public/cuda.cmake",
+      "url": "https://raw.githubusercontent.com/pytorch/pytorch/2b3ec34829036a65cd9d1398ea72a0167dc37470/cmake/public/cuda.cmake",
+      "bytes": 14368,
+      "sha256": "9f2be13ffa913f5d7f15b9f4f8eb80c40bd9ae7969f7050be700aaa655bdccb0",
+      "git_blob_sha1": null
+    },
+    {
+      "project": "pytorch",
+      "repository": "https://github.com/pytorch/pytorch.git",
+      "revision": "2b3ec34829036a65cd9d1398ea72a0167dc37470",
+      "path": "setup.py",
+      "url": "https://raw.githubusercontent.com/pytorch/pytorch/2b3ec34829036a65cd9d1398ea72a0167dc37470/setup.py",
+      "bytes": 2390,
+      "sha256": "01f864ef76df8d91c9d085646a7ac6a49dc357ced819ce5369a329c73c81c676",
+      "git_blob_sha1": null
+    },
+    {
+      "project": "pytorch",
+      "repository": "https://github.com/pytorch/pytorch.git",
+      "revision": "2b3ec34829036a65cd9d1398ea72a0167dc37470",
+      "path": "torch/utils/cpp_extension.py",
+      "url": "https://raw.githubusercontent.com/pytorch/pytorch/2b3ec34829036a65cd9d1398ea72a0167dc37470/torch/utils/cpp_extension.py",
+      "bytes": 147296,
+      "sha256": "9230d7985a75cbccb8aa8b89a497324592fa6c310c8e5e4740801efb07b60cef",
+      "git_blob_sha1": null
+    },
+    {
+      "project": "vf64-metal",
+      "repository": "https://github.com/Lulzx/VF64-metal.git",
+      "revision": "729021777455da72db8809d9ef1269c677d88b3f",
+      "path": "Package.swift",
+      "url": "https://raw.githubusercontent.com/Lulzx/VF64-metal/729021777455da72db8809d9ef1269c677d88b3f/Package.swift",
+      "bytes": 355,
+      "sha256": "dc098d2b03eb820f8014d523046d56112fa3ee65c1733eb8ca94957ca20cca2a",
+      "git_blob_sha1": "dc16748b4b69e7c7136724d3e30bda538450e8ab"
+    },
+    {
+      "project": "vf64-metal",
+      "repository": "https://github.com/Lulzx/VF64-metal.git",
+      "revision": "729021777455da72db8809d9ef1269c677d88b3f",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/Lulzx/VF64-metal/729021777455da72db8809d9ef1269c677d88b3f/README.md",
+      "bytes": 5286,
+      "sha256": "3f99714bf89a8ffc2b91ad5e116014f8302a22c57d6ac62aecb4ff9ba783bd20",
+      "git_blob_sha1": "ae21c85fb201fb773f92fe2d2bd0b60a9f400fd5"
+    }
+  ],
+  "local_resource_accounting": {
+    "downloaded_source_archive_payload_bytes": 6828996,
+    "retained_metadata_and_selected_source_payload_bytes": 1010689,
+    "candidate_plus_submodule_expanded_blob_bytes": 16111130,
+    "installations": 0
+  }
+}

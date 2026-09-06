@@ -1,0 +1,168 @@
+{
+  "schema": "cuda4as-m1-fixture-manifest-v1",
+  "m1_baseline": "ce4a1c2e60688e9ea7641202cac3d2036529ffe6",
+  "candidate": {
+    "repository": "https://github.com/Lulzx/cuda-metal.git",
+    "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+    "build_type": "Release",
+    "provisional_cuda_arch": "sm_86",
+    "fp64_policy": "ieee64",
+    "options": {
+      "CUMETAL_BUILD_TESTS": "OFF",
+      "CUMETAL_ENABLE_CUDA_REGISTRATION": "ON",
+      "CUMETAL_ENABLE_BINARY_SHIM": "OFF"
+    }
+  },
+  "policy": {
+    "application_files_unchanged_after_pin": true,
+    "gpu_pass_requires_apple_gpu_provenance": true,
+    "nvidia_fixture_validation_is_not_cuda4as_execution": true,
+    "comparison": "exact"
+  },
+  "cases": [
+    {
+      "id": "oracle.vector_add",
+      "case_type": "existing_oracle",
+      "source_files": [
+        {
+          "path": "oracle/src/vector_add.cu",
+          "sha256": "b3f205cabc42a697276244d5810ce62ff40a5c9cc6a8e1078420ccbefa88d0e2"
+        },
+        {
+          "path": "oracle/src/oracle.h",
+          "sha256": "6e7cc4c2e59e10db5b68df4116ed67ec3fe1d88d559c41e0a9feb2da3dd643bc"
+        }
+      ],
+      "build_files": [],
+      "expected_output": {
+        "path_role": "runtime-selected output path",
+        "dtype": "f32",
+        "byte_order": "little-endian",
+        "shape": [1048576],
+        "bytes": 4194304,
+        "sha256": "ed551637cf393112d0093037a0b41b9d1e9bd213c6037e8efcde30cf480f0332"
+      },
+      "candidate_route": "cumetalc single-source native AOT executable; PTX/registration may be run only as a separately labeled control",
+      "future_required_stages": [
+        "host_compile",
+        "device_compile",
+        "native_link",
+        "launch",
+        "validation"
+      ],
+      "m1_fixture_validation": {
+        "reference_integrity": "MATCH",
+        "cuda4as_classification": "NOT_RUN"
+      }
+    },
+    {
+      "id": "integration.minimal_cmake_cuda",
+      "case_type": "unchanged_cmake_project",
+      "source_files": [
+        {
+          "path": "tests/m1/fixtures/cmake-vector-add/main.cu",
+          "sha256": "782cbfbc4b9b9709b4ff90b4c45a3b59eedd4a034eaeb46b2aa603faf8c0b6ee"
+        }
+      ],
+      "build_files": [
+        {
+          "path": "tests/m1/fixtures/cmake-vector-add/CMakeLists.txt",
+          "sha256": "6c081bb596387ff81c50d207f1194851b9bae6b5795976d91029a4745042e2e4"
+        }
+      ],
+      "expected_output": {
+        "path_role": "first executable argument",
+        "dtype": "u32",
+        "byte_order": "little-endian",
+        "shape": [4096],
+        "bytes": 16384,
+        "sha256": "8fe6be55ab663bfedbdd6435befcae6ffc5ab6f78059f2d20cd6ad50a417f4ef"
+      },
+      "candidate_route": "normal unchanged CMake CUDA-language project using a disclosed task-local M1 adapter derived from the pinned upstream source-toolkit generator; the adapter remains outside the application inputs",
+      "future_required_stages": [
+        "configure",
+        "host_compile",
+        "device_compile",
+        "native_link",
+        "launch",
+        "validation"
+      ],
+      "m1_fixture_validation": {
+        "reference_environment": "Linux x86-64, NVIDIA RTX 5080, CUDA 13.2 nvcc, sm_120",
+        "configure": "PASS",
+        "build": "PASS",
+        "execution": "PASS_REFERENCE_ENVIRONMENT",
+        "independent_host_byte_check": "PASS",
+        "cuda4as_classification": "NOT_RUN"
+      }
+    },
+    {
+      "id": "integration.multi_tu_device_link",
+      "case_type": "unchanged_cmake_project",
+      "source_files": [
+        {
+          "path": "tests/m1/fixtures/cmake-device-link/main.cu",
+          "sha256": "b4ceb6d393950efbf568629bde758835063f920eaea0379e2e2f2203976c052d"
+        },
+        {
+          "path": "tests/m1/fixtures/cmake-device-link/kernel.cu",
+          "sha256": "d938c888d89b9774651d139ebeb374664629efb7a165685c017cc70d960ee96b"
+        },
+        {
+          "path": "tests/m1/fixtures/cmake-device-link/device-function.cu",
+          "sha256": "bd4b24471caa7d254fb89fe5ff97d1c20d5c4e5e61c5d461adaa9876560b92c1"
+        },
+        {
+          "path": "tests/m1/fixtures/cmake-device-link/device-api.cuh",
+          "sha256": "a1510a2268cec366a9adc2a0235495fc122325fd3a82f95d1ecd65f7b0693b53"
+        }
+      ],
+      "build_files": [
+        {
+          "path": "tests/m1/fixtures/cmake-device-link/CMakeLists.txt",
+          "sha256": "a23672623379afa14e53b6298c792a1312763f8f8ac6f7644558ed938d1a5833"
+        }
+      ],
+      "expected_output": {
+        "path_role": "first executable argument",
+        "dtype": "u32",
+        "byte_order": "little-endian",
+        "shape": [2048],
+        "bytes": 8192,
+        "sha256": "d173cf4cf4849f14508f67d6f7ec3f3f7080eac5305785b9f071e9feeb6269a1"
+      },
+      "candidate_route": "normal unchanged CMake CUDA-language project through the disclosed task-local M1 adapter, three CUDA translation units, relocatable device code, and required device link",
+      "source_audit_risk": "The pinned upstream CMake-facing nvcc shim emits an empty host object for -dlink because it expects each translation unit to register independently. That is not a device-image link and does not prove resolution of this fixture's external __device__ call. The case must still be attempted and classified from its actual stage logs.",
+      "future_required_stages": [
+        "configure",
+        "host_compile",
+        "device_compile",
+        "device_link",
+        "native_link",
+        "launch",
+        "validation"
+      ],
+      "m1_fixture_validation": {
+        "reference_environment": "Linux x86-64, NVIDIA RTX 5080, CUDA 13.2 nvcc, sm_120",
+        "configure": "PASS",
+        "build": "PASS",
+        "device_link": "PASS",
+        "execution": "PASS_REFERENCE_ENVIRONMENT",
+        "independent_host_byte_check": "PASS",
+        "cuda4as_classification": "NOT_RUN"
+      }
+    }
+  ],
+  "reference_commands": {
+    "cmake_vector_add": [
+      "cmake -S tests/m1/fixtures/cmake-vector-add -B <build> -G Ninja -DCMAKE_CUDA_COMPILER=/usr/local/cuda-13/bin/nvcc -DCMAKE_CUDA_ARCHITECTURES=120 -DCMAKE_BUILD_TYPE=Release",
+      "cmake --build <build>",
+      "<build>/cuda4as_m1_cmake_vector_add <build>/output.bin"
+    ],
+    "cmake_device_link": [
+      "cmake -S tests/m1/fixtures/cmake-device-link -B <build> -G Ninja -DCMAKE_CUDA_COMPILER=/usr/local/cuda-13/bin/nvcc -DCMAKE_CUDA_ARCHITECTURES=120 -DCMAKE_BUILD_TYPE=Release",
+      "cmake --build <build>",
+      "<build>/cuda4as_m1_cmake_device_link <build>/output.bin"
+    ]
+  }
+}

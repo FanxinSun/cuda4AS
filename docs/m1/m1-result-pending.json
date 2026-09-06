@@ -1,0 +1,330 @@
+{
+  "schema": "cuda4as-m1-result-v1",
+  "run_id": "m1-native-pending-inventory",
+  "created_utc": "2026-09-06T09:52:06Z",
+  "contract": {
+    "id": "cuda4as-m0-initial-ampere-source-profile",
+    "revision": "0.1",
+    "corpus_schema_version": 1
+  },
+  "candidate": {
+    "repository": "https://github.com/Lulzx/cuda-metal.git",
+    "revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+    "source_state": "not_present",
+    "build_type": "Release",
+    "options": {
+      "CUMETAL_BUILD_TESTS": "OFF",
+      "CUMETAL_ENABLE_CUDA_REGISTRATION": "ON",
+      "CUMETAL_ENABLE_BINARY_SHIM": "OFF",
+      "CUMETAL_CUDA_ARCH": "sm_86",
+      "CUMETAL_FP64_MODE": "ieee64"
+    }
+  },
+  "machine": {
+    "os_name": "PENDING_USER_INVENTORY",
+    "os_version": "PENDING",
+    "os_build": "PENDING",
+    "arch": "arm64",
+    "model": "PENDING",
+    "developer_directory": "PENDING",
+    "xcode_version": "PENDING",
+    "sdk_version": "PENDING",
+    "metal_compiler": "PENDING",
+    "metal_devices": []
+  },
+  "cases": [
+    {
+      "id": "oracle.vector_add",
+      "case_type": "existing_oracle",
+      "required": true,
+      "classification": "NOT_RUN",
+      "source": {
+        "files": [
+          {
+            "path": "oracle/src/vector_add.cu",
+            "sha256": "b3f205cabc42a697276244d5810ce62ff40a5c9cc6a8e1078420ccbefa88d0e2"
+          },
+          {
+            "path": "oracle/src/oracle.h",
+            "sha256": "6e7cc4c2e59e10db5b68df4116ed67ec3fe1d88d559c41e0a9feb2da3dd643bc"
+          }
+        ],
+        "application_source_unchanged": null,
+        "application_build_unchanged": null,
+        "diff_path": null
+      },
+      "required_stages": [
+        "host_compile",
+        "device_compile",
+        "native_link",
+        "launch",
+        "validation"
+      ],
+      "stages": {
+        "host_compile": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        },
+        "device_compile": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        },
+        "native_link": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        },
+        "launch": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        },
+        "validation": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        }
+      },
+      "execution": {
+        "attempted": false,
+        "route": "none",
+        "explicit_cpu_selection": false,
+        "exit_code": null,
+        "backend_evidence_log": null,
+        "gpu_provenance": []
+      },
+      "validation": {
+        "attempted": false,
+        "status": "NOT_RUN",
+        "comparison": "exact",
+        "expected": {
+          "bytes": 4194304,
+          "sha256": "ed551637cf393112d0093037a0b41b9d1e9bd213c6037e8efcde30cf480f0332"
+        },
+        "actual": {
+          "bytes": null,
+          "sha256": null
+        },
+        "assertions": []
+      },
+      "diagnostic_assertions": [],
+      "environment_gaps": [
+        "user-operated Mac inventory return outstanding",
+        "native candidate build and GPU run not started"
+      ],
+      "reason": "Pinned M1 fixture; native execution awaits the user-operated Mac inventory and feasibility drop."
+    },
+    {
+      "id": "integration.minimal_cmake_cuda",
+      "case_type": "unchanged_cmake_project",
+      "required": true,
+      "classification": "NOT_RUN",
+      "source": {
+        "files": [
+          {
+            "path": "tests/m1/fixtures/cmake-vector-add/main.cu",
+            "sha256": "782cbfbc4b9b9709b4ff90b4c45a3b59eedd4a034eaeb46b2aa603faf8c0b6ee"
+          },
+          {
+            "path": "tests/m1/fixtures/cmake-vector-add/CMakeLists.txt",
+            "sha256": "6c081bb596387ff81c50d207f1194851b9bae6b5795976d91029a4745042e2e4"
+          }
+        ],
+        "application_source_unchanged": null,
+        "application_build_unchanged": null,
+        "diff_path": null
+      },
+      "required_stages": [
+        "configure",
+        "host_compile",
+        "device_compile",
+        "native_link",
+        "launch",
+        "validation"
+      ],
+      "stages": {
+        "configure": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        },
+        "host_compile": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        },
+        "device_compile": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        },
+        "native_link": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        },
+        "launch": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        },
+        "validation": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        }
+      },
+      "execution": {
+        "attempted": false,
+        "route": "none",
+        "explicit_cpu_selection": false,
+        "exit_code": null,
+        "backend_evidence_log": null,
+        "gpu_provenance": []
+      },
+      "validation": {
+        "attempted": false,
+        "status": "NOT_RUN",
+        "comparison": "exact",
+        "expected": {
+          "bytes": 16384,
+          "sha256": "8fe6be55ab663bfedbdd6435befcae6ffc5ab6f78059f2d20cd6ad50a417f4ef"
+        },
+        "actual": {
+          "bytes": null,
+          "sha256": null
+        },
+        "assertions": []
+      },
+      "diagnostic_assertions": [],
+      "environment_gaps": [
+        "user-operated Mac inventory return outstanding",
+        "native candidate build and GPU run not started"
+      ],
+      "reason": "Pinned M1 fixture; native execution awaits the user-operated Mac inventory and feasibility drop."
+    },
+    {
+      "id": "integration.multi_tu_device_link",
+      "case_type": "unchanged_cmake_project",
+      "required": true,
+      "classification": "NOT_RUN",
+      "source": {
+        "files": [
+          {
+            "path": "tests/m1/fixtures/cmake-device-link/main.cu",
+            "sha256": "b4ceb6d393950efbf568629bde758835063f920eaea0379e2e2f2203976c052d"
+          },
+          {
+            "path": "tests/m1/fixtures/cmake-device-link/kernel.cu",
+            "sha256": "d938c888d89b9774651d139ebeb374664629efb7a165685c017cc70d960ee96b"
+          },
+          {
+            "path": "tests/m1/fixtures/cmake-device-link/device-function.cu",
+            "sha256": "bd4b24471caa7d254fb89fe5ff97d1c20d5c4e5e61c5d461adaa9876560b92c1"
+          },
+          {
+            "path": "tests/m1/fixtures/cmake-device-link/device-api.cuh",
+            "sha256": "a1510a2268cec366a9adc2a0235495fc122325fd3a82f95d1ecd65f7b0693b53"
+          },
+          {
+            "path": "tests/m1/fixtures/cmake-device-link/CMakeLists.txt",
+            "sha256": "a23672623379afa14e53b6298c792a1312763f8f8ac6f7644558ed938d1a5833"
+          }
+        ],
+        "application_source_unchanged": null,
+        "application_build_unchanged": null,
+        "diff_path": null
+      },
+      "required_stages": [
+        "configure",
+        "host_compile",
+        "device_compile",
+        "device_link",
+        "native_link",
+        "launch",
+        "validation"
+      ],
+      "stages": {
+        "configure": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        },
+        "host_compile": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        },
+        "device_compile": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        },
+        "device_link": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        },
+        "native_link": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        },
+        "launch": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        },
+        "validation": {
+          "status": "NOT_RUN",
+          "exit_code": null,
+          "log": null
+        }
+      },
+      "execution": {
+        "attempted": false,
+        "route": "none",
+        "explicit_cpu_selection": false,
+        "exit_code": null,
+        "backend_evidence_log": null,
+        "gpu_provenance": []
+      },
+      "validation": {
+        "attempted": false,
+        "status": "NOT_RUN",
+        "comparison": "exact",
+        "expected": {
+          "bytes": 8192,
+          "sha256": "d173cf4cf4849f14508f67d6f7ec3f3f7080eac5305785b9f071e9feeb6269a1"
+        },
+        "actual": {
+          "bytes": null,
+          "sha256": null
+        },
+        "assertions": []
+      },
+      "diagnostic_assertions": [],
+      "environment_gaps": [
+        "user-operated Mac inventory return outstanding",
+        "native candidate build and GPU run not started"
+      ],
+      "reason": "Pinned M1 fixture; native execution awaits the user-operated Mac inventory and feasibility drop."
+    }
+  ],
+  "summary": {
+    "case_count": 3,
+    "counts": {
+      "PASS_GPU": 0,
+      "PASS_CPU_EXPLICIT": 0,
+      "FAIL": 0,
+      "UNSUPPORTED": 0,
+      "SKIP_ENVIRONMENT": 0,
+      "NOT_RUN": 3
+    },
+    "required_failures": 0,
+    "all_required_attempted": false,
+    "record_status": "INCOMPLETE"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "schema": "cuda4as-m1-dependency-manifest-v1",
+  "manifest_id": "m1-wsl-reference",
+  "updated_utc": "2026-09-06T09:49:09Z",
+  "m1_baseline": "ce4a1c2e60688e9ea7641202cac3d2036529ffe6",
+  "status": "RECORDED_NO_CHANGES",
+  "machine": {
+    "os": "Ubuntu 26.04 LTS",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "arch": "x86_64",
+    "workspace_filesystem_total_bytes": 1081101176832,
+    "workspace_filesystem_free_bytes_observed": 568682995712
+  },
+  "tools": [
+    {
+      "id": "cmake",
+      "version": "4.2.3",
+      "path": "/usr/bin/cmake",
+      "origin": "Ubuntu package cmake 4.2.3-2ubuntu2 amd64",
+      "bytes": 14253272,
+      "sha256": "6e1dccda39845415d68eabb934c598998949c99ec4668625d571aee1827b05c7"
+    },
+    {
+      "id": "ninja",
+      "version": "1.13.2.git.kitware.jobserver-pipe-1",
+      "path": "/home/rog/.local/bin/ninja",
+      "resolved_path": "/home/rog/.local/share/uv/tools/ninja/bin/ninja",
+      "origin": "existing uv tool ninja v1.13.2",
+      "bytes": 370448,
+      "sha256": "08639e194fffa7f08b259fc4abfa4803aff66b64de52549cee42ec527d55cea6"
+    },
+    {
+      "id": "nvcc",
+      "version": "CUDA 13.2 V13.2.86",
+      "path": "/usr/local/cuda-13/bin/nvcc",
+      "resolved_path": "/usr/local/cuda-13.2/bin/nvcc",
+      "origin": "pre-existing installation; package provenance not asserted",
+      "bytes": 33994064,
+      "sha256": "e0341e832da4c4c9c412c0722ac1a9e6944d0c0fcb36f3cd51d2fe11435f46e5"
+    },
+    {
+      "id": "python",
+      "version": "3.14.4",
+      "path": "/usr/bin/python3",
+      "origin": "existing system Python"
+    },
+    {
+      "id": "git",
+      "version": "2.53.0",
+      "path": "/usr/bin/git",
+      "origin": "existing system Git"
+    },
+    {
+      "id": "clang",
+      "status": "MISSING_FROM_PATH"
+    },
+    {
+      "id": "llvm-config",
+      "status": "MISSING_FROM_PATH"
+    }
+  ],
+  "libraries": [
+    {
+      "id": "lz4",
+      "package": "liblz4-dev:amd64 1.10.0-8",
+      "path": "/usr/lib/x86_64-linux-gnu/liblz4.so.1.10.0",
+      "bytes": 166224,
+      "sha256": "45729d07db6c43e524c2e69d0c4aef81148a66e272c4f4e0e64b787e17fe1731"
+    },
+    {
+      "id": "zstd",
+      "package": "libzstd-dev:amd64 1.5.7+dfsg-3",
+      "path": "/usr/lib/x86_64-linux-gnu/libzstd.so.1.5.7",
+      "bytes": 796824,
+      "sha256": "060eeb79531d435306665fd78329d8a9dd579f95876c5960bb67937825362a80"
+    }
+  ],
+  "candidate_role": "Source preparation and evidence only. CuMetal targets Apple frameworks and no WSL candidate build is claimed.",
+  "reference_fixture_role": "The existing CUDA 13.2 NVIDIA toolchain was used only to validate the two new fixture oracles; those results are PASS_REFERENCE_ENVIRONMENT, never cuda4AS compatibility.",
+  "network_payloads": [
+    {
+      "id": "cumetal-source-archive",
+      "bytes": 6694104,
+      "sha256": "57358b123daece57e472a8bf2805a0919e6879e7a1a781d8d20866b12ffaafbd",
+      "retained_path": ".m1-work/downloads/cuda-metal-f486e5eb.tar.gz"
+    },
+    {
+      "id": "vf64-source-archive",
+      "bytes": 134892,
+      "sha256": "c9e0308a54a3beec0dba15a12b81a68cda9ad502a919a6dd1cfe193a4bd6e5a5",
+      "retained_path": ".m1-work/downloads/vf64-metal-72902177.tar.gz"
+    },
+    {
+      "id": "api-and-selected-raw-primary-source-payloads",
+      "bytes": 1010689,
+      "sha256": null,
+      "note": "Aggregate retained file bytes at evidence-manifest generation; individual selected raw files have hashes in upstream-evidence.json. HTTP header bytes and earlier non-retained response payloads were not measured."
+    }
+  ],
+  "installations_or_system_changes": [],
+  "working_storage": {
+    "paths": [
+      ".m1-work/upstream/",
+      ".m1-work/downloads/",
+      ".m1-work/source-v1/"
+    ],
+    "ignored": true,
+    "rollback": "Remove only these ignored M1 paths after the native drop and report no longer need them.",
+    "retention": "Keep through M1 packaging and validation."
+  }
+}

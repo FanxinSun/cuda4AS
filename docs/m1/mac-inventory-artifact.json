@@ -1,0 +1,55 @@
+{
+  "schema": "cuda4as-m1-artifact-manifest-v1",
+  "artifact_id": "cuda4as-m1-mac-inventory-v1",
+  "m1_baseline": "ce4a1c2e60688e9ea7641202cac3d2036529ffe6",
+  "generated_path": "dist/m1/cuda4as-m1-mac-inventory-v1.tgz",
+  "bytes": 4230,
+  "sha256": "febe1d8d7d22b591236f703b4a84555b8884bf329f1ead0612eac941790a8213",
+  "archive_prefix": "cuda4as-m1-mac-inventory-v1",
+  "files": [
+    {
+      "path": "README.md",
+      "mode": "0644",
+      "bytes": 1085,
+      "sha256": "623ed1e54e83e856d1c269fb897fbb3ec686cd81e14e7b7978fcb53ea804f65e"
+    },
+    {
+      "path": "metal-device-inventory.swift",
+      "mode": "0644",
+      "bytes": 2035,
+      "sha256": "941a105a61fcbc5a15cea780dc7fcabfdc4f1ac467b1ad37824a5527626c62ee"
+    },
+    {
+      "path": "run-inventory.sh",
+      "mode": "0755",
+      "bytes": 9318,
+      "sha256": "cfed7d3e7ceb2df63eeb07a3c2b70c5be9c5a50352b6c86fb444a6d612b245af"
+    }
+  ],
+  "behavior": {
+    "network": "none",
+    "sudo": false,
+    "installs_or_updates": false,
+    "gpu_work_submission": false,
+    "writes": "only beneath the extracted artifact directory",
+    "optional_compile": "one Swift Metal-device enumeration helper when swiftc is already available through xcrun"
+  },
+  "expected_return": {
+    "filename_pattern": "cuda4as-m1-mac-inventory-return-<UTC>.tgz",
+    "repository_destination": "RESULTS/m1/incoming/",
+    "required_members": [
+      "facts.tsv",
+      "status.tsv",
+      "inventory.txt",
+      "MANIFEST.sha256",
+      "logs/"
+    ]
+  },
+  "local_validation": {
+    "deterministic_packaging": "PASS",
+    "shell_syntax": "PASS",
+    "archive_member_and_mode_check": "PASS",
+    "missing-tool_linux_smoke": "PASS",
+    "native_macos_run": "NOT_RUN"
+  }
+}

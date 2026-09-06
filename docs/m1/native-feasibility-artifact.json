@@ -1,0 +1,192 @@
+{
+  "schema": "cuda4as-m1-artifact-manifest-v1",
+  "artifact_id": "cuda4as-m1-native-feasibility-v1",
+  "status": "PENDING_USER_INVENTORY",
+  "m1_baseline": "ce4a1c2e60688e9ea7641202cac3d2036529ffe6",
+  "candidate_revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
+  "vf64_revision": "729021777455da72db8809d9ef1269c677d88b3f",
+  "generated_path": "dist/m1/cuda4as-m1-native-feasibility-v1.tgz",
+  "bytes": 8549126,
+  "sha256": "09810d4467fffb9a2fb33463f44e7c3d2f200663923644ed7ff2713b564a17e6",
+  "archive_prefix": "cuda4as-m1-native-feasibility-v1",
+  "files": [
+    {
+      "path": "PACKAGE-MANIFEST.sha256",
+      "mode": "0644",
+      "bytes": 2489,
+      "sha256": "89fcc88f29781d751962b2ee0de2eea49af2c4b007ef51280931c2bd6dc5093e"
+    },
+    {
+      "path": "README.md",
+      "mode": "0644",
+      "bytes": 2327,
+      "sha256": "a89270a27ea5043863118a24a4b25e440925c5427581009b19fd8dde622e431b"
+    },
+    {
+      "path": "candidate/combined-tree-files.txt",
+      "mode": "0644",
+      "bytes": 48816,
+      "sha256": "aebda5a6bb0db8542aa46a48090bc710e7e79df2b97837e62cc5e32e7377300b"
+    },
+    {
+      "path": "candidate/combined-tree-summary.json",
+      "mode": "0644",
+      "bytes": 225,
+      "sha256": "924a5e6d846fb2c00d88ef525ac4eaab7a2e3e16047e498669c9bc24631cc03b"
+    },
+    {
+      "path": "candidate/combined-tree.sha256",
+      "mode": "0644",
+      "bytes": 119106,
+      "sha256": "b5ee0a6c8c695b4dc9e0c6527566340b18b338a223a2cd81392b81112b96a37c"
+    },
+    {
+      "path": "candidate/cuda-metal-f486e5eb.tar.gz",
+      "mode": "0644",
+      "bytes": 6694104,
+      "sha256": "57358b123daece57e472a8bf2805a0919e6879e7a1a781d8d20866b12ffaafbd"
+    },
+    {
+      "path": "candidate/vf64-metal-72902177.tar.gz",
+      "mode": "0644",
+      "bytes": 134892,
+      "sha256": "c9e0308a54a3beec0dba15a12b81a68cda9ad502a919a6dd1cfe193a4bd6e5a5"
+    },
+    {
+      "path": "contracts/result-schema-v1.md",
+      "mode": "0644",
+      "bytes": 3491,
+      "sha256": "2b0d044e32f5721b5e115cffe0bd3580d480ec9ebaeceb9b302fae5cf61616f6"
+    },
+    {
+      "path": "contracts/result-schema-v1.schema.json",
+      "mode": "0644",
+      "bytes": 9086,
+      "sha256": "e305838a7f0079c7a2788c413102ac9bea4e0dce3871f77b8f4c4ef844141765"
+    },
+    {
+      "path": "fixtures/INPUTS.sha256",
+      "mode": "0644",
+      "bytes": 1332,
+      "sha256": "5bc9017418a4bd1a14d2fa6c74bf10dff6fb025848097dd687f71c002b968641"
+    },
+    {
+      "path": "fixtures/cmake-device-link/CMakeLists.txt",
+      "mode": "0644",
+      "bytes": 425,
+      "sha256": "a23672623379afa14e53b6298c792a1312763f8f8ac6f7644558ed938d1a5833"
+    },
+    {
+      "path": "fixtures/cmake-device-link/device-api.cuh",
+      "mode": "0644",
+      "bytes": 364,
+      "sha256": "a1510a2268cec366a9adc2a0235495fc122325fd3a82f95d1ecd65f7b0693b53"
+    },
+    {
+      "path": "fixtures/cmake-device-link/device-function.cu",
+      "mode": "0644",
+      "bytes": 292,
+      "sha256": "bd4b24471caa7d254fb89fe5ff97d1c20d5c4e5e61c5d461adaa9876560b92c1"
+    },
+    {
+      "path": "fixtures/cmake-device-link/kernel.cu",
+      "mode": "0644",
+      "bytes": 386,
+      "sha256": "d938c888d89b9774651d139ebeb374664629efb7a165685c017cc70d960ee96b"
+    },
+    {
+      "path": "fixtures/cmake-device-link/main.cu",
+      "mode": "0644",
+      "bytes": 2921,
+      "sha256": "b4ceb6d393950efbf568629bde758835063f920eaea0379e2e2f2203976c052d"
+    },
+    {
+      "path": "fixtures/cmake-vector-add/CMakeLists.txt",
+      "mode": "0644",
+      "bytes": 311,
+      "sha256": "6c081bb596387ff81c50d207f1194851b9bae6b5795976d91029a4745042e2e4"
+    },
+    {
+      "path": "fixtures/cmake-vector-add/main.cu",
+      "mode": "0644",
+      "bytes": 3376,
+      "sha256": "782cbfbc4b9b9709b4ff90b4c45a3b59eedd4a034eaeb46b2aa603faf8c0b6ee"
+    },
+    {
+      "path": "fixtures/expected/cmake-device-link.bin",
+      "mode": "0644",
+      "bytes": 8192,
+      "sha256": "d173cf4cf4849f14508f67d6f7ec3f3f7080eac5305785b9f071e9feeb6269a1"
+    },
+    {
+      "path": "fixtures/expected/cmake-vector-add.bin",
+      "mode": "0644",
+      "bytes": 16384,
+      "sha256": "8fe6be55ab663bfedbdd6435befcae6ffc5ab6f78059f2d20cd6ad50a417f4ef"
+    },
+    {
+      "path": "fixtures/expected/oracle-vector-add.bin",
+      "mode": "0644",
+      "bytes": 4194304,
+      "sha256": "ed551637cf393112d0093037a0b41b9d1e9bd213c6037e8efcde30cf480f0332"
+    },
+    {
+      "path": "fixtures/fixtures.json",
+      "mode": "0644",
+      "bytes": 6518,
+      "sha256": "da9f5a7aef51e17ecf818719c0dadb29f69dc9b212cb554f04f890323529f84a"
+    },
+    {
+      "path": "fixtures/oracle/oracle.h",
+      "mode": "0644",
+      "bytes": 3697,
+      "sha256": "6e7cc4c2e59e10db5b68df4116ed67ec3fe1d88d559c41e0a9feb2da3dd643bc"
+    },
+    {
+      "path": "fixtures/oracle/vector_add.cu",
+      "mode": "0644",
+      "bytes": 1748,
+      "sha256": "b3f205cabc42a697276244d5810ce62ff40a5c9cc6a8e1078420ccbefa88d0e2"
+    },
+    {
+      "path": "run-native-feasibility.sh",
+      "mode": "0755",
+      "bytes": 32304,
+      "sha256": "6cb7dbaf52c1e4f7572b4442e2b206b41d34423bc65d736bdc4da4a17943d100"
+    },
+    {
+      "path": "target-inventory-binding.json",
+      "mode": "0644",
+      "bytes": 117,
+      "sha256": "fa37be75052d3f156f626e1096e9aab119967c7c55bf9765b27d7c997e041512"
+    },
+    {
+      "path": "tools/prepare-cmake-adapter.sh",
+      "mode": "0755",
+      "bytes": 2787,
+      "sha256": "137d306df2d4930da9d6286d5eb18ee5c344b5e4cf376169cb7a392a1f3090c4"
+    }
+  ],
+  "inventory_binding": {
+    "schema": "cuda4as-m1-inventory-binding-v1",
+    "status": "PENDING_USER_INVENTORY",
+    "inventory_archive": null
+  },
+  "behavior": {
+    "network": "none",
+    "sudo": false,
+    "installs_or_updates": false,
+    "writes": "only beneath the extracted artifact directory",
+    "candidate_configuration": {
+      "build_type": "Release",
+      "registration": "ON",
+      "binary_shim": "OFF",
+      "cuda_arch": "sm_86",
+      "fp64_policy": "ieee64"
+    }
+  },
+  "local_validation": {
+    "deterministic_packaging": true,
+    "native_macos_run": "NOT_RUN"
+  }
+}
