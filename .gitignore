@@ -22,3 +22,6 @@ dist/
 drop/as-phase0/results/
 drop/as-phase0/build/
 drop/as-phase0/*.tgz
+
+# Local codex-watermarked project plan and rendered review copies.
+/planning-codex/
