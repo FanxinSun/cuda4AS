@@ -141,3 +141,103 @@ will validate the archive and its internal manifest before using any facts.
 - This return is required before selecting the native dependency route and
   issuing the build/GPU feasibility drop. Independent candidate inspection,
   fixtures, result-schema work, and PyTorch platform audit continue locally.
+
+## Action 2: bounded native feasibility run — MAC ACTION REQUIRED
+
+The post-install inventory is complete and every native preflight requirement is
+ready. This package now performs the bounded CuMetal build and three enrolled
+feasibility cases. It is the first M1 action that may compile source and submit
+the candidate's test workloads to the Apple GPU. It does not download source,
+install software, update macOS/Xcode, invoke `sudo`, modify shell startup files,
+or change the repository checkout.
+
+### Artifact
+
+- WSL path:
+  `/home/rog/business/YFCE/cuda4AS/dist/m1/cuda4as-m1-native-feasibility-v1.tgz`
+- Windows source:
+  `\\wsl.localhost\Ubuntu\home\rog\business\YFCE\cuda4AS\dist\m1\cuda4as-m1-native-feasibility-v1.tgz`
+- Size: 8,549,223 bytes.
+- SHA-256:
+  `dbb390b4f470b8f286ccb65a2b8565a235e749d9122c16e8e92ade96e0099bc7`.
+- The package is bound to inventory return
+  `cuda4as-m1-mac-inventory-return-20260906T163442Z.tgz`, SHA-256
+  `b1a9d5bd34e1b009abf9bc58ff48823b39130af62b7ebcc7f08ce4ee31c8d339`.
+- Manifest: [`native-feasibility-artifact.json`](native-feasibility-artifact.json).
+
+Copy it from WSL to Windows Downloads in PowerShell:
+
+```powershell
+Copy-Item "\\wsl.localhost\Ubuntu\home\rog\business\YFCE\cuda4AS\dist\m1\cuda4as-m1-native-feasibility-v1.tgz" "$HOME\Downloads\cuda4as-m1-native-feasibility-v1.tgz"
+```
+
+Transfer that file to the Mac and place it at
+`~/Downloads/cuda4as-m1-native-feasibility-v1.tgz`.
+
+### Exact Mac commands
+
+```bash
+set -euo pipefail
+
+ARTIFACT="$HOME/Downloads/cuda4as-m1-native-feasibility-v1.tgz"
+EXPECTED="dbb390b4f470b8f286ccb65a2b8565a235e749d9122c16e8e92ade96e0099bc7"
+TASK_ROOT="$HOME/cuda4as-m1/native-v1"
+PACKAGE_DIR="$TASK_ROOT/cuda4as-m1-native-feasibility-v1"
+
+printf '%s  %s\n' "$EXPECTED" "$ARTIFACT" | shasum -a 256 -c -
+test ! -e "$PACKAGE_DIR"
+mkdir -p "$TASK_ROOT"
+tar -xzf "$ARTIFACT" -C "$TASK_ROOT"
+cd "$PACKAGE_DIR"
+
+set +e
+./run-native-feasibility.sh | tee native-run.console.txt
+RUN_EXIT="${PIPESTATUS[0]}"
+set -e
+
+RETURN_ARCHIVE="$(find "$PWD/returns" -maxdepth 1 -type f -name 'cuda4as-m1-native-return-*.tgz' -print | sort | tail -n 1)"
+test -n "$RETURN_ARCHIVE"
+shasum -a 256 "$RETURN_ARCHIVE"
+printf 'RUN_EXIT=%s\nRETURN THIS FILE: %s\n' "$RUN_EXIT" "$RETURN_ARCHIVE"
+```
+
+The checksum must print `OK`. The runner prints its own final exit code and
+always creates a return archive: `0` means all raw gates passed, `1` means a
+build, launch, provenance, or exact-output gate failed, and `77` means an
+existing environment preflight gap. None of those codes is a cuda4AS result
+classification until the returned evidence is validated.
+
+### Scope and limits
+
+- Enrolled cases: `oracle.vector_add`, `integration.minimal_cmake_cuda`, and
+  `integration.multi_tu_device_link`.
+- Candidate configuration: Release, CUDA registration ON, binary shim OFF,
+  `sm_86` source profile, explicit IEEE FP64 policy.
+- Network: none. Installs/updates: none. `sudo`: none.
+- Package input: 8,549,223 bytes. The candidate source payload is about 16.1 MB
+  expanded; build-tree size and duration are not yet measured on this Mac.
+- Expected duration: approximately 5–20 minutes, with uncertainty because this
+  is the first run on the target Mac. Interrupt with Control-C and report it if
+  it runs longer than 30 minutes or the task directory exceeds 20 GiB.
+- The script writes only under the extracted package directory. Existing source
+  and fixture inputs are hash-checked before and after the run.
+
+### Return path
+
+Transfer the one generated `.tgz` back to Windows without extracting or editing
+it. Place it in:
+
+```text
+/home/rog/business/YFCE/cuda4AS/RESULTS/m1/incoming/
+```
+
+For example, copy the Windows file into that WSL directory with:
+
+```powershell
+$Return = "$HOME\Downloads\cuda4as-m1-native-return-<UTC>.tgz"
+Copy-Item $Return "\\wsl.localhost\Ubuntu\home\rog\business\YFCE\cuda4AS\RESULTS\m1\incoming\"
+```
+
+Reply with the returned filename, SHA-256, and the printed `RUN_EXIT`. I will
+validate the archive's complete manifest, package binding, stage logs, GPU
+provenance, and exact output bytes. No M2 work follows from this action.

@@ -1,20 +1,20 @@
 {
   "schema": "cuda4as-m1-artifact-manifest-v1",
   "artifact_id": "cuda4as-m1-native-feasibility-v1",
-  "status": "PENDING_USER_INVENTORY",
+  "status": "BOUND_TO_RETURNED_INVENTORY",
   "m1_baseline": "ce4a1c2e60688e9ea7641202cac3d2036529ffe6",
   "candidate_revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
   "vf64_revision": "729021777455da72db8809d9ef1269c677d88b3f",
   "generated_path": "dist/m1/cuda4as-m1-native-feasibility-v1.tgz",
-  "bytes": 8549126,
-  "sha256": "09810d4467fffb9a2fb33463f44e7c3d2f200663923644ed7ff2713b564a17e6",
+  "bytes": 8549223,
+  "sha256": "dbb390b4f470b8f286ccb65a2b8565a235e749d9122c16e8e92ade96e0099bc7",
   "archive_prefix": "cuda4as-m1-native-feasibility-v1",
   "files": [
     {
       "path": "PACKAGE-MANIFEST.sha256",
       "mode": "0644",
       "bytes": 2489,
-      "sha256": "89fcc88f29781d751962b2ee0de2eea49af2c4b007ef51280931c2bd6dc5093e"
+      "sha256": "50a132c33fbde481c79d278a10275f825ae8f6757ea5886c8b3e34c0d8f09b54"
     },
     {
       "path": "README.md",
@@ -157,8 +157,8 @@
     {
       "path": "target-inventory-binding.json",
       "mode": "0644",
-      "bytes": 117,
-      "sha256": "fa37be75052d3f156f626e1096e9aab119967c7c55bf9765b27d7c997e041512"
+      "bytes": 295,
+      "sha256": "581c201795d7d18cfea26528b83a0dc6d920e3b20421beb2136b2d4f4cdbcd53"
     },
     {
       "path": "tools/prepare-cmake-adapter.sh",
@@ -169,8 +169,12 @@
   ],
   "inventory_binding": {
     "schema": "cuda4as-m1-inventory-binding-v1",
-    "status": "PENDING_USER_INVENTORY",
-    "inventory_archive": null
+    "status": "BOUND_TO_RETURNED_INVENTORY",
+    "inventory_archive": {
+      "filename": "cuda4as-m1-mac-inventory-return-20260906T163442Z.tgz",
+      "bytes": 9133,
+      "sha256": "b1a9d5bd34e1b009abf9bc58ff48823b39130af62b7ebcc7f08ce4ee31c8d339"
+    }
   },
   "behavior": {
     "network": "none",
