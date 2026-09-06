@@ -23,3 +23,8 @@ when `swiftc` is already available through `xcrun`. It enumerates Metal devices
 and the default device. It does not compile Metal source, allocate GPU buffers,
 or submit commands. The temporary compiler outputs are excluded from the return
 archive.
+
+If `MTLCreateSystemDefaultDevice()` reports no default while enumeration still
+finds devices, the return records that explicit `null` observation. It does not
+substitute a device; a later native run must independently record the actual
+device it selected.

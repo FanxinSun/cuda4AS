@@ -1,5 +1,12 @@
 # MAC ACTION REQUIRED — CUDA4AS M1 IS READY FOR YOUR MAC RUN
 
+> **Inventory checkpoint, 2026-09-06:** the returned inventory archive was
+> internally valid and enumerated one Apple M1 Pro Metal device. The only native
+> prerequisite gap is LLVM; no native build/GPU action is issued until the user
+> decides on the separately described Homebrew LLVM installation. The absent
+> system-default Metal device is retained as an observation, not replaced with
+> the enumerated device.
+
 ## Action 1: read-only Mac inventory
 
 This is the first M1 inventory run. It records the current Apple chip and Metal

@@ -85,7 +85,39 @@ class MacInventoryValidatorTests(unittest.TestCase):
         result = normalize(path)
         self.assertEqual(result["inventory_status"], "COMPLETE")
         self.assertEqual(result["machine"]["default_metal_device_name"], "Apple M Test")
+        self.assertEqual(result["machine"]["default_metal_device_status"], "MATCHED")
         self.assertEqual(result["machine"]["metal_devices"][0]["registry_id"], "1234")
+
+    def test_absent_system_default_is_preserved_with_enumerated_device(self) -> None:
+        files = inventory_files()
+        device = json.loads(files["logs/metal_device_inventory.stdout.json"])
+        device["default_device_name"] = None
+        device["default_device_registry_id"] = None
+        files["logs/metal_device_inventory.stdout.json"] = (
+            json.dumps(device, indent=2) + "\n"
+        ).encode()
+        files.pop("MANIFEST.sha256")
+        add_manifest(files)
+        temp, path = self.archive(files)
+        self.addCleanup(temp.cleanup)
+        result = normalize(path)
+        self.assertEqual(result["inventory_status"], "COMPLETE")
+        self.assertEqual(result["machine"]["default_metal_device_status"], "UNAVAILABLE")
+        self.assertEqual(len(result["machine"]["metal_devices"]), 1)
+
+    def test_partial_default_identity_is_rejected(self) -> None:
+        files = inventory_files()
+        device = json.loads(files["logs/metal_device_inventory.stdout.json"])
+        device["default_device_name"] = None
+        files["logs/metal_device_inventory.stdout.json"] = (
+            json.dumps(device, indent=2) + "\n"
+        ).encode()
+        files.pop("MANIFEST.sha256")
+        add_manifest(files)
+        temp, path = self.archive(files)
+        self.addCleanup(temp.cleanup)
+        with self.assertRaisesRegex(ValueError, "both null or a nonempty"):
+            normalize(path)
 
     def test_missing_check_row_is_rejected(self) -> None:
         files = inventory_files()

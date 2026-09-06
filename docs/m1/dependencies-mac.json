@@ -1,18 +1,32 @@
 {
   "schema": "cuda4as-m1-dependency-manifest-v1",
   "manifest_id": "m1-native-mac",
-  "updated_utc": "2026-09-06T10:28:38Z",
+  "updated_utc": "2026-09-06T11:54:19Z",
   "m1_baseline": "ce4a1c2e60688e9ea7641202cac3d2036529ffe6",
-  "status": "PENDING_USER_INVENTORY",
+  "status": "AWAITING_USER_DEPENDENCY_APPROVAL",
   "readiness_assessment": {
     "tool": "tools/m1/assess_mac_inventory.py",
-    "status": "PENDING",
+    "status": "NOT_READY",
+    "analysis_path": "RESULTS/m1/mac-inventory-20260906T114425Z.analysis.json",
+    "gaps": [
+      "llvm"
+    ],
     "native_packaging_gate": "The bound native package is generated only when every runner prerequisite is observed ready."
   },
   "machine": {
     "inventory_artifact": "cuda4as-m1-mac-inventory-v1",
-    "return_received": false,
-    "facts": null
+    "return_received": true,
+    "facts": {
+      "return_filename": "cuda4as-m1-mac-inventory-return-20260906T114425Z.tgz",
+      "return_bytes": 9141,
+      "return_sha256": "0f30104ff27dc8a42b892afff7303966a6bf9e13abbbd3177689cb72be365fad",
+      "machine": "MacBookPro18,3 / Apple M1 Pro / arm64",
+      "macos": "14.4 (23E214)",
+      "xcode": "15.2 (15C500b)",
+      "sdk": "14.2 (23C53)",
+      "metal_device_enumeration": "one Apple M1 Pro device; system default was explicitly unavailable",
+      "task_filesystem_free_kib": 79963964
+    }
   },
   "task_layout": {
     "root": "~/cuda4as-m1/native-v1/cuda4as-m1-native-feasibility-v1",
@@ -23,7 +37,7 @@
     "results": "~/cuda4as-m1/native-v1/cuda4as-m1-native-feasibility-v1/results/<RUN_UTC>",
     "returns": "~/cuda4as-m1/native-v1/cuda4as-m1-native-feasibility-v1/returns",
     "install_prefix": null,
-    "install_policy": "Build-tree execution only for M1 feasibility; no global or task-local install is currently needed."
+    "install_policy": "Build-tree execution only for M1 feasibility. No global or task-local install has occurred; an explicit user-approved Homebrew LLVM install is the only current proposed dependency action."
   },
   "candidate_sources": [
     {
@@ -51,62 +65,62 @@
       "id": "apple_silicon",
       "constraint": "arm64 Apple Silicon",
       "origin": "target hardware",
-      "inventory_state": "PENDING"
+      "inventory_state": "READY: arm64 Apple M1 Pro"
     },
     {
       "id": "macos",
       "constraint": "CuMetal declares macOS 14 or newer",
       "origin": "installed OS",
-      "inventory_state": "PENDING",
+      "inventory_state": "READY: macOS 14.4 (23E214)",
       "upgrade_authorized": false
     },
     {
       "id": "xcode_sdk",
       "constraint": "xcrun, macOS SDK, Metal compiler and metallib tools; full Xcode may be required for reference-tool validation",
       "origin": "Apple developer tools",
-      "inventory_state": "PENDING",
+      "inventory_state": "READY: full Xcode 15.2, macOS SDK 14.2, metal and metallib found",
       "install_or_update_authorized": false
     },
     {
       "id": "cmake",
       "constraint": ">=3.28",
       "origin": "existing path or a separately approved package route",
-      "inventory_state": "PENDING",
+      "inventory_state": "READY: CMake 4.3.3",
       "install_authorized": false
     },
     {
       "id": "llvm",
       "constraint": ">=18 with LLVM CMake config and CUDA-capable clang++",
       "origin": "existing path or a separately approved package route; upstream documents Homebrew llvm",
-      "inventory_state": "PENDING",
+      "inventory_state": "MISSING: no Homebrew LLVM, Intel-Homebrew LLVM, or PATH llvm-config observed",
       "install_authorized": false
     },
     {
       "id": "lz4",
       "constraint": "headers and linkable library",
       "origin": "existing path or a separately approved package route; upstream documents Homebrew lz4",
-      "inventory_state": "PENDING",
+      "inventory_state": "READY: pkg-config liblz4 1.10.0",
       "install_authorized": false
     },
     {
       "id": "zstd",
       "constraint": "headers and linkable library",
       "origin": "existing path or a separately approved package route; upstream documents Homebrew zstd",
-      "inventory_state": "PENDING",
+      "inventory_state": "READY: pkg-config libzstd 1.5.7",
       "install_authorized": false
     },
     {
       "id": "build_driver",
       "constraint": "Ninja is required by the M1 runner so object compilation, device link, and native link remain separately observable",
       "origin": "existing tool only until inventory is reviewed",
-      "inventory_state": "PENDING",
+      "inventory_state": "READY: Ninja 1.12.1",
       "install_authorized": false
     },
     {
       "id": "shell_archive_tools",
       "constraint": "bash, tar, shasum",
       "origin": "standard macOS tools",
-      "inventory_state": "PENDING"
+      "inventory_state": "READY: successful inventory archive creation demonstrates bash, tar, and shasum availability"
     }
   ],
   "selected_candidate_configuration": {
@@ -126,21 +140,22 @@
     "source_archive_transfer_bytes": 6828996,
     "expanded_source_blob_bytes": 16111130,
     "native_drop_bytes": 8549126,
-    "native_drop_status": "PENDING_USER_INVENTORY; provisional artifact is not actionable",
+    "native_drop_status": "BLOCKED_BY_MISSING_LLVM; no bound actionable package has been generated",
     "candidate_build_bytes": "UNKNOWN_UNTIL_MAC_RUN",
-    "dependency_download_bytes": "UNKNOWN_UNTIL_INVENTORY",
-    "free_bytes": "PENDING_INVENTORY",
-    "expected_runtime": "PENDING_INVENTORY_AND_PORTABLE_PACKAGE_CHECKS",
+    "dependency_download_bytes": 471632619,
+    "dependency_download_detail": "Current official Homebrew arm64 Sonoma bottles if uncached: llvm 23.1.0 is 457766943 bytes plus absent dependency z3 5.1.0 at 13865676 bytes; existing zstd is already present. Bottle metadata observed 2026-09-06.",
+    "free_bytes": 81883099136,
+    "expected_runtime": "PENDING_USER_DEPENDENCY_APPROVAL_AND_NATIVE_PACKAGE_PREPARATION",
     "limits": "The actionable drop will state stop limits before the user runs it."
   },
   "cache_state": {
-    "homebrew": "PENDING_INVENTORY",
-    "macports": "PENDING_INVENTORY",
+    "homebrew": "present at /opt/homebrew; version 5.1.15; llvm and z3 absent from observed relevant component list",
+    "macports": "present at version 2.8.1; no relevant active component reported",
     "candidate_source": "will be supplied in drop",
     "build_cache": "new task directory"
   },
   "approval_state": {
-    "inventory_run": "USER_ACTION_ALREADY_REQUESTED",
+    "inventory_run": "COMPLETED_AND_VALIDATED",
     "candidate_source_reads_under_few_tens_mb": "CONSUMED_WITHIN_M1_SCOPE",
     "dependency_downloads_or_installs": "NOT_AUTHORIZED",
     "os_sdk_upgrade": "NOT_AUTHORIZED",

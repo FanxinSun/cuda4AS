@@ -258,6 +258,7 @@ def normalize(archive: Path) -> dict[str, Any]:
     sw_vers = parse_sw_vers(command_text(files, "sw_vers"))
     devices: list[dict[str, Any]] = []
     device_document: dict[str, Any] | None = None
+    default_device_status = "NOT_REPORTED"
     device_bytes = files.get("logs/metal_device_inventory.stdout.json", b"").strip()
     device_status = checks["metal_device_inventory"]["status"]
     if device_status == "ok" and not device_bytes:
@@ -292,11 +293,25 @@ def normalize(archive: Path) -> dict[str, Any]:
         device_document = value
         default_name = value.get("default_device_name")
         default_registry_id = value.get("default_device_registry_id")
-        if devices and not any(
-            device["name"] == default_name and device["registry_id"] == default_registry_id
-            for device in devices
+        if default_name is None and default_registry_id is None:
+            default_device_status = "UNAVAILABLE"
+        elif (
+            isinstance(default_name, str)
+            and default_name
+            and isinstance(default_registry_id, str)
+            and default_registry_id
         ):
-            raise ValueError("default Metal device is absent from enumerated devices")
+            if not any(
+                device["name"] == default_name
+                and device["registry_id"] == default_registry_id
+                for device in devices
+            ):
+                raise ValueError("default Metal device is absent from enumerated devices")
+            default_device_status = "MATCHED"
+        else:
+            raise ValueError(
+                "default Metal device identity must be both null or a nonempty name/registry_id"
+            )
     if device_status == "ok" and checks["metal_device_compile"]["status"] != "ok":
         raise ValueError("Metal inventory ran without a successful helper compile")
 
@@ -356,6 +371,7 @@ def normalize(archive: Path) -> dict[str, Any]:
             "default_metal_device_registry_id": (
                 device_document or {}
             ).get("default_device_registry_id"),
+            "default_metal_device_status": default_device_status,
         },
         "tools": {
             check_id: {
