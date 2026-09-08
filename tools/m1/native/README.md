@@ -39,3 +39,13 @@ Run only with the exact commands in `docs/m1/MAC-ACTION-REQUIRED.md`. The
 script creates work, results, and return archives only beneath the extracted
 package directory. It prints the return archive path, byte count, and SHA-256
 even when it records a controlled failure or environment gap.
+
+When using the Git checkout route, the tracked package and its wrapper are
+available together. From the checkout root, run:
+
+```bash
+./tools/m1/run-native-probe.sh
+```
+
+The wrapper verifies the tracked archive, extracts it outside the checkout,
+invokes `run-native-feasibility.sh`, and prints the returned archive details.

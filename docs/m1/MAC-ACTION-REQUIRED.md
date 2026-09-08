@@ -160,10 +160,31 @@ or change the repository checkout.
 - Size: 8,549,223 bytes.
 - SHA-256:
   `dbb390b4f470b8f286ccb65a2b8565a235e749d9122c16e8e92ade96e0099bc7`.
+- The same archive is tracked for the Git checkout route at
+  `tools/m1/artifacts/cuda4as-m1-native-feasibility-v1.tgz`.
 - The package is bound to inventory return
   `cuda4as-m1-mac-inventory-return-20260906T163442Z.tgz`, SHA-256
   `b1a9d5bd34e1b009abf9bc58ff48823b39130af62b7ebcc7f08ce4ee31c8d339`.
 - Manifest: [`native-feasibility-artifact.json`](native-feasibility-artifact.json).
+
+### Git checkout route — one command
+
+After pulling `codex/m1-reuse-feasibility` on the Mac, run this from the
+checkout root. The script verifies the tracked archive, creates a separate
+task directory, runs the probe, and prints the return archive path, byte count,
+SHA-256, and `RUN_EXIT`:
+
+```bash
+./tools/m1/run-native-probe.sh
+```
+
+The default task directory is
+`~/cuda4as-m1/native-v1`. To make a fresh run after a previous extraction,
+choose another task directory without deleting the earlier evidence:
+
+```bash
+CUDA4AS_M1_TASK_ROOT="$HOME/cuda4as-m1/native-v2" ./tools/m1/run-native-probe.sh
+```
 
 Copy it from WSL to Windows Downloads in PowerShell:
 
