@@ -1,5 +1,7 @@
 {
   "schema": "cuda4as-m1-result-v1",
+  "record_role": "HISTORICAL_PRE_RUN_BASELINE",
+  "superseded_by": "RESULTS/m1/native-feasibility-20260910T072306Z.analysis.json",
   "run_id": "m1-native-pending-inventory",
   "created_utc": "2026-09-06T09:52:06Z",
   "contract": {

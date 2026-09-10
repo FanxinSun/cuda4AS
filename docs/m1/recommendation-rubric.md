@@ -51,5 +51,11 @@ compatibility.
 
 ## Current proposal
 
-`PENDING_USER_MAC_INVENTORY`. All three concrete M1 cases remain `NOT_RUN`, so
-no adopt, selective-reuse, or reject proposal is yet supported.
+`REJECT_EXACT_PINNED_BUILD_ROUTE_OR_REQUEST_NARROW_M1_CORRECTION`. The
+inventory-bound Mac run completed with all preflight requirements, source
+integrity, and configure passing, but the pinned candidate stopped in
+`compiler/ptx/src/lower_to_llvm.cpp`: it uses `std::array` without including
+`<array>`. All three application cases remain `NOT_RUN`; there was no Apple-GPU
+launch, output comparison, or compatibility pass. The executor proposes that
+the manager either reject this exact pin/configuration or authorize a separately
+disclosed narrow M1 patched-candidate retry. No M2 work follows from this result.

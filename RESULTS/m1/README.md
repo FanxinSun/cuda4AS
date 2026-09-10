@@ -10,3 +10,9 @@ Current expected inventory return name:
 ```text
 cuda4as-m1-mac-inventory-return-<UTC>.tgz
 ```
+
+Current expected native-feasibility return name:
+
+```text
+cuda4as-m1-native-return-<UTC>.tgz
+```

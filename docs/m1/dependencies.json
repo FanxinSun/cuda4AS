@@ -1,13 +1,13 @@
 {
   "schema": "cuda4as-m1-dependency-index-v1",
-  "updated_utc": "2026-09-06T17:05:40Z",
+  "updated_utc": "2026-09-10T08:07:33Z",
   "m1_baseline": "ce4a1c2e60688e9ea7641202cac3d2036529ffe6",
   "candidate_revision": "f486e5ebcfd381d06e3297afd65dbcbd5006a902",
   "manifests": [
     {
       "platform": "native Mac",
       "path": "docs/m1/dependencies-mac.json",
-      "status": "READY_FOR_USER_MAC_RUN"
+      "status": "NATIVE_BUILD_BLOCKED"
     },
     {
       "platform": "WSL reference/preparation",
@@ -17,10 +17,10 @@
   ],
   "decision_gate": "Review the returned Mac inventory before selecting or requesting any dependency acquisition. Existing suitable tools will be preferred. Any missing dependency install or download over a few tens of MB requires direct user action/approval with exact current sizes and targets.",
   "readiness_tool": "tools/m1/assess_mac_inventory.py",
-  "current_blocker": "No local prerequisite gap remains. The bound native drop is ready; the next gate is the user-operated Mac build/run and returned evidence archive.",
+  "current_blocker": "The user-operated Mac run returned valid evidence: all prerequisites, source integrity, and configure passed, but the pinned CuMetal build failed because compiler/ptx/src/lower_to_llvm.cpp uses std::array without including <array>. The three application cases remain NOT_RUN. A separately disclosed patched-candidate M1 retry requires manager judgment.",
   "no_change_assertions": [
     "No executor-performed package installation or OS/SDK upgrade has occurred; the user separately installed the approved Homebrew LLVM dependency.",
     "No existing conda environment, system Python, CUDA toolkit, or package state was changed.",
-    "No candidate build or Mac native execution has occurred."
+    "The user-operated native Mac build was attempted without executor-performed installation, network operation, or OS/SDK change; it stopped before any enrolled case launched."
   ]
 }

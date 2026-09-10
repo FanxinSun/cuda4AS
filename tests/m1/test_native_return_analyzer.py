@@ -16,6 +16,12 @@ from tools.m1.validate_results import validate_document
 
 REPOSITORY = Path(__file__).resolve().parents[2]
 FIXTURES = json.loads((REPOSITORY / "docs/m1/fixtures.json").read_text())
+ARTIFACT = json.loads((REPOSITORY / "docs/m1/native-feasibility-artifact.json").read_text())
+ARTIFACT_PACKAGE_ENTRIES = {
+    record["path"]: record["sha256"]
+    for record in ARTIFACT["files"]
+    if record["path"] != "PACKAGE-MANIFEST.sha256"
+}
 CANDIDATE = "f486e5ebcfd381d06e3297afd65dbcbd5006a902"
 VF64 = "729021777455da72db8809d9ef1269c677d88b3f"
 
@@ -51,14 +57,10 @@ def expected_outputs() -> dict[str, bytes]:
     }
 
 
-def normalized_inventory(filename: str = "inventory-return.tgz") -> dict:
+def normalized_inventory() -> dict:
     return {
         "schema": "cuda4as-m1-mac-inventory-normalized-v1",
-        "source_archive": {
-            "filename": filename,
-            "bytes": 4321,
-            "sha256": "d" * 64,
-        },
+        "source_archive": deepcopy(ARTIFACT["inventory_binding"]["inventory_archive"]),
         "validation": {
             "archive_members_safe": True,
             "internal_manifest_valid": True,
@@ -119,45 +121,9 @@ def build_return_files(inventory: dict, mode: str = "pass") -> dict[str, bytes]:
         "inventory_archive": inventory["source_archive"],
     }
     binding_bytes = (json.dumps(binding, indent=2) + "\n").encode()
-    package_entries = {
-        "target-inventory-binding.json": digest(binding_bytes),
-        "README.md": digest((REPOSITORY / "tools/m1/native/README.md").read_bytes()),
-        "run-native-feasibility.sh": digest(
-            (REPOSITORY / "tools/m1/native/run-native-feasibility.sh").read_bytes()
-        ),
-        "tools/prepare-cmake-adapter.sh": digest(
-            (REPOSITORY / "tools/m1/native/prepare-cmake-adapter.sh").read_bytes()
-        ),
-        "fixtures/fixtures.json": digest(
-            (REPOSITORY / "docs/m1/fixtures.json").read_bytes()
-        ),
-        "contracts/result-schema-v1.md": digest(
-            (REPOSITORY / "docs/m1/result-schema-v1.md").read_bytes()
-        ),
-        "contracts/result-schema-v1.schema.json": digest(
-            (REPOSITORY / "docs/m1/result-schema-v1.schema.json").read_bytes()
-        ),
-        "candidate/cuda-metal-f486e5eb.tar.gz":
-            "57358b123daece57e472a8bf2805a0919e6879e7a1a781d8d20866b12ffaafbd",
-        "candidate/vf64-metal-72902177.tar.gz":
-            "c9e0308a54a3beec0dba15a12b81a68cda9ad502a919a6dd1cfe193a4bd6e5a5",
-    }
-    output_paths = {
-        "oracle.vector_add": "fixtures/expected/oracle-vector-add.bin",
-        "integration.minimal_cmake_cuda": "fixtures/expected/cmake-vector-add.bin",
-        "integration.multi_tu_device_link": "fixtures/expected/cmake-device-link.bin",
-    }
-    for case in FIXTURES["cases"]:
-        for record in case["source_files"] + case["build_files"]:
-            source_path = record["path"]
-            if source_path.startswith("oracle/src/"):
-                packaged_path = "fixtures/oracle/" + source_path.removeprefix("oracle/src/")
-            else:
-                packaged_path = "fixtures/" + source_path.removeprefix(
-                    "tests/m1/fixtures/"
-                )
-            package_entries[packaged_path] = record["sha256"]
-        package_entries[output_paths[case["id"]]] = case["expected_output"]["sha256"]
+    package_entries = dict(ARTIFACT_PACKAGE_ENTRIES)
+    if digest(binding_bytes) != package_entries["target-inventory-binding.json"]:
+        raise AssertionError("synthetic inventory binding does not match bound artifact")
     package_manifest = "".join(
         f"{value}  {key}\n" for key, value in sorted(package_entries.items())
     ).encode()
@@ -346,6 +312,23 @@ class NativeReturnAnalyzerTests(unittest.TestCase):
         self.addCleanup(temp.cleanup)
         with self.assertRaisesRegex(ValueError, "binding does not match"):
             analyze(path, changed, FIXTURES)
+
+    def test_package_manifest_mismatch_is_rejected(self) -> None:
+        inventory = normalized_inventory()
+        files = build_return_files(inventory)
+        expected = ARTIFACT_PACKAGE_ENTRIES["README.md"]
+        files["package/PACKAGE-MANIFEST.sha256"] = files[
+            "package/PACKAGE-MANIFEST.sha256"
+        ].replace(
+            f"{expected}  README.md\n".encode(),
+            f"{'0' * 64}  README.md\n".encode(),
+        )
+        files.pop("MANIFEST.sha256")
+        add_manifest(files)
+        temp, path = self.make_archive(files)
+        self.addCleanup(temp.cleanup)
+        with self.assertRaisesRegex(ValueError, "package manifest does not match"):
+            analyze(path, inventory, FIXTURES)
 
     def test_archive_link_member_is_rejected_without_extraction(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

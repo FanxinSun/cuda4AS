@@ -1,4 +1,12 @@
-# MAC ACTION REQUIRED — CUDA4AS M1 IS READY FOR YOUR MAC RUN
+# CUDA4AS M1 MAC ACTION RECORD — NO RUN CURRENTLY REQUESTED
+
+> **Native feasibility result, 2026-09-10:** the user completed the bound run.
+> Preflight, source integrity, and configure passed, but the pinned CuMetal
+> build stopped because `compiler/ptx/src/lower_to_llvm.cpp` uses `std::array`
+> without including `<array>`. The three enrolled cases are `NOT_RUN`; no
+> Apple-GPU launch or compatibility pass was established. No rerun is currently
+> requested. See
+> `RESULTS/m1/native-feasibility-20260910T072306Z.analysis.json`.
 
 > **Inventory checkpoint, 2026-09-06:** the returned inventory archive was
 > internally valid and enumerated one Apple M1 Pro Metal device. The only native
@@ -142,14 +150,13 @@ will validate the archive and its internal manifest before using any facts.
   issuing the build/GPU feasibility drop. Independent candidate inspection,
   fixtures, result-schema work, and PyTorch platform audit continue locally.
 
-## Action 2: bounded native feasibility run — MAC ACTION REQUIRED
+## Action 2: bounded native feasibility run — COMPLETED
 
-The post-install inventory is complete and every native preflight requirement is
-ready. This package now performs the bounded CuMetal build and three enrolled
-feasibility cases. It is the first M1 action that may compile source and submit
-the candidate's test workloads to the Apple GPU. It does not download source,
-install software, update macOS/Xcode, invoke `sudo`, modify shell startup files,
-or change the repository checkout.
+The post-install inventory was complete and every native preflight requirement
+was ready. The user completed this bounded CuMetal build/run on 2026-09-10. Its
+returned evidence records a pinned candidate build failure before any enrolled
+case could compile or launch. These instructions are retained as run provenance;
+do not rerun this package unless a separately disclosed M1 correction is approved.
 
 ### Artifact
 

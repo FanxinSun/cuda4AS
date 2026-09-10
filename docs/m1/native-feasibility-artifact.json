@@ -191,6 +191,6 @@
   },
   "local_validation": {
     "deterministic_packaging": true,
-    "native_macos_run": "NOT_RUN"
+    "native_macos_run": "ATTEMPTED_20260910T072306Z; returned evidence validated, candidate build failed before any enrolled case stage"
   }
 }

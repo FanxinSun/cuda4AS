@@ -29,10 +29,9 @@ except ImportError:  # Direct invocation: python3 tools/m1/analyze_native_return
 
 ROOT = Path(__file__).resolve().parents[2]
 FIXTURES_PATH = ROOT / "docs/m1/fixtures.json"
+ARTIFACT_MANIFEST_PATH = ROOT / "docs/m1/native-feasibility-artifact.json"
 CANDIDATE_REVISION = "f486e5ebcfd381d06e3297afd65dbcbd5006a902"
 VF64_REVISION = "729021777455da72db8809d9ef1269c677d88b3f"
-CANDIDATE_ARCHIVE_SHA256 = "57358b123daece57e472a8bf2805a0919e6879e7a1a781d8d20866b12ffaafbd"
-VF64_ARCHIVE_SHA256 = "c9e0308a54a3beec0dba15a12b81a68cda9ad502a919a6dd1cfe193a4bd6e5a5"
 RESULT_SCHEMA = "cuda4as-m1-result-v1"
 RETURN_SCHEMA = "cuda4as-m1-native-return-v1"
 INVENTORY_SCHEMA = "cuda4as-m1-mac-inventory-normalized-v1"
@@ -390,6 +389,45 @@ def observations_match(left: Any, right: Any) -> bool:
     return str(left) == str(right)
 
 
+def expected_package_manifest() -> dict[str, str]:
+    """Load the immutable member hashes recorded when the bound drop was made."""
+
+    try:
+        artifact = json.loads(ARTIFACT_MANIFEST_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"cannot read native artifact manifest: {exc}") from exc
+    if not isinstance(artifact, dict) or artifact.get("schema") != "cuda4as-m1-artifact-manifest-v1":
+        raise ValueError("unexpected native artifact manifest schema")
+    if artifact.get("artifact_id") != "cuda4as-m1-native-feasibility-v1":
+        raise ValueError("unexpected native artifact ID")
+    if artifact.get("status") != "BOUND_TO_RETURNED_INVENTORY":
+        raise ValueError("native artifact manifest is not inventory-bound")
+    records = artifact.get("files")
+    if not isinstance(records, list):
+        raise ValueError("native artifact manifest files must be an array")
+
+    expected: dict[str, str] = {}
+    for index, record in enumerate(records):
+        if not isinstance(record, dict):
+            raise ValueError(f"native artifact manifest file {index} must be an object")
+        raw_path = record.get("path")
+        expected_hash = record.get("sha256")
+        if not isinstance(raw_path, str):
+            raise ValueError(f"native artifact manifest file {index} has no path")
+        path = _safe_name(raw_path)
+        if not isinstance(expected_hash, str) or not re.fullmatch(r"[0-9a-f]{64}", expected_hash):
+            raise ValueError(f"native artifact manifest file {path!r} has invalid SHA-256")
+        if path in expected:
+            raise ValueError(f"native artifact manifest duplicates {path!r}")
+        expected[path] = expected_hash
+
+    if expected.pop("PACKAGE-MANIFEST.sha256", None) is None:
+        raise ValueError("native artifact manifest lacks PACKAGE-MANIFEST.sha256")
+    if not expected:
+        raise ValueError("native artifact manifest has no package members")
+    return expected
+
+
 def validate_inventory_binding(
     files: dict[str, bytes], inventory: dict[str, Any], fixtures: dict[str, Any]
 ) -> None:
@@ -417,44 +455,19 @@ def validate_inventory_binding(
     expected_binding_hash = package_manifest.get("target-inventory-binding.json")
     if expected_binding_hash != sha256(files["package/target-inventory-binding.json"]):
         raise ValueError("returned inventory binding does not match the checked package manifest")
-    for packaged_path, local_path in (
-        ("README.md", ROOT / "tools/m1/native/README.md"),
-        ("run-native-feasibility.sh", ROOT / "tools/m1/native/run-native-feasibility.sh"),
-        ("tools/prepare-cmake-adapter.sh", ROOT / "tools/m1/native/prepare-cmake-adapter.sh"),
-        ("fixtures/fixtures.json", FIXTURES_PATH),
-        ("contracts/result-schema-v1.md", ROOT / "docs/m1/result-schema-v1.md"),
-        (
-            "contracts/result-schema-v1.schema.json",
-            ROOT / "docs/m1/result-schema-v1.schema.json",
-        ),
-    ):
-        if package_manifest.get(packaged_path) != sha256(local_path.read_bytes()):
-            raise ValueError(f"package evidence does not match local M1 pin: {packaged_path}")
-    expected_package_hashes = {
-        "candidate/cuda-metal-f486e5eb.tar.gz": CANDIDATE_ARCHIVE_SHA256,
-        "candidate/vf64-metal-72902177.tar.gz": VF64_ARCHIVE_SHA256,
-    }
-    output_paths = {
-        "oracle.vector_add": "fixtures/expected/oracle-vector-add.bin",
-        "integration.minimal_cmake_cuda": "fixtures/expected/cmake-vector-add.bin",
-        "integration.multi_tu_device_link": "fixtures/expected/cmake-device-link.bin",
-    }
-    for case in fixtures["cases"]:
-        for record in case["source_files"] + case["build_files"]:
-            source_path = record["path"]
-            if source_path.startswith("oracle/src/"):
-                packaged_path = "fixtures/oracle/" + source_path.removeprefix("oracle/src/")
-            elif source_path.startswith("tests/m1/fixtures/"):
-                packaged_path = "fixtures/" + source_path.removeprefix("tests/m1/fixtures/")
-            else:
-                raise ValueError(f"unmapped fixture source path: {source_path}")
-            expected_package_hashes[packaged_path] = record["sha256"]
-        expected_package_hashes[output_paths[case["id"]]] = case["expected_output"][
-            "sha256"
-        ]
-    for packaged_path, expected_hash in expected_package_hashes.items():
-        if package_manifest.get(packaged_path) != expected_hash:
-            raise ValueError(f"package manifest pin mismatch: {packaged_path}")
+    expected_manifest = expected_package_manifest()
+    if package_manifest != expected_manifest:
+        missing = sorted(set(expected_manifest) - set(package_manifest))
+        extra = sorted(set(package_manifest) - set(expected_manifest))
+        changed = sorted(
+            path
+            for path in set(package_manifest) & set(expected_manifest)
+            if package_manifest[path] != expected_manifest[path]
+        )
+        raise ValueError(
+            "returned package manifest does not match the bound artifact "
+            f"(missing={missing}, extra={extra}, changed={changed})"
+        )
 
 
 def validate_run_identity(facts: dict[str, str], inventory: dict[str, Any]) -> int:
