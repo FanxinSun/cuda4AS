@@ -75,14 +75,49 @@ def _source_for_file(
     source_bytes: bytes | None,
     source_bytes_by_file: list[tuple[str, bytes]] | None,
 ) -> bytes | None:
-    if source_bytes_by_file is None or not file_name:
+    if source_bytes_by_file is None:
         return source_bytes
+    if not file_name:
+        return None
     for expected, data in source_bytes_by_file:
         if _paths_match(file_name, expected):
             return data
     # A named location that cannot be tied to one of the unchanged inputs must
     # not accidentally use bytes from a different source file.
     return None
+
+
+def _resolve_capture_path(file_name: str, capture_working_directory: Path | None) -> str:
+    """Resolve an emitted relative filename only with an explicit capture cwd."""
+
+    normalized = file_name.replace("\\", "/")
+    path = Path(normalized)
+    if path.is_absolute() or capture_working_directory is None:
+        return normalized
+    return str((capture_working_directory / path).resolve())
+
+
+_ADDRESS_SPACE_RE = re.compile(
+    r"__attribute__\s*\(\(\s*address_space\s*\(\s*([^)]*?)\s*\)\s*\)\)"
+)
+_CUDA_ADDRESS_SPACE_NAMES = {
+    "__global__": "global",
+    "global": "global",
+    "__constant__": "constant",
+    "constant": "constant",
+    "__shared__": "shared",
+    "shared": "shared",
+    "__generic__": "generic",
+    "generic": "generic",
+}
+
+
+def _strip_type_address_annotations(text: str) -> str:
+    """Remove address-space spelling from a type before scalar normalization."""
+
+    text = _ADDRESS_SPACE_RE.sub(" ", text)
+    text = re.sub(r"__(?:global|constant|shared|generic)__", " ", text)
+    return " ".join(text.split())
 
 
 def _point(
@@ -117,12 +152,137 @@ def _point(
     return None
 
 
+class _LocationNormalizer:
+    """Reconstruct JSONNodeDumper's stateful filename/line elision."""
+
+    _COORDINATE_KEYS = {"file", "line", "col", "offset", "tokLen"}
+
+    def __init__(
+        self,
+        *,
+        source_bytes: bytes | None,
+        source_bytes_by_file: list[tuple[str, bytes]] | None,
+        capture_working_directory: Path | None,
+    ) -> None:
+        self.source_bytes = source_bytes
+        self.source_bytes_by_file = source_bytes_by_file
+        self.capture_working_directory = capture_working_directory
+        self.last_file: str | None = None
+        self.last_line: int | None = None
+        self.points: dict[int, dict[str, Any]] = {}
+        self.errors: dict[int, str] = {}
+
+    def _record(self, candidate: dict[str, Any]) -> dict[str, Any]:
+        raw_file = candidate.get("file")
+        has_file = raw_file is not None
+        if has_file and (not isinstance(raw_file, str) or not raw_file):
+            raise ClangASTImportError("compiler source location has an invalid filename")
+        if has_file:
+            file_name = _resolve_capture_path(raw_file, self.capture_working_directory)
+        else:
+            file_name = self.last_file
+            if file_name is not None and not Path(file_name).is_absolute() and self.capture_working_directory is None:
+                raise ClangASTImportError(
+                    "compiler source location recovers a relative filename without capture working directory"
+                )
+        if file_name is None:
+            raise ClangASTImportError("compiler source location elides its first filename")
+
+        raw_line = candidate.get("line")
+        has_line = raw_line is not None
+        if has_line and (not isinstance(raw_line, int) or isinstance(raw_line, bool) or raw_line <= 0):
+            raise ClangASTImportError("compiler source location has an invalid line")
+        line = raw_line if has_line else self.last_line
+        if line is None and candidate.get("offset") is None:
+            raise ClangASTImportError("compiler source location elides its first line")
+        column = candidate.get("col")
+        if column is not None and (not isinstance(column, int) or isinstance(column, bool) or column <= 0):
+            raise ClangASTImportError("compiler source location has an invalid column")
+        offset = candidate.get("offset")
+        if offset is not None and (not isinstance(offset, int) or isinstance(offset, bool) or offset < 0):
+            raise ClangASTImportError("compiler source location has an invalid offset")
+
+        result: dict[str, Any] = {"file": file_name}
+        if offset is not None:
+            result["offset"] = offset
+            source = _source_for_file(file_name, self.source_bytes, self.source_bytes_by_file)
+            if source is None or offset > len(source):
+                raise ClangASTImportError("compiler source location offset has no identified source bytes")
+            prefix = source[:offset]
+            offset_line = prefix.count(b"\n") + 1
+            last_newline = prefix.rfind(b"\n")
+            offset_column = offset - (last_newline + 1) + 1
+            if has_line and offset_line != line:
+                raise ClangASTImportError("compiler source location conflicts with pinned source bytes")
+            if column is not None and offset_column != column:
+                raise ClangASTImportError("compiler source location conflicts with pinned source bytes")
+            line = offset_line
+            column = offset_column
+            result["provenance"] = "exact_offset" if has_file and has_line else "exact_offset_deelided"
+        else:
+            if column is None:
+                raise ClangASTImportError("compiler source location has no valid column")
+            result["provenance"] = "exact" if has_file and has_line else "exact_deelided"
+        result.update({"line": line, "column": column})
+
+        self.last_file = file_name
+        self.last_line = line
+        return result
+
+    def _scan_location_value(self, value: Any) -> None:
+        if not isinstance(value, dict):
+            return
+        if self._COORDINATE_KEYS.intersection(value):
+            try:
+                point = self._record(value)
+            except ClangASTImportError as exc:
+                self.errors[id(value)] = str(exc)
+            else:
+                if isinstance(value.get("includedFrom"), dict):
+                    point["included_from"] = value["includedFrom"]
+                self.points[id(value)] = point
+        # spellingLoc/expansionLoc are visited in their JSON insertion order.
+        for key, nested in value.items():
+            if key in {"spellingLoc", "expansionLoc"}:
+                self._scan_location_value(nested)
+
+    def scan(self, value: Any) -> None:
+        """Walk records in parsed JSON insertion order, matching emission order."""
+
+        if isinstance(value, dict):
+            for key, nested in value.items():
+                if key in {"loc", "range"}:
+                    if key == "range" and isinstance(nested, dict):
+                        for range_key, point in nested.items():
+                            if range_key in {"begin", "end"}:
+                                self._scan_location_value(point)
+                    else:
+                        self._scan_location_value(nested)
+                elif key in {"inner", "referencedDecl", "definitionData"}:
+                    self.scan(nested)
+                elif isinstance(nested, (dict, list)):
+                    self.scan(nested)
+        elif isinstance(value, list):
+            for nested in value:
+                self.scan(nested)
+
+    def resolve(self, candidate: Any) -> dict[str, Any] | None:
+        if not isinstance(candidate, dict):
+            return None
+        candidate_id = id(candidate)
+        if candidate_id in self.errors:
+            raise ClangASTImportError(self.errors[candidate_id])
+        point = self.points.get(candidate_id)
+        return dict(point) if point is not None else None
+
+
 def _location(
     node: dict[str, Any],
     fallback: dict[str, Any] | None = None,
     *,
     source_bytes: bytes | None = None,
     source_bytes_by_file: list[tuple[str, bytes]] | None = None,
+    location_normalizer: _LocationNormalizer | None = None,
 ) -> dict[str, Any]:
     """Return a compiler-exact or explicitly inherited source location."""
 
@@ -136,8 +296,16 @@ def _location(
         candidates.append(begin)
         if isinstance(begin, dict):
             candidates.extend([begin.get("expansionLoc"), begin.get("spellingLoc")])
+        end = span.get("end")
+        candidates.append(end)
+        if isinstance(end, dict):
+            candidates.extend([end.get("expansionLoc"), end.get("spellingLoc")])
     for candidate in candidates:
-        point = _point(candidate, source_bytes, source_bytes_by_file)
+        point = (
+            location_normalizer.resolve(candidate)
+            if location_normalizer is not None
+            else _point(candidate, source_bytes, source_bytes_by_file)
+        )
         if point is not None:
             # Some Clang records put the file on the range point rather than
             # the shorthand loc. Preserve it for provenance checks.
@@ -159,7 +327,7 @@ def _location(
 def _require_location(kind: str, location: dict[str, Any]) -> dict[str, Any]:
     if location.get("line", 0) <= 0 or location.get("column", 0) <= 0:
         raise ClangASTImportError(f"compiler {kind} has no source location")
-    if location.get("provenance") not in {"exact", "exact_offset", "inherited"}:
+    if location.get("provenance") not in {"exact", "exact_offset", "exact_deelided", "exact_offset_deelided", "inherited"}:
         raise ClangASTImportError(f"compiler {kind} has unclassified source location provenance")
     return location
 
@@ -192,16 +360,22 @@ def _type_address_space(node: dict[str, Any], qual_type: str) -> str | None:
     typ = node.get("type")
     if isinstance(typ, dict):
         for key in ("addressSpace", "address_space"):
-            value = typ.get(key)
-            if isinstance(value, (str, int)) and not isinstance(value, bool) and value != "":
-                return str(value)
+            if key in typ:
+                raise ClangASTImportError(
+                    f"compiler AST type contains non-emitted address-space key {key!r}"
+                )
     for key in ("addressSpace", "address_space"):
-        value = node.get(key)
-        if isinstance(value, (str, int)) and not isinstance(value, bool) and value != "":
-            return str(value)
-    match = re.search(r"(?:__attribute__\(\(address_space\(([^)]+)\)\)\)|__(global|constant|shared)__)", qual_type)
+        if key in node:
+            raise ClangASTImportError(
+                f"compiler AST node contains non-emitted address-space key {key!r}"
+            )
+    match = _ADDRESS_SPACE_RE.search(qual_type)
     if match:
-        return match.group(1) or match.group(2)
+        spelling = match.group(1).strip().lower()
+        return _CUDA_ADDRESS_SPACE_NAMES.get(spelling, spelling)
+    for spelling, canonical in _CUDA_ADDRESS_SPACE_NAMES.items():
+        if re.search(rf"(?<!\w){re.escape(spelling)}(?!\w)", qual_type, flags=re.IGNORECASE):
+            return canonical
     return None
 
 
@@ -215,6 +389,7 @@ def normalize_type(node: dict[str, Any], *, parameter: bool = False) -> dict[str
     address_space = _type_address_space(node, qual_type)
     if pointer:
         base = compact.split("*", 1)[0].strip()
+        base = _strip_type_address_annotations(base)
         base = re.sub(r"\b(const|volatile|restrict)\b", "", base).strip()
         scalar = normalize_scalar(base)
         # An absent address-space field is an unknown compiler fact. Preserve
@@ -228,7 +403,7 @@ def normalize_type(node: dict[str, Any], *, parameter: bool = False) -> dict[str
             "address_space": semantic_address_space,
             "qual_type": qual_type,
         }
-    scalar = normalize_scalar(compact)
+    scalar = normalize_scalar(_strip_type_address_annotations(compact))
     return {
         "type": scalar,
         "pointer": False,
@@ -267,8 +442,6 @@ def _referenced_name(node: dict[str, Any]) -> str:
     ref = node.get("referencedDecl")
     if isinstance(ref, dict) and isinstance(ref.get("name"), str):
         return ref["name"]
-    if isinstance(node.get("name"), str):
-        return node["name"]
     raise ClangASTImportError("compiler DeclRefExpr has no referenced declaration name")
 
 
@@ -280,16 +453,19 @@ class SemanticImporter:
         source_bytes: bytes | None = None,
         source_path: Path | None = None,
         facade_contract: dict[str, Any] | None = None,
+        capture_working_directory: Path | None = None,
     ):
         self.root = root
         self.function = function
         self.source_bytes = source_bytes
         self.source_path = source_path
         self.facade_contract = facade_contract
+        self.capture_working_directory = capture_working_directory
         self.source_bytes_by_file: list[tuple[str, bytes]] = []
         if source_path is not None and source_bytes is not None:
             self.source_bytes_by_file.append((str(source_path), source_bytes))
-            self.source_bytes_by_file.append((str(source_path.resolve()), source_bytes))
+            source_resolved = source_path if source_path.is_absolute() or capture_working_directory is None else capture_working_directory / source_path
+            self.source_bytes_by_file.append((str(source_resolved.resolve()), source_bytes))
         elif source_path is not None:
             try:
                 source_data = source_path.read_bytes()
@@ -297,7 +473,8 @@ class SemanticImporter:
                 raise ClangASTImportError(f"cannot load compiler source bytes: {exc}") from exc
             self.source_bytes = source_data
             self.source_bytes_by_file.append((str(source_path), source_data))
-            self.source_bytes_by_file.append((str(source_path.resolve()), source_data))
+            source_resolved = source_path if source_path.is_absolute() or capture_working_directory is None else capture_working_directory / source_path
+            self.source_bytes_by_file.append((str(source_resolved.resolve()), source_data))
         if isinstance(facade_contract, dict):
             header_path = facade_contract.get("header_path")
             if isinstance(header_path, str):
@@ -306,12 +483,22 @@ class SemanticImporter:
                 except OSError as exc:
                     raise ClangASTImportError(f"cannot load pinned CUDA facade header: {exc}") from exc
                 self.source_bytes_by_file.append((header_path, header_bytes))
-            manifest = facade_contract.get("manifest")
-            builtin_contract = facade_contract.get("builtin_contract")
-            if isinstance(manifest, dict) and isinstance(manifest.get("header"), dict):
-                manifest_header = manifest["header"].get("path")
-                if isinstance(manifest_header, str) and isinstance(header_path, str):
-                    self.source_bytes_by_file.append((manifest_header, header_bytes))
+                header_resolved = Path(header_path) if Path(header_path).is_absolute() or capture_working_directory is None else capture_working_directory / header_path
+                self.source_bytes_by_file.append((str(header_resolved.resolve()), header_bytes))
+                manifest = facade_contract.get("manifest")
+                builtin_contract = facade_contract.get("builtin_contract")
+                if isinstance(manifest, dict) and isinstance(manifest.get("header"), dict):
+                    manifest_header = manifest["header"].get("path")
+                    if isinstance(manifest_header, str) and isinstance(header_path, str):
+                        self.source_bytes_by_file.append((manifest_header, header_bytes))
+                        manifest_resolved = Path(manifest_header) if Path(manifest_header).is_absolute() or capture_working_directory is None else capture_working_directory / manifest_header
+                        self.source_bytes_by_file.append((str(manifest_resolved.resolve()), header_bytes))
+        self.location_normalizer = _LocationNormalizer(
+            source_bytes=self.source_bytes,
+            source_bytes_by_file=self.source_bytes_by_file,
+            capture_working_directory=capture_working_directory,
+        )
+        self.location_normalizer.scan(root)
         self.env: dict[str, dict[str, Any]] = {}
         self.env_by_id: dict[str, dict[str, Any]] = {}
         self.declarations_by_id: dict[str, dict[str, Any]] = {}
@@ -328,7 +515,11 @@ class SemanticImporter:
             fallback,
             source_bytes=self.source_bytes,
             source_bytes_by_file=self.source_bytes_by_file,
+            location_normalizer=self.location_normalizer,
         )
+
+    def _point_for(self, candidate: Any) -> dict[str, Any] | None:
+        return self.location_normalizer.resolve(candidate)
 
     def _builtin_location(self, node: dict[str, Any], expected_paths: tuple[str, ...]) -> dict[str, Any]:
         """Prefer a spelling/range point proven to belong to the pinned facade."""
@@ -343,8 +534,12 @@ class SemanticImporter:
             candidates.append(begin)
             if isinstance(begin, dict):
                 candidates.extend([begin.get("spellingLoc"), begin.get("expansionLoc")])
+            end = span.get("end")
+            candidates.append(end)
+            if isinstance(end, dict):
+                candidates.extend([end.get("spellingLoc"), end.get("expansionLoc")])
         for candidate in candidates:
-            point = _point(candidate, self.source_bytes, self.source_bytes_by_file)
+            point = self._point_for(candidate)
             if point is None:
                 continue
             if "file" not in point:
@@ -431,7 +626,17 @@ class SemanticImporter:
             or header_lines[line - 1].strip() != anchor
         ):
             raise ClangASTImportError(f"compiler CUDA facade contract has invalid {name} declaration anchor")
-        return declaration, (header_path, manifest_header_path), header_bytes
+        expected_paths = [header_path, manifest_header_path]
+        # Resolve the pinned contract paths from the importer process/contract,
+        # never from the capture cwd supplied by the AST. A wrong capture cwd
+        # must therefore fail the facade provenance check instead of redefining
+        # what the pinned header means.
+        expected_paths.extend(
+            str(Path(item).resolve())
+            for item in (header_path, manifest_header_path)
+            if not Path(item).is_absolute()
+        )
+        return declaration, tuple(expected_paths), header_bytes
 
     def _expr_type(self, node: dict[str, Any], default: str | None = None) -> str:
         try:
@@ -472,7 +677,7 @@ class SemanticImporter:
         if decl_type != expected_type:
             raise ClangASTImportError(f"builtin {name} declaration type is not the pinned facade type")
         location = _require_location("builtin VarDecl", self._builtin_location(declaration, expected_paths))
-        if location.get("provenance") not in {"exact", "exact_offset"}:
+        if location.get("provenance") not in {"exact", "exact_offset", "exact_deelided", "exact_offset_deelided"}:
             raise ClangASTImportError(f"builtin {name} has no exact facade source provenance")
         file_name = location.get("file")
         if not isinstance(file_name, str) or not any(_paths_match(file_name, expected) for expected in expected_paths):
@@ -660,8 +865,8 @@ class SemanticImporter:
             if len(children) != 2:
                 raise ClangASTImportError("compiler assignment must have two operands")
             lhs, rhs = self.expr(children[0], loc), self.expr(children[1], loc)
-            if lhs["kind"] != "index" or lhs.get("address_space") != "global":
-                raise ClangASTImportError("compiler assignment target is not a global array element")
+            if lhs["kind"] != "index" or lhs.get("address_space") not in {"unknown", "global"}:
+                raise ClangASTImportError("compiler assignment target is not a supported kernel buffer element")
             if rhs["type"] != lhs["type"] and not (lhs["type"] == "float" and rhs["type"] == "int"):
                 raise ClangASTImportError(f"compiler store type {rhs['type']} does not match {lhs['type']}")
             return {"kind": "assign", "lhs": lhs, "operator": "=", "rhs": rhs, "source_location": loc}
@@ -755,6 +960,13 @@ class SemanticImporter:
             "mangled_name": self.function.get("mangledName"),
             "kernel_attributes": sorted(attrs),
             "node_count": sum(1 for _ in walk(self.function)),
+            "location_normalization": {
+                "schema": "cuda4as-clang-json-location-normalization-v1",
+                "serializer_state": ["LastLocFilename", "LastLocLine"],
+                "capture_working_directory": str(self.capture_working_directory) if self.capture_working_directory is not None else "NOT_RECORDED",
+                "elided_provenance": ["exact_deelided", "exact_offset_deelided"],
+                "parent_fallback_provenance": "inherited",
+            },
         }
         return kernel, metadata
 
@@ -767,6 +979,7 @@ def import_ast(
     source_bytes: bytes | None = None,
     source_path: Path | None = None,
     facade_contract: dict[str, Any] | None = None,
+    capture_working_directory: Path | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     if root.get("kind") != "TranslationUnitDecl":
         raise ClangASTImportError("compiler AST root is not TranslationUnitDecl")
@@ -779,6 +992,7 @@ def import_ast(
         source_bytes=source_bytes,
         source_path=source_path,
         facade_contract=facade_contract,
+        capture_working_directory=capture_working_directory,
     ).kernel()
     if ast_sha256 is not None:
         metadata["ast_sha256"] = ast_sha256
@@ -792,6 +1006,7 @@ def import_ast_file(
     source: Path | None = None,
     source_bytes: bytes | None = None,
     facade_contract: dict[str, Any] | None = None,
+    capture_working_directory: Path | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     try:
         raw = path.read_bytes()
@@ -812,4 +1027,5 @@ def import_ast_file(
         source_bytes=source_bytes,
         source_path=source,
         facade_contract=facade_contract,
+        capture_working_directory=capture_working_directory,
     )

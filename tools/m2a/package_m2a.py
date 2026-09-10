@@ -65,6 +65,12 @@ def build(output: Path) -> dict[str, object]:
         "output": {"bytes": 4194304, "sha256": "ed551637cf393112d0093037a0b41b9d1e9bd213c6037e8efcde30cf480f0332", "comparison": "exact"},
         "route": "apple_gpu", "cpu_fallback": False, "runtime_compilation": False,
         "aot_tools": ["metal", "metallib"], "schemas": ["cuda4as-device-ssa-ir-v1", "cuda4as-native-aot-abi-v1", "cuda4as-device-link-v1"],
+        "semantic_contract": {
+            "compiler_source": "clang_ast",
+            "location_schema": "cuda4as-clang-json-location-normalization-v1",
+            "abi_lowering_profile": "cuda4as-vector-add-kernel-abi-v1",
+            "compiler_validation_status": "NOT_RUN",
+        },
     }
     with tempfile.TemporaryDirectory(prefix="cuda4as-m2a-package-") as td:
         stage = Path(td)
@@ -81,7 +87,7 @@ def build(output: Path) -> dict[str, object]:
         files["tools/m2a/clang_cuda_facade/manifest.json"] = (ROOT / "tools/m2a/clang_cuda_facade/manifest.json").read_bytes()
         files["inventory-binding.json"] = canonical(binding)
         files["expected.json"] = canonical(expected)
-        readme = f"""# {PACKAGE_ID}\n\nThis is the user-operated M2A Native AOT Core v1 drop. It performs no network, install, update, sudo, or CPU fallback. The runner writes all evidence beneath this extracted directory and returns one archive.\n\nBound machine: {machine['model']} / {machine['cpu_brand']} / {machine['os_version']} ({machine['os_build']}); Xcode {machine['xcode_version'].replace(chr(10), ' ')}; SDK {machine['sdk_version']}; intended LLVM 23.1.0 facade (validation NOT_RUN).\n\nThe package contains the unchanged oracle source and header. Do not edit them.\n""".encode()
+        readme = f"""# {PACKAGE_ID}\n\nThis is the user-operated M2A Native AOT Core v1 drop. It performs no network, install, update, sudo, or CPU fallback. The runner writes all evidence beneath this extracted directory and returns one archive.\n\nBound machine: {machine['model']} / {machine['cpu_brand']} / {machine['os_version']} ({machine['os_build']}); Xcode {machine['xcode_version'].replace(chr(10), ' ')}; SDK {machine['sdk_version']}; intended LLVM 23.1.0 facade (validation NOT_RUN).\n\nThe generated ABI and AOT records keep Clang semantic address-space facts separate from the explicit vector_add kernel ABI-to-Metal lowering rule, and preserve exact serializer-de-elided location provenance.\n\nThe package contains the unchanged oracle source and header. Do not edit them.\n""".encode()
         files["README.md"] = readme
         for rel, data in files.items():
             target = stage / rel

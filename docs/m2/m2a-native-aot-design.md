@@ -47,10 +47,29 @@ exact frontend argument template. The live frontend uses
 `-Xclang -ast-dump=json`. A compiler-output fixture is available for portable
 importer tests. The fixture is explicitly synthetic schema-conformance data,
 with a sidecar recording its inputs and non-capture status; it is not native
-compiler validation and deliberately models only AST-emittable direct `inner`
-`*Attr` records. Absent address-space facts remain `unknown` until an explicit
-backend rule accepts them. Fixture emission records
-`validation_status=FIXTURE` and `compiler_validation_status=NOT_RUN`.
+compiler validation. It models declaration `loc`, statement/expression
+`range`, `referencedDecl` identity, direct `inner` `*Attr` records under the
+emitted C linkage wrapper, and Clang's stateful file/line elision. The importer
+normalizes that serializer state in emitted order and labels recovered
+coordinates `exact_deelided` (or `exact_offset_deelided`); coordinates supplied
+only by semantic parent fallback are labelled `inherited`. Missing first state,
+wrong capture working directories, unknown source files, and offset/line
+conflicts fail closed.
+
+Clang `createQualType` supplies `qualType` (and optional desugaring/alias IDs),
+not a fabricated `addressSpace` member. Plain pointer parameters therefore
+retain the compiler fact `address_space=unknown`; explicit textual CUDA address
+spaces are preserved when present. The backend applies the separate, pinned
+`cuda4as-vector-add-kernel-abi-v1` lowering record: only the four-argument
+`vector_add` kernel's `unknown` or `global` pointer facts lower to global CUDA
+ABI/device Metal buffers. Generated ABI records carry the semantic fact,
+lowered address space, rule version, and `EXPLICIT_PORTABLE_RULE` provenance;
+generic, constant, shared, and other unsupported pointer spaces are rejected.
+Fixture emission records `validation_status=FIXTURE` and
+`compiler_validation_status=NOT_RUN`.
+The generated `aot-manifest.json` repeats this separation under
+`abi_address_space_contract`: `compiler_facts` are imported Clang facts and
+`arguments`/`lowering` are the explicit backend transformation record.
 `--skip-clang` emits a visible `NOT_RUN` record and returns 77, so it cannot
 satisfy the frontend or M2A validation gate.
 

@@ -39,6 +39,9 @@ def main() -> int:
     ir = json.loads((w / "ir.json").read_text(encoding="utf-8"))
     abi = json.loads((w / "abi.json").read_text(encoding="utf-8"))
     link = json.loads((w / "device-link.json").read_text(encoding="utf-8"))
+    mapping = abi.get("address_space_mapping")
+    if not isinstance(mapping, dict) or mapping.get("profile") != "cuda4as-vector-add-kernel-abi-v1" or mapping.get("status") != "EXPLICIT_PORTABLE_RULE":
+        raise ValueError("ABI does not carry the pinned address-space lowering record")
     lib = w / "metallib" / f"{args.kernel}.metallib"
     files = {name: digest(w / name) for name in ("ir.json", "abi.json", "device-link.json", "device-link-image.json", "kernel.metal", "clang-device-ast.json", "device-source.cu")}
     facade_dir = Path(__file__).resolve().parent / "clang_cuda_facade"
@@ -91,6 +94,25 @@ def main() -> int:
         "schema": "cuda4as-m2a-aot-manifest-v1", "version": 1, "kernel": args.kernel,
         "numerical_mode": ir["module"]["numerical_mode"], "capabilities": sorted(ir["capabilities"]),
         "source": ir["source"], "files": files, "abi_schema": abi["schema"], "device_link_schema": link["schema"],
+        "abi_address_space_contract": {
+            "compiler_facts": [
+                {"index": item["index"], "name": item["name"], "semantic_address_space": item["semantic_address_space"]}
+                for item in abi["arguments"]
+            ],
+            "lowering": mapping,
+            "arguments": [
+                {
+                    "index": item["index"],
+                    "name": item["name"],
+                    "address_space": item["address_space"],
+                    "metal_address_space": item["metal_address_space"],
+                    "lowering_rule": item["lowering_rule"],
+                    "lowering_version": item["lowering_version"],
+                    "lowering_provenance": item["lowering_provenance"],
+                }
+                for item in abi["arguments"]
+            ],
+        },
         "facade": {
             "version": facade_manifest["version"],
             "manifest": "tools/m2a/clang_cuda_facade/manifest.json",

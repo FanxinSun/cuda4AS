@@ -9,58 +9,62 @@
       }
     },
     {
-      "kind": "VarDecl",
-      "name": "blockIdx",
-      "type": {
-        "qualType": "const dim3"
-      },
-      "id": "builtin-blockIdx",
+      "kind": "LinkageSpecDecl",
+      "language": "C",
       "inner": [
         {
-          "kind": "CUDADeviceAttr"
-        }
-      ],
-      "loc": {
-        "file": "tools/m2a/clang_cuda_facade/cuda_runtime.h",
-        "line": 62,
-        "col": 53
-      }
-    },
-    {
-      "kind": "VarDecl",
-      "name": "blockDim",
-      "type": {
-        "qualType": "const dim3"
-      },
-      "id": "builtin-blockDim",
-      "inner": [
+          "kind": "VarDecl",
+          "name": "blockIdx",
+          "type": {
+            "qualType": "const dim3"
+          },
+          "id": "builtin-blockIdx",
+          "inner": [
+            {
+              "kind": "CUDADeviceAttr"
+            }
+          ],
+          "loc": {
+            "file": "tools/m2a/clang_cuda_facade/cuda_runtime.h",
+            "line": 62,
+            "col": 53
+          }
+        },
         {
-          "kind": "CUDADeviceAttr"
-        }
-      ],
-      "loc": {
-        "file": "tools/m2a/clang_cuda_facade/cuda_runtime.h",
-        "line": 63,
-        "col": 53
-      }
-    },
-    {
-      "kind": "VarDecl",
-      "name": "threadIdx",
-      "type": {
-        "qualType": "const dim3"
-      },
-      "id": "builtin-threadIdx",
-      "inner": [
+          "kind": "VarDecl",
+          "name": "blockDim",
+          "type": {
+            "qualType": "const dim3"
+          },
+          "id": "builtin-blockDim",
+          "inner": [
+            {
+              "kind": "CUDADeviceAttr"
+            }
+          ],
+          "loc": {
+            "line": 63,
+            "col": 53
+          }
+        },
         {
-          "kind": "CUDADeviceAttr"
+          "kind": "VarDecl",
+          "name": "threadIdx",
+          "type": {
+            "qualType": "const dim3"
+          },
+          "id": "builtin-threadIdx",
+          "inner": [
+            {
+              "kind": "CUDADeviceAttr"
+            }
+          ],
+          "loc": {
+            "line": 64,
+            "col": 53
+          }
         }
-      ],
-      "loc": {
-        "file": "tools/m2a/clang_cuda_facade/cuda_runtime.h",
-        "line": 64,
-        "col": 53
-      }
+      ]
     },
     {
       "kind": "FunctionDecl",
@@ -68,6 +72,7 @@
       "name": "vector_add",
       "mangledName": "_Z10vector_addPKfS0_Pfi",
       "loc": {
+        "file": "oracle/src/vector_add.cu",
         "line": 8,
         "col": 1
       },
@@ -87,8 +92,7 @@
             "col": 41
           },
           "type": {
-            "qualType": "const float *",
-            "addressSpace": "global"
+            "qualType": "const float *"
           }
         },
         {
@@ -100,8 +104,7 @@
             "col": 57
           },
           "type": {
-            "qualType": "const float *",
-            "addressSpace": "global"
+            "qualType": "const float *"
           }
         },
         {
@@ -113,8 +116,7 @@
             "col": 67
           },
           "type": {
-            "qualType": "float *",
-            "addressSpace": "global"
+            "qualType": "float *"
           }
         },
         {
@@ -135,15 +137,15 @@
             "begin": {
               "line": 8,
               "col": 77
+            },
+            "end": {
+              "line": 11,
+              "col": 1
             }
           },
           "inner": [
             {
               "kind": "DeclStmt",
-              "loc": {
-                "line": 9,
-                "col": 5
-              },
               "inner": [
                 {
                   "kind": "VarDecl",
@@ -165,8 +167,11 @@
                       },
                       "range": {
                         "begin": {
-                          "line": 9,
                           "col": 13
+                        },
+                        "end": {
+                          "line": 9,
+                          "col": 14
                         }
                       },
                       "inner": [
@@ -193,7 +198,6 @@
                                   "inner": [
                                     {
                                       "kind": "DeclRefExpr",
-                                      "name": "blockIdx",
                                       "type": {
                                         "qualType": "dim3"
                                       },
@@ -201,11 +205,41 @@
                                         "kind": "VarDecl",
                                         "id": "builtin-blockIdx",
                                         "name": "blockIdx"
+                                      },
+                                      "range": {
+                                        "begin": {
+                                          "line": 9,
+                                          "col": 13
+                                        },
+                                        "end": {
+                                          "line": 9,
+                                          "col": 14
+                                        }
                                       }
                                     }
-                                  ]
+                                  ],
+                                  "range": {
+                                    "begin": {
+                                      "line": 9,
+                                      "col": 13
+                                    },
+                                    "end": {
+                                      "line": 9,
+                                      "col": 14
+                                    }
+                                  }
                                 }
-                              ]
+                              ],
+                              "range": {
+                                "begin": {
+                                  "line": 9,
+                                  "col": 13
+                                },
+                                "end": {
+                                  "line": 9,
+                                  "col": 14
+                                }
+                              }
                             },
                             {
                               "kind": "MemberExpr",
@@ -223,7 +257,6 @@
                                   "inner": [
                                     {
                                       "kind": "DeclRefExpr",
-                                      "name": "blockDim",
                                       "type": {
                                         "qualType": "dim3"
                                       },
@@ -231,13 +264,53 @@
                                         "kind": "VarDecl",
                                         "id": "builtin-blockDim",
                                         "name": "blockDim"
+                                      },
+                                      "range": {
+                                        "begin": {
+                                          "line": 9,
+                                          "col": 13
+                                        },
+                                        "end": {
+                                          "line": 9,
+                                          "col": 14
+                                        }
                                       }
                                     }
-                                  ]
+                                  ],
+                                  "range": {
+                                    "begin": {
+                                      "line": 9,
+                                      "col": 13
+                                    },
+                                    "end": {
+                                      "line": 9,
+                                      "col": 14
+                                    }
+                                  }
                                 }
-                              ]
+                              ],
+                              "range": {
+                                "begin": {
+                                  "line": 9,
+                                  "col": 13
+                                },
+                                "end": {
+                                  "line": 9,
+                                  "col": 14
+                                }
+                              }
                             }
-                          ]
+                          ],
+                          "range": {
+                            "begin": {
+                              "line": 9,
+                              "col": 13
+                            },
+                            "end": {
+                              "line": 9,
+                              "col": 14
+                            }
+                          }
                         },
                         {
                           "kind": "MemberExpr",
@@ -255,7 +328,6 @@
                               "inner": [
                                 {
                                   "kind": "DeclRefExpr",
-                                  "name": "threadIdx",
                                   "type": {
                                     "qualType": "dim3"
                                   },
@@ -263,24 +335,60 @@
                                     "kind": "VarDecl",
                                     "id": "builtin-threadIdx",
                                     "name": "threadIdx"
+                                  },
+                                  "range": {
+                                    "begin": {
+                                      "line": 9,
+                                      "col": 13
+                                    },
+                                    "end": {
+                                      "line": 9,
+                                      "col": 14
+                                    }
                                   }
                                 }
-                              ]
+                              ],
+                              "range": {
+                                "begin": {
+                                  "line": 9,
+                                  "col": 13
+                                },
+                                "end": {
+                                  "line": 9,
+                                  "col": 14
+                                }
+                              }
                             }
-                          ]
+                          ],
+                          "range": {
+                            "begin": {
+                              "line": 9,
+                              "col": 13
+                            },
+                            "end": {
+                              "line": 9,
+                              "col": 14
+                            }
+                          }
                         }
                       ]
                     }
                   ]
                 }
-              ]
+              ],
+              "range": {
+                "begin": {
+                  "line": 9,
+                  "col": 5
+                },
+                "end": {
+                  "line": 9,
+                  "col": 10
+                }
+              }
             },
             {
               "kind": "IfStmt",
-              "loc": {
-                "line": 10,
-                "col": 5
-              },
               "inner": [
                 {
                   "kind": "ParenExpr",
@@ -304,7 +412,6 @@
                           "inner": [
                             {
                               "kind": "DeclRefExpr",
-                              "name": "i",
                               "type": {
                                 "qualType": "int"
                               },
@@ -315,9 +422,29 @@
                                   "qualType": "int"
                                 },
                                 "id": "local-i"
+                              },
+                              "range": {
+                                "begin": {
+                                  "line": 10,
+                                  "col": 5
+                                },
+                                "end": {
+                                  "line": 10,
+                                  "col": 6
+                                }
                               }
                             }
-                          ]
+                          ],
+                          "range": {
+                            "begin": {
+                              "line": 10,
+                              "col": 5
+                            },
+                            "end": {
+                              "line": 10,
+                              "col": 6
+                            }
+                          }
                         },
                         {
                           "kind": "ImplicitCastExpr",
@@ -328,7 +455,6 @@
                           "inner": [
                             {
                               "kind": "DeclRefExpr",
-                              "name": "n",
                               "type": {
                                 "qualType": "int"
                               },
@@ -339,23 +465,59 @@
                                   "qualType": "int"
                                 },
                                 "id": "param-n"
+                              },
+                              "range": {
+                                "begin": {
+                                  "line": 10,
+                                  "col": 5
+                                },
+                                "end": {
+                                  "line": 10,
+                                  "col": 6
+                                }
                               }
                             }
-                          ]
+                          ],
+                          "range": {
+                            "begin": {
+                              "line": 10,
+                              "col": 5
+                            },
+                            "end": {
+                              "line": 10,
+                              "col": 6
+                            }
+                          }
                         }
-                      ]
+                      ],
+                      "range": {
+                        "begin": {
+                          "line": 10,
+                          "col": 5
+                        },
+                        "end": {
+                          "line": 10,
+                          "col": 6
+                        }
+                      }
                     }
-                  ]
+                  ],
+                  "range": {
+                    "begin": {
+                      "line": 10,
+                      "col": 5
+                    },
+                    "end": {
+                      "line": 10,
+                      "col": 6
+                    }
+                  }
                 },
                 {
                   "kind": "BinaryOperator",
                   "opcode": "=",
                   "type": {
                     "qualType": "float"
-                  },
-                  "loc": {
-                    "line": 10,
-                    "col": 16
                   },
                   "inner": [
                     {
@@ -373,7 +535,6 @@
                           "inner": [
                             {
                               "kind": "DeclRefExpr",
-                              "name": "c",
                               "type": {
                                 "qualType": "float *"
                               },
@@ -384,9 +545,29 @@
                                   "qualType": "float *"
                                 },
                                 "id": "param-c"
+                              },
+                              "range": {
+                                "begin": {
+                                  "line": 10,
+                                  "col": 16
+                                },
+                                "end": {
+                                  "line": 10,
+                                  "col": 17
+                                }
                               }
                             }
-                          ]
+                          ],
+                          "range": {
+                            "begin": {
+                              "line": 10,
+                              "col": 16
+                            },
+                            "end": {
+                              "line": 10,
+                              "col": 17
+                            }
+                          }
                         },
                         {
                           "kind": "ImplicitCastExpr",
@@ -397,7 +578,6 @@
                           "inner": [
                             {
                               "kind": "DeclRefExpr",
-                              "name": "i",
                               "type": {
                                 "qualType": "int"
                               },
@@ -408,11 +588,41 @@
                                   "qualType": "int"
                                 },
                                 "id": "local-i"
+                              },
+                              "range": {
+                                "begin": {
+                                  "line": 10,
+                                  "col": 16
+                                },
+                                "end": {
+                                  "line": 10,
+                                  "col": 17
+                                }
                               }
                             }
-                          ]
+                          ],
+                          "range": {
+                            "begin": {
+                              "line": 10,
+                              "col": 16
+                            },
+                            "end": {
+                              "line": 10,
+                              "col": 17
+                            }
+                          }
                         }
-                      ]
+                      ],
+                      "range": {
+                        "begin": {
+                          "line": 10,
+                          "col": 16
+                        },
+                        "end": {
+                          "line": 10,
+                          "col": 17
+                        }
+                      }
                     },
                     {
                       "kind": "BinaryOperator",
@@ -436,7 +646,6 @@
                               "inner": [
                                 {
                                   "kind": "DeclRefExpr",
-                                  "name": "a",
                                   "type": {
                                     "qualType": "const float *"
                                   },
@@ -447,9 +656,29 @@
                                       "qualType": "const float *"
                                     },
                                     "id": "param-a"
+                                  },
+                                  "range": {
+                                    "begin": {
+                                      "line": 10,
+                                      "col": 16
+                                    },
+                                    "end": {
+                                      "line": 10,
+                                      "col": 17
+                                    }
                                   }
                                 }
-                              ]
+                              ],
+                              "range": {
+                                "begin": {
+                                  "line": 10,
+                                  "col": 16
+                                },
+                                "end": {
+                                  "line": 10,
+                                  "col": 17
+                                }
+                              }
                             },
                             {
                               "kind": "ImplicitCastExpr",
@@ -460,7 +689,6 @@
                               "inner": [
                                 {
                                   "kind": "DeclRefExpr",
-                                  "name": "i",
                                   "type": {
                                     "qualType": "int"
                                   },
@@ -471,11 +699,41 @@
                                       "qualType": "int"
                                     },
                                     "id": "local-i"
+                                  },
+                                  "range": {
+                                    "begin": {
+                                      "line": 10,
+                                      "col": 16
+                                    },
+                                    "end": {
+                                      "line": 10,
+                                      "col": 17
+                                    }
                                   }
                                 }
-                              ]
+                              ],
+                              "range": {
+                                "begin": {
+                                  "line": 10,
+                                  "col": 16
+                                },
+                                "end": {
+                                  "line": 10,
+                                  "col": 17
+                                }
+                              }
                             }
-                          ]
+                          ],
+                          "range": {
+                            "begin": {
+                              "line": 10,
+                              "col": 16
+                            },
+                            "end": {
+                              "line": 10,
+                              "col": 17
+                            }
+                          }
                         },
                         {
                           "kind": "ArraySubscriptExpr",
@@ -492,7 +750,6 @@
                               "inner": [
                                 {
                                   "kind": "DeclRefExpr",
-                                  "name": "b",
                                   "type": {
                                     "qualType": "const float *"
                                   },
@@ -503,9 +760,29 @@
                                       "qualType": "const float *"
                                     },
                                     "id": "param-b"
+                                  },
+                                  "range": {
+                                    "begin": {
+                                      "line": 10,
+                                      "col": 16
+                                    },
+                                    "end": {
+                                      "line": 10,
+                                      "col": 17
+                                    }
                                   }
                                 }
-                              ]
+                              ],
+                              "range": {
+                                "begin": {
+                                  "line": 10,
+                                  "col": 16
+                                },
+                                "end": {
+                                  "line": 10,
+                                  "col": 17
+                                }
+                              }
                             },
                             {
                               "kind": "ImplicitCastExpr",
@@ -516,7 +793,6 @@
                               "inner": [
                                 {
                                   "kind": "DeclRefExpr",
-                                  "name": "i",
                                   "type": {
                                     "qualType": "int"
                                   },
@@ -527,17 +803,77 @@
                                       "qualType": "int"
                                     },
                                     "id": "local-i"
+                                  },
+                                  "range": {
+                                    "begin": {
+                                      "line": 10,
+                                      "col": 16
+                                    },
+                                    "end": {
+                                      "line": 10,
+                                      "col": 17
+                                    }
                                   }
                                 }
-                              ]
+                              ],
+                              "range": {
+                                "begin": {
+                                  "line": 10,
+                                  "col": 16
+                                },
+                                "end": {
+                                  "line": 10,
+                                  "col": 17
+                                }
+                              }
                             }
-                          ]
+                          ],
+                          "range": {
+                            "begin": {
+                              "line": 10,
+                              "col": 16
+                            },
+                            "end": {
+                              "line": 10,
+                              "col": 17
+                            }
+                          }
                         }
-                      ]
+                      ],
+                      "range": {
+                        "begin": {
+                          "line": 10,
+                          "col": 16
+                        },
+                        "end": {
+                          "line": 10,
+                          "col": 17
+                        }
+                      }
                     }
-                  ]
+                  ],
+                  "range": {
+                    "begin": {
+                      "line": 10,
+                      "col": 16
+                    },
+                    "end": {
+                      "line": 10,
+                      "col": 17
+                    }
+                  }
                 }
-              ]
+              ],
+              "range": {
+                "begin": {
+                  "line": 10,
+                  "col": 5
+                },
+                "end": {
+                  "line": 10,
+                  "col": 40
+                }
+              }
             }
           ]
         }

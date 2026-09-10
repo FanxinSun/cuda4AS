@@ -607,13 +607,72 @@ def verify_source_compiler_signature(source_kernel: dict[str, Any], compiler_ker
     for index, (source_param, compiler_param) in enumerate(zip(source_params, compiler_params)):
         if any(source_param.get(field) != compiler_param.get(field) for field in fields):
             raise AOTError(f"source/parser and compiler parameter {index} contracts disagree")
-        if source_param.get("pointer") and source_param.get("address_space") != compiler_param.get("address_space"):
-            raise AOTError(f"source/parser and compiler parameter {index} address spaces disagree")
+
+
+KERNEL_ABI_LOWERING_RULE = "cuda4as-vector-add-kernel-abi-v1"
+KERNEL_ABI_LOWERING_VERSION = 1
+KERNEL_ABI_LOWERING_PROVENANCE = "EXPLICIT_PORTABLE_RULE"
+
+
+def lower_kernel_argument_abi(kernel: dict[str, Any]) -> list[dict[str, Any]]:
+    """Apply the pinned vector_add CUDA-kernel argument ABI.
+
+    The compiler's address-space spelling is retained as a semantic fact.  A
+    pointer with an absent Clang type address space is therefore ``unknown``;
+    this narrow ABI explicitly lowers only ``unknown`` or ``global`` pointer
+    parameters to Metal ``device`` buffers.  Other CUDA spaces are rejected.
+    """
+
+    if kernel.get("name") != "vector_add":
+        raise AOTError("the pinned kernel argument ABI applies only to vector_add")
+    params = kernel.get("params")
+    if not isinstance(params, list) or len(params) != 4:
+        raise AOTError("the pinned vector_add ABI requires exactly four arguments")
+    lowered: list[dict[str, Any]] = []
+    for index, param in enumerate(params):
+        if not isinstance(param, dict) or param.get("index") != index:
+            raise AOTError("kernel argument indices are not contiguous")
+        if not isinstance(param.get("name"), str) or not isinstance(param.get("type"), str):
+            raise AOTError("kernel argument ABI record lacks a name or type")
+        pointer = param.get("pointer") is True
+        expected_pointer = index < 3
+        if pointer != expected_pointer:
+            raise AOTError("the pinned vector_add ABI requires three pointer buffers and one scalar")
+        semantic = param.get("address_space", "unknown")
+        if not isinstance(semantic, str):
+            raise AOTError("compiler address-space fact is not a string")
+        if pointer and semantic not in {"unknown", "global"}:
+            raise AOTError(
+                f"compiler pointer argument {param.get('name', index)!r} has unsupported address space {semantic!r}"
+            )
+        if not pointer and semantic not in {"unknown", "constant"}:
+            raise AOTError(
+                f"compiler scalar argument {param.get('name', index)!r} has unsupported address space {semantic!r}"
+            )
+        kind = "buffer" if pointer else "scalar"
+        lowered.append(
+            {
+                "index": index,
+                "name": param.get("name"),
+                "kind": kind,
+                "element_type": param.get("type"),
+                "address_space": "global" if pointer else "constant",
+                "metal_address_space": "device" if pointer else "constant",
+                "semantic_address_space": semantic,
+                "lowering_rule": KERNEL_ABI_LOWERING_RULE,
+                "lowering_version": KERNEL_ABI_LOWERING_VERSION,
+                "lowering_provenance": KERNEL_ABI_LOWERING_PROVENANCE,
+                "const": bool(param.get("const", False)),
+            }
+        )
+    return lowered
 
 
 class SSABuilder:
     def __init__(self, kernel: dict[str, Any]):
         self.kernel = kernel
+        self.kernel_argument_abi = lower_kernel_argument_abi(kernel)
+        self.abi_by_name = {item["name"]: item for item in self.kernel_argument_abi}
         self.env: dict[str, dict[str, Any]] = {
             p["name"]: {
                 "type": (p["type"] + "*") if p["pointer"] else p["type"],
@@ -652,16 +711,29 @@ class SSABuilder:
             if name not in self.env:
                 raise AOTError(f"unknown identifier {name!r}")
             entry = self.env[name]
+            extra = {
+                "name": name,
+                "argument": entry.get("arg"),
+                "pointer": entry.get("pointer", False),
+                "const": entry.get("const", False),
+                "address_space": entry.get("address_space", "unknown"),
+                "semantic_address_space": entry.get("address_space", "unknown"),
+            }
+            abi = self.abi_by_name.get(name)
+            if abi is not None:
+                extra.update(
+                    {
+                        "lowering_rule": abi["lowering_rule"],
+                        "lowering_version": abi["lowering_version"],
+                        "lowering_provenance": abi["lowering_provenance"],
+                    }
+                )
             return self.value(
                 entry["type"],
                 "argument" if "arg" in entry else "local",
                 [],
                 loc,
-                name=name,
-                argument=entry.get("arg"),
-                pointer=entry.get("pointer", False),
-                const=entry.get("const", False),
-                address_space=entry.get("address_space", "unknown"),
+                **extra,
             ), entry["type"]
         if kind == "member":
             base, bt = self.lower_expr(expr["base"])
@@ -675,10 +747,25 @@ class SSABuilder:
             if not bt.endswith("*"):
                 raise AOTError("index base is not a pointer")
             typ = expr.get("type", bt[:-1])
-            address_space = expr.get("address_space", "global")
-            if address_space != "global":
-                raise AOTError(f"compiler/imported index has unsupported address space {address_space!r}")
-            return self.value(typ, "load_global", [base, idx], loc, address_space=address_space, element_type=typ), typ
+            base_name = expr.get("base", {}).get("name")
+            abi = self.abi_by_name.get(base_name)
+            semantic_address_space = self.env.get(base_name, {}).get("address_space", "unknown")
+            if abi is None or abi.get("kind") != "buffer":
+                raise AOTError("compiler/imported index is not a pinned kernel buffer argument")
+            if expr.get("address_space", semantic_address_space) != semantic_address_space:
+                raise AOTError("compiler/imported index address space disagrees with its pointer declaration")
+            return self.value(
+                typ,
+                "load_global",
+                [base, idx],
+                loc,
+                address_space=abi["address_space"],
+                semantic_address_space=semantic_address_space,
+                lowering_rule=abi["lowering_rule"],
+                lowering_version=abi["lowering_version"],
+                lowering_provenance=abi["lowering_provenance"],
+                element_type=typ,
+            ), typ
         if kind == "unary":
             val, typ = self.lower_expr(expr["value"])
             typ = expr.get("type") or _type_for_expr(expr, self.env)
@@ -700,9 +787,9 @@ class SSABuilder:
         name = expr["base"]["name"]
         if not self.env.get(name, {}).get("pointer"):
             raise AOTError("assignment target is not a kernel pointer")
-        address_space = self.env[name].get("address_space", "unknown")
-        if address_space != "global":
-            raise AOTError(f"assignment target address space is {address_space!r}, expected compiler global")
+        abi = self.abi_by_name.get(name)
+        if abi is None or abi.get("kind") != "buffer":
+            raise AOTError("assignment target is outside the pinned kernel buffer ABI")
         base, bt = self.lower_expr(expr["base"])
         idx, _ = self.lower_expr(expr["index"])
         return base, idx, bt.removesuffix("*")
@@ -729,7 +816,20 @@ class SSABuilder:
                     raise AOTError("compound assignment is not enabled in Native AOT Core v1")
                 if value_type != target_type and not (target_type == "float" and value_type == "int"):
                     raise AOTError(f"store type {value_type} does not match {target_type}")
-                out.append({"kind": "store_global", "base": base, "index": idx, "value": value, "type": target_type, "address_space": "global", "source_location": stmt["source_location"]})
+                abi = self.abi_by_name[stmt["lhs"]["base"]["name"]]
+                out.append({
+                    "kind": "store_global",
+                    "base": base,
+                    "index": idx,
+                    "value": value,
+                    "type": target_type,
+                    "address_space": abi["address_space"],
+                    "semantic_address_space": abi["semantic_address_space"],
+                    "lowering_rule": abi["lowering_rule"],
+                    "lowering_version": abi["lowering_version"],
+                    "lowering_provenance": abi["lowering_provenance"],
+                    "source_location": stmt["source_location"],
+                })
             elif kind == "if":
                 cond, cond_type = self.lower_expr(stmt["condition"])
                 if cond_type != "bool":
@@ -763,6 +863,15 @@ def verify_ir(ir: dict[str, Any], *, require_semantic_source: bool = True) -> No
         raise AOTError("device IR has no authoritative Clang semantic source")
     if isinstance(semantic, dict) and semantic.get("authoritative") is True and semantic.get("kind") != "clang_cuda_ast_json":
         raise AOTError("device IR semantic source is not the selected Clang AST representation")
+    if require_semantic_source:
+        locations = semantic.get("location_normalization") if isinstance(semantic, dict) else None
+        if (
+            not isinstance(locations, dict)
+            or locations.get("schema") != "cuda4as-clang-json-location-normalization-v1"
+            or locations.get("serializer_state") != ["LastLocFilename", "LastLocLine"]
+            or locations.get("parent_fallback_provenance") != "inherited"
+        ):
+            raise AOTError("device semantic source has no explicit Clang location normalization contract")
     kernel = ir.get("kernel")
     if not isinstance(kernel, dict) or not kernel.get("name"):
         raise AOTError("IR has no kernel metadata")
@@ -777,15 +886,20 @@ def verify_ir(ir: dict[str, Any], *, require_semantic_source: bool = True) -> No
         raise AOTError("IR value IDs are not unique")
     for block in ir.get("blocks", []):
         for op in block.get("ops", []):
-            if op.get("kind") == "store_global" and op.get("address_space") != "global":
-                raise AOTError("global store lost its address space")
+            if op.get("kind") in {"load_global", "store_global"}:
+                if op.get("address_space") != "global":
+                    raise AOTError("global memory operation lost its lowered address space")
+                if op.get("semantic_address_space") not in {"unknown", "global"}:
+                    raise AOTError("global memory operation silently remapped an unsupported compiler address space")
+                if op.get("lowering_rule") != KERNEL_ABI_LOWERING_RULE or op.get("lowering_version") != KERNEL_ABI_LOWERING_VERSION or op.get("lowering_provenance") != KERNEL_ABI_LOWERING_PROVENANCE:
+                    raise AOTError("global memory operation lacks the explicit kernel ABI lowering record")
     for value in values:
         location = value.get("source_location")
         if (
             not isinstance(location, dict)
             or location.get("line", 0) <= 0
             or location.get("column", 0) <= 0
-            or location.get("provenance") not in ({"exact", "exact_offset", "inherited"} if require_semantic_source else {"exact", "exact_offset", "inherited", "source_parser"})
+            or location.get("provenance") not in ({"exact", "exact_offset", "exact_deelided", "exact_offset_deelided", "inherited"} if require_semantic_source else {"exact", "exact_offset", "exact_deelided", "exact_offset_deelided", "inherited", "source_parser"})
         ):
             raise AOTError("IR value has no compiler source location")
     if "cpu_fallback" not in ir.get("unsupported_capabilities", []):
@@ -796,19 +910,23 @@ def verify_abi(abi: dict[str, Any]) -> None:
     if abi.get("schema") != ABI_SCHEMA or abi.get("version") != 1:
         raise AOTError("unsupported AOT ABI schema/version")
     args = abi.get("arguments")
-    if not isinstance(args, list) or [a.get("index") for a in args] != list(range(len(args))):
+    if not isinstance(args, list) or any(not isinstance(a, dict) for a in args) or [a.get("index") for a in args] != list(range(len(args))):
         raise AOTError("malformed kernel ABI indices")
     if len(args) != 4 or any(a.get("kind") not in {"buffer", "scalar"} for a in args):
         raise AOTError("M2A ABI requires four typed arguments")
     mapping = abi.get("address_space_mapping")
+    expected_rules = [
+        {"compiler_kind": "pointer", "compiler_address_space": "unknown", "lowered_address_space": "global", "metal_address_space": "device"},
+        {"compiler_kind": "pointer", "compiler_address_space": "global", "lowered_address_space": "global", "metal_address_space": "device"},
+        {"compiler_kind": "scalar", "compiler_address_space": "any", "lowered_address_space": "constant", "metal_address_space": "constant"},
+    ]
     if (
         not isinstance(mapping, dict)
         or mapping.get("schema") != "cuda4as-address-space-lowering-v1"
-        or mapping.get("status") != "EXPLICIT_PORTABLE_RULE"
-        or mapping.get("rules") != [
-            {"compiler_kind": "pointer", "compiler_address_space": "global", "metal_address_space": "device"},
-            {"compiler_kind": "scalar", "compiler_address_space": "any", "metal_address_space": "constant"},
-        ]
+        or mapping.get("version") != KERNEL_ABI_LOWERING_VERSION
+        or mapping.get("profile") != KERNEL_ABI_LOWERING_RULE
+        or mapping.get("status") != KERNEL_ABI_LOWERING_PROVENANCE
+        or mapping.get("rules") != expected_rules
     ):
         raise AOTError("ABI lacks the versioned explicit CUDA-to-Metal address-space mapping")
     if any(a.get("kind") == "buffer" and a.get("address_space") != "global" for a in args):
@@ -817,10 +935,17 @@ def verify_abi(abi: dict[str, Any]) -> None:
         raise AOTError("buffer ABI lacks its explicit Metal device mapping")
     if any(a.get("kind") == "scalar" and a.get("metal_address_space") != "constant" for a in args):
         raise AOTError("scalar ABI lacks its explicit Metal constant mapping")
-    if any(a.get("kind") == "buffer" and a.get("semantic_address_space") != "global" for a in args):
-        raise AOTError("buffer ABI mapping disagrees with compiler address space")
-    if any(a.get("kind") == "scalar" and not isinstance(a.get("semantic_address_space"), str) for a in args):
+    if any(a.get("kind") == "buffer" and a.get("semantic_address_space") not in {"unknown", "global"} for a in args):
+        raise AOTError("buffer ABI mapping silently remapped an unsupported compiler address space")
+    if any(a.get("kind") == "scalar" and a.get("semantic_address_space") not in {"unknown", "constant"} for a in args):
         raise AOTError("scalar ABI lacks its compiler address-space provenance")
+    if any(
+        a.get("lowering_rule") != KERNEL_ABI_LOWERING_RULE
+        or a.get("lowering_version") != KERNEL_ABI_LOWERING_VERSION
+        or a.get("lowering_provenance") != KERNEL_ABI_LOWERING_PROVENANCE
+        for a in args
+    ):
+        raise AOTError("ABI arguments lack their explicit kernel lowering provenance")
     if abi.get("cpu_fallback") is not False or abi.get("thread_position") != "1d_grid":
         raise AOTError("ABI permits a prohibited fallback or has no launch contract")
 
@@ -850,10 +975,9 @@ def _literal_to_msl(raw: str) -> str:
 def lower_to_msl(kernel: dict[str, Any], ir: dict[str, Any], block_x: int, *, require_semantic_source: bool = True) -> tuple[str, dict[str, Any]]:
     verify_ir(ir, require_semantic_source=require_semantic_source)
     params = kernel["params"]
+    lowered_arguments = lower_kernel_argument_abi(kernel)
     if any(not p["pointer"] and p["type"] not in {"int", "u32"} for p in params):
         raise AOTError("only int/u32 scalar kernel arguments are supported")
-    if any(p["pointer"] and p.get("address_space") != "global" for p in params):
-        raise AOTError("compiler pointer argument lacks an explicit global address space")
     lines = ["#include <metal_stdlib>", "using namespace metal;", "", f"// cuda4as-ir-schema: {IR_SCHEMA}"]
     sig: list[str] = []
     for p in params:
@@ -934,27 +1058,16 @@ def lower_to_msl(kernel: dict[str, Any], ir: dict[str, Any], block_x: int, *, re
         "schema": ABI_SCHEMA,
         "version": 1,
         "kernel": kernel["name"],
-        "arguments": [
-            {
-                "index": p["index"],
-                "name": p["name"],
-                "kind": "buffer" if p["pointer"] else "scalar",
-                "element_type": p["type"],
-                # Metal's constant-buffer ABI is an explicit lowering rule;
-                # the imported compiler fact remains semantic_address_space.
-                "address_space": "global" if p["pointer"] else "constant",
-                "metal_address_space": "device" if p["pointer"] else "constant",
-                "semantic_address_space": p.get("address_space", "unknown"),
-                "const": p["const"],
-            }
-            for p in params
-        ],
+        "arguments": lowered_arguments,
         "address_space_mapping": {
             "schema": "cuda4as-address-space-lowering-v1",
-            "status": "EXPLICIT_PORTABLE_RULE",
+            "version": KERNEL_ABI_LOWERING_VERSION,
+            "profile": KERNEL_ABI_LOWERING_RULE,
+            "status": KERNEL_ABI_LOWERING_PROVENANCE,
             "rules": [
-                {"compiler_kind": "pointer", "compiler_address_space": "global", "metal_address_space": "device"},
-                {"compiler_kind": "scalar", "compiler_address_space": "any", "metal_address_space": "constant"},
+                {"compiler_kind": "pointer", "compiler_address_space": "unknown", "lowered_address_space": "global", "metal_address_space": "device"},
+                {"compiler_kind": "pointer", "compiler_address_space": "global", "lowered_address_space": "global", "metal_address_space": "device"},
+                {"compiler_kind": "scalar", "compiler_address_space": "any", "lowered_address_space": "constant", "metal_address_space": "constant"},
             ],
         },
         "thread_position": "1d_grid",
@@ -1037,6 +1150,7 @@ def import_typed_compiler_output(
     source: Path | None = None,
     source_bytes: bytes | None = None,
     facade_contract: dict[str, Any] | None = None,
+    capture_working_directory: Path | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Import the selected Clang AST as the device semantic authority."""
 
@@ -1052,6 +1166,7 @@ def import_typed_compiler_output(
             source=source,
             source_bytes=source_bytes,
             facade_contract=facade_contract,
+            capture_working_directory=capture_working_directory,
         )
     except ClangASTImportError as exc:
         raise AOTError(str(exc)) from exc
@@ -1097,6 +1212,7 @@ def emit(args: argparse.Namespace) -> int:
             host["launch"]["kernel"],
             source=args.source,
             facade_contract=facade_contract,
+            capture_working_directory=Path.cwd(),
         )
         compiler_metadata["validation"] = "compiler_output_fixture"
         compiler_metadata["status"] = "FIXTURE"
@@ -1133,6 +1249,7 @@ def emit(args: argparse.Namespace) -> int:
             host["launch"]["kernel"],
             source=args.source,
             facade_contract=facade_contract,
+            capture_working_directory=Path.cwd(),
         )
         frontend.update(compiler_metadata)
         frontend["validation_status"] = "VALIDATED"

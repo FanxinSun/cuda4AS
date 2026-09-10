@@ -57,6 +57,14 @@ def main() -> int:
     expected_doc = json.loads((root / "expected.json").read_text(encoding="utf-8"))
     if expected_doc.get("cpu_fallback") is not False or expected_doc.get("runtime_compilation") is not False:
         raise SystemExit("prohibited fallback/runtime compilation flag")
+    semantic_contract = expected_doc.get("semantic_contract")
+    if semantic_contract is not None and semantic_contract != {
+        "compiler_source": "clang_ast",
+        "location_schema": "cuda4as-clang-json-location-normalization-v1",
+        "abi_lowering_profile": "cuda4as-vector-add-kernel-abi-v1",
+        "compiler_validation_status": "NOT_RUN",
+    }:
+        raise SystemExit("package semantic compiler/lowering contract is invalid")
     print("M2A_PACKAGE_VALID")
     return 0
 
