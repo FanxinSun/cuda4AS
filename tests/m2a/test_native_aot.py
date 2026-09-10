@@ -102,7 +102,7 @@ def make_return(path: Path, result: dict, *, unsafe: bool = False) -> None:
 
 class ReturnAnalyzerTests(unittest.TestCase):
     def base_result(self) -> dict:
-        return {"schema": "cuda4as-m2a-result-v1", "classification": "PASS_GPU", "device": {"name": "Apple M1 Pro", "registry_id": 4294969587, "route": "apple_gpu"}, "output": {"bytes": 4194304, "sha256": OUT_HASH, "expected_sha256": OUT_HASH, "mismatches": 0}, "stages": {k: "PASS" for k in ("allocation", "h2d", "aot_load", "launch", "d2h", "validation")}, "cpu_fallback": False}
+        return {"schema": "cuda4as-m2a-result-v1", "classification": "PASS_GPU", "device": {"name": "Apple M1 Pro", "registry_id": 4294969587, "route": "apple_gpu"}, "output": {"bytes": 4194304, "sha256": OUT_HASH, "expected_sha256": OUT_HASH, "mismatches": 0}, "stages": {k: "PASS" for k in ("allocation", "h2d", "aot_load", "launch", "last_error", "synchronize", "d2h", "validation", "cleanup")}, "cpu_fallback": False}
 
     def test_success_compile_failure_launch_failure_and_not_run(self) -> None:
         with tempfile.TemporaryDirectory() as td:

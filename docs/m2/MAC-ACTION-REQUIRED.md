@@ -59,8 +59,8 @@ The M2A Native AOT Core v1 vector-add package is the small, separate artifact:
 tools/m2a/artifacts/cuda4as-m2a-native-aot-vector-add-v1.tgz
 ```
 
-Current package identity: 21,706 bytes, SHA-256
-`649371617a3e2266fdd5a1da4bbb39b55ab49524297bc6703cb073f755c9aaf9`.
+Current package identity: 21,730 bytes, SHA-256
+`66216f36d41e08008c109f16c5daa509a5a6bc08665cf88a0620ea97ef7a2436`.
 
 After copying that file to the Mac, verify its SHA-256 from the package metadata
 (`tools/m2a/artifacts/cuda4as-m2a-native-aot-vector-add-v1.manifest.json`), then

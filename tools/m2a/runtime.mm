@@ -112,7 +112,7 @@ int main(int argc, char **argv) {
       return 1;
     }
     std::ofstream f(result_path);
-    f << "{\n  \"schema\": \"cuda4as-m2a-result-v1\",\n  \"classification\": \"PASS_GPU\",\n  \"device\": {\"name\": \"" << name << "\", \"registry_id\": " << registry << ", \"route\": \"apple_gpu\"},\n  \"output\": {\"bytes\": " << bytes << ", \"sha256\": \"" << actual << "\", \"expected_sha256\": \"" << CUDA4AS_EXPECTED_OUTPUT_SHA256 << "\", \"mismatches\": 0},\n  \"launch\": {\"grid_x\": " << CUDA4AS_ELEMENT_COUNT << ", \"block_x\": " << CUDA4AS_BLOCK_X << ", \"completed\": true},\n  \"stages\": {\"allocation\": \"PASS\", \"h2d\": \"PASS\", \"aot_load\": \"PASS\", \"launch\": \"PASS\", \"d2h\": \"PASS\", \"validation\": \"PASS\"},\n  \"cpu_fallback\": false,\n  \"diagnostic_elapsed_ms\": " << elapsed_ms << "\n}\n";
+    f << "{\n  \"schema\": \"cuda4as-m2a-result-v1\",\n  \"classification\": \"PASS_GPU\",\n  \"device\": {\"name\": \"" << name << "\", \"registry_id\": " << registry << ", \"route\": \"apple_gpu\"},\n  \"output\": {\"bytes\": " << bytes << ", \"sha256\": \"" << actual << "\", \"expected_sha256\": \"" << CUDA4AS_EXPECTED_OUTPUT_SHA256 << "\", \"mismatches\": 0},\n  \"launch\": {\"grid_x\": " << CUDA4AS_ELEMENT_COUNT << ", \"block_x\": " << CUDA4AS_BLOCK_X << ", \"completed\": true},\n  \"stages\": {\"allocation\": \"PASS\", \"h2d\": \"PASS\", \"aot_load\": \"PASS\", \"launch\": \"PASS\", \"last_error\": \"PASS\", \"synchronize\": \"PASS\", \"d2h\": \"PASS\", \"validation\": \"PASS\", \"cleanup\": \"PASS\"},\n  \"cpu_fallback\": false,\n  \"diagnostic_elapsed_ms\": " << elapsed_ms << "\n}\n";
   }
   return 0;
 }

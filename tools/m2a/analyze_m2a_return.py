@@ -108,7 +108,7 @@ def analyze(path: Path) -> dict[str, Any]:
             "output_bytes_exact": output.get("bytes") == EXPECTED_BYTES,
             "output_sha256_exact": output.get("sha256") == EXPECTED_OUT and output.get("expected_sha256") == EXPECTED_OUT,
             "zero_mismatches": output.get("mismatches") == 0,
-            "all_runtime_stages_pass": all(stages.get(k) == "PASS" for k in ("allocation", "h2d", "aot_load", "launch", "d2h", "validation")),
+            "all_runtime_stages_pass": all(stages.get(k) == "PASS" for k in ("allocation", "h2d", "aot_load", "launch", "last_error", "synchronize", "d2h", "validation", "cleanup")),
             "no_cpu_fallback": result.get("cpu_fallback") is False,
             "metallib_evidence": any(k.endswith(".metallib") for k in files),
             "linked_image_evidence": any(k.endswith("device-link-image.json") for k in files),
