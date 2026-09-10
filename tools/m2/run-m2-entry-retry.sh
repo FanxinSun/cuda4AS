@@ -10,8 +10,8 @@ DELTA_ARTIFACT="${CUDA4AS_M2_ARTIFACT:-${REPO_ROOT}/tools/m2/artifacts/cuda4as-m
 BASE_ARTIFACT="${CUDA4AS_M1_ARTIFACT:-${REPO_ROOT}/tools/m1/artifacts/cuda4as-m1-native-feasibility-v1.tgz}"
 TASK_ROOT="${CUDA4AS_M2_TASK_ROOT:-${HOME}/cuda4as-m2/entry-v1}"
 START_UTC="$(/bin/date -u '+%Y%m%dT%H%M%SZ')"
-EXPECTED_DELTA_SHA256="526d5d36e418e0d29fc321fbefad57b754608aa3f32cedfd3f52c8200091d31f"
-EXPECTED_DELTA_BYTES=137652
+EXPECTED_DELTA_SHA256="1ffb31b06c0800b11225fa730908404604923e89cf5847e82e883e7ecb26525e"
+EXPECTED_DELTA_BYTES=137793
 
 if [ ! -f "${DELTA_ARTIFACT}" ] || [ ! -f "${BASE_ARTIFACT}" ]; then
   printf 'error: expected M1 base and M2 delta artifacts are missing\n' >&2

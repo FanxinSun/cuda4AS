@@ -298,6 +298,32 @@ def _summary(cases: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _parse_m2_events(
+    files: dict[str, bytes], fixture_cases: dict[str, dict[str, Any]]
+) -> tuple[dict[tuple[str, str], dict[str, Any]], bool]:
+    """Parse the published runner's one known package-log alias safely.
+
+    The first published M2 runner recorded the patch-binding event with the
+    delta-relative path, while the returned archive stores that file beneath
+    ``package/m2-delta``.  Accept that exact, unambiguous alias so an already
+    completed Mac run remains usable; the runner is repaired separately.
+    """
+
+    try:
+        events, _ = parse_events(files, fixture_cases)
+        return events, False
+    except ValueError as exc:
+        marker = b"\tcandidate/patch-binding.json\t"
+        replacement = b"\tpackage/m2-delta/candidate/patch-binding.json\t"
+        raw = files["case-stage-events.tsv"]
+        if "event references missing log: candidate/patch-binding.json" not in str(exc) or raw.count(marker) != 1:
+            raise
+        repaired = dict(files)
+        repaired["case-stage-events.tsv"] = raw.replace(marker, replacement)
+        events, _ = parse_events(repaired, fixture_cases)
+        return events, True
+
+
 def analyze(archive: Path, inventory: dict[str, Any], fixtures: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
     files, archive_validation = load_verified_files(archive)
     if fixtures.get("schema") != "cuda4as-m1-fixture-manifest-v1" or fixtures.get("candidate", {}).get("revision") != CANDIDATE_REVISION:
@@ -311,7 +337,7 @@ def analyze(archive: Path, inventory: dict[str, Any], fixtures: dict[str, Any]) 
     package = validate_package_and_patch(files, inventory)
     facts = unique_map(parse_tsv(files["facts.tsv"], ("key", "value"), "facts.tsv"), "key", "facts.tsv")
     runner_exit = validate_identity(facts, inventory)
-    events, _ = parse_events(files, fixture_cases)
+    events, event_log_alias_repaired = _parse_m2_events(files, fixture_cases)
     assertions = parse_assertions(files)
     package_assertions = {item["id"]: item["passed"] for item in assertions.get("_package", [])}
     for key in ("fixture_inputs_match_before_run", "fixture_inputs_unchanged_after_run"):
@@ -400,6 +426,7 @@ def analyze(archive: Path, inventory: dict[str, Any], fixtures: dict[str, Any]) 
         "contract": {"id": "cuda4as-m2-entry-gate", "revision": "1.0", "base_contract": "cuda4as-m1-result-v1"},
         "candidate": {"repository": "https://github.com/Lulzx/cuda-metal.git", "revision": CANDIDATE_REVISION, "vf64_revision": VF64_REVISION, "source_state": "patched" if candidate_gate_complete else "patch_not_validated", "patch_id": PATCH_ID, "patch_sha256": PATCH_SHA256, "patch_binding_sha256": package["patch_binding_sha256"], "clean_tree_manifest_sha256": CLEAN_TREE_SHA256, "patched_tree_manifest_sha256": PATCHED_TREE_SHA256, "build_type": "Release", "options": {"CUMETAL_BUILD_TESTS": "OFF", "CUMETAL_ENABLE_CUDA_REGISTRATION": "ON", "CUMETAL_ENABLE_BINARY_SHIM": "OFF", "CUMETAL_CUDA_ARCH": "sm_86", "CUMETAL_FP64_MODE": "ieee64"}},
         "candidate_gate": {"attempted": candidate_attempted, "complete_pass": candidate_gate_complete, "stages": candidate_gate},
+        "contract_repairs": ["mapped published patch-binding event log to package/m2-delta/candidate/patch-binding.json"] if event_log_alias_repaired else [],
         "machine": _inventory_machine(inventory), "cases": cases, "summary": _summary(cases),
     }
     return document, archive_validation

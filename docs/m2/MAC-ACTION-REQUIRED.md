@@ -1,11 +1,11 @@
 # MAC ACTION REQUIRED — CUDA4AS M2 ENTRY RETRY IS READY
 
-The executor prepared a 137,652-byte delta package. It reuses the existing
+The executor prepared a 137,793-byte corrected delta package. It reuses the existing
 M1 package and contains no candidate or VF64 source archive. Verify:
 
 ```
 cuda4as-m2-entry-retry-v1.tgz
-526d5d36e418e0d29fc321fbefad57b754608aa3f32cedfd3f52c8200091d31f
+1ffb31b06c0800b11225fa730908404604923e89cf5847e82e883e7ecb26525e
 ```
 
 The existing base package must also remain exactly 8,549,223 bytes with SHA-256
