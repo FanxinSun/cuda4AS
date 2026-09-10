@@ -1,7 +1,7 @@
 #!/bin/bash
 # Standalone Git repair and launcher for the CUDA4AS M2A native probe.
-# Download this file once when the checkout cannot yet obtain the M2A branch,
-# then run: /bin/bash /actual/path/bootstrap-m2a-native-aot-probe.sh
+# Acquire this tracked file with the one-time Git pull when the checkout cannot
+# yet obtain the M2A branch, then run: /bin/bash /actual/path/bootstrap-m2a-native-aot-probe.sh
 set -u
 
 TARGET_BRANCH="codex/m2a-native-aot-vector-add"

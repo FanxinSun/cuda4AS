@@ -86,17 +86,14 @@ missing tool, compiler/AOT error, or resource limit. Return exactly the printed
 ### Broken-checkout bootstrap
 
 If the checkout was created from `codex/m2-entry-gate` and does not yet contain
-the wrapper, download the published
-`tools/m2a/bootstrap-m2a-native-aot-probe.sh` file once from this branch, save
-it as `/Users/yaminocellist/Downloads/bootstrap-m2a-native-aot-probe.sh`, and
-launch that file:
-
-```text
-https://raw.githubusercontent.com/FanxinSun/cuda4AS/codex/m2a-native-aot-vector-add/tools/m2a/bootstrap-m2a-native-aot-probe.sh
-```
+the wrapper, stay in the existing checkout and acquire the tracked bootstrap,
+wrapper, and package through Git. Pull does not switch branches; this sequence
+uses the explicit task branch so it also works when the local target branch has
+the old `codex/m2-entry-gate` upstream:
 
 ```bash
-/bin/bash /Users/yaminocellist/Downloads/bootstrap-m2a-native-aot-probe.sh
+git pull --ff-only origin codex/m2a-native-aot-vector-add
+/bin/bash tools/m2a/bootstrap-m2a-native-aot-probe.sh
 ```
 
 The standalone bootstrap explicitly fetches the narrow branch ref, repairs an
