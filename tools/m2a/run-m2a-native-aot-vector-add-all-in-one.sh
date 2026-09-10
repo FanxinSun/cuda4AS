@@ -7,7 +7,8 @@ set -u
 PACKAGE_NAME="cuda4as-m2a-native-aot-vector-add-v1.tgz"
 PACKAGE_SHA="1184651ff56d76fbea08fce7c68ca857615d1f27fe78934470d218313fbbe1c0"
 PACKAGE_BYTES="22535"
-DEFAULT_ARCHIVE="$HOME/Downloads/$PACKAGE_NAME"
+SCRIPT_DIR="$(CDPATH= cd "$(dirname "$0")" && pwd)"
+DEFAULT_ARCHIVE="$SCRIPT_DIR/artifacts/$PACKAGE_NAME"
 ARCHIVE="${1:-$DEFAULT_ARCHIVE}"
 RUNS_ROOT="$HOME/cuda4as-m2a-native-aot-runs"
 
