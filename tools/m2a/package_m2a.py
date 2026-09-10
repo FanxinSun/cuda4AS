@@ -56,7 +56,7 @@ def build(output: Path) -> dict[str, object]:
             "xcode_version": machine["xcode_version"], "metal_compiler": machine["metal_compiler"],
             "metal_devices": machine["metal_devices"],
         },
-        "llvm": {"origin": "/opt/homebrew/opt/llvm", "version": "23.1.0", "minimum_major": 18},
+        "llvm": {"origin": "/opt/homebrew/opt/llvm", "version": "23.1.0", "minimum_major": 18, "maximum_major_exclusive": 24},
         "limits": {"max_jobs": 4, "min_free_gib": 5, "max_task_disk_gib": 20, "max_minutes": 30},
     }
     expected = {
@@ -72,10 +72,13 @@ def build(output: Path) -> dict[str, object]:
         files["oracle/src/vector_add.cu"] = (ROOT / "oracle/src/vector_add.cu").read_bytes()
         files["oracle/src/oracle.h"] = (ROOT / "oracle/src/oracle.h").read_bytes()
         files["tools/m2a/native_aot.py"] = (ROOT / "tools/m2a/native_aot.py").read_bytes()
+        files["tools/m2a/clang_ast.py"] = (ROOT / "tools/m2a/clang_ast.py").read_bytes()
         files["tools/m2a/preflight.py"] = (ROOT / "tools/m2a/preflight.py").read_bytes()
         files["tools/m2a/aot_manifest.py"] = (ROOT / "tools/m2a/aot_manifest.py").read_bytes()
         files["tools/m2a/runtime.mm"] = (ROOT / "tools/m2a/runtime.mm").read_bytes()
         files["tools/m2a/verify_m2a_package.py"] = (ROOT / "tools/m2a/verify_m2a_package.py").read_bytes()
+        files["tools/m2a/clang_cuda_facade/cuda_runtime.h"] = (ROOT / "tools/m2a/clang_cuda_facade/cuda_runtime.h").read_bytes()
+        files["tools/m2a/clang_cuda_facade/manifest.json"] = (ROOT / "tools/m2a/clang_cuda_facade/manifest.json").read_bytes()
         files["inventory-binding.json"] = canonical(binding)
         files["expected.json"] = canonical(expected)
         readme = f"""# {PACKAGE_ID}\n\nThis is the user-operated M2A Native AOT Core v1 drop. It performs no network, install, update, sudo, or CPU fallback. The runner writes all evidence beneath this extracted directory and returns one archive.\n\nBound machine: {machine['model']} / {machine['cpu_brand']} / {machine['os_version']} ({machine['os_build']}); Xcode {machine['xcode_version'].replace(chr(10), ' ')}; SDK {machine['sdk_version']}; LLVM 23.1.0.\n\nThe package contains the unchanged oracle source and header. Do not edit them.\n""".encode()

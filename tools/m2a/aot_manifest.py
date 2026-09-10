@@ -40,12 +40,32 @@ def main() -> int:
     abi = json.loads((w / "abi.json").read_text(encoding="utf-8"))
     link = json.loads((w / "device-link.json").read_text(encoding="utf-8"))
     lib = w / "metallib" / f"{args.kernel}.metallib"
-    files = {name: digest(w / name) for name in ("ir.json", "abi.json", "device-link.json", "device-link-image.json", "kernel.metal", "clang-device-ast.json", "device-split.cu")}
+    files = {name: digest(w / name) for name in ("ir.json", "abi.json", "device-link.json", "device-link-image.json", "kernel.metal", "clang-device-ast.json", "device-source.cu")}
+    facade_dir = Path(__file__).resolve().parent / "clang_cuda_facade"
+    facade = facade_dir / "cuda_runtime.h"
+    facade_manifest_path = facade_dir / "manifest.json"
+    facade_manifest = json.loads(facade_manifest_path.read_text(encoding="utf-8"))
+    if facade_manifest.get("schema") != "cuda4as-clang-cuda-facade-manifest-v1":
+        raise ValueError("unsupported Clang CUDA facade manifest schema")
+    if digest(facade) != facade_manifest.get("header", {}).get("sha256"):
+        raise ValueError("Clang CUDA facade header does not match its manifest")
+    files["tools/m2a/clang_cuda_facade/cuda_runtime.h"] = digest(facade)
+    files["tools/m2a/clang_cuda_facade/manifest.json"] = digest(facade_manifest_path)
     files["metallib"] = digest(lib)
     doc = {
         "schema": "cuda4as-m2a-aot-manifest-v1", "version": 1, "kernel": args.kernel,
         "numerical_mode": ir["module"]["numerical_mode"], "capabilities": sorted(ir["capabilities"]),
         "source": ir["source"], "files": files, "abi_schema": abi["schema"], "device_link_schema": link["schema"],
+        "facade": {
+            "version": facade_manifest["version"],
+            "manifest": "tools/m2a/clang_cuda_facade/manifest.json",
+            "manifest_sha256": files["tools/m2a/clang_cuda_facade/manifest.json"],
+            "header": facade_manifest["header"]["path"],
+            "header_sha256": facade_manifest["header"]["sha256"],
+            "supported_clang": facade_manifest["supported_clang"],
+            "target": facade_manifest["target"],
+            "compiler_arguments": facade_manifest["compiler_arguments"],
+        },
         "tools": {"clang": tool_identity(args.clang), "metal": tool_identity(args.metal), "metallib": tool_identity(args.metallib), "sdk_path": args.sdk},
         "cpu_fallback": False, "runtime_compilation": False, "device_link_empty": link["empty"],
     }

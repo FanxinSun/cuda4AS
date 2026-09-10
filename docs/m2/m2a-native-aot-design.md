@@ -7,11 +7,15 @@ it is not a general CUDA compatibility layer.
 
 ## Owned boundaries
 
-`tools/m2a/native_aot.py` tokenizes and parses the supported CUDA kernel,
-retains source locations and CUDA address spaces, builds versioned typed SSA
-values and explicit control-flow operations, verifies capabilities, imports a
-real Clang CUDA AST JSON device translation unit, and serializes deterministic
-IR/ABI/MSL/device-link records. `tools/m2a/runtime.mm` owns the Objective-C++
+`tools/m2a/native_aot.py` discovers the pinned Clang frontend and passes the
+unchanged CUDA translation unit through
+`tools/m2a/clang_cuda_facade/cuda_runtime.h`. The AST importer in
+`tools/m2a/clang_ast.py` traverses typed compiler records for kernel identity,
+parameters, address spaces, expressions, control flow, built-ins, and source
+locations; it then builds versioned typed SSA values and explicit control-flow
+operations, verifies capabilities, and serializes deterministic IR/ABI/MSL/
+device-link records. The source tokenizer is limited to host launch discovery
+and an explicitly `NOT_RUN` packaging path. `tools/m2a/runtime.mm` owns the Objective-C++
 Metal device, buffer, command queue, AOT library, pipeline, launch, completion,
 copy, exact output validation, and error/lifetime path. It has no CPU kernel
 fallback. `tools/m2a/run-m2a-native.sh` is the bounded user-operated Mac drop;
@@ -24,6 +28,17 @@ The current IR schema is `cuda4as-device-ssa-ir-v1`; ABI is
 The device link emits a non-empty inspectable JSON linked image whose identity
 is tied to the IR hash and symbol table. It is a real single-module link record
 and does not claim the deferred multi-translation-unit gate.
+
+The facade is versioned `1.0.0`, maps CUDA annotations to Clang attributes,
+declares typed `dim3` execution built-ins with `device_builtin`, and exposes
+only the host runtime declarations needed by the unchanged oracle. Its
+`manifest.json` binds the header SHA-256, LLVM Clang support range (18 through
+23), validated Homebrew LLVM 23.1.0 identity, `sm_86` target, and exact
+frontend argument template. The live frontend uses
+`-nocudainc -nocudalib -I tools/m2a/clang_cuda_facade` and
+`-Xclang -ast-dump=json`. A compiler-output fixture is available for portable
+importer tests; `--skip-clang` emits a visible `NOT_RUN` record and returns 77,
+so it cannot satisfy the frontend or M2A validation gate.
 
 ## Supported profile and explicit stops
 

@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Small, source-driven CUDA vector-add AOT compiler used by the M2A slice.
+"""Small CUDA vector-add Native AOT compiler used by the M2A slice.
 
-The implementation intentionally has a narrow capability surface.  It parses
-the kernel into a typed, versioned SSA-like representation, asks the selected
-Clang CUDA frontend to validate/import the device translation unit, lowers the
-owned representation to deterministic MSL, and emits a real device-link
-record.  It does not match a fixture by filename or digest and never provides a
-host execution fallback.
+The implementation has a narrow capability surface. The pinned Clang CUDA
+frontend consumes the unchanged source through the tracked facade; its typed
+AST is the authoritative device semantic input. The importer lowers those
+compiler records into versioned SSA-like IR, deterministic MSL, and a real
+device-link record. The source tokenizer remains only a host-launch diagnostic
+aid (or an explicitly NOT_RUN portable packaging path) and never silently
+supplies device semantics when compiler output is required.
 """
 
 from __future__ import annotations
@@ -25,11 +26,36 @@ import time
 from dataclasses import dataclass
 from typing import Any, Iterable, Iterator, Sequence
 
+# The Mac runner invokes this file by absolute path from an arbitrary working
+# directory. Make the extracted package root importable so the sibling
+# compiler-output importer works without relying on the caller's PYTHONPATH.
+_PACKAGE_ROOT = Path(__file__).resolve().parents[2]
+if str(_PACKAGE_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PACKAGE_ROOT))
+
 
 IR_SCHEMA = "cuda4as-device-ssa-ir-v1"
 ABI_SCHEMA = "cuda4as-native-aot-abi-v1"
 LINK_SCHEMA = "cuda4as-device-link-v1"
 DRIVER_SCHEMA = "cuda4as-native-aot-driver-v1"
+FACADE_MANIFEST_SCHEMA = "cuda4as-clang-cuda-facade-manifest-v1"
+FACADE_VERSION = "1.0.0"
+FACADE_HEADER_REL = "tools/m2a/clang_cuda_facade/cuda_runtime.h"
+FACADE_MANIFEST_REL = "tools/m2a/clang_cuda_facade/manifest.json"
+FACADE_ARGUMENT_TEMPLATE = [
+    "-x",
+    "cuda",
+    "--cuda-device-only",
+    "--cuda-gpu-arch=sm_86",
+    "-nocudainc",
+    "-nocudalib",
+    "-I",
+    "<FACADE_DIR>",
+    "-Xclang",
+    "-ast-dump=json",
+    "-fsyntax-only",
+    "<SOURCE>",
+]
 EXPECTED_OUTPUT_SHA256 = "ed551637cf393112d0093037a0b41b9d1e9bd213c6037e8efcde30cf480f0332"
 EXPECTED_OUTPUT_BYTES = 4_194_304
 
@@ -56,6 +82,83 @@ def sha256_file(path: Path) -> str:
 
 def canonical_json(value: Any) -> str:
     return json.dumps(value, sort_keys=True, indent=2, separators=(",", ": ")) + "\n"
+
+
+def load_facade_contract(facade_dir: Path) -> dict[str, Any]:
+    """Load and verify the tracked CUDA facade contract.
+
+    The manifest is intentionally separate from the header so a generated
+    work record can bind the exact bytes, supported Clang range, target, and
+    frontend arguments without relying on a mutable host installation.
+    """
+
+    manifest_path = facade_dir / "manifest.json"
+    header_path = facade_dir / "cuda_runtime.h"
+    try:
+        raw = manifest_path.read_bytes()
+        manifest = json.loads(raw.decode("utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise AOTError(f"cannot load tracked Clang CUDA facade manifest: {exc}") from exc
+    if not isinstance(manifest, dict) or manifest.get("schema") != FACADE_MANIFEST_SCHEMA:
+        raise AOTError("tracked Clang CUDA facade manifest has an unsupported schema")
+    if manifest.get("version") != FACADE_VERSION:
+        raise AOTError("tracked Clang CUDA facade manifest version is not 1.0.0")
+    header = manifest.get("header")
+    if not isinstance(header, dict) or header.get("path") != FACADE_HEADER_REL:
+        raise AOTError("tracked Clang CUDA facade manifest has the wrong header path")
+    expected_header_sha = header.get("sha256")
+    if not isinstance(expected_header_sha, str) or not re.fullmatch(r"[0-9a-f]{64}", expected_header_sha):
+        raise AOTError("tracked Clang CUDA facade manifest has no valid header hash")
+    if not header_path.is_file():
+        raise AOTError(f"tracked Clang CUDA facade header is missing: {header_path}")
+    actual_header_sha = sha256_file(header_path)
+    if actual_header_sha != expected_header_sha:
+        raise AOTError("tracked Clang CUDA facade header hash does not match its manifest")
+    header_text = header_path.read_text(encoding="utf-8")
+    version_marker = f'#define CUDA4AS_CLANG_CUDA_FACADE_VERSION "{FACADE_VERSION}"'
+    if version_marker not in header_text:
+        raise AOTError("tracked Clang CUDA facade header does not declare its manifest version")
+
+    supported = manifest.get("supported_clang")
+    if not isinstance(supported, dict):
+        raise AOTError("tracked Clang CUDA facade manifest has no Clang support range")
+    minimum_major = supported.get("minimum_major")
+    maximum_major_exclusive = supported.get("maximum_major_exclusive")
+    validated_major = supported.get("validated_major")
+    if not all(isinstance(value, int) for value in (minimum_major, maximum_major_exclusive, validated_major)):
+        raise AOTError("tracked Clang CUDA facade manifest has invalid Clang major bounds")
+    if minimum_major >= maximum_major_exclusive or not minimum_major <= validated_major < maximum_major_exclusive:
+        raise AOTError("tracked Clang CUDA facade manifest has inconsistent Clang major bounds")
+    if supported.get("family") != "LLVM Clang CUDA frontend" or not isinstance(supported.get("validated_identity"), str):
+        raise AOTError("tracked Clang CUDA facade manifest has no supported Clang identity")
+
+    target = manifest.get("target")
+    if not isinstance(target, dict) or target.get("cuda_gpu_arch") != "sm_86":
+        raise AOTError("tracked Clang CUDA facade manifest has an unsupported target architecture")
+    arguments = manifest.get("compiler_arguments")
+    if arguments != FACADE_ARGUMENT_TEMPLATE:
+        raise AOTError("tracked Clang CUDA facade manifest compiler arguments are not the pinned contract")
+    return {
+        "manifest": manifest,
+        "manifest_path": str(manifest_path),
+        "manifest_sha256": sha256_bytes(raw),
+        "header_path": str(header_path),
+        "header_sha256": actual_header_sha,
+        "version": FACADE_VERSION,
+        "supported_clang": supported,
+        "target": target,
+        "compiler_arguments": list(arguments),
+    }
+
+
+def materialize_facade_arguments(source: Path, facade_dir: Path) -> list[str]:
+    """Resolve the manifest's placeholders for one unchanged source file."""
+
+    contract = load_facade_contract(facade_dir)
+    return [
+        str(facade_dir) if item == "<FACADE_DIR>" else str(source) if item == "<SOURCE>" else item
+        for item in contract["compiler_arguments"]
+    ]
 
 
 def tokenize(source: str) -> list[Token]:
@@ -400,6 +503,11 @@ class KernelParser:
 
 
 def _type_for_expr(expr: dict[str, Any], env: dict[str, dict[str, Any]]) -> str:
+    # Compiler-imported expressions carry their exact typed AST result. This
+    # field is authoritative; the inference below is retained only for the
+    # explicit source-parser packaging path and independent diagnostics.
+    if isinstance(expr.get("type"), str):
+        return expr["type"]
     kind = expr["kind"]
     if kind == "literal":
         return "int"
@@ -440,6 +548,26 @@ def _type_for_expr(expr: dict[str, Any], env: dict[str, dict[str, Any]]) -> str:
     raise AOTError(f"unsupported expression kind {kind!r}")
 
 
+def verify_source_compiler_signature(source_kernel: dict[str, Any], compiler_kernel: dict[str, Any]) -> None:
+    """Reject host-parser/compiler disagreements without using parser semantics.
+
+    The source parser supplies only an independently checked kernel identity and
+    parameter contract. Device expressions and statements remain owned by the
+    compiler importer.
+    """
+
+    if source_kernel.get("name") != compiler_kernel.get("name") or source_kernel.get("return_type") != compiler_kernel.get("return_type"):
+        raise AOTError("source/parser and compiler kernel identity disagree")
+    source_params = source_kernel.get("params", [])
+    compiler_params = compiler_kernel.get("params", [])
+    if len(source_params) != len(compiler_params):
+        raise AOTError("source/parser and compiler kernel parameter counts disagree")
+    fields = ("name", "type", "pointer", "const", "address_space")
+    for index, (source_param, compiler_param) in enumerate(zip(source_params, compiler_params)):
+        if any(source_param.get(field) != compiler_param.get(field) for field in fields):
+            raise AOTError(f"source/parser and compiler parameter {index} contracts disagree")
+
+
 class SSABuilder:
     def __init__(self, kernel: dict[str, Any]):
         self.kernel = kernel
@@ -464,7 +592,7 @@ class SSABuilder:
         loc = expr["source_location"]
         if kind == "literal":
             raw = expr["value"].replace("'", "")
-            typ = "float" if any(x in raw.lower() for x in (".", "e", "f")) else "int"
+            typ = expr.get("type") or ("float" if any(x in raw.lower() for x in (".", "e", "f")) else "int")
             return self.value(typ, "constant", [], loc, literal=raw), typ
         if kind == "name":
             name = expr["name"]
@@ -478,22 +606,31 @@ class SSABuilder:
             base, bt = self.lower_expr(expr["base"])
             if bt != "u32x3":
                 raise AOTError("member base is not a CUDA builtin vector")
-            return self.value("u32", "builtin_member", [base], loc, member=expr["member"]), "u32"
+            typ = expr.get("type", "u32")
+            return self.value(typ, "builtin_member", [base], loc, member=expr["member"]), typ
         if kind == "index":
             base, bt = self.lower_expr(expr["base"])
             idx, it = self.lower_expr(expr["index"])
             if not bt.endswith("*"):
                 raise AOTError("index base is not a pointer")
-            typ = bt[:-1]
-            return self.value(typ, "load_global", [base, idx], loc, address_space="global", element_type=typ), typ
+            typ = expr.get("type", bt[:-1])
+            address_space = expr.get("address_space", "global")
+            if address_space != "global":
+                raise AOTError("compiler/imported index lost global address space")
+            return self.value(typ, "load_global", [base, idx], loc, address_space=address_space, element_type=typ), typ
         if kind == "unary":
             val, typ = self.lower_expr(expr["value"])
-            return self.value(_type_for_expr(expr, self.env), "unary_" + expr["operator"], [val], loc), _type_for_expr(expr, self.env)
+            typ = expr.get("type") or _type_for_expr(expr, self.env)
+            return self.value(typ, "unary_" + expr["operator"], [val], loc), typ
         if kind == "binary":
             left, _ = self.lower_expr(expr["left"])
             right, _ = self.lower_expr(expr["right"])
-            typ = _type_for_expr(expr, self.env)
+            typ = expr.get("type") or _type_for_expr(expr, self.env)
             return self.value(typ, "binary_" + expr["operator"], [left, right], loc), typ
+        if kind == "cast":
+            value, value_type = self.lower_expr(expr["value"])
+            typ = expr.get("type") or _type_for_expr(expr, self.env)
+            return self.value(typ, "cast", [value], loc, cast_kind=expr.get("cast_kind"), source_type=value_type), typ
         raise AOTError(f"unsupported expression {kind}")
 
     def lower_lvalue(self, expr: dict[str, Any]) -> tuple[str, str, str]:
@@ -554,22 +691,34 @@ class SSABuilder:
         }
 
 
-def verify_ir(ir: dict[str, Any]) -> None:
+def verify_ir(ir: dict[str, Any], *, require_semantic_source: bool = True) -> None:
     if ir.get("schema") != IR_SCHEMA or ir.get("version") != 1:
         raise AOTError("unsupported IR schema/version")
+    semantic = ir.get("semantic_source")
+    if require_semantic_source and (not isinstance(semantic, dict) or semantic.get("authoritative") is not True or semantic.get("kind") != "clang_cuda_ast_json"):
+        raise AOTError("device IR has no authoritative Clang semantic source")
+    if isinstance(semantic, dict) and semantic.get("authoritative") is True and semantic.get("kind") != "clang_cuda_ast_json":
+        raise AOTError("device IR semantic source is not the selected Clang AST representation")
     kernel = ir.get("kernel")
     if not isinstance(kernel, dict) or not kernel.get("name"):
         raise AOTError("IR has no kernel metadata")
     params = kernel.get("params")
     if not isinstance(params, list) or len(params) != 4:
         raise AOTError("M2A ABI requires exactly four kernel parameters")
-    ids = {v.get("id") for v in ir.get("values", [])}
-    if None in ids or len(ids) != len(ir.get("values", [])):
+    values = ir.get("values")
+    if not isinstance(values, list) or any(not isinstance(value, dict) for value in values):
+        raise AOTError("IR values are malformed")
+    ids = {v.get("id") for v in values}
+    if None in ids or len(ids) != len(values):
         raise AOTError("IR value IDs are not unique")
     for block in ir.get("blocks", []):
         for op in block.get("ops", []):
             if op.get("kind") == "store_global" and op.get("address_space") != "global":
                 raise AOTError("global store lost its address space")
+    for value in values:
+        location = value.get("source_location")
+        if not isinstance(location, dict) or location.get("line", 0) <= 0 or location.get("column", 0) <= 0:
+            raise AOTError("IR value has no compiler source location")
     if "cpu_fallback" not in ir.get("unsupported_capabilities", []):
         raise AOTError("IR must explicitly prohibit CPU fallback")
 
@@ -610,8 +759,8 @@ def _literal_to_msl(raw: str) -> str:
     return raw
 
 
-def lower_to_msl(kernel: dict[str, Any], ir: dict[str, Any], block_x: int) -> tuple[str, dict[str, Any]]:
-    verify_ir(ir)
+def lower_to_msl(kernel: dict[str, Any], ir: dict[str, Any], block_x: int, *, require_semantic_source: bool = True) -> tuple[str, dict[str, Any]]:
+    verify_ir(ir, require_semantic_source=require_semantic_source)
     params = kernel["params"]
     if any(not p["pointer"] and p["type"] not in {"int", "u32"} for p in params):
         raise AOTError("only int/u32 scalar kernel arguments are supported")
@@ -652,6 +801,14 @@ def lower_to_msl(kernel: dict[str, Any], ir: dict[str, Any], block_x: int) -> tu
             out = f"{val(v['operands'][0])}.{v['member']}"
         elif op == "load_global":
             out = f"{val(v['operands'][0])}[{val(v['operands'][1])}]"
+        elif op == "cast":
+            inner = val(v["operands"][0])
+            source_type = v.get("source_type")
+            if source_type == v.get("type") or v.get("cast_kind") in {"NoOp", "LValueToRValue"}:
+                out = inner
+            else:
+                mtyp = "uint" if v.get("type") == "u32" else v.get("type")
+                out = f"static_cast<{mtyp}>({inner})"
         elif op.startswith("binary_"):
             sym = op.removeprefix("binary_")
             out = f"({val(v['operands'][0])} {sym} {val(v['operands'][1])})"
@@ -699,101 +856,176 @@ def lower_to_msl(kernel: dict[str, Any], ir: dict[str, Any], block_x: int) -> tu
     return msl, abi
 
 
-def device_split_source(kernel: dict[str, Any]) -> str:
-    """Create a minimal CUDA device TU from parsed source spans/semantics."""
-    # Re-emit the parsed supported kernel rather than consuming generated MSL.
-    # This is still source-driven and allows Clang to type-check CUDA keywords.
-    def expr(e: dict[str, Any]) -> str:
-        k = e["kind"]
-        if k == "name": return e["name"]
-        if k == "literal": return e["value"]
-        if k == "member": return f"{expr(e['base'])}.{e['member']}"
-        if k == "index": return f"{expr(e['base'])}[{expr(e['index'])}]"
-        if k == "unary": return f"({e['operator']}{expr(e['value'])})"
-        if k == "binary": return f"({expr(e['left'])} {e['operator']} {expr(e['right'])})"
-        raise AOTError("cannot emit device split")
-    def stmt(s: dict[str, Any], ind: str = "  ") -> str:
-        if s["kind"] == "decl":
-            typ = "unsigned int" if s["type"] == "u32" else s["type"]
-            return f"{ind}{typ} {s['name']} = {expr(s['init'])};"
-        if s["kind"] == "assign": return f"{ind}{expr(s['lhs'])} {s['operator']} {expr(s['rhs'])};"
-        if s["kind"] == "if": return f"{ind}if ({expr(s['condition'])}) {{\n" + "\n".join(stmt(x, ind + "  ") for x in s["then"]) + f"\n{ind}}}"
-        raise AOTError("unsupported split statement")
-    ps = []
-    for p in kernel["params"]:
-        typ = "unsigned int" if p["type"] == "u32" else p["type"]
-        ps.append(("const " if p["const"] else "") + typ + (" *" if p["pointer"] else " ") + p["name"])
-    body = "\n".join(stmt(s) for s in kernel["body"])
-    return """// Generated device split; source semantics are imported into cuda4AS IR.\nstruct dim3 { unsigned int x; unsigned int y; unsigned int z; };\nextern \"C\" __device__ dim3 blockIdx;\nextern \"C\" __device__ dim3 blockDim;\nextern \"C\" __device__ dim3 threadIdx;\n__global__ void %s(%s) {\n%s\n}\n""" % (kernel["name"], ", ".join(ps), body)
+def discover_toolchain(clang: str | None = None, *, facade_contract: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Select a compatible LLVM Clang and record its exact identity.
 
+    Apple Clang and arbitrary unbounded host versions are not silently treated
+    as equivalent to the pinned LLVM CUDA frontend contract.
+    """
 
-def discover_toolchain(clang: str | None = None) -> dict[str, Any]:
-    candidates = [clang] if clang else []
-    candidates += ["/opt/homebrew/opt/llvm/bin/clang++", "clang++"]
+    contract = facade_contract or load_facade_contract(Path(__file__).resolve().parent / "clang_cuda_facade")
+    supported = contract["supported_clang"]
+    candidates = [clang] if clang else ["/opt/homebrew/opt/llvm/bin/clang++", "clang++"]
     selected = next((x for x in candidates if x and shutil.which(x)), None)
     if not selected:
         raise AOTError("CUDA-capable clang++ is unavailable; no install/download is permitted")
     proc = subprocess.run([selected, "--version"], text=True, capture_output=True, check=False)
-    return {"clang": selected, "version": proc.stdout.strip() or proc.stderr.strip(), "exit_code": proc.returncode}
+    version = proc.stdout.strip() or proc.stderr.strip()
+    if proc.returncode != 0:
+        raise AOTError(f"Clang version query failed for {selected}: exit {proc.returncode}")
+    match = re.search(r"\bclang(?:\+\+)?\s+version\s+(\d+)", version, flags=re.IGNORECASE)
+    if not match:
+        raise AOTError(f"cannot determine LLVM Clang major version from {selected} --version")
+    major = int(match.group(1))
+    minimum = supported["minimum_major"]
+    maximum = supported["maximum_major_exclusive"]
+    if not minimum <= major < maximum:
+        raise AOTError(f"Clang major {major} is outside the facade support range [{minimum}, {maximum})")
+    return {
+        "clang": selected,
+        "version": version,
+        "major": major,
+        "supported_range": f">={minimum},<{maximum}",
+        "identity": supported["family"],
+        "exit_code": proc.returncode,
+    }
 
 
-def run_clang_device(clang: str, split: Path, ast: Path, log: Path) -> dict[str, Any]:
-    cmd = [clang, "-x", "cuda", "--cuda-device-only", "--cuda-gpu-arch=sm_86", "-nocudainc", "-nocudalib", "-Xclang", "-ast-dump=json", "-fsyntax-only", str(split)]
+def run_clang_device(
+    clang: str,
+    source: Path,
+    ast: Path,
+    log: Path,
+    facade_dir: Path,
+    *,
+    facade_contract: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    contract = facade_contract or load_facade_contract(facade_dir)
+    cmd = [clang, *[
+        str(facade_dir) if item == "<FACADE_DIR>" else str(source) if item == "<SOURCE>" else item
+        for item in contract["compiler_arguments"]
+    ]]
     proc = subprocess.run(cmd, text=True, capture_output=True, check=False)
     ast.write_text(proc.stdout, encoding="utf-8")
     log.write_text("$ " + " ".join(cmd) + "\n" + proc.stdout + proc.stderr, encoding="utf-8")
-    return {"command": cmd, "exit_code": proc.returncode, "stdout_sha256": sha256_bytes(proc.stdout.encode()), "stderr": proc.stderr[-4000:]}
+    return {
+        "command": cmd,
+        "exit_code": proc.returncode,
+        "stdout_sha256": sha256_bytes(proc.stdout.encode()),
+        "stderr": proc.stderr[-4000:],
+        "input_source": str(source),
+        "facade_dir": str(facade_dir),
+        "facade_manifest_sha256": contract["manifest_sha256"],
+        "facade_header_sha256": contract["header_sha256"],
+        "target": contract["target"]["cuda_gpu_arch"],
+    }
 
 
-def import_typed_compiler_output(ast_path: Path, ir: dict[str, Any]) -> dict[str, Any]:
+def import_typed_compiler_output(ast_path: Path, kernel_name: str) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Import the selected Clang AST as the device semantic authority."""
+
+    from tools.m2a.clang_ast import ClangASTImportError, import_ast_file
+
     raw = ast_path.read_text(encoding="utf-8")
     if not raw.strip():
         raise AOTError("Clang produced no typed AST output")
     try:
-        ast = json.loads(raw)
+        kernel, metadata = import_ast_file(ast_path, kernel_name)
+    except ClangASTImportError as exc:
+        raise AOTError(str(exc)) from exc
     except json.JSONDecodeError as exc:
         raise AOTError(f"Clang AST output is not JSON: {exc}") from exc
-    # Preserve a compact, deterministic compiler identity in the IR; the
-    # complete AST remains an evidence file and is never parsed as generated MSL.
-    node_count = raw.count('"kind"')
-    if node_count < 2:
-        raise AOTError("Clang AST has no typed declaration records")
-    ir = json.loads(json.dumps(ir))
-    ir["frontend"] = {"kind": "clang_cuda_ast_json", "schema": "clang-ast-dump-json", "node_count": node_count, "root_kind": ast.get("kind")}
-    return ir
+    return kernel, metadata
 
 
 def emit(args: argparse.Namespace) -> int:
-    source = args.source.read_text(encoding="utf-8")
+    if args.ast_fixture and args.skip_clang:
+        raise AOTError("--ast-fixture and --skip-clang are mutually exclusive")
+    source_bytes = args.source.read_bytes()
+    source = source_bytes.decode("utf-8")
     header = args.header.read_bytes()
-    kernel, host = KernelParser(source).find_kernel()
-    if kernel["name"] != host["launch"]["kernel"]:
-        raise AOTError("launch kernel does not match parsed kernel declaration")
-    ir = SSABuilder(kernel).build()
-    ir["source"] = {"path": args.source.name, "sha256": sha256_bytes(source.encode()), "header_sha256": sha256_bytes(header)}
-    verify_ir(ir)
-    msl, abi = lower_to_msl(kernel, ir, host["launch"]["block_x"])
+    # Host launch discovery is intentionally separate from device semantics.
+    # The AST importer below owns the kernel, parameters, expressions, and
+    # control flow whenever compiler validation is requested.
+    host = KernelParser(source).parse_host_metadata()
     work = args.work
     work.mkdir(parents=True, exist_ok=True)
-    split = work / "device-split.cu"
-    split.write_text(device_split_source(kernel), encoding="utf-8")
-    # A response file is part of the provenance even when portable validation
-    # deliberately skips the unavailable Mac compiler.
+    facade_dir = Path(__file__).resolve().parent / "clang_cuda_facade"
+    facade_contract = load_facade_contract(facade_dir)
+
+    # Preserve the exact source as an evidence input. This is a copy of the
+    # original translation unit, never a reconstructed kernel.
+    device_source = work / "device-source.cu"
+    device_source.write_bytes(source_bytes)
     response = work / "clang-device.rsp"
-    response.write_text("\n".join(["-x", "cuda", "--cuda-device-only", "--cuda-gpu-arch=sm_86", "-nocudainc", "-nocudalib", str(split)]) + "\n", encoding="utf-8")
+    response_args = materialize_facade_arguments(args.source, facade_dir)
+    response.write_text("\n".join(response_args) + "\n", encoding="utf-8")
     ast = work / "clang-device-ast.json"
     clang_log = work / "clang-device.log"
-    frontend = {"status": "NOT_RUN", "exit_code": None}
-    if not args.skip_clang:
+    semantic_required = True
+    compiler_metadata: dict[str, Any]
+    toolchain: dict[str, Any]
+
+    if args.ast_fixture:
+        fixture_bytes = args.ast_fixture.read_bytes()
+        ast.write_bytes(fixture_bytes)
+        clang_log.write_text("portable compiler-output fixture; no live compiler invocation\n", encoding="utf-8")
+        kernel, compiler_metadata = import_typed_compiler_output(ast, host["launch"]["kernel"])
+        compiler_metadata["validation"] = "compiler_output_fixture"
+        compiler_metadata["status"] = "FIXTURE"
+        toolchain = {"status": "FIXTURE", "fixture": str(args.ast_fixture)}
+        frontend = dict(compiler_metadata)
+    elif args.skip_clang:
+        # This path exists only for packaging mechanics. It is deliberately
+        # marked NOT_RUN and cannot pass the semantic frontend gate.
+        parser_kernel, _ = KernelParser(source).find_kernel()
+        kernel = parser_kernel
+        semantic_required = False
+        compiler_metadata = {
+            "kind": "source_parser",
+            "schema": "cuda4as-source-parser-not-run-v1",
+            "authoritative": False,
+            "status": "NOT_RUN",
+        }
+        toolchain = {"status": "NOT_RUN_PORTABLE"}
+        frontend = dict(compiler_metadata)
+        ast.write_text("{\"kind\":\"PortableValidationPlaceholder\",\"typed\":false}\n", encoding="utf-8")
+        clang_log.write_text("portable validation: compiler invocation intentionally not run; semantic IR is NOT_RUN\n", encoding="utf-8")
+    else:
         tc = discover_toolchain(args.clang)
-        frontend = run_clang_device(tc["clang"], split, ast, clang_log)
+        toolchain = tc
+        frontend = run_clang_device(
+            tc["clang"], args.source, ast, clang_log, facade_dir,
+            facade_contract=facade_contract,
+        )
         if frontend["exit_code"] != 0:
             raise AOTError("Clang CUDA device validation failed; see clang-device.log")
-        ir = import_typed_compiler_output(ast, ir)
-    else:
-        ast.write_text("{\"kind\":\"PortableValidationPlaceholder\",\"typed\":true}\n", encoding="utf-8")
-        clang_log.write_text("portable validation: compiler invocation intentionally not run\n", encoding="utf-8")
-    verify_ir(ir)
+        kernel, compiler_metadata = import_typed_compiler_output(ast, host["launch"]["kernel"])
+        frontend.update(compiler_metadata)
+        frontend["status"] = "PASS"
+
+    if kernel["name"] != host["launch"]["kernel"]:
+        raise AOTError("compiler kernel identity does not match host launch discovery")
+    if semantic_required:
+        source_kernel, _ = KernelParser(source).find_kernel()
+        verify_source_compiler_signature(source_kernel, kernel)
+    ir = SSABuilder(kernel).build()
+    ir["source"] = {"path": args.source.name, "sha256": sha256_bytes(source_bytes), "header_sha256": sha256_bytes(header)}
+    ir["semantic_source"] = compiler_metadata
+    ir["frontend"] = frontend
+    ir["validation_status"] = "VALIDATED" if semantic_required else "NOT_RUN"
+    ir["facade"] = {
+        "version": facade_contract["version"],
+        "header": FACADE_HEADER_REL,
+        "sha256": facade_contract["header_sha256"],
+        "manifest": FACADE_MANIFEST_REL,
+        "manifest_sha256": facade_contract["manifest_sha256"],
+        "supported_clang": facade_contract["supported_clang"],
+        "target": facade_contract["target"]["cuda_gpu_arch"],
+        "arguments": response_args,
+    }
+    verify_ir(ir, require_semantic_source=semantic_required)
+    msl, abi = lower_to_msl(kernel, ir, host["launch"]["block_x"], require_semantic_source=semantic_required)
     link = {
         "schema": LINK_SCHEMA,
         "version": 1,
@@ -821,12 +1053,14 @@ def emit(args: argparse.Namespace) -> int:
     driver = {
         "schema": DRIVER_SCHEMA,
         "version": 1,
-        "source": {"path": args.source.name, "sha256": sha256_bytes(source.encode()), "header_sha256": sha256_bytes(header)},
-        "split": {"device_source": split.name, "device_source_sha256": sha256_file(split), "host_path": "runtime.mm"},
+        "source": {"path": args.source.name, "sha256": sha256_bytes(source_bytes), "header_sha256": sha256_bytes(header)},
+        "device_input": {"path": args.source.name, "copy": device_source.name, "sha256": sha256_file(device_source), "reconstructed": False},
         "frontend": frontend,
         "host": host,
-        "toolchain": discover_toolchain(args.clang) if not args.skip_clang else {"status": "NOT_RUN_PORTABLE"},
+        "toolchain": toolchain,
+        "facade": ir["facade"],
         "unsupported": sorted(ir["unsupported_capabilities"]),
+        "semantic_authority": "clang_ast" if semantic_required else "NOT_RUN",
     }
     (work / "ir.json").write_text(canonical_json(ir), encoding="utf-8")
     (work / "abi.json").write_text(canonical_json(abi), encoding="utf-8")
@@ -834,7 +1068,7 @@ def emit(args: argparse.Namespace) -> int:
     (work / "device-link-image.json").write_bytes(linked_image)
     (work / "kernel.metal").write_text(msl, encoding="utf-8")
     (work / "driver-facts.json").write_text(canonical_json(driver), encoding="utf-8")
-    return 0
+    return 0 if semantic_required else 77
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -844,6 +1078,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     p.add_argument("--header", type=Path, required=True)
     p.add_argument("--work", type=Path, required=True)
     p.add_argument("--clang")
+    p.add_argument("--ast-fixture", type=Path, help="portable compiler-output AST fixture; no live frontend invocation")
     p.add_argument("--skip-clang", action="store_true")
     args = p.parse_args(argv)
     try:

@@ -1,0 +1,39 @@
+{
+  "schema": "cuda4as-clang-cuda-facade-manifest-v1",
+  "version": "1.0.0",
+  "header": {
+    "path": "tools/m2a/clang_cuda_facade/cuda_runtime.h",
+    "sha256": "e9fabf30365d3b5e3ecaab8e3119d80723eb5c8a20ee32a95ebbb95497d8208b"
+  },
+  "supported_clang": {
+    "family": "LLVM Clang CUDA frontend",
+    "minimum_major": 18,
+    "maximum_major_exclusive": 24,
+    "validated_identity": "Homebrew LLVM 23.1.0",
+    "validated_major": 23,
+    "required_features": [
+      "cuda-device-only",
+      "cuda-gpu-arch=sm_86",
+      "ast-dump=json"
+    ]
+  },
+  "target": {
+    "host_arch": "arm64",
+    "host_triple_prefix": "arm64-apple-darwin",
+    "cuda_gpu_arch": "sm_86"
+  },
+  "compiler_arguments": [
+    "-x",
+    "cuda",
+    "--cuda-device-only",
+    "--cuda-gpu-arch=sm_86",
+    "-nocudainc",
+    "-nocudalib",
+    "-I",
+    "<FACADE_DIR>",
+    "-Xclang",
+    "-ast-dump=json",
+    "-fsyntax-only",
+    "<SOURCE>"
+  ]
+}
