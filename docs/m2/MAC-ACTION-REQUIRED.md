@@ -62,25 +62,18 @@ tools/m2a/artifacts/cuda4as-m2a-native-aot-vector-add-v1.tgz
 Current package identity: 22,535 bytes, SHA-256
 `1184651ff56d76fbea08fce7c68ca857615d1f27fe78934470d218313fbbe1c0`.
 
-After copying that file to the Mac, verify its SHA-256 from the package metadata
-(`tools/m2a/artifacts/cuda4as-m2a-native-aot-vector-add-v1.manifest.json`), then
-run this single command block from the repository checkout (it does not alter
-the checkout or install anything):
+Pull the published `codex/m2a-native-aot-vector-add` branch on the Mac. The
+tracked package is resolved relative to the tracked wrapper, so no separate
+package copy, extraction, or package argument is needed:
 
 ```bash
-set -u
-ARCHIVE="$HOME/Downloads/cuda4as-m2a-native-aot-vector-add-v1.tgz"
-ROOT="$HOME/cuda4as-m2a-native-aot-vector-add-v1"
-python3 - "$ARCHIVE" "$ROOT" <<'PY'
-from pathlib import Path
-import shutil, sys, tarfile
-archive, root = map(Path, sys.argv[1:])
-if root.exists(): shutil.rmtree(root)
-root.mkdir(parents=True)
-with tarfile.open(archive, "r:gz") as tar: tar.extractall(root)
-PY
-exec "$ROOT/cuda4as-m2a-native-aot-vector-add-v1/run-m2a-native.sh"
+git pull --ff-only
+/bin/bash tools/m2a/run-m2a-native-aot-vector-add-all-in-one.sh
 ```
+
+The wrapper verifies the tracked package identity, creates a fresh task
+directory, performs safe extraction and package validation, runs the native
+probe, logs the console, and copies the unchanged return archive to `~/Downloads`.
 
 The runner is bound to arm64 MacBookPro18,3 / Apple M1 Pro, macOS 14.4 build
 23E214, Xcode 15.2 / SDK 14.2, and Homebrew LLVM 23.1.0. It requires at least
