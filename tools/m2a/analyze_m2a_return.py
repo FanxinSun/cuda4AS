@@ -115,7 +115,7 @@ def analyze(path: Path) -> dict[str, Any]:
             "stage_record_complete": isinstance(stage_record, dict) and stage_record.get("schema") == "cuda4as-m2a-stage-record-v1",
         })
         if isinstance(stage_record, dict):
-            checks["all_build_stages_pass"] = all(stage_record.get("stages", {}).get(k) == "PASS" for k in ("package-verify", "device-import", "ir_verify", "device_link", "msl_generation", "metal_compile", "metallib_link", "host_compile", "native_link", "runtime_launch"))
+            checks["all_build_stages_pass"] = all(stage_record.get("stages", {}).get(k) == "PASS" for k in ("package-verify", "preflight", "device-import", "ir_verify", "device_link", "msl_generation", "metal_compile", "metallib_link", "host_compile", "native_link", "runtime_launch"))
     valid = all(checks.values()) if classification == "PASS_GPU" else True
     if classification == "PASS_GPU" and not valid:
         classification = "FAIL"

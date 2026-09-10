@@ -23,13 +23,21 @@ printf '%s\n' "$VERIFY_EXIT" >"$WORK/logs/package-verify.exit"
 if [ "$VERIFY_EXIT" -ne 0 ]; then
   printf '%s\n' '{"schema":"cuda4as-m2a-result-v1","classification":"FAIL","failed_stage":"package_verify","cpu_fallback":false}' >"$WORK/m2a-result.json"
 else
-  CLANG="/opt/homebrew/opt/llvm/bin/clang++"
-  if [ ! -x "$CLANG" ]; then CLANG="$(command -v clang++ 2>/dev/null || true)"; fi
-  if [ -z "$CLANG" ] || ! command -v xcrun >/dev/null 2>&1; then
+  python3 "$PACKAGE_ROOT/tools/m2a/preflight.py" "$PACKAGE_ROOT/inventory-binding.json" "$WORK" >"$WORK/logs/preflight.stdout.txt" 2>"$WORK/logs/preflight.stderr.txt"
+  PREFLIGHT_EXIT=$?
+  printf '%s\n' "$PREFLIGHT_EXIT" >"$WORK/logs/preflight.exit"
+  if [ "$PREFLIGHT_EXIT" -ne 0 ]; then
+    if [ "$PREFLIGHT_EXIT" -eq 77 ]; then RUN_EXIT=77; CLASSIFICATION="SKIP_ENVIRONMENT"; else RUN_EXIT=1; CLASSIFICATION="FAIL"; fi
+    printf '%s\n' "preflight exit $PREFLIGHT_EXIT" >"$WORK/logs/environment-gap.txt"
+    printf '{"schema":"cuda4as-m2a-result-v1","classification":"%s","failed_stage":"preflight","cpu_fallback":false}\n' "$CLASSIFICATION" >"$WORK/m2a-result.json"
+  else
+    CLANG="/opt/homebrew/opt/llvm/bin/clang++"
+    if [ ! -x "$CLANG" ]; then CLANG="$(command -v clang++ 2>/dev/null || true)"; fi
+    if [ -z "$CLANG" ] || ! command -v xcrun >/dev/null 2>&1; then
     printf '%s\n' 'environment gap: clang++ or xcrun is unavailable' >"$WORK/logs/environment-gap.txt"
     printf '%s\n' '{"schema":"cuda4as-m2a-result-v1","classification":"SKIP_ENVIRONMENT","failed_stage":"toolchain_discovery","cpu_fallback":false}' >"$WORK/m2a-result.json"
     RUN_EXIT=77
-  else
+    else
     python3 "$PACKAGE_ROOT/tools/m2a/native_aot.py" --source "$PACKAGE_ROOT/oracle/src/vector_add.cu" --header "$PACKAGE_ROOT/oracle/src/oracle.h" --work "$WORK" --clang "$CLANG" >"$WORK/logs/device-import.stdout.txt" 2>"$WORK/logs/device-import.stderr.txt"
     DRIVER_EXIT=$?
     printf '%s\n' "$DRIVER_EXIT" >"$WORK/logs/device-import.exit"
@@ -97,6 +105,7 @@ PY
       fi
     fi
   fi
+  fi
 fi
 
 python3 - "$WORK" "$RUN_EXIT" <<'PY' >"$WORK/stage-record.json"
@@ -108,7 +117,7 @@ def stage(name):
     try: code=int(p.read_text().strip())
     except ValueError: return 'FAIL'
     return 'PASS' if code == 0 else 'FAIL'
-stages={name:stage(name) for name in ('package-verify','device-import','metal_compile','metallib_link','host_compile','native_link','runtime_launch')}
+stages={name:stage(name) for name in ('package-verify','preflight','device-import','metal_compile','metallib_link','host_compile','native_link','runtime_launch')}
 for name,path in (('ir_verify','ir.json'),('device_link','device-link.json'),('msl_generation','kernel.metal')):
     stages[name]='PASS' if (w/path).is_file() else 'NOT_RUN'
 print(json.dumps({'schema':'cuda4as-m2a-stage-record-v1','runner_exit':exit_code,'classification':'PASS_GPU' if exit_code==0 else 'SKIP_ENVIRONMENT' if exit_code==77 else 'FAIL','stages':stages,'cpu_fallback':False,'runtime_compilation':False}, sort_keys=True, indent=2))

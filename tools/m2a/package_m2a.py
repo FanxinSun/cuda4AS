@@ -72,6 +72,7 @@ def build(output: Path) -> dict[str, object]:
         files["oracle/src/vector_add.cu"] = (ROOT / "oracle/src/vector_add.cu").read_bytes()
         files["oracle/src/oracle.h"] = (ROOT / "oracle/src/oracle.h").read_bytes()
         files["tools/m2a/native_aot.py"] = (ROOT / "tools/m2a/native_aot.py").read_bytes()
+        files["tools/m2a/preflight.py"] = (ROOT / "tools/m2a/preflight.py").read_bytes()
         files["tools/m2a/runtime.mm"] = (ROOT / "tools/m2a/runtime.mm").read_bytes()
         files["tools/m2a/verify_m2a_package.py"] = (ROOT / "tools/m2a/verify_m2a_package.py").read_bytes()
         files["inventory-binding.json"] = canonical(binding)

@@ -87,7 +87,7 @@ def make_return(path: Path, result: dict, *, unsafe: bool = False) -> None:
             "expected.json": json.dumps({"cpu_fallback": False, "runtime_compilation": False}).encode() + b"\n",
             "inventory-binding.json": json.dumps({"schema": "cuda4as-m2a-inventory-binding-v1", "status": "BOUND_TO_VALIDATED_M1_INVENTORY", "machine": {"arch": "arm64", "model": "MacBookPro18,3", "metal_devices": [{"name": "Apple M1 Pro", "registry_id": 4294969587}]}}).encode() + b"\n",
             "PACKAGE-MANIFEST.sha256": f"{SRC_HASH}  oracle/src/vector_add.cu\n{HDR_HASH}  oracle/src/oracle.h\n".encode(),
-            "stage-record.json": json.dumps({"schema": "cuda4as-m2a-stage-record-v1", "runner_exit": 0, "classification": "PASS_GPU", "cpu_fallback": False, "runtime_compilation": False, "stages": {k: "PASS" for k in ("package-verify", "device-import", "ir_verify", "device_link", "msl_generation", "metal_compile", "metallib_link", "host_compile", "native_link", "runtime_launch")}}).encode() + b"\n",
+            "stage-record.json": json.dumps({"schema": "cuda4as-m2a-stage-record-v1", "runner_exit": 0, "classification": "PASS_GPU", "cpu_fallback": False, "runtime_compilation": False, "stages": {k: "PASS" for k in ("package-verify", "preflight", "device-import", "ir_verify", "device_link", "msl_generation", "metal_compile", "metallib_link", "host_compile", "native_link", "runtime_launch")}}).encode() + b"\n",
         }
         if result.get("classification") == "PASS_GPU":
             members["metallib/vector_add.metallib"] = b"AIR-LINKED-METALLIB"
