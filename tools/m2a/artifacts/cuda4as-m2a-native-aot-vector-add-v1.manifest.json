@@ -1,7 +1,7 @@
 {
   "archive_prefix": "cuda4as-m2a-native-aot-vector-add-v1",
   "artifact_id": "cuda4as-m2a-native-aot-vector-add-v1",
-  "bytes": 21700,
+  "bytes": 21706,
   "files": {
     "README.md": {
       "bytes": 454,
@@ -34,9 +34,9 @@
       "sha256": "389542a04d9546394979a82eb008eea90b1439ec09703f26e9a9b669ac2bd955"
     },
     "tools/m2a/native_aot.py": {
-      "bytes": 40045,
+      "bytes": 40052,
       "mode": "0644",
-      "sha256": "b9eafada700b43775b31db32aedf2a4e4bbdf73a7d4358870f1111ee0a3502de"
+      "sha256": "361da38ba65a1d02ec53eb1e837bb5e8492f067b84e4e217bd9fba71c19bc4e2"
     },
     "tools/m2a/preflight.py": {
       "bytes": 4036,
@@ -103,5 +103,5 @@
     "status": "BOUND_TO_VALIDATED_M1_INVENTORY"
   },
   "schema": "cuda4as-m2a-artifact-manifest-v1",
-  "sha256": "4191ce4fb55b8a4aee36965b62f6bfcd94471095d5c26fcd03a3f310fde24357"
+  "sha256": "649371617a3e2266fdd5a1da4bbb39b55ab49524297bc6703cb073f755c9aaf9"
 }

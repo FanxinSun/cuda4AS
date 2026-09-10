@@ -619,8 +619,8 @@ def lower_to_msl(kernel: dict[str, Any], ir: dict[str, Any], block_x: int) -> tu
     sig: list[str] = []
     for p in params:
         if p["pointer"]:
-            c = "const " if p["const"] else ""
-            sig.append(f"device {c}{p['type']}* {p['name']} [[buffer({p['index']})]]")
+            c = "const device " if p["const"] else "device "
+            sig.append(f"{c}{p['type']}* {p['name']} [[buffer({p['index']})]]")
         else:
             mtyp = "uint" if p["type"] == "u32" else p["type"]
             sig.append(f"constant {mtyp}& {p['name']} [[buffer({p['index']})]]")
