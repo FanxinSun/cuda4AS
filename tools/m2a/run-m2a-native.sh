@@ -85,18 +85,24 @@ PY
             if [ "$LIB_EXIT" -ne 0 ]; then
               printf '%s\n' '{"schema":"cuda4as-m2a-result-v1","classification":"FAIL","failed_stage":"metallib","cpu_fallback":false}' >"$WORK/m2a-result.json"
             else
-              log_run host_compile "$CLANG" -arch arm64 -std=c++17 -fobjc-arc -isysroot "$SDK" -mmacosx-version-min=14.0 -I"$WORK" -c "$PACKAGE_ROOT/tools/m2a/runtime.mm" -o "$WORK/runtime.o"
-              HOST_EXIT=$?
-              if [ "$HOST_EXIT" -ne 0 ]; then
-                printf '%s\n' '{"schema":"cuda4as-m2a-result-v1","classification":"FAIL","failed_stage":"host_compile","cpu_fallback":false}' >"$WORK/m2a-result.json"
+              log_run aot_manifest python3 "$PACKAGE_ROOT/tools/m2a/aot_manifest.py" "$WORK" "$KERNEL_NAME" "$METAL" "$METALLIB" "$CLANG" "$SDK"
+              AOT_MANIFEST_EXIT=$?
+              if [ "$AOT_MANIFEST_EXIT" -ne 0 ]; then
+                printf '%s\n' '{"schema":"cuda4as-m2a-result-v1","classification":"FAIL","failed_stage":"aot_manifest","cpu_fallback":false}' >"$WORK/m2a-result.json"
               else
-                log_run native_link "$CLANG" -arch arm64 -isysroot "$SDK" -mmacosx-version-min=14.0 "$WORK/runtime.o" -framework Foundation -framework Metal -framework CoreFoundation -o "$WORK/native"
-                LINK_EXIT=$?
-                if [ "$LINK_EXIT" -ne 0 ]; then
-                  printf '%s\n' '{"schema":"cuda4as-m2a-result-v1","classification":"FAIL","failed_stage":"native_link","cpu_fallback":false}' >"$WORK/m2a-result.json"
+                log_run host_compile "$CLANG" -arch arm64 -std=c++17 -fobjc-arc -isysroot "$SDK" -mmacosx-version-min=14.0 -I"$WORK" -c "$PACKAGE_ROOT/tools/m2a/runtime.mm" -o "$WORK/runtime.o"
+                HOST_EXIT=$?
+                if [ "$HOST_EXIT" -ne 0 ]; then
+                  printf '%s\n' '{"schema":"cuda4as-m2a-result-v1","classification":"FAIL","failed_stage":"host_compile","cpu_fallback":false}' >"$WORK/m2a-result.json"
                 else
-                  log_run runtime_launch "$WORK/native" "$WORK"
-                  RUN_EXIT=$?
+                  log_run native_link "$CLANG" -arch arm64 -isysroot "$SDK" -mmacosx-version-min=14.0 "$WORK/runtime.o" -framework Foundation -framework Metal -framework CoreFoundation -o "$WORK/native"
+                  LINK_EXIT=$?
+                  if [ "$LINK_EXIT" -ne 0 ]; then
+                    printf '%s\n' '{"schema":"cuda4as-m2a-result-v1","classification":"FAIL","failed_stage":"native_link","cpu_fallback":false}' >"$WORK/m2a-result.json"
+                  else
+                    log_run runtime_launch "$WORK/native" "$WORK"
+                    RUN_EXIT=$?
+                  fi
                 fi
               fi
             fi
@@ -117,7 +123,7 @@ def stage(name):
     try: code=int(p.read_text().strip())
     except ValueError: return 'FAIL'
     return 'PASS' if code == 0 else 'FAIL'
-stages={name:stage(name) for name in ('package-verify','preflight','device-import','metal_compile','metallib_link','host_compile','native_link','runtime_launch')}
+stages={name:stage(name) for name in ('package-verify','preflight','device-import','metal_compile','metallib_link','aot_manifest','host_compile','native_link','runtime_launch')}
 for name,path in (('ir_verify','ir.json'),('device_link','device-link.json'),('msl_generation','kernel.metal')):
     stages[name]='PASS' if (w/path).is_file() else 'NOT_RUN'
 print(json.dumps({'schema':'cuda4as-m2a-stage-record-v1','runner_exit':exit_code,'classification':'PASS_GPU' if exit_code==0 else 'SKIP_ENVIRONMENT' if exit_code==77 else 'FAIL','stages':stages,'cpu_fallback':False,'runtime_compilation':False}, sort_keys=True, indent=2))

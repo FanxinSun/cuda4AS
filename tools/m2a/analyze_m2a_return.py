@@ -84,6 +84,8 @@ def analyze(path: Path) -> dict[str, Any]:
     source_manifest = _find(files, "PACKAGE-MANIFEST.sha256")
     stage_raw = _find(files, "stage-record.json")
     stage_record = json.loads(stage_raw.decode("utf-8")) if stage_raw else None
+    aot_raw = _find(files, "aot-manifest.json")
+    aot_manifest = json.loads(aot_raw.decode("utf-8")) if aot_raw else None
     source_hashes = {"cuda": EXPECTED_CU, "header": EXPECTED_H}
     if source_manifest is not None:
         text = source_manifest.decode("utf-8")
@@ -112,10 +114,11 @@ def analyze(path: Path) -> dict[str, Any]:
             "no_cpu_fallback": result.get("cpu_fallback") is False,
             "metallib_evidence": any(k.endswith(".metallib") for k in files),
             "linked_image_evidence": any(k.endswith("device-link-image.json") for k in files),
+            "aot_manifest_complete": isinstance(aot_manifest, dict) and aot_manifest.get("schema") == "cuda4as-m2a-aot-manifest-v1" and aot_manifest.get("cpu_fallback") is False and aot_manifest.get("runtime_compilation") is False,
             "stage_record_complete": isinstance(stage_record, dict) and stage_record.get("schema") == "cuda4as-m2a-stage-record-v1",
         })
         if isinstance(stage_record, dict):
-            checks["all_build_stages_pass"] = all(stage_record.get("stages", {}).get(k) == "PASS" for k in ("package-verify", "preflight", "device-import", "ir_verify", "device_link", "msl_generation", "metal_compile", "metallib_link", "host_compile", "native_link", "runtime_launch"))
+            checks["all_build_stages_pass"] = all(stage_record.get("stages", {}).get(k) == "PASS" for k in ("package-verify", "preflight", "device-import", "ir_verify", "device_link", "msl_generation", "metal_compile", "metallib_link", "aot_manifest", "host_compile", "native_link", "runtime_launch"))
     valid = all(checks.values()) if classification == "PASS_GPU" else True
     if classification == "PASS_GPU" and not valid:
         classification = "FAIL"
@@ -131,6 +134,7 @@ def analyze(path: Path) -> dict[str, Any]:
         "output": result.get("output"),
         "stages": result.get("stages"),
         "stage_record": stage_record,
+        "aot_manifest": aot_manifest,
         "diagnostics": {"message": result.get("message"), "environment_gap": _find(files, "environment-gap.txt") is not None},
     }
 
