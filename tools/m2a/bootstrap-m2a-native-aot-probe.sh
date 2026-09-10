@@ -7,6 +7,7 @@ set -u
 TARGET_BRANCH="codex/m2a-native-aot-vector-add"
 REMOTE_NAME="origin"
 REMOTE_REF="refs/remotes/$REMOTE_NAME/$TARGET_BRANCH"
+UPSTREAM_REF="$REMOTE_NAME/$TARGET_BRANCH"
 REPO_ROOT="${CUDA4AS_M2A_REPO:-/Users/yaminocellist/git_repos/cuda4AS-m1}"
 LOG_ROOT="${CUDA4AS_M2A_LOG_ROOT:-$HOME/cuda4as-m2a-bootstrap-runs}"
 PACKAGE_NAME="cuda4as-m2a-native-aot-vector-add-v1.tgz"
@@ -25,6 +26,7 @@ command -v bash >/dev/null 2>&1 || fail 2 "bash is unavailable"
 command -v shasum >/dev/null 2>&1 || fail 2 "shasum is unavailable"
 command -v mktemp >/dev/null 2>&1 || fail 2 "mktemp is unavailable"
 command -v tee >/dev/null 2>&1 || fail 2 "tee is unavailable"
+command -v grep >/dev/null 2>&1 || fail 2 "grep is unavailable"
 
 mkdir -p "$LOG_ROOT" || fail 2 "cannot create log root: $LOG_ROOT"
 TASK_ROOT="$(mktemp -d "$LOG_ROOT/run.XXXXXX")" ||
@@ -52,9 +54,19 @@ git -C "$REPO_ROOT" rev-parse --show-toplevel >/dev/null 2>&1 ||
 git -C "$REPO_ROOT" remote get-url "$REMOTE_NAME" >/dev/null 2>&1 ||
   fail 2 "remote '$REMOTE_NAME' is unavailable"
 
+FETCH_SPEC="refs/heads/$TARGET_BRANCH:refs/remotes/$REMOTE_NAME/$TARGET_BRANCH"
+if ! git -C "$REPO_ROOT" config --get-all "remote.$REMOTE_NAME.fetch" |
+  grep -Fqx "$FETCH_SPEC"; then
+  printf 'Adding the target ref to the local narrow-fetch configuration\n'
+  git -C "$REPO_ROOT" config --add "remote.$REMOTE_NAME.fetch" "$FETCH_SPEC"
+  CONFIG_EXIT="$?"
+  [ "$CONFIG_EXIT" -eq 0 ] ||
+    fail 3 "cannot add target ref to local fetch configuration"
+fi
+
 printf 'Fetching the target ref explicitly (narrow/single-branch safe)\n'
 git -C "$REPO_ROOT" fetch "$REMOTE_NAME" \
-  "refs/heads/$TARGET_BRANCH:refs/remotes/$REMOTE_NAME/$TARGET_BRANCH"
+  "$FETCH_SPEC"
 FETCH_EXIT="$?"
 [ "$FETCH_EXIT" -eq 0 ] ||
   fail 3 "target ref fetch failed; local work was not changed"
@@ -73,13 +85,13 @@ if git -C "$REPO_ROOT" show-ref --verify --quiet "refs/heads/$TARGET_BRANCH"; th
     fail 3 "cannot switch safely to existing target branch; local work preserved"
 else
   printf 'Creating local target branch from fetched remote head\n'
-  git -C "$REPO_ROOT" switch --track -c "$TARGET_BRANCH" "$REMOTE_REF"
+  git -C "$REPO_ROOT" switch --track -c "$TARGET_BRANCH" "$UPSTREAM_REF"
   SWITCH_EXIT="$?"
   [ "$SWITCH_EXIT" -eq 0 ] ||
     fail 3 "cannot create target branch safely; local work preserved"
 fi
 
-git -C "$REPO_ROOT" branch --set-upstream-to="$REMOTE_REF" "$TARGET_BRANCH"
+git -C "$REPO_ROOT" branch --set-upstream-to="$UPSTREAM_REF" "$TARGET_BRANCH"
 UPSTREAM_EXIT="$?"
 [ "$UPSTREAM_EXIT" -eq 0 ] ||
   fail 3 "cannot repair target branch upstream; local work preserved"
@@ -91,9 +103,9 @@ else
   printf 'Worktree is clean before fast-forward check\n'
 fi
 
-AHEAD="$(git -C "$REPO_ROOT" rev-list --count "$REMOTE_REF..$TARGET_BRANCH")" ||
+AHEAD="$(git -C "$REPO_ROOT" rev-list --count "$UPSTREAM_REF..$TARGET_BRANCH")" ||
   fail 3 "cannot measure local branch divergence"
-BEHIND="$(git -C "$REPO_ROOT" rev-list --count "$TARGET_BRANCH..$REMOTE_REF")" ||
+BEHIND="$(git -C "$REPO_ROOT" rev-list --count "$TARGET_BRANCH..$UPSTREAM_REF")" ||
   fail 3 "cannot measure remote branch divergence"
 printf 'DIVERGENCE_AHEAD=%s\nDIVERGENCE_BEHIND=%s\n' "$AHEAD" "$BEHIND"
 
@@ -113,7 +125,7 @@ fi
 
 LOCAL_HEAD="$(git -C "$REPO_ROOT" rev-parse HEAD)" ||
   fail 3 "cannot resolve local target head"
-REMOTE_HEAD_AFTER="$(git -C "$REPO_ROOT" rev-parse "$REMOTE_REF")" ||
+REMOTE_HEAD_AFTER="$(git -C "$REPO_ROOT" rev-parse "$UPSTREAM_REF")" ||
   fail 3 "cannot resolve fetched remote head after pull"
 [ "$LOCAL_HEAD" = "$REMOTE_HEAD_AFTER" ] ||
   fail 3 "local head does not equal fetched remote head; refusing to launch"
