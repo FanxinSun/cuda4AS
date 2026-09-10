@@ -359,6 +359,17 @@ def analyze(archive: Path, inventory: dict[str, Any], fixtures: dict[str, Any]) 
     }
     candidate_gate_complete = len(candidate_gate) == len(candidate_keys) and all(item["status"] == "PASS" for item in candidate_gate.values())
     candidate_attempted = ("_candidate", "source_integrity_clean") in events
+    # ``complete_pass`` was historically the integrity sub-gate only.  Keep it
+    # for backwards-compatible readers, but add an explicit build outcome so a
+    # clean/patch pass cannot be mistaken for a candidate build pass.
+    build_event = events.get(("_candidate", "build")) or events.get(("_candidate", "candidate_build"))
+    if build_event is not None:
+        build_outcome = build_event["status"]
+        candidate_gate["_candidate/candidate_build"] = _stage(build_event, archive)
+    elif runner_exit == 77:
+        build_outcome = "NOT_RUN_ENVIRONMENT"
+    else:
+        build_outcome = "NOT_RECORDED"
     gaps = [line.strip() for line in files["environment-gaps.txt"].decode("utf-8").splitlines() if line.strip()]
     inventory_devices = {item["name"] for item in _inventory_machine(inventory)["metal_devices"]}
     cases: list[dict[str, Any]] = []
@@ -425,7 +436,7 @@ def analyze(archive: Path, inventory: dict[str, Any], fixtures: dict[str, Any]) 
         "created_utc": facts["ended_utc"],
         "contract": {"id": "cuda4as-m2-entry-gate", "revision": "1.0", "base_contract": "cuda4as-m1-result-v1"},
         "candidate": {"repository": "https://github.com/Lulzx/cuda-metal.git", "revision": CANDIDATE_REVISION, "vf64_revision": VF64_REVISION, "source_state": "patched" if candidate_gate_complete else "patch_not_validated", "patch_id": PATCH_ID, "patch_sha256": PATCH_SHA256, "patch_binding_sha256": package["patch_binding_sha256"], "clean_tree_manifest_sha256": CLEAN_TREE_SHA256, "patched_tree_manifest_sha256": PATCHED_TREE_SHA256, "build_type": "Release", "options": {"CUMETAL_BUILD_TESTS": "OFF", "CUMETAL_ENABLE_CUDA_REGISTRATION": "ON", "CUMETAL_ENABLE_BINARY_SHIM": "OFF", "CUMETAL_CUDA_ARCH": "sm_86", "CUMETAL_FP64_MODE": "ieee64"}},
-        "candidate_gate": {"attempted": candidate_attempted, "complete_pass": candidate_gate_complete, "stages": candidate_gate},
+        "candidate_gate": {"attempted": candidate_attempted, "integrity_pass": candidate_gate_complete, "complete_pass": candidate_gate_complete, "build_outcome": build_outcome, "build_pass": build_outcome == "PASS", "stages": candidate_gate},
         "contract_repairs": ["mapped published patch-binding event log to package/m2-delta/candidate/patch-binding.json"] if event_log_alias_repaired else [],
         "machine": _inventory_machine(inventory), "cases": cases, "summary": _summary(cases),
     }

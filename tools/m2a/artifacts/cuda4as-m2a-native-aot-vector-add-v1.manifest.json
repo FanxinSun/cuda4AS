@@ -1,0 +1,102 @@
+{
+  "archive_prefix": "cuda4as-m2a-native-aot-vector-add-v1",
+  "artifact_id": "cuda4as-m2a-native-aot-vector-add-v1",
+  "bytes": 20433,
+  "files": {
+    "README.md": {
+      "bytes": 454,
+      "mode": "0644",
+      "sha256": "ec58071c794f4c1788123f0cf468d5609272b063898a386c57b2fffd8009d973"
+    },
+    "expected.json": {
+      "bytes": 586,
+      "mode": "0644",
+      "sha256": "c84e880a82a861927867911218963e271487ff9fefabd2681d7d761d03abc92a"
+    },
+    "inventory-binding.json": {
+      "bytes": 1320,
+      "mode": "0644",
+      "sha256": "684a1dffe51446707aedf13668c6a7d10f12b311c003dfc1728799d1c21a6722"
+    },
+    "oracle/src/oracle.h": {
+      "bytes": 3697,
+      "mode": "0644",
+      "sha256": "6e7cc4c2e59e10db5b68df4116ed67ec3fe1d88d559c41e0a9feb2da3dd643bc"
+    },
+    "oracle/src/vector_add.cu": {
+      "bytes": 1748,
+      "mode": "0644",
+      "sha256": "b3f205cabc42a697276244d5810ce62ff40a5c9cc6a8e1078420ccbefa88d0e2"
+    },
+    "run-m2a-native.sh": {
+      "bytes": 7734,
+      "mode": "0755",
+      "sha256": "672c4aebccf756ab829838112183fa2f3e1720ba23ac8a9ee82415ecf3ad5003"
+    },
+    "tools/m2a/native_aot.py": {
+      "bytes": 40045,
+      "mode": "0644",
+      "sha256": "b9eafada700b43775b31db32aedf2a4e4bbdf73a7d4358870f1111ee0a3502de"
+    },
+    "tools/m2a/runtime.mm": {
+      "bytes": 7652,
+      "mode": "0644",
+      "sha256": "bafe67019ee42603a053247c4f9b62e0262a5b742a004bec4181facd2b4077fd"
+    },
+    "tools/m2a/verify_m2a_package.py": {
+      "bytes": 2735,
+      "mode": "0644",
+      "sha256": "81953e83540e71d223a634fa608f19a6f5f6328258c6759c88368f920718257e"
+    }
+  },
+  "generated_path": "tools/m2a/artifacts/cuda4as-m2a-native-aot-vector-add-v1.tgz",
+  "inventory_binding": {
+    "inventory_archive": {
+      "bytes": 9133,
+      "filename": "cuda4as-m1-mac-inventory-return-20260906T163442Z.tgz",
+      "sha256": "b1a9d5bd34e1b009abf9bc58ff48823b39130af62b7ebcc7f08ce4ee31c8d339"
+    },
+    "limits": {
+      "max_jobs": 4,
+      "max_minutes": 30,
+      "max_task_disk_gib": 20,
+      "min_free_gib": 5
+    },
+    "llvm": {
+      "minimum_major": 18,
+      "origin": "/opt/homebrew/opt/llvm",
+      "version": "23.1.0"
+    },
+    "machine": {
+      "arch": "arm64",
+      "cpu_brand": "Apple M1 Pro",
+      "metal_compiler": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/metal",
+      "metal_devices": [
+        {
+          "has_unified_memory": true,
+          "is_headless": false,
+          "is_low_power": false,
+          "is_removable": false,
+          "max_buffer_length": "8589934592",
+          "max_threads_per_threadgroup": [
+            1024,
+            1024,
+            1024
+          ],
+          "name": "Apple M1 Pro",
+          "recommended_max_working_set_size": "11453251584",
+          "registry_id": "4294969587"
+        }
+      ],
+      "model": "MacBookPro18,3",
+      "os_build": "23E214",
+      "os_version": "14.4",
+      "sdk_version": "14.2",
+      "xcode_version": "Xcode 15.2\nBuild version 15C500b"
+    },
+    "schema": "cuda4as-m2a-inventory-binding-v1",
+    "status": "BOUND_TO_VALIDATED_M1_INVENTORY"
+  },
+  "schema": "cuda4as-m2a-artifact-manifest-v1",
+  "sha256": "344ecedf4476506b16dde2441b8169e0899355e872071d49b5dd2e867c14ce2b"
+}

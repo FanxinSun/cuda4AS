@@ -50,3 +50,42 @@ The repository-side analyzer will validate the package, inventory, patch,
 fixtures, outputs, provenance, and all three case classifications. One
 validated Apple-GPU pass is sufficient for the entry gate; otherwise the
 preselected Native AOT Core v1 architecture route is recorded.
+
+## M2A — MAC ACTION REQUIRED after portable gates
+
+The M2A Native AOT Core v1 vector-add package is the small, separate artifact:
+
+```
+tools/m2a/artifacts/cuda4as-m2a-native-aot-vector-add-v1.tgz
+```
+
+Current package identity: 20,433 bytes, SHA-256
+`344ecedf4476506b16dde2441b8169e0899355e872071d49b5dd2e867c14ce2b`.
+
+After copying that file to the Mac, verify its SHA-256 from the package metadata
+(`tools/m2a/artifacts/cuda4as-m2a-native-aot-vector-add-v1.manifest.json`), then
+run this single command block from the repository checkout (it does not alter
+the checkout or install anything):
+
+```bash
+set -u
+ARCHIVE="$HOME/Downloads/cuda4as-m2a-native-aot-vector-add-v1.tgz"
+ROOT="$HOME/cuda4as-m2a-native-aot-vector-add-v1"
+python3 - "$ARCHIVE" "$ROOT" <<'PY'
+from pathlib import Path
+import shutil, sys, tarfile
+archive, root = map(Path, sys.argv[1:])
+if root.exists(): shutil.rmtree(root)
+root.mkdir(parents=True)
+with tarfile.open(archive, "r:gz") as tar: tar.extractall(root)
+PY
+exec "$ROOT/cuda4as-m2a-native-aot-vector-add-v1/run-m2a-native.sh"
+```
+
+The runner is bound to arm64 MacBookPro18,3 / Apple M1 Pro, macOS 14.4 build
+23E214, Xcode 15.2 / SDK 14.2, and Homebrew LLVM 23.1.0. It requires at least
+5 GiB free, uses no more than four build jobs and 20 GiB task-local space, and
+stops at 30 minutes. Stop if the package reports an inventory mismatch,
+missing tool, compiler/AOT error, or resource limit. Return exactly the printed
+`cuda4as-m2a-native-return-<UTC>.tgz` unchanged to
+`RESULTS/m2a/incoming/` for repository-side analysis.
