@@ -49,6 +49,31 @@ def main() -> int:
         raise ValueError("unsupported Clang CUDA facade manifest schema")
     if digest(facade) != facade_manifest.get("header", {}).get("sha256"):
         raise ValueError("Clang CUDA facade header does not match its manifest")
+    builtin_contract = facade_manifest.get("builtin_contract")
+    if not isinstance(builtin_contract, dict) or builtin_contract.get("schema") != "cuda4as-clang-cuda-facade-builtins-v1":
+        raise ValueError("Clang CUDA facade manifest has no builtin declaration contract")
+    if (
+        builtin_contract.get("header_path") != facade_manifest.get("header", {}).get("path")
+        or builtin_contract.get("header_sha256") != facade_manifest.get("header", {}).get("sha256")
+    ):
+        raise ValueError("Clang CUDA facade builtin contract is not bound to its header")
+    declarations = builtin_contract.get("declarations")
+    if not isinstance(declarations, dict) or set(declarations) != {"blockIdx", "blockDim", "threadIdx"}:
+        raise ValueError("Clang CUDA facade builtin contract has the wrong declaration set")
+    facade_lines = facade.read_text(encoding="utf-8").splitlines()
+    for name, declaration in declarations.items():
+        if (
+            not isinstance(declaration, dict)
+            or declaration.get("qual_type") != "const dim3"
+            or not isinstance(declaration.get("line"), int)
+            or not isinstance(declaration.get("column"), int)
+            or not isinstance(declaration.get("source_anchor"), str)
+            or declaration["line"] <= 0
+            or declaration["column"] <= 0
+            or declaration["line"] > len(facade_lines)
+            or facade_lines[declaration["line"] - 1].strip() != declaration["source_anchor"]
+        ):
+            raise ValueError(f"Clang CUDA facade builtin contract anchor is invalid for {name}")
     supported_clang = facade_manifest.get("supported_clang")
     if (
         not isinstance(supported_clang, dict)
@@ -72,6 +97,7 @@ def main() -> int:
             "manifest_sha256": files["tools/m2a/clang_cuda_facade/manifest.json"],
             "header": facade_manifest["header"]["path"],
             "header_sha256": facade_manifest["header"]["sha256"],
+            "builtin_contract": builtin_contract,
             "supported_clang": supported_clang,
             "target": facade_manifest["target"],
             "compiler_arguments": facade_manifest["compiler_arguments"],

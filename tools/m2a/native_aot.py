@@ -39,6 +39,8 @@ ABI_SCHEMA = "cuda4as-native-aot-abi-v1"
 LINK_SCHEMA = "cuda4as-device-link-v1"
 DRIVER_SCHEMA = "cuda4as-native-aot-driver-v1"
 FACADE_MANIFEST_SCHEMA = "cuda4as-clang-cuda-facade-manifest-v1"
+FACADE_BUILTIN_SCHEMA = "cuda4as-clang-cuda-facade-builtins-v1"
+FACADE_BUILTIN_NAMES = ("blockIdx", "blockDim", "threadIdx")
 FACADE_VERSION = "1.0.0"
 FACADE_HEADER_REL = "tools/m2a/clang_cuda_facade/cuda_runtime.h"
 FACADE_MANIFEST_REL = "tools/m2a/clang_cuda_facade/manifest.json"
@@ -119,6 +121,39 @@ def load_facade_contract(facade_dir: Path) -> dict[str, Any]:
     if version_marker not in header_text:
         raise AOTError("tracked Clang CUDA facade header does not declare its manifest version")
 
+    builtin_contract = manifest.get("builtin_contract")
+    if not isinstance(builtin_contract, dict) or builtin_contract.get("schema") != FACADE_BUILTIN_SCHEMA:
+        raise AOTError("tracked Clang CUDA facade manifest has no builtin declaration contract")
+    device_builtin_semantics = builtin_contract.get("device_builtin_semantics")
+    if device_builtin_semantics != {
+        "spelling": "device_builtin",
+        "status": "IGNORED_NON_AST",
+        "ast_node": 0,
+        "ast_json_child": False,
+    }:
+        raise AOTError("tracked Clang CUDA facade manifest has an invalid device_builtin serialization contract")
+    if (
+        builtin_contract.get("header_path") != FACADE_HEADER_REL
+        or builtin_contract.get("header_sha256") != actual_header_sha
+    ):
+        raise AOTError("tracked Clang CUDA facade builtin contract is not bound to the header")
+    declarations = builtin_contract.get("declarations")
+    if not isinstance(declarations, dict) or set(declarations) != set(FACADE_BUILTIN_NAMES):
+        raise AOTError("tracked Clang CUDA facade builtin contract has the wrong declaration set")
+    header_lines = header_text.splitlines()
+    for builtin_name in FACADE_BUILTIN_NAMES:
+        declaration = declarations.get(builtin_name)
+        if not isinstance(declaration, dict):
+            raise AOTError(f"tracked Clang CUDA facade contract has no {builtin_name} declaration")
+        line = declaration.get("line")
+        column = declaration.get("column")
+        if not isinstance(line, int) or line <= 0 or not isinstance(column, int) or column <= 0:
+            raise AOTError(f"tracked Clang CUDA facade contract has invalid {builtin_name} location")
+        if declaration.get("qual_type") != "const dim3" or not isinstance(declaration.get("source_anchor"), str):
+            raise AOTError(f"tracked Clang CUDA facade contract has invalid {builtin_name} type/anchor")
+        if line > len(header_lines) or header_lines[line - 1].strip() != declaration["source_anchor"]:
+            raise AOTError(f"tracked Clang CUDA facade contract anchor does not match {builtin_name} header source")
+
     supported = manifest.get("supported_clang")
     if not isinstance(supported, dict):
         raise AOTError("tracked Clang CUDA facade manifest has no Clang support range")
@@ -153,6 +188,7 @@ def load_facade_contract(facade_dir: Path) -> dict[str, Any]:
         "supported_clang": supported,
         "target": target,
         "compiler_arguments": list(arguments),
+        "builtin_contract": builtin_contract,
     }
 
 
@@ -998,7 +1034,9 @@ def import_typed_compiler_output(
     ast_path: Path,
     kernel_name: str,
     *,
+    source: Path | None = None,
     source_bytes: bytes | None = None,
+    facade_contract: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Import the selected Clang AST as the device semantic authority."""
 
@@ -1008,7 +1046,13 @@ def import_typed_compiler_output(
     if not raw.strip():
         raise AOTError("Clang produced no typed AST output")
     try:
-        kernel, metadata = import_ast_file(ast_path, kernel_name, source_bytes=source_bytes)
+        kernel, metadata = import_ast_file(
+            ast_path,
+            kernel_name,
+            source=source,
+            source_bytes=source_bytes,
+            facade_contract=facade_contract,
+        )
     except ClangASTImportError as exc:
         raise AOTError(str(exc)) from exc
     except json.JSONDecodeError as exc:
@@ -1049,7 +1093,10 @@ def emit(args: argparse.Namespace) -> int:
         ast.write_bytes(fixture_bytes)
         clang_log.write_text("portable compiler-output fixture; no live compiler invocation\n", encoding="utf-8")
         kernel, compiler_metadata = import_typed_compiler_output(
-            ast, host["launch"]["kernel"], source_bytes=source_bytes,
+            ast,
+            host["launch"]["kernel"],
+            source=args.source,
+            facade_contract=facade_contract,
         )
         compiler_metadata["validation"] = "compiler_output_fixture"
         compiler_metadata["status"] = "FIXTURE"
@@ -1082,7 +1129,10 @@ def emit(args: argparse.Namespace) -> int:
         if frontend["exit_code"] != 0:
             raise AOTError("Clang CUDA device validation failed; see clang-device.log")
         kernel, compiler_metadata = import_typed_compiler_output(
-            ast, host["launch"]["kernel"], source_bytes=source_bytes,
+            ast,
+            host["launch"]["kernel"],
+            source=args.source,
+            facade_contract=facade_contract,
         )
         frontend.update(compiler_metadata)
         frontend["validation_status"] = "VALIDATED"

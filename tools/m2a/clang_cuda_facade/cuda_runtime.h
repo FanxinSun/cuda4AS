@@ -55,8 +55,10 @@ typedef struct __device_builtin__ dim3 {
         : x(vx), y(vy), z(vz) {}
 } dim3;
 
-// CUDA execution builtins. The device_builtin attribute is required so the
-// AST records their compiler-defined meaning rather than ordinary globals.
+// CUDA execution builtins. Clang accepts device_builtin for its CUDA frontend
+// semantics, but its attribute-table entry is ignored (ASTNode=0), so it does
+// not appear as an AST JSON child. The emitted CUDADeviceAttr and this pinned
+// declaration contract provide the AST-visible identity.
 extern "C" __device__ __device_builtin__ const dim3 blockIdx;
 extern "C" __device__ __device_builtin__ const dim3 blockDim;
 extern "C" __device__ __device_builtin__ const dim3 threadIdx;

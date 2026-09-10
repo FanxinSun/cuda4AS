@@ -3,7 +3,38 @@
   "version": "1.0.0",
   "header": {
     "path": "tools/m2a/clang_cuda_facade/cuda_runtime.h",
-    "sha256": "e9fabf30365d3b5e3ecaab8e3119d80723eb5c8a20ee32a95ebbb95497d8208b"
+    "sha256": "e4fe928dcbe5e80cee2050f9527ca8a0fc22349192033057b56fa5ee0df46cae"
+  },
+  "builtin_contract": {
+    "schema": "cuda4as-clang-cuda-facade-builtins-v1",
+    "device_builtin_semantics": {
+      "spelling": "device_builtin",
+      "status": "IGNORED_NON_AST",
+      "ast_node": 0,
+      "ast_json_child": false
+    },
+    "header_path": "tools/m2a/clang_cuda_facade/cuda_runtime.h",
+    "header_sha256": "e4fe928dcbe5e80cee2050f9527ca8a0fc22349192033057b56fa5ee0df46cae",
+    "declarations": {
+      "blockIdx": {
+        "line": 62,
+        "column": 53,
+        "qual_type": "const dim3",
+        "source_anchor": "extern \"C\" __device__ __device_builtin__ const dim3 blockIdx;"
+      },
+      "blockDim": {
+        "line": 63,
+        "column": 53,
+        "qual_type": "const dim3",
+        "source_anchor": "extern \"C\" __device__ __device_builtin__ const dim3 blockDim;"
+      },
+      "threadIdx": {
+        "line": 64,
+        "column": 53,
+        "qual_type": "const dim3",
+        "source_anchor": "extern \"C\" __device__ __device_builtin__ const dim3 threadIdx;"
+      }
+    }
   },
   "supported_clang": {
     "family": "LLVM Clang CUDA frontend",

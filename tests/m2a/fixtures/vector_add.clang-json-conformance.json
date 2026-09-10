@@ -12,49 +12,55 @@
       "kind": "VarDecl",
       "name": "blockIdx",
       "type": {
-        "qualType": "dim3"
+        "qualType": "const dim3"
       },
       "id": "builtin-blockIdx",
       "inner": [
         {
           "kind": "CUDADeviceAttr"
-        },
-        {
-          "kind": "CUDADeviceBuiltinAttr"
         }
-      ]
+      ],
+      "loc": {
+        "file": "tools/m2a/clang_cuda_facade/cuda_runtime.h",
+        "line": 62,
+        "col": 53
+      }
     },
     {
       "kind": "VarDecl",
       "name": "blockDim",
       "type": {
-        "qualType": "dim3"
+        "qualType": "const dim3"
       },
       "id": "builtin-blockDim",
       "inner": [
         {
           "kind": "CUDADeviceAttr"
-        },
-        {
-          "kind": "CUDADeviceBuiltinAttr"
         }
-      ]
+      ],
+      "loc": {
+        "file": "tools/m2a/clang_cuda_facade/cuda_runtime.h",
+        "line": 63,
+        "col": 53
+      }
     },
     {
       "kind": "VarDecl",
       "name": "threadIdx",
       "type": {
-        "qualType": "dim3"
+        "qualType": "const dim3"
       },
       "id": "builtin-threadIdx",
       "inner": [
         {
           "kind": "CUDADeviceAttr"
-        },
-        {
-          "kind": "CUDADeviceBuiltinAttr"
         }
-      ]
+      ],
+      "loc": {
+        "file": "tools/m2a/clang_cuda_facade/cuda_runtime.h",
+        "line": 64,
+        "col": 53
+      }
     },
     {
       "kind": "FunctionDecl",

@@ -17,7 +17,11 @@ from typing import Any, Iterable
 
 AST_SCHEMA = "cuda4as-clang-cuda-ast-semantic-v1"
 BUILTINS = {"blockIdx", "blockDim", "threadIdx"}
-CUDA_BUILTIN_ATTR = "CUDADeviceBuiltinAttr"
+CUDA_DEVICE_ATTR = "CUDADeviceAttr"
+FACADE_BUILTIN_SCHEMA = "cuda4as-clang-cuda-facade-builtins-v1"
+FACADE_MANIFEST_SCHEMA = "cuda4as-clang-cuda-facade-manifest-v1"
+FACADE_VERSION = "1.0.0"
+FACADE_HEADER_REL = "tools/m2a/clang_cuda_facade/cuda_runtime.h"
 WRAPPER_NODES = {
     "ImplicitCastExpr",
     "CStyleCastExpr",
@@ -53,19 +57,58 @@ def walk(node: Any) -> Iterable[dict[str, Any]]:
             yield from walk(value)
 
 
-def _point(candidate: Any, source_bytes: bytes | None = None) -> dict[str, Any] | None:
+def _paths_match(recorded: str, expected: str) -> bool:
+    """Compare an AST location path with an exact pinned source path."""
+
+    recorded_norm = recorded.replace("\\", "/")
+    expected_norm = expected.replace("\\", "/")
+    if recorded_norm == expected_norm:
+        return True
+    try:
+        return Path(recorded).is_absolute() and Path(expected).is_absolute() and Path(recorded).resolve() == Path(expected).resolve()
+    except OSError:
+        return False
+
+
+def _source_for_file(
+    file_name: str | None,
+    source_bytes: bytes | None,
+    source_bytes_by_file: list[tuple[str, bytes]] | None,
+) -> bytes | None:
+    if source_bytes_by_file is None or not file_name:
+        return source_bytes
+    for expected, data in source_bytes_by_file:
+        if _paths_match(file_name, expected):
+            return data
+    # A named location that cannot be tied to one of the unchanged inputs must
+    # not accidentally use bytes from a different source file.
+    return None
+
+
+def _point(
+    candidate: Any,
+    source_bytes: bytes | None = None,
+    source_bytes_by_file: list[tuple[str, bytes]] | None = None,
+) -> dict[str, Any] | None:
     if not isinstance(candidate, dict):
         return None
     offset = candidate.get("offset")
     result: dict[str, Any] = {}
+    file_name = candidate.get("file")
+    if isinstance(file_name, str) and file_name:
+        result["file"] = file_name
+    included_from = candidate.get("includedFrom")
+    if isinstance(included_from, dict):
+        result["included_from"] = included_from
     if isinstance(offset, int) and offset >= 0:
         result["offset"] = offset
     line, column = candidate.get("line"), candidate.get("col")
     if isinstance(line, int) and isinstance(column, int):
         result.update({"line": line, "column": column, "provenance": "exact"})
         return result
-    if "offset" in result and source_bytes is not None and offset <= len(source_bytes):
-        prefix = source_bytes[:offset]
+    offset_source = _source_for_file(file_name if isinstance(file_name, str) else None, source_bytes, source_bytes_by_file)
+    if "offset" in result and offset_source is not None and offset <= len(offset_source):
+        prefix = offset_source[:offset]
         result["line"] = prefix.count(b"\n") + 1
         last_newline = prefix.rfind(b"\n")
         result["column"] = offset - (last_newline + 1) + 1
@@ -79,6 +122,7 @@ def _location(
     fallback: dict[str, Any] | None = None,
     *,
     source_bytes: bytes | None = None,
+    source_bytes_by_file: list[tuple[str, bytes]] | None = None,
 ) -> dict[str, Any]:
     """Return a compiler-exact or explicitly inherited source location."""
 
@@ -93,8 +137,15 @@ def _location(
         if isinstance(begin, dict):
             candidates.extend([begin.get("expansionLoc"), begin.get("spellingLoc")])
     for candidate in candidates:
-        point = _point(candidate, source_bytes)
+        point = _point(candidate, source_bytes, source_bytes_by_file)
         if point is not None:
+            # Some Clang records put the file on the range point rather than
+            # the shorthand loc. Preserve it for provenance checks.
+            if "file" not in point:
+                for sibling in candidates:
+                    if isinstance(sibling, dict) and isinstance(sibling.get("file"), str):
+                        point["file"] = sibling["file"]
+                        break
             return point
     # Clang may omit locations for synthetic wrappers. Preserve the inherited
     # label so downstream evidence never presents a parent coordinate as exact.
@@ -222,10 +273,45 @@ def _referenced_name(node: dict[str, Any]) -> str:
 
 
 class SemanticImporter:
-    def __init__(self, root: dict[str, Any], function: dict[str, Any], source_bytes: bytes | None = None):
+    def __init__(
+        self,
+        root: dict[str, Any],
+        function: dict[str, Any],
+        source_bytes: bytes | None = None,
+        source_path: Path | None = None,
+        facade_contract: dict[str, Any] | None = None,
+    ):
         self.root = root
         self.function = function
         self.source_bytes = source_bytes
+        self.source_path = source_path
+        self.facade_contract = facade_contract
+        self.source_bytes_by_file: list[tuple[str, bytes]] = []
+        if source_path is not None and source_bytes is not None:
+            self.source_bytes_by_file.append((str(source_path), source_bytes))
+            self.source_bytes_by_file.append((str(source_path.resolve()), source_bytes))
+        elif source_path is not None:
+            try:
+                source_data = source_path.read_bytes()
+            except OSError as exc:
+                raise ClangASTImportError(f"cannot load compiler source bytes: {exc}") from exc
+            self.source_bytes = source_data
+            self.source_bytes_by_file.append((str(source_path), source_data))
+            self.source_bytes_by_file.append((str(source_path.resolve()), source_data))
+        if isinstance(facade_contract, dict):
+            header_path = facade_contract.get("header_path")
+            if isinstance(header_path, str):
+                try:
+                    header_bytes = Path(header_path).read_bytes()
+                except OSError as exc:
+                    raise ClangASTImportError(f"cannot load pinned CUDA facade header: {exc}") from exc
+                self.source_bytes_by_file.append((header_path, header_bytes))
+            manifest = facade_contract.get("manifest")
+            builtin_contract = facade_contract.get("builtin_contract")
+            if isinstance(manifest, dict) and isinstance(manifest.get("header"), dict):
+                manifest_header = manifest["header"].get("path")
+                if isinstance(manifest_header, str) and isinstance(header_path, str):
+                    self.source_bytes_by_file.append((manifest_header, header_bytes))
         self.env: dict[str, dict[str, Any]] = {}
         self.env_by_id: dict[str, dict[str, Any]] = {}
         self.declarations_by_id: dict[str, dict[str, Any]] = {}
@@ -235,6 +321,117 @@ class SemanticImporter:
                 # The first declaration record is the canonical one; later
                 # referencedDecl snapshots must not shadow its attributes.
                 self.declarations_by_id.setdefault(node_id, node)
+
+    def _location_for(self, node: dict[str, Any], fallback: dict[str, Any] | None = None) -> dict[str, Any]:
+        return _location(
+            node,
+            fallback,
+            source_bytes=self.source_bytes,
+            source_bytes_by_file=self.source_bytes_by_file,
+        )
+
+    def _builtin_location(self, node: dict[str, Any], expected_paths: tuple[str, ...]) -> dict[str, Any]:
+        """Prefer a spelling/range point proven to belong to the pinned facade."""
+
+        loc = node.get("loc")
+        candidates: list[Any] = [loc]
+        if isinstance(loc, dict):
+            candidates.extend([loc.get("spellingLoc"), loc.get("expansionLoc")])
+        span = node.get("range")
+        if isinstance(span, dict):
+            begin = span.get("begin")
+            candidates.append(begin)
+            if isinstance(begin, dict):
+                candidates.extend([begin.get("spellingLoc"), begin.get("expansionLoc")])
+        for candidate in candidates:
+            point = _point(candidate, self.source_bytes, self.source_bytes_by_file)
+            if point is None:
+                continue
+            if "file" not in point:
+                for sibling in candidates:
+                    if isinstance(sibling, dict) and isinstance(sibling.get("file"), str):
+                        point["file"] = sibling["file"]
+                        break
+            file_name = point.get("file")
+            if isinstance(file_name, str) and any(_paths_match(file_name, expected) for expected in expected_paths):
+                return point
+        return self._location_for(node)
+
+    def _facade_builtin(self, name: str) -> tuple[dict[str, Any], tuple[str, ...], bytes]:
+        contract = self.facade_contract
+        if not isinstance(contract, dict):
+            raise ClangASTImportError(f"builtin {name} has no verified CUDA facade contract")
+        builtin_contract = contract.get("builtin_contract")
+        if not isinstance(builtin_contract, dict) or builtin_contract.get("schema") != FACADE_BUILTIN_SCHEMA:
+            raise ClangASTImportError("compiler CUDA facade builtin contract has an unsupported schema")
+        if builtin_contract.get("device_builtin_semantics") != {
+            "spelling": "device_builtin",
+            "status": "IGNORED_NON_AST",
+            "ast_node": 0,
+            "ast_json_child": False,
+        }:
+            raise ClangASTImportError("compiler CUDA facade contract has an invalid device_builtin serialization contract")
+        declarations = builtin_contract.get("declarations")
+        if not isinstance(declarations, dict) or set(declarations) != BUILTINS:
+            raise ClangASTImportError("compiler CUDA facade builtin contract has the wrong declaration set")
+        declaration = declarations.get(name)
+        if not isinstance(declaration, dict):
+            raise ClangASTImportError(f"builtin {name} is not in the verified CUDA facade contract")
+        header_path = contract.get("header_path")
+        manifest = contract.get("manifest")
+        manifest_header_path = builtin_contract.get("header_path")
+        if not isinstance(header_path, str) or not isinstance(manifest_header_path, str):
+            raise ClangASTImportError("compiler CUDA facade contract has no immutable header identity")
+        if (
+            not isinstance(manifest, dict)
+            or manifest.get("schema") != FACADE_MANIFEST_SCHEMA
+            or manifest.get("version") != FACADE_VERSION
+            or manifest.get("builtin_contract") != builtin_contract
+        ):
+            raise ClangASTImportError("compiler CUDA facade builtin contract is not bound to its manifest")
+        manifest_header = manifest.get("header")
+        if (
+            not isinstance(manifest_header, dict)
+            or manifest_header.get("path") != manifest_header_path
+            or manifest_header_path != FACADE_HEADER_REL
+        ):
+            raise ClangASTImportError("compiler CUDA facade header path is not consistently pinned")
+        manifest_path = contract.get("manifest_path")
+        manifest_hash = contract.get("manifest_sha256")
+        if not isinstance(manifest_path, str) or not isinstance(manifest_hash, str):
+            raise ClangASTImportError("compiler CUDA facade manifest has no immutable identity")
+        try:
+            manifest_bytes = Path(manifest_path).read_bytes()
+            disk_manifest = json.loads(manifest_bytes.decode("utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise ClangASTImportError(f"cannot load pinned CUDA facade manifest: {exc}") from exc
+        if hashlib.sha256(manifest_bytes).hexdigest() != manifest_hash or disk_manifest != manifest:
+            raise ClangASTImportError("compiler CUDA facade manifest does not match its loaded contract")
+        try:
+            header_bytes = Path(header_path).read_bytes()
+        except OSError as exc:
+            raise ClangASTImportError(f"cannot load pinned CUDA facade header: {exc}") from exc
+        expected_hash = builtin_contract.get("header_sha256")
+        if not isinstance(expected_hash, str) or hashlib.sha256(header_bytes).hexdigest() != expected_hash:
+            raise ClangASTImportError("compiler CUDA facade header hash does not match its builtin contract")
+        if contract.get("header_sha256") != expected_hash or manifest_header.get("sha256") != expected_hash:
+            raise ClangASTImportError("compiler CUDA facade header hash is not consistently pinned")
+        header_lines = header_bytes.decode("utf-8").splitlines()
+        line = declaration.get("line")
+        column = declaration.get("column")
+        anchor = declaration.get("source_anchor")
+        if (
+            not isinstance(line, int)
+            or line <= 0
+            or not isinstance(column, int)
+            or column <= 0
+            or declaration.get("qual_type") != "const dim3"
+            or not isinstance(anchor, str)
+            or line > len(header_lines)
+            or header_lines[line - 1].strip() != anchor
+        ):
+            raise ClangASTImportError(f"compiler CUDA facade contract has invalid {name} declaration anchor")
+        return declaration, (header_path, manifest_header_path), header_bytes
 
     def _expr_type(self, node: dict[str, Any], default: str | None = None) -> str:
         try:
@@ -251,28 +448,41 @@ class SemanticImporter:
         ref_id = ref.get("id")
         if not isinstance(ref_id, str):
             raise ClangASTImportError(f"builtin {name} has no compiler declaration identity")
+        if ref.get("name") != name:
+            raise ClangASTImportError(f"builtin {name} reference name does not match its compiler declaration identity")
         declaration = self.declarations_by_id.get(ref_id)
         if not isinstance(declaration, dict) or declaration.get("kind") != "VarDecl" or declaration.get("name") != name:
             raise ClangASTImportError(f"builtin {name} does not resolve to its compiler VarDecl")
         attrs = _attrs(declaration)
-        if CUDA_BUILTIN_ATTR not in attrs or "CUDADeviceAttr" not in attrs:
-            raise ClangASTImportError(f"builtin {name} lacks direct CUDA device/builtin compiler attributes")
-        if "CUDAHostAttr" in attrs:
-            raise ClangASTImportError(f"builtin {name} has conflicting CUDA host attribute")
+        if CUDA_DEVICE_ATTR not in attrs:
+            raise ClangASTImportError(f"builtin {name} lacks direct CUDA device compiler attribute")
+        unsupported_cuda = {item for item in attrs if item.startswith("CUDA") and item != CUDA_DEVICE_ATTR}
+        if unsupported_cuda:
+            raise ClangASTImportError(f"builtin {name} has unsupported CUDA compiler attributes: {sorted(unsupported_cuda)}")
+        contract_declaration, expected_paths, _header_bytes = self._facade_builtin(name)
         ref_type = None
         try:
             ref_type = _qual_type(ref)
         except ClangASTImportError:
             pass
         decl_type = _qual_type(declaration)
-        if ref_type not in {None, "dim3", "const dim3"}:
+        expected_type = contract_declaration["qual_type"]
+        if ref_type not in {None, "dim3", expected_type}:
             raise ClangASTImportError(f"builtin {name} reference is not typed as dim3")
-        if decl_type not in {"dim3", "const dim3"}:
-            raise ClangASTImportError(f"builtin {name} is not typed as dim3")
+        if decl_type != expected_type:
+            raise ClangASTImportError(f"builtin {name} declaration type is not the pinned facade type")
+        location = _require_location("builtin VarDecl", self._builtin_location(declaration, expected_paths))
+        if location.get("provenance") not in {"exact", "exact_offset"}:
+            raise ClangASTImportError(f"builtin {name} has no exact facade source provenance")
+        file_name = location.get("file")
+        if not isinstance(file_name, str) or not any(_paths_match(file_name, expected) for expected in expected_paths):
+            raise ClangASTImportError(f"builtin {name} source location is outside the pinned CUDA facade")
+        if location.get("line") != contract_declaration["line"] or location.get("column") != contract_declaration["column"]:
+            raise ClangASTImportError(f"builtin {name} source location does not match the pinned facade declaration")
 
     def expr(self, node: dict[str, Any], inherited_location: dict[str, Any] | None = None) -> dict[str, Any]:
         kind = node.get("kind")
-        loc = _require_location(str(kind), _location(node, inherited_location, source_bytes=self.source_bytes))
+        loc = _require_location(str(kind), self._location_for(node, inherited_location))
         if kind in WRAPPER_NODES:
             child = self.expr(_single_child(node, context=kind), loc)
             out_type = self._expr_type(node, child["type"])
@@ -395,7 +605,7 @@ class SemanticImporter:
 
     def stmt(self, node: dict[str, Any], inherited_location: dict[str, Any] | None = None) -> dict[str, Any]:
         kind = node.get("kind")
-        loc = _require_location(str(kind), _location(node, inherited_location, source_bytes=self.source_bytes))
+        loc = _require_location(str(kind), self._location_for(node, inherited_location))
         if kind == "CompoundStmt":
             return {"kind": "compound", "statements": [self.stmt(child, loc) for child in _children(node)], "source_location": loc}
         if kind == "DeclStmt":
@@ -458,6 +668,8 @@ class SemanticImporter:
         raise ClangASTImportError(f"unsupported compiler statement node {kind!r}")
 
     def kernel(self) -> tuple[dict[str, Any], dict[str, Any]]:
+        if "attrs" in self.function or "isCUDAKernel" in self.function:
+            raise ClangASTImportError("compiler FunctionDecl uses the rejected legacy CUDA kernel schema")
         attrs = _attrs(self.function)
         if "CUDAGlobalAttr" not in attrs:
             raise ClangASTImportError("compiler FunctionDecl has no direct CUDAGlobalAttr")
@@ -471,7 +683,7 @@ class SemanticImporter:
             raise ClangASTImportError("M2A CUDA kernel must return void according to Clang")
         params: list[dict[str, Any]] = []
         body: dict[str, Any] | None = None
-        function_location = _require_location("FunctionDecl", _location(self.function, source_bytes=self.source_bytes))
+        function_location = _require_location("FunctionDecl", self._location_for(self.function))
         for child in _children(self.function):
             child_kind = child.get("kind")
             if isinstance(child_kind, str) and child_kind.endswith("Attr"):
@@ -497,7 +709,7 @@ class SemanticImporter:
                     "const": typ["const"],
                     "address_space": typ["address_space"],
                     "qual_type": typ["qual_type"],
-                    "source_location": _require_location("ParmVarDecl", _location(child, source_bytes=self.source_bytes)),
+                    "source_location": _require_location("ParmVarDecl", self._location_for(child)),
                 }
                 params.append(param)
                 self.env[name] = {
@@ -528,7 +740,7 @@ class SemanticImporter:
             "params": params,
             "body": semantic_body["statements"],
             "source_location": function_location,
-            "body_location": _require_location("CompoundStmt", _location(body, source_bytes=self.source_bytes)),
+            "body_location": _require_location("CompoundStmt", self._location_for(body)),
             "semantic_source": "clang_ast",
             "compiler_function_id": self.function.get("id"),
             "compiler_mangled_name": self.function.get("mangledName"),
@@ -553,19 +765,34 @@ def import_ast(
     *,
     ast_sha256: str | None = None,
     source_bytes: bytes | None = None,
+    source_path: Path | None = None,
+    facade_contract: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     if root.get("kind") != "TranslationUnitDecl":
         raise ClangASTImportError("compiler AST root is not TranslationUnitDecl")
     matches = [node for node in walk(root) if node.get("kind") == "FunctionDecl" and node.get("name") == kernel_name]
     if len(matches) != 1:
         raise ClangASTImportError(f"expected one compiler kernel FunctionDecl {kernel_name!r}, found {len(matches)}")
-    kernel, metadata = SemanticImporter(root, matches[0], source_bytes=source_bytes).kernel()
+    kernel, metadata = SemanticImporter(
+        root,
+        matches[0],
+        source_bytes=source_bytes,
+        source_path=source_path,
+        facade_contract=facade_contract,
+    ).kernel()
     if ast_sha256 is not None:
         metadata["ast_sha256"] = ast_sha256
     return kernel, metadata
 
 
-def import_ast_file(path: Path, kernel_name: str, *, source: Path | None = None, source_bytes: bytes | None = None) -> tuple[dict[str, Any], dict[str, Any]]:
+def import_ast_file(
+    path: Path,
+    kernel_name: str,
+    *,
+    source: Path | None = None,
+    source_bytes: bytes | None = None,
+    facade_contract: dict[str, Any] | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
     try:
         raw = path.read_bytes()
         root = json.loads(raw.decode("utf-8"))
@@ -578,4 +805,11 @@ def import_ast_file(path: Path, kernel_name: str, *, source: Path | None = None,
             source_bytes = source.read_bytes()
         except OSError as exc:
             raise ClangASTImportError(f"cannot load Clang AST source bytes: {exc}") from exc
-    return import_ast(root, kernel_name, ast_sha256=hashlib.sha256(raw).hexdigest(), source_bytes=source_bytes)
+    return import_ast(
+        root,
+        kernel_name,
+        ast_sha256=hashlib.sha256(raw).hexdigest(),
+        source_bytes=source_bytes,
+        source_path=source,
+        facade_contract=facade_contract,
+    )

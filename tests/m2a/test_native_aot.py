@@ -35,6 +35,7 @@ OUT_HASH = "ed551637cf393112d0093037a0b41b9d1e9bd213c6037e8efcde30cf480f0332"
 AST_FIXTURE = ROOT / "tests/m2a/fixtures/vector_add.clang-json-conformance.json"
 AST_FIXTURE_META = ROOT / "tests/m2a/fixtures/vector_add.clang-json-conformance.provenance.json"
 FACADE = ROOT / "tools/m2a/clang_cuda_facade/cuda_runtime.h"
+FACADE_CONTRACT = load_facade_contract(FACADE.parent)
 
 
 def _walk_dicts(node: object):
@@ -45,6 +46,16 @@ def _walk_dicts(node: object):
     elif isinstance(node, list):
         for value in node:
             yield from _walk_dicts(value)
+
+
+def import_fixture(root: dict, *, source_bytes: bytes | None = None, facade_contract: dict | None = FACADE_CONTRACT):
+    return import_ast(
+        root,
+        "vector_add",
+        source_bytes=source_bytes,
+        source_path=CU,
+        facade_contract=facade_contract,
+    )
 
 
 class NativeAOTCompilerTests(unittest.TestCase):
@@ -139,7 +150,7 @@ class NativeAOTCompilerTests(unittest.TestCase):
         self.assertRaises(AOTError, verify_device_link, link)
 
     def test_compiler_ast_is_semantic_authority_for_types_builtins_and_control_flow(self) -> None:
-        kernel, metadata = import_ast_file(AST_FIXTURE, "vector_add")
+        kernel, metadata = import_ast_file(AST_FIXTURE, "vector_add", source=CU, facade_contract=FACADE_CONTRACT)
         self.assertTrue(metadata["authoritative"])
         self.assertEqual(metadata["kind"], "clang_cuda_ast_json")
         self.assertEqual([p["address_space"] for p in kernel["params"]], ["global", "global", "global", "unknown"])
@@ -163,6 +174,13 @@ class NativeAOTCompilerTests(unittest.TestCase):
         self.assertEqual(provenance["compiler_identity"]["validation_status"], "NOT_RUN")
         self.assertEqual(provenance["capture"]["status"], "NOT_CAPTURED")
         self.assertEqual(provenance["producer"], "cuda4AS hand-authored Clang JSON schema conformance fixture")
+        builtin_kinds = {
+            child.get("kind")
+            for node in _walk_dicts(json.loads(AST_FIXTURE.read_text()))
+            if node.get("kind") == "VarDecl" and node.get("name") in {"blockIdx", "blockDim", "threadIdx"}
+            for child in node.get("inner", [])
+        }
+        self.assertEqual(builtin_kinds, {"CUDADeviceAttr"})
 
     def test_compiler_ast_mutations_change_or_fail_import(self) -> None:
         root = json.loads(AST_FIXTURE.read_text())
@@ -184,60 +202,57 @@ class NativeAOTCompilerTests(unittest.TestCase):
         add = find_add(changed)
         self.assertIsNotNone(add)
         add["opcode"] = "-"
-        original_kernel, _ = import_ast(root, "vector_add")
-        changed_kernel, _ = import_ast(changed, "vector_add")
+        original_kernel, _ = import_fixture(root)
+        changed_kernel, _ = import_fixture(changed)
         self.assertEqual(original_kernel["body"][1]["then"][0]["rhs"]["operator"], "+")
         self.assertEqual(changed_kernel["body"][1]["then"][0]["rhs"]["operator"], "-")
         malformed = json.loads(AST_FIXTURE.read_text())
-        builtin = next(node for node in _walk_dicts(malformed) if node.get("kind") == "VarDecl" and node.get("name") == "blockIdx")
-        builtin["inner"] = [node for node in builtin["inner"] if node.get("kind") != "CUDADeviceBuiltinAttr"]
         for node in _walk_dicts(malformed):
             if node.get("kind") == "DeclRefExpr" and node.get("name") == "blockIdx":
                 node["referencedDecl"]["id"] = "missing-blockIdx"
         with self.assertRaises(ClangASTImportError):
-            import_ast(malformed, "vector_add")
+            import_fixture(malformed)
 
         missing_device = json.loads(AST_FIXTURE.read_text())
         builtin = next(node for node in _walk_dicts(missing_device) if node.get("kind") == "VarDecl" and node.get("name") == "blockIdx")
         builtin["inner"] = [node for node in builtin["inner"] if node.get("kind") != "CUDADeviceAttr"]
         with self.assertRaises(ClangASTImportError):
-            import_ast(missing_device, "vector_add")
+            import_fixture(missing_device)
 
         conflicting_builtin = json.loads(AST_FIXTURE.read_text())
         builtin = next(node for node in _walk_dicts(conflicting_builtin) if node.get("kind") == "VarDecl" and node.get("name") == "blockIdx")
         builtin["inner"].append({"kind": "CUDAHostAttr"})
         with self.assertRaises(ClangASTImportError):
-            import_ast(conflicting_builtin, "vector_add")
+            import_fixture(conflicting_builtin)
 
         old_layout = json.loads(AST_FIXTURE.read_text())
         old_function = next(node for node in _walk_dicts(old_layout) if node.get("kind") == "FunctionDecl" and node.get("name") == "vector_add")
         old_function["isCUDAKernel"] = True
         old_function["attrs"] = [{"kind": "CUDAKernelAttr"}]
-        old_function["inner"] = [node for node in old_function["inner"] if node.get("kind") != "CUDAGlobalAttr"]
         with self.assertRaises(ClangASTImportError):
-            import_ast(old_layout, "vector_add")
+            import_fixture(old_layout)
 
         missing_body = json.loads(AST_FIXTURE.read_text())
         function = next(node for node in _walk_dicts(missing_body) if node.get("kind") == "FunctionDecl" and node.get("name") == "vector_add")
         function["inner"] = [node for node in function["inner"] if node.get("kind") != "CompoundStmt"]
         with self.assertRaises(ClangASTImportError):
-            import_ast(missing_body, "vector_add")
+            import_fixture(missing_body)
 
         mismatched_kernel = json.loads(AST_FIXTURE.read_text())
         mismatched_function = next(node for node in _walk_dicts(mismatched_kernel) if node.get("kind") == "FunctionDecl" and node.get("name") == "vector_add")
         mismatched_function["name"] = "other_kernel"
         with self.assertRaises(ClangASTImportError):
-            import_ast(mismatched_kernel, "vector_add")
+            import_fixture(mismatched_kernel)
 
         missing_location = json.loads(AST_FIXTURE.read_text())
         location_function = next(node for node in _walk_dicts(missing_location) if node.get("kind") == "FunctionDecl" and node.get("name") == "vector_add")
         location_function.pop("loc", None)
         with self.assertRaises(ClangASTImportError):
-            import_ast(missing_location, "vector_add")
+            import_fixture(missing_location)
 
     def test_source_and_compiler_parameter_contract_mismatch_fails_closed(self) -> None:
         source_kernel, _ = KernelParser(CU.read_text()).find_kernel()
-        compiler_kernel, _ = import_ast_file(AST_FIXTURE, "vector_add")
+        compiler_kernel, _ = import_ast_file(AST_FIXTURE, "vector_add", source=CU, facade_contract=FACADE_CONTRACT)
         compiler_kernel["params"][3]["type"] = "float"
         with self.assertRaises(AOTError):
             verify_source_compiler_signature(source_kernel, compiler_kernel)
@@ -246,7 +261,7 @@ class NativeAOTCompilerTests(unittest.TestCase):
         generic_ast = json.loads(AST_FIXTURE.read_text())
         generic_param = next(node for node in _walk_dicts(generic_ast) if node.get("kind") == "ParmVarDecl" and node.get("name") == "a")
         generic_param["type"]["addressSpace"] = "generic"
-        generic_kernel, _ = import_ast(generic_ast, "vector_add")
+        generic_kernel, _ = import_fixture(generic_ast)
         self.assertEqual(generic_kernel["params"][0]["address_space"], "generic")
         with self.assertRaises(AOTError):
             SSABuilder(generic_kernel).build()
@@ -254,7 +269,7 @@ class NativeAOTCompilerTests(unittest.TestCase):
         unknown_ast = json.loads(AST_FIXTURE.read_text())
         unknown_param = next(node for node in _walk_dicts(unknown_ast) if node.get("kind") == "ParmVarDecl" and node.get("name") == "a")
         unknown_param["type"].pop("addressSpace")
-        unknown_kernel, _ = import_ast(unknown_ast, "vector_add")
+        unknown_kernel, _ = import_fixture(unknown_ast)
         self.assertEqual(unknown_kernel["params"][0]["address_space"], "unknown")
         with self.assertRaises(AOTError):
             SSABuilder(unknown_kernel).build()
@@ -262,22 +277,57 @@ class NativeAOTCompilerTests(unittest.TestCase):
         constant_ast = json.loads(AST_FIXTURE.read_text())
         constant_param = next(node for node in _walk_dicts(constant_ast) if node.get("kind") == "ParmVarDecl" and node.get("name") == "a")
         constant_param["type"]["addressSpace"] = "constant"
-        constant_kernel, _ = import_ast(constant_ast, "vector_add")
+        constant_kernel, _ = import_fixture(constant_ast)
         self.assertEqual(constant_kernel["params"][0]["address_space"], "constant")
         with self.assertRaises(AOTError):
             SSABuilder(constant_kernel).build()
 
     def test_builtin_binding_uses_compiler_identity_not_same_name(self) -> None:
         extra = json.loads(AST_FIXTURE.read_text())
-        extra["inner"].insert(1, {"kind": "VarDecl", "id": "user-blockIdx", "name": "blockIdx", "type": {"qualType": "int"}, "loc": {"line": 50, "col": 1}})
-        kernel, _ = import_ast(extra, "vector_add")
+        extra["inner"].insert(1, {"kind": "VarDecl", "id": "user-blockIdx", "name": "blockIdx", "type": {"qualType": "const dim3"}, "loc": {"file": "oracle/src/vector_add.cu", "line": 50, "col": 1}, "inner": [{"kind": "CUDADeviceAttr"}]})
+        kernel, _ = import_fixture(extra)
         self.assertEqual(kernel["body"][0]["init"]["left"]["left"]["base"]["builtin"], "blockIdx")
         wrong_ref = json.loads(AST_FIXTURE.read_text())
-        wrong_ref["inner"].insert(1, {"kind": "VarDecl", "id": "user-blockIdx", "name": "blockIdx", "type": {"qualType": "int"}, "loc": {"line": 50, "col": 1}})
+        wrong_ref["inner"].insert(1, {"kind": "VarDecl", "id": "user-blockIdx", "name": "blockIdx", "type": {"qualType": "const dim3"}, "loc": {"file": "oracle/src/vector_add.cu", "line": 50, "col": 1}, "inner": [{"kind": "CUDADeviceAttr"}]})
         first_ref = next(node for node in _walk_dicts(wrong_ref) if node.get("kind") == "DeclRefExpr" and node.get("name") == "blockIdx")
         first_ref["referencedDecl"]["id"] = "user-blockIdx"
         with self.assertRaises(ClangASTImportError):
-            import_ast(wrong_ref, "vector_add")
+            import_fixture(wrong_ref)
+
+    def test_builtin_facade_provenance_and_contract_fail_closed(self) -> None:
+        no_contract = json.loads(AST_FIXTURE.read_text())
+        with self.assertRaises(ClangASTImportError):
+            import_fixture(no_contract, facade_contract=None)
+
+        wrong_file = json.loads(AST_FIXTURE.read_text())
+        builtin = next(node for node in _walk_dicts(wrong_file) if node.get("kind") == "VarDecl" and node.get("name") == "blockIdx")
+        builtin["loc"]["file"] = "oracle/src/vector_add.cu"
+        with self.assertRaises(ClangASTImportError):
+            import_fixture(wrong_file)
+
+        wrong_line = json.loads(AST_FIXTURE.read_text())
+        builtin = next(node for node in _walk_dicts(wrong_line) if node.get("kind") == "VarDecl" and node.get("name") == "blockIdx")
+        builtin["loc"]["line"] += 1
+        with self.assertRaises(ClangASTImportError):
+            import_fixture(wrong_line)
+
+        wrong_type = json.loads(AST_FIXTURE.read_text())
+        builtin = next(node for node in _walk_dicts(wrong_type) if node.get("kind") == "VarDecl" and node.get("name") == "blockIdx")
+        builtin["type"]["qualType"] = "dim3"
+        with self.assertRaises(ClangASTImportError):
+            import_fixture(wrong_type)
+
+        wrong_name = json.loads(AST_FIXTURE.read_text())
+        builtin = next(node for node in _walk_dicts(wrong_name) if node.get("kind") == "VarDecl" and node.get("name") == "blockIdx")
+        builtin["name"] = "not_blockIdx"
+        with self.assertRaises(ClangASTImportError):
+            import_fixture(wrong_name)
+
+        broken_contract = dict(FACADE_CONTRACT)
+        broken_contract["builtin_contract"] = dict(FACADE_CONTRACT["builtin_contract"])
+        broken_contract["builtin_contract"]["header_sha256"] = "0" * 64
+        with self.assertRaises(ClangASTImportError):
+            import_fixture(json.loads(AST_FIXTURE.read_text()), facade_contract=broken_contract)
 
     def test_offset_location_is_exact_and_parent_fallback_is_inherited(self) -> None:
         source = CU.read_bytes()
@@ -290,7 +340,7 @@ class NativeAOTCompilerTests(unittest.TestCase):
         offset_ast = json.loads(AST_FIXTURE.read_text())
         function = next(node for node in _walk_dicts(offset_ast) if node.get("kind") == "FunctionDecl" and node.get("name") == "vector_add")
         function["loc"] = {"offset": source.index(b"__global__")}
-        kernel, _ = import_ast(offset_ast, "vector_add", source_bytes=source)
+        kernel, _ = import_fixture(offset_ast, source_bytes=source)
         self.assertEqual(kernel["source_location"]["provenance"], "exact_offset")
         self.assertEqual((kernel["source_location"]["line"], kernel["source_location"]["column"]), (8, 1))
 
@@ -310,11 +360,16 @@ class NativeAOTCompilerTests(unittest.TestCase):
         self.assertNotIn("validated_identity", contract["supported_clang"])
         self.assertNotIn("validated_major", contract["supported_clang"])
         self.assertEqual(contract["target"]["cuda_gpu_arch"], "sm_86")
-        self.assertEqual(contract["header_sha256"], "e9fabf30365d3b5e3ecaab8e3119d80723eb5c8a20ee32a95ebbb95497d8208b")
+        self.assertEqual(contract["header_sha256"], "e4fe928dcbe5e80cee2050f9527ca8a0fc22349192033057b56fa5ee0df46cae")
+        self.assertEqual(contract["builtin_contract"]["schema"], "cuda4as-clang-cuda-facade-builtins-v1")
+        self.assertEqual(set(contract["builtin_contract"]["declarations"]), {"blockIdx", "blockDim", "threadIdx"})
+        self.assertEqual(contract["builtin_contract"]["device_builtin_semantics"]["status"], "IGNORED_NON_AST")
+        self.assertEqual(contract["builtin_contract"]["device_builtin_semantics"]["ast_node"], 0)
+        self.assertFalse(contract["builtin_contract"]["device_builtin_semantics"]["ast_json_child"])
         args = materialize_facade_arguments(CU, FACADE.parent)
         self.assertEqual(args[args.index("-I") + 1], str(FACADE.parent))
         self.assertEqual(args[-1], str(CU))
-        kernel, _ = import_ast_file(AST_FIXTURE, "vector_add")
+        kernel, _ = import_ast_file(AST_FIXTURE, "vector_add", source=CU, facade_contract=FACADE_CONTRACT)
         for expression in _walk_dicts(kernel):
             if expression.get("kind") in {"name", "member", "index", "binary", "literal", "cast", "unary"}:
                 location = expression.get("source_location", {})

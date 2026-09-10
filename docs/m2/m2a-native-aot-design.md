@@ -31,18 +31,25 @@ and does not claim the deferred multi-translation-unit gate.
 
 The facade is versioned `1.0.0`, maps CUDA annotations to Clang attributes,
 declares typed `dim3` execution built-ins with `device_builtin`, and exposes
-only the host runtime declarations needed by the unchanged oracle. Its
-`manifest.json` binds the header SHA-256, LLVM Clang support range (18 through
-23), intended Homebrew LLVM 23.1.0 identity, and its `NOT_RUN` validation
-status, `sm_86` target, and exact
-frontend argument template. The live frontend uses
+only the host runtime declarations needed by the unchanged oracle. Clang
+accepts the `device_builtin` spelling for CUDA frontend semantics, but LLVM
+defines that attribute as ignored (`ASTNode=0`), so it does not appear as an
+AST JSON child. Builtin identity therefore comes from the exact referenced
+declaration ID, a direct emitted `CUDADeviceAttr`, the pinned `const dim3`
+type, and the manifest's immutable facade header hash plus line/source-anchor
+contract. Same-name user declarations, missing or conflicting attributes,
+wrong types, and locations outside the verified facade fail closed. Its
+`manifest.json` binds the header SHA-256, versioned builtin declaration
+contract, LLVM Clang support range (18 through 23), intended Homebrew LLVM
+23.1.0 identity, and its `NOT_RUN` validation status, `sm_86` target, and
+exact frontend argument template. The live frontend uses
 `-nocudainc -nocudalib -I tools/m2a/clang_cuda_facade` and
 `-Xclang -ast-dump=json`. A compiler-output fixture is available for portable
 importer tests. The fixture is explicitly synthetic schema-conformance data,
 with a sidecar recording its inputs and non-capture status; it is not native
-compiler validation. Clang declaration attributes are consumed from direct
-`inner` `*Attr` records, and absent address-space facts remain `unknown` until
-an explicit backend rule accepts them. Fixture emission records
+compiler validation and deliberately models only AST-emittable direct `inner`
+`*Attr` records. Absent address-space facts remain `unknown` until an explicit
+backend rule accepts them. Fixture emission records
 `validation_status=FIXTURE` and `compiler_validation_status=NOT_RUN`.
 `--skip-clang` emits a visible `NOT_RUN` record and returns 77, so it cannot
 satisfy the frontend or M2A validation gate.

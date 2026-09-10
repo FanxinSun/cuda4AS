@@ -2,7 +2,7 @@
   "schema": "cuda4as-clang-json-conformance-provenance-v1",
   "status": "SYNTHETIC_SCHEMA_CONFORMANCE",
   "fixture": "tests/m2a/fixtures/vector_add.clang-json-conformance.json",
-  "fixture_sha256": "45c21bc7869237b70dac71265bce0e6f3198ecac6e1ab034aabf7db92c3df52f",
+  "fixture_sha256": "41dae70c71186f381db6bcb72515f7da7e24395d2ce905ffe347d8d618a4db91",
   "producer": "cuda4AS hand-authored Clang JSON schema conformance fixture",
   "compiler_identity": {
     "family": "LLVM Clang CUDA frontend",
@@ -21,7 +21,7 @@
     "header": "oracle/src/oracle.h",
     "header_sha256": "6e7cc4c2e59e10db5b68df4116ed67ec3fe1d88d559c41e0a9feb2da3dd643bc",
     "facade": "tools/m2a/clang_cuda_facade/cuda_runtime.h",
-    "facade_sha256": "e9fabf30365d3b5e3ecaab8e3119d80723eb5c8a20ee32a95ebbb95497d8208b"
+    "facade_sha256": "e4fe928dcbe5e80cee2050f9527ca8a0fc22349192033057b56fa5ee0df46cae"
   },
   "intended_command": [
     "clang++",
@@ -40,6 +40,8 @@
   ],
   "limitations": [
     "The JSON records intentionally model Clang direct inner *Attr children and declaration identities.",
+    "Clang accepts the device_builtin spelling for CUDA frontend semantics but defines it as an ignored, non-AST attribute; no such child record is modeled.",
+    "Builtin identity is accepted only when the exact declaration ID, direct CUDADeviceAttr, pinned const dim3 type, and facade source anchor/hash contract all verify.",
     "This fixture establishes importer schema behavior, not native compiler syntax or Mac execution."
   ]
 }
