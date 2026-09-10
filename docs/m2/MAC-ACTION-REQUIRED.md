@@ -82,3 +82,24 @@ stops at 30 minutes. Stop if the package reports an inventory mismatch,
 missing tool, compiler/AOT error, or resource limit. Return exactly the printed
 `cuda4as-m2a-native-return-<UTC>.tgz` unchanged to
 `RESULTS/m2a/incoming/` for repository-side analysis.
+
+### Broken-checkout bootstrap
+
+If the checkout was created from `codex/m2-entry-gate` and does not yet contain
+the wrapper, download the published
+`tools/m2a/bootstrap-m2a-native-aot-probe.sh` file once from this branch, save
+it as `/Users/yaminocellist/Downloads/bootstrap-m2a-native-aot-probe.sh`, and
+launch that file:
+
+```text
+https://raw.githubusercontent.com/FanxinSun/cuda4AS/codex/m2a-native-aot-vector-add/tools/m2a/bootstrap-m2a-native-aot-probe.sh
+```
+
+```bash
+/bin/bash /Users/yaminocellist/Downloads/bootstrap-m2a-native-aot-probe.sh
+```
+
+The standalone bootstrap explicitly fetches the narrow branch ref, repairs an
+existing wrong upstream, fast-forwards only, preserves local divergence, and
+launches the tracked wrapper after verifying the package. It creates a fresh
+bootstrap log directory outside the checkout.
