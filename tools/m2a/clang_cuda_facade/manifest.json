@@ -9,8 +9,9 @@
     "family": "LLVM Clang CUDA frontend",
     "minimum_major": 18,
     "maximum_major_exclusive": 24,
-    "validated_identity": "Homebrew LLVM 23.1.0",
-    "validated_major": 23,
+    "intended_identity": "Homebrew LLVM 23.1.0",
+    "intended_major": 23,
+    "validation_status": "NOT_RUN",
     "required_features": [
       "cuda-device-only",
       "cuda-gpu-arch=sm_86",

@@ -124,13 +124,18 @@ def load_facade_contract(facade_dir: Path) -> dict[str, Any]:
         raise AOTError("tracked Clang CUDA facade manifest has no Clang support range")
     minimum_major = supported.get("minimum_major")
     maximum_major_exclusive = supported.get("maximum_major_exclusive")
-    validated_major = supported.get("validated_major")
-    if not all(isinstance(value, int) for value in (minimum_major, maximum_major_exclusive, validated_major)):
+    intended_major = supported.get("intended_major")
+    validation_status = supported.get("validation_status")
+    if not all(isinstance(value, int) for value in (minimum_major, maximum_major_exclusive, intended_major)):
         raise AOTError("tracked Clang CUDA facade manifest has invalid Clang major bounds")
-    if minimum_major >= maximum_major_exclusive or not minimum_major <= validated_major < maximum_major_exclusive:
+    if minimum_major >= maximum_major_exclusive or not minimum_major <= intended_major < maximum_major_exclusive:
         raise AOTError("tracked Clang CUDA facade manifest has inconsistent Clang major bounds")
-    if supported.get("family") != "LLVM Clang CUDA frontend" or not isinstance(supported.get("validated_identity"), str):
-        raise AOTError("tracked Clang CUDA facade manifest has no supported Clang identity")
+    if (
+        supported.get("family") != "LLVM Clang CUDA frontend"
+        or not isinstance(supported.get("intended_identity"), str)
+        or validation_status not in {"NOT_RUN", "VALIDATED"}
+    ):
+        raise AOTError("tracked Clang CUDA facade manifest has no honest intended Clang identity/status")
 
     target = manifest.get("target")
     if not isinstance(target, dict) or target.get("cuda_gpu_arch") != "sm_86":
@@ -562,27 +567,37 @@ def verify_source_compiler_signature(source_kernel: dict[str, Any], compiler_ker
     compiler_params = compiler_kernel.get("params", [])
     if len(source_params) != len(compiler_params):
         raise AOTError("source/parser and compiler kernel parameter counts disagree")
-    fields = ("name", "type", "pointer", "const", "address_space")
+    fields = ("name", "type", "pointer", "const")
     for index, (source_param, compiler_param) in enumerate(zip(source_params, compiler_params)):
         if any(source_param.get(field) != compiler_param.get(field) for field in fields):
             raise AOTError(f"source/parser and compiler parameter {index} contracts disagree")
+        if source_param.get("pointer") and source_param.get("address_space") != compiler_param.get("address_space"):
+            raise AOTError(f"source/parser and compiler parameter {index} address spaces disagree")
 
 
 class SSABuilder:
     def __init__(self, kernel: dict[str, Any]):
         self.kernel = kernel
         self.env: dict[str, dict[str, Any]] = {
-            p["name"]: {"type": (p["type"] + "*") if p["pointer"] else p["type"], "pointer": p["pointer"], "arg": p["index"]}
+            p["name"]: {
+                "type": (p["type"] + "*") if p["pointer"] else p["type"],
+                "pointer": p["pointer"],
+                "const": p.get("const", False),
+                "address_space": p.get("address_space", "unknown"),
+                "arg": p["index"],
+            }
             for p in kernel["params"]
         }
         self.values: list[dict[str, Any]] = []
         self.ops: list[dict[str, Any]] = []
         self.counter = 0
 
-    def value(self, typ: str, op: str, operands: list[str], loc: dict[str, int], **extra: Any) -> str:
+    def value(self, typ: str, op: str, operands: list[str], loc: dict[str, Any], **extra: Any) -> str:
         name = f"%{self.counter}"
         self.counter += 1
-        rec = {"id": name, "type": typ, "op": op, "operands": operands, "source_location": loc}
+        location = dict(loc)
+        location.setdefault("provenance", "source_parser")
+        rec = {"id": name, "type": typ, "op": op, "operands": operands, "source_location": location}
         rec.update(extra)
         self.values.append(rec)
         return name
@@ -601,7 +616,17 @@ class SSABuilder:
             if name not in self.env:
                 raise AOTError(f"unknown identifier {name!r}")
             entry = self.env[name]
-            return self.value(entry["type"], "argument" if "arg" in entry else "local", [], loc, name=name, argument=entry.get("arg")), entry["type"]
+            return self.value(
+                entry["type"],
+                "argument" if "arg" in entry else "local",
+                [],
+                loc,
+                name=name,
+                argument=entry.get("arg"),
+                pointer=entry.get("pointer", False),
+                const=entry.get("const", False),
+                address_space=entry.get("address_space", "unknown"),
+            ), entry["type"]
         if kind == "member":
             base, bt = self.lower_expr(expr["base"])
             if bt != "u32x3":
@@ -616,7 +641,7 @@ class SSABuilder:
             typ = expr.get("type", bt[:-1])
             address_space = expr.get("address_space", "global")
             if address_space != "global":
-                raise AOTError("compiler/imported index lost global address space")
+                raise AOTError(f"compiler/imported index has unsupported address space {address_space!r}")
             return self.value(typ, "load_global", [base, idx], loc, address_space=address_space, element_type=typ), typ
         if kind == "unary":
             val, typ = self.lower_expr(expr["value"])
@@ -639,6 +664,9 @@ class SSABuilder:
         name = expr["base"]["name"]
         if not self.env.get(name, {}).get("pointer"):
             raise AOTError("assignment target is not a kernel pointer")
+        address_space = self.env[name].get("address_space", "unknown")
+        if address_space != "global":
+            raise AOTError(f"assignment target address space is {address_space!r}, expected compiler global")
         base, bt = self.lower_expr(expr["base"])
         idx, _ = self.lower_expr(expr["index"])
         return base, idx, bt.removesuffix("*")
@@ -717,7 +745,12 @@ def verify_ir(ir: dict[str, Any], *, require_semantic_source: bool = True) -> No
                 raise AOTError("global store lost its address space")
     for value in values:
         location = value.get("source_location")
-        if not isinstance(location, dict) or location.get("line", 0) <= 0 or location.get("column", 0) <= 0:
+        if (
+            not isinstance(location, dict)
+            or location.get("line", 0) <= 0
+            or location.get("column", 0) <= 0
+            or location.get("provenance") not in ({"exact", "exact_offset", "inherited"} if require_semantic_source else {"exact", "exact_offset", "inherited", "source_parser"})
+        ):
             raise AOTError("IR value has no compiler source location")
     if "cpu_fallback" not in ir.get("unsupported_capabilities", []):
         raise AOTError("IR must explicitly prohibit CPU fallback")
@@ -731,8 +764,27 @@ def verify_abi(abi: dict[str, Any]) -> None:
         raise AOTError("malformed kernel ABI indices")
     if len(args) != 4 or any(a.get("kind") not in {"buffer", "scalar"} for a in args):
         raise AOTError("M2A ABI requires four typed arguments")
+    mapping = abi.get("address_space_mapping")
+    if (
+        not isinstance(mapping, dict)
+        or mapping.get("schema") != "cuda4as-address-space-lowering-v1"
+        or mapping.get("status") != "EXPLICIT_PORTABLE_RULE"
+        or mapping.get("rules") != [
+            {"compiler_kind": "pointer", "compiler_address_space": "global", "metal_address_space": "device"},
+            {"compiler_kind": "scalar", "compiler_address_space": "any", "metal_address_space": "constant"},
+        ]
+    ):
+        raise AOTError("ABI lacks the versioned explicit CUDA-to-Metal address-space mapping")
     if any(a.get("kind") == "buffer" and a.get("address_space") != "global" for a in args):
         raise AOTError("buffer ABI lost global address space")
+    if any(a.get("kind") == "buffer" and a.get("metal_address_space") != "device" for a in args):
+        raise AOTError("buffer ABI lacks its explicit Metal device mapping")
+    if any(a.get("kind") == "scalar" and a.get("metal_address_space") != "constant" for a in args):
+        raise AOTError("scalar ABI lacks its explicit Metal constant mapping")
+    if any(a.get("kind") == "buffer" and a.get("semantic_address_space") != "global" for a in args):
+        raise AOTError("buffer ABI mapping disagrees with compiler address space")
+    if any(a.get("kind") == "scalar" and not isinstance(a.get("semantic_address_space"), str) for a in args):
+        raise AOTError("scalar ABI lacks its compiler address-space provenance")
     if abi.get("cpu_fallback") is not False or abi.get("thread_position") != "1d_grid":
         raise AOTError("ABI permits a prohibited fallback or has no launch contract")
 
@@ -764,6 +816,8 @@ def lower_to_msl(kernel: dict[str, Any], ir: dict[str, Any], block_x: int, *, re
     params = kernel["params"]
     if any(not p["pointer"] and p["type"] not in {"int", "u32"} for p in params):
         raise AOTError("only int/u32 scalar kernel arguments are supported")
+    if any(p["pointer"] and p.get("address_space") != "global" for p in params):
+        raise AOTError("compiler pointer argument lacks an explicit global address space")
     lines = ["#include <metal_stdlib>", "using namespace metal;", "", f"// cuda4as-ir-schema: {IR_SCHEMA}"]
     sig: list[str] = []
     for p in params:
@@ -845,9 +899,28 @@ def lower_to_msl(kernel: dict[str, Any], ir: dict[str, Any], block_x: int, *, re
         "version": 1,
         "kernel": kernel["name"],
         "arguments": [
-            {"index": p["index"], "name": p["name"], "kind": "buffer" if p["pointer"] else "scalar", "element_type": p["type"], "address_space": p["address_space"], "const": p["const"]}
+            {
+                "index": p["index"],
+                "name": p["name"],
+                "kind": "buffer" if p["pointer"] else "scalar",
+                "element_type": p["type"],
+                # Metal's constant-buffer ABI is an explicit lowering rule;
+                # the imported compiler fact remains semantic_address_space.
+                "address_space": "global" if p["pointer"] else "constant",
+                "metal_address_space": "device" if p["pointer"] else "constant",
+                "semantic_address_space": p.get("address_space", "unknown"),
+                "const": p["const"],
+            }
             for p in params
         ],
+        "address_space_mapping": {
+            "schema": "cuda4as-address-space-lowering-v1",
+            "status": "EXPLICIT_PORTABLE_RULE",
+            "rules": [
+                {"compiler_kind": "pointer", "compiler_address_space": "global", "metal_address_space": "device"},
+                {"compiler_kind": "scalar", "compiler_address_space": "any", "metal_address_space": "constant"},
+            ],
+        },
         "thread_position": "1d_grid",
         "block_x": block_x,
         "numerical_mode": "ieee754-f32",
@@ -921,7 +994,12 @@ def run_clang_device(
     }
 
 
-def import_typed_compiler_output(ast_path: Path, kernel_name: str) -> tuple[dict[str, Any], dict[str, Any]]:
+def import_typed_compiler_output(
+    ast_path: Path,
+    kernel_name: str,
+    *,
+    source_bytes: bytes | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
     """Import the selected Clang AST as the device semantic authority."""
 
     from tools.m2a.clang_ast import ClangASTImportError, import_ast_file
@@ -930,7 +1008,7 @@ def import_typed_compiler_output(ast_path: Path, kernel_name: str) -> tuple[dict
     if not raw.strip():
         raise AOTError("Clang produced no typed AST output")
     try:
-        kernel, metadata = import_ast_file(ast_path, kernel_name)
+        kernel, metadata = import_ast_file(ast_path, kernel_name, source_bytes=source_bytes)
     except ClangASTImportError as exc:
         raise AOTError(str(exc)) from exc
     except json.JSONDecodeError as exc:
@@ -970,9 +1048,12 @@ def emit(args: argparse.Namespace) -> int:
         fixture_bytes = args.ast_fixture.read_bytes()
         ast.write_bytes(fixture_bytes)
         clang_log.write_text("portable compiler-output fixture; no live compiler invocation\n", encoding="utf-8")
-        kernel, compiler_metadata = import_typed_compiler_output(ast, host["launch"]["kernel"])
+        kernel, compiler_metadata = import_typed_compiler_output(
+            ast, host["launch"]["kernel"], source_bytes=source_bytes,
+        )
         compiler_metadata["validation"] = "compiler_output_fixture"
         compiler_metadata["status"] = "FIXTURE"
+        compiler_metadata["validation_status"] = "NOT_RUN"
         toolchain = {"status": "FIXTURE", "fixture": str(args.ast_fixture)}
         frontend = dict(compiler_metadata)
     elif args.skip_clang:
@@ -1000,8 +1081,11 @@ def emit(args: argparse.Namespace) -> int:
         )
         if frontend["exit_code"] != 0:
             raise AOTError("Clang CUDA device validation failed; see clang-device.log")
-        kernel, compiler_metadata = import_typed_compiler_output(ast, host["launch"]["kernel"])
+        kernel, compiler_metadata = import_typed_compiler_output(
+            ast, host["launch"]["kernel"], source_bytes=source_bytes,
+        )
         frontend.update(compiler_metadata)
+        frontend["validation_status"] = "VALIDATED"
         frontend["status"] = "PASS"
 
     if kernel["name"] != host["launch"]["kernel"]:
@@ -1013,7 +1097,11 @@ def emit(args: argparse.Namespace) -> int:
     ir["source"] = {"path": args.source.name, "sha256": sha256_bytes(source_bytes), "header_sha256": sha256_bytes(header)}
     ir["semantic_source"] = compiler_metadata
     ir["frontend"] = frontend
-    ir["validation_status"] = "VALIDATED" if semantic_required else "NOT_RUN"
+    # A schema fixture proves importer behavior but cannot prove a live
+    # compiler invocation. Keep its portable result separate from compiler
+    # validation so no AOT record turns synthetic data into native evidence.
+    ir["validation_status"] = "FIXTURE" if args.ast_fixture else "VALIDATED" if semantic_required else "NOT_RUN"
+    ir["compiler_validation_status"] = "NOT_RUN" if args.ast_fixture or not semantic_required else "VALIDATED"
     ir["facade"] = {
         "version": facade_contract["version"],
         "header": FACADE_HEADER_REL,
@@ -1061,6 +1149,7 @@ def emit(args: argparse.Namespace) -> int:
         "facade": ir["facade"],
         "unsupported": sorted(ir["unsupported_capabilities"]),
         "semantic_authority": "clang_ast" if semantic_required else "NOT_RUN",
+        "compiler_validation_status": ir["compiler_validation_status"],
     }
     (work / "ir.json").write_text(canonical_json(ir), encoding="utf-8")
     (work / "abi.json").write_text(canonical_json(abi), encoding="utf-8")

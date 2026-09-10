@@ -49,6 +49,16 @@ def main() -> int:
         raise ValueError("unsupported Clang CUDA facade manifest schema")
     if digest(facade) != facade_manifest.get("header", {}).get("sha256"):
         raise ValueError("Clang CUDA facade header does not match its manifest")
+    supported_clang = facade_manifest.get("supported_clang")
+    if (
+        not isinstance(supported_clang, dict)
+        or not isinstance(supported_clang.get("intended_identity"), str)
+        or not isinstance(supported_clang.get("intended_major"), int)
+        or supported_clang.get("validation_status") not in {"NOT_RUN", "VALIDATED"}
+        or "validated_identity" in supported_clang
+        or "validated_major" in supported_clang
+    ):
+        raise ValueError("Clang CUDA facade manifest has an invalid intended/validation identity")
     files["tools/m2a/clang_cuda_facade/cuda_runtime.h"] = digest(facade)
     files["tools/m2a/clang_cuda_facade/manifest.json"] = digest(facade_manifest_path)
     files["metallib"] = digest(lib)
@@ -62,11 +72,13 @@ def main() -> int:
             "manifest_sha256": files["tools/m2a/clang_cuda_facade/manifest.json"],
             "header": facade_manifest["header"]["path"],
             "header_sha256": facade_manifest["header"]["sha256"],
-            "supported_clang": facade_manifest["supported_clang"],
+            "supported_clang": supported_clang,
             "target": facade_manifest["target"],
             "compiler_arguments": facade_manifest["compiler_arguments"],
         },
         "tools": {"clang": tool_identity(args.clang), "metal": tool_identity(args.metal), "metallib": tool_identity(args.metallib), "sdk_path": args.sdk},
+        "semantic_validation_status": ir.get("validation_status"),
+        "compiler_validation_status": ir.get("compiler_validation_status"),
         "cpu_fallback": False, "runtime_compilation": False, "device_link_empty": link["empty"],
     }
     (w / "aot-manifest.json").write_text(json.dumps(doc, indent=2, sort_keys=True) + "\n", encoding="utf-8")

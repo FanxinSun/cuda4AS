@@ -33,12 +33,19 @@ The facade is versioned `1.0.0`, maps CUDA annotations to Clang attributes,
 declares typed `dim3` execution built-ins with `device_builtin`, and exposes
 only the host runtime declarations needed by the unchanged oracle. Its
 `manifest.json` binds the header SHA-256, LLVM Clang support range (18 through
-23), validated Homebrew LLVM 23.1.0 identity, `sm_86` target, and exact
+23), intended Homebrew LLVM 23.1.0 identity, and its `NOT_RUN` validation
+status, `sm_86` target, and exact
 frontend argument template. The live frontend uses
 `-nocudainc -nocudalib -I tools/m2a/clang_cuda_facade` and
 `-Xclang -ast-dump=json`. A compiler-output fixture is available for portable
-importer tests; `--skip-clang` emits a visible `NOT_RUN` record and returns 77,
-so it cannot satisfy the frontend or M2A validation gate.
+importer tests. The fixture is explicitly synthetic schema-conformance data,
+with a sidecar recording its inputs and non-capture status; it is not native
+compiler validation. Clang declaration attributes are consumed from direct
+`inner` `*Attr` records, and absent address-space facts remain `unknown` until
+an explicit backend rule accepts them. Fixture emission records
+`validation_status=FIXTURE` and `compiler_validation_status=NOT_RUN`.
+`--skip-clang` emits a visible `NOT_RUN` record and returns 77, so it cannot
+satisfy the frontend or M2A validation gate.
 
 ## Supported profile and explicit stops
 

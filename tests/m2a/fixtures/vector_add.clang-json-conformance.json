@@ -1,0 +1,541 @@
+{
+  "kind": "TranslationUnitDecl",
+  "inner": [
+    {
+      "kind": "RecordDecl",
+      "name": "dim3",
+      "type": {
+        "qualType": "dim3"
+      }
+    },
+    {
+      "kind": "VarDecl",
+      "name": "blockIdx",
+      "type": {
+        "qualType": "dim3"
+      },
+      "id": "builtin-blockIdx",
+      "inner": [
+        {
+          "kind": "CUDADeviceAttr"
+        },
+        {
+          "kind": "CUDADeviceBuiltinAttr"
+        }
+      ]
+    },
+    {
+      "kind": "VarDecl",
+      "name": "blockDim",
+      "type": {
+        "qualType": "dim3"
+      },
+      "id": "builtin-blockDim",
+      "inner": [
+        {
+          "kind": "CUDADeviceAttr"
+        },
+        {
+          "kind": "CUDADeviceBuiltinAttr"
+        }
+      ]
+    },
+    {
+      "kind": "VarDecl",
+      "name": "threadIdx",
+      "type": {
+        "qualType": "dim3"
+      },
+      "id": "builtin-threadIdx",
+      "inner": [
+        {
+          "kind": "CUDADeviceAttr"
+        },
+        {
+          "kind": "CUDADeviceBuiltinAttr"
+        }
+      ]
+    },
+    {
+      "kind": "FunctionDecl",
+      "id": "kernel-1",
+      "name": "vector_add",
+      "mangledName": "_Z10vector_addPKfS0_Pfi",
+      "loc": {
+        "line": 8,
+        "col": 1
+      },
+      "type": {
+        "qualType": "void (const float *, const float *, float *, int)"
+      },
+      "inner": [
+        {
+          "kind": "CUDAGlobalAttr"
+        },
+        {
+          "kind": "ParmVarDecl",
+          "id": "param-a",
+          "name": "a",
+          "loc": {
+            "line": 8,
+            "col": 41
+          },
+          "type": {
+            "qualType": "const float *",
+            "addressSpace": "global"
+          }
+        },
+        {
+          "kind": "ParmVarDecl",
+          "id": "param-b",
+          "name": "b",
+          "loc": {
+            "line": 8,
+            "col": 57
+          },
+          "type": {
+            "qualType": "const float *",
+            "addressSpace": "global"
+          }
+        },
+        {
+          "kind": "ParmVarDecl",
+          "id": "param-c",
+          "name": "c",
+          "loc": {
+            "line": 8,
+            "col": 67
+          },
+          "type": {
+            "qualType": "float *",
+            "addressSpace": "global"
+          }
+        },
+        {
+          "kind": "ParmVarDecl",
+          "id": "param-n",
+          "name": "n",
+          "loc": {
+            "line": 8,
+            "col": 74
+          },
+          "type": {
+            "qualType": "int"
+          }
+        },
+        {
+          "kind": "CompoundStmt",
+          "range": {
+            "begin": {
+              "line": 8,
+              "col": 77
+            }
+          },
+          "inner": [
+            {
+              "kind": "DeclStmt",
+              "loc": {
+                "line": 9,
+                "col": 5
+              },
+              "inner": [
+                {
+                  "kind": "VarDecl",
+                  "id": "local-i",
+                  "name": "i",
+                  "loc": {
+                    "line": 9,
+                    "col": 9
+                  },
+                  "type": {
+                    "qualType": "int"
+                  },
+                  "inner": [
+                    {
+                      "kind": "BinaryOperator",
+                      "opcode": "+",
+                      "type": {
+                        "qualType": "unsigned int"
+                      },
+                      "range": {
+                        "begin": {
+                          "line": 9,
+                          "col": 13
+                        }
+                      },
+                      "inner": [
+                        {
+                          "kind": "BinaryOperator",
+                          "opcode": "*",
+                          "type": {
+                            "qualType": "unsigned int"
+                          },
+                          "inner": [
+                            {
+                              "kind": "MemberExpr",
+                              "name": "x",
+                              "type": {
+                                "qualType": "unsigned int"
+                              },
+                              "inner": [
+                                {
+                                  "kind": "ImplicitCastExpr",
+                                  "type": {
+                                    "qualType": "dim3"
+                                  },
+                                  "castKind": "LValueToRValue",
+                                  "inner": [
+                                    {
+                                      "kind": "DeclRefExpr",
+                                      "name": "blockIdx",
+                                      "type": {
+                                        "qualType": "dim3"
+                                      },
+                                      "referencedDecl": {
+                                        "kind": "VarDecl",
+                                        "id": "builtin-blockIdx",
+                                        "name": "blockIdx"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "MemberExpr",
+                              "name": "x",
+                              "type": {
+                                "qualType": "unsigned int"
+                              },
+                              "inner": [
+                                {
+                                  "kind": "ImplicitCastExpr",
+                                  "type": {
+                                    "qualType": "dim3"
+                                  },
+                                  "castKind": "LValueToRValue",
+                                  "inner": [
+                                    {
+                                      "kind": "DeclRefExpr",
+                                      "name": "blockDim",
+                                      "type": {
+                                        "qualType": "dim3"
+                                      },
+                                      "referencedDecl": {
+                                        "kind": "VarDecl",
+                                        "id": "builtin-blockDim",
+                                        "name": "blockDim"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "kind": "MemberExpr",
+                          "name": "x",
+                          "type": {
+                            "qualType": "unsigned int"
+                          },
+                          "inner": [
+                            {
+                              "kind": "ImplicitCastExpr",
+                              "type": {
+                                "qualType": "dim3"
+                              },
+                              "castKind": "LValueToRValue",
+                              "inner": [
+                                {
+                                  "kind": "DeclRefExpr",
+                                  "name": "threadIdx",
+                                  "type": {
+                                    "qualType": "dim3"
+                                  },
+                                  "referencedDecl": {
+                                    "kind": "VarDecl",
+                                    "id": "builtin-threadIdx",
+                                    "name": "threadIdx"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "kind": "IfStmt",
+              "loc": {
+                "line": 10,
+                "col": 5
+              },
+              "inner": [
+                {
+                  "kind": "ParenExpr",
+                  "type": {
+                    "qualType": "bool"
+                  },
+                  "inner": [
+                    {
+                      "kind": "BinaryOperator",
+                      "opcode": "<",
+                      "type": {
+                        "qualType": "bool"
+                      },
+                      "inner": [
+                        {
+                          "kind": "ImplicitCastExpr",
+                          "type": {
+                            "qualType": "int"
+                          },
+                          "castKind": "LValueToRValue",
+                          "inner": [
+                            {
+                              "kind": "DeclRefExpr",
+                              "name": "i",
+                              "type": {
+                                "qualType": "int"
+                              },
+                              "referencedDecl": {
+                                "kind": "VarDecl",
+                                "name": "i",
+                                "type": {
+                                  "qualType": "int"
+                                },
+                                "id": "local-i"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "kind": "ImplicitCastExpr",
+                          "type": {
+                            "qualType": "int"
+                          },
+                          "castKind": "LValueToRValue",
+                          "inner": [
+                            {
+                              "kind": "DeclRefExpr",
+                              "name": "n",
+                              "type": {
+                                "qualType": "int"
+                              },
+                              "referencedDecl": {
+                                "kind": "ParmVarDecl",
+                                "name": "n",
+                                "type": {
+                                  "qualType": "int"
+                                },
+                                "id": "param-n"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "BinaryOperator",
+                  "opcode": "=",
+                  "type": {
+                    "qualType": "float"
+                  },
+                  "loc": {
+                    "line": 10,
+                    "col": 16
+                  },
+                  "inner": [
+                    {
+                      "kind": "ArraySubscriptExpr",
+                      "type": {
+                        "qualType": "float"
+                      },
+                      "inner": [
+                        {
+                          "kind": "ImplicitCastExpr",
+                          "type": {
+                            "qualType": "float *"
+                          },
+                          "castKind": "LValueToRValue",
+                          "inner": [
+                            {
+                              "kind": "DeclRefExpr",
+                              "name": "c",
+                              "type": {
+                                "qualType": "float *"
+                              },
+                              "referencedDecl": {
+                                "kind": "ParmVarDecl",
+                                "name": "c",
+                                "type": {
+                                  "qualType": "float *"
+                                },
+                                "id": "param-c"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "kind": "ImplicitCastExpr",
+                          "type": {
+                            "qualType": "int"
+                          },
+                          "castKind": "LValueToRValue",
+                          "inner": [
+                            {
+                              "kind": "DeclRefExpr",
+                              "name": "i",
+                              "type": {
+                                "qualType": "int"
+                              },
+                              "referencedDecl": {
+                                "kind": "VarDecl",
+                                "name": "i",
+                                "type": {
+                                  "qualType": "int"
+                                },
+                                "id": "local-i"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "BinaryOperator",
+                      "opcode": "+",
+                      "type": {
+                        "qualType": "float"
+                      },
+                      "inner": [
+                        {
+                          "kind": "ArraySubscriptExpr",
+                          "type": {
+                            "qualType": "const float"
+                          },
+                          "inner": [
+                            {
+                              "kind": "ImplicitCastExpr",
+                              "type": {
+                                "qualType": "const float *"
+                              },
+                              "castKind": "LValueToRValue",
+                              "inner": [
+                                {
+                                  "kind": "DeclRefExpr",
+                                  "name": "a",
+                                  "type": {
+                                    "qualType": "const float *"
+                                  },
+                                  "referencedDecl": {
+                                    "kind": "ParmVarDecl",
+                                    "name": "a",
+                                    "type": {
+                                      "qualType": "const float *"
+                                    },
+                                    "id": "param-a"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "ImplicitCastExpr",
+                              "type": {
+                                "qualType": "int"
+                              },
+                              "castKind": "LValueToRValue",
+                              "inner": [
+                                {
+                                  "kind": "DeclRefExpr",
+                                  "name": "i",
+                                  "type": {
+                                    "qualType": "int"
+                                  },
+                                  "referencedDecl": {
+                                    "kind": "VarDecl",
+                                    "name": "i",
+                                    "type": {
+                                      "qualType": "int"
+                                    },
+                                    "id": "local-i"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "kind": "ArraySubscriptExpr",
+                          "type": {
+                            "qualType": "const float"
+                          },
+                          "inner": [
+                            {
+                              "kind": "ImplicitCastExpr",
+                              "type": {
+                                "qualType": "const float *"
+                              },
+                              "castKind": "LValueToRValue",
+                              "inner": [
+                                {
+                                  "kind": "DeclRefExpr",
+                                  "name": "b",
+                                  "type": {
+                                    "qualType": "const float *"
+                                  },
+                                  "referencedDecl": {
+                                    "kind": "ParmVarDecl",
+                                    "name": "b",
+                                    "type": {
+                                      "qualType": "const float *"
+                                    },
+                                    "id": "param-b"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "ImplicitCastExpr",
+                              "type": {
+                                "qualType": "int"
+                              },
+                              "castKind": "LValueToRValue",
+                              "inner": [
+                                {
+                                  "kind": "DeclRefExpr",
+                                  "name": "i",
+                                  "type": {
+                                    "qualType": "int"
+                                  },
+                                  "referencedDecl": {
+                                    "kind": "VarDecl",
+                                    "name": "i",
+                                    "type": {
+                                      "qualType": "int"
+                                    },
+                                    "id": "local-i"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

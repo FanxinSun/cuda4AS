@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 from pathlib import Path
 import stat
 import subprocess
@@ -9,7 +10,7 @@ import tempfile
 import unittest
 
 from tools.m2a.analyze_m2a_return import analyze
-from tools.m2a.clang_ast import ClangASTImportError, import_ast, import_ast_file
+from tools.m2a.clang_ast import ClangASTImportError, _location, import_ast, import_ast_file
 from tools.m2a.native_aot import (
     AOTError,
     KernelParser,
@@ -31,7 +32,8 @@ HDR = ROOT / "oracle/src/oracle.h"
 SRC_HASH = "b3f205cabc42a697276244d5810ce62ff40a5c9cc6a8e1078420ccbefa88d0e2"
 HDR_HASH = "6e7cc4c2e59e10db5b68df4116ed67ec3fe1d88d559c41e0a9feb2da3dd643bc"
 OUT_HASH = "ed551637cf393112d0093037a0b41b9d1e9bd213c6037e8efcde30cf480f0332"
-AST_FIXTURE = ROOT / "tests/m2a/fixtures/vector_add.clang-ast.json"
+AST_FIXTURE = ROOT / "tests/m2a/fixtures/vector_add.clang-json-conformance.json"
+AST_FIXTURE_META = ROOT / "tests/m2a/fixtures/vector_add.clang-json-conformance.provenance.json"
 FACADE = ROOT / "tools/m2a/clang_cuda_facade/cuda_runtime.h"
 
 
@@ -62,6 +64,21 @@ class NativeAOTCompilerTests(unittest.TestCase):
             for name in ("ir.json", "abi.json", "device-link.json", "device-link-image.json", "kernel.metal", "device-source.cu"):
                 self.assertEqual((a / name).read_bytes(), (b / name).read_bytes(), name)
             self.assertEqual(json.loads((a / "device-link.json").read_text())["empty"], False)
+            abi = json.loads((a / "abi.json").read_text())
+            self.assertEqual(abi["address_space_mapping"]["schema"], "cuda4as-address-space-lowering-v1")
+            self.assertEqual(abi["arguments"][0]["semantic_address_space"], "global")
+            self.assertEqual(abi["arguments"][0]["metal_address_space"], "device")
+
+    def test_schema_fixture_is_not_live_compiler_validation(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            work = self.run_emit(Path(td) / "fixture")
+            ir = json.loads((work / "ir.json").read_text())
+            driver = json.loads((work / "driver-facts.json").read_text())
+            self.assertEqual(ir["validation_status"], "FIXTURE")
+            self.assertEqual(ir["compiler_validation_status"], "NOT_RUN")
+            self.assertEqual(driver["compiler_validation_status"], "NOT_RUN")
+            self.assertEqual(ir["semantic_source"]["status"], "FIXTURE")
+            self.assertEqual(ir["semantic_source"]["validation_status"], "NOT_RUN")
 
     def test_supported_operand_change_flows_into_ir_and_msl(self) -> None:
         with tempfile.TemporaryDirectory() as td:
@@ -108,7 +125,12 @@ class NativeAOTCompilerTests(unittest.TestCase):
             self.assertRaises(AOTError, KernelParser(bad_addr.read_text()).find_kernel)
 
     def test_malformed_abi_unresolved_link_and_fallback_fail(self) -> None:
-        good = {"schema": "cuda4as-native-aot-abi-v1", "version": 1, "arguments": [{"index": i, "kind": "buffer" if i < 3 else "scalar", "address_space": "global" if i < 3 else "constant"} for i in range(4)], "thread_position": "1d_grid", "cpu_fallback": False}
+        good = {
+            "schema": "cuda4as-native-aot-abi-v1", "version": 1,
+            "arguments": [{"index": i, "kind": "buffer" if i < 3 else "scalar", "address_space": "global" if i < 3 else "constant", "metal_address_space": "device" if i < 3 else "constant", "semantic_address_space": "global" if i < 3 else "unknown"} for i in range(4)],
+            "address_space_mapping": {"schema": "cuda4as-address-space-lowering-v1", "status": "EXPLICIT_PORTABLE_RULE", "rules": [{"compiler_kind": "pointer", "compiler_address_space": "global", "metal_address_space": "device"}, {"compiler_kind": "scalar", "compiler_address_space": "any", "metal_address_space": "constant"}]},
+            "thread_position": "1d_grid", "cpu_fallback": False,
+        }
         bad = dict(good); bad["arguments"] = good["arguments"][:3]
         self.assertRaises(AOTError, verify_abi, bad)
         bad_fallback = dict(good); bad_fallback["cpu_fallback"] = True
@@ -120,15 +142,27 @@ class NativeAOTCompilerTests(unittest.TestCase):
         kernel, metadata = import_ast_file(AST_FIXTURE, "vector_add")
         self.assertTrue(metadata["authoritative"])
         self.assertEqual(metadata["kind"], "clang_cuda_ast_json")
-        self.assertEqual([p["address_space"] for p in kernel["params"]], ["global", "global", "global", "constant"])
+        self.assertEqual([p["address_space"] for p in kernel["params"]], ["global", "global", "global", "unknown"])
         self.assertEqual([p["qual_type"] for p in kernel["params"]], ["const float *", "const float *", "float *", "int"])
         init = kernel["body"][0]["init"]
         self.assertEqual(init["type"], "u32")
         self.assertEqual(init["left"]["operator"], "*")
         self.assertEqual(init["left"]["left"]["base"]["builtin"], "blockIdx")
+        self.assertEqual(init["source_location"]["provenance"], "exact")
+        self.assertEqual(init["left"]["source_location"]["provenance"], "inherited")
         self.assertEqual(kernel["body"][1]["kind"], "if")
         self.assertEqual(kernel["body"][1]["condition"]["operator"], "<")
         self.assertEqual(kernel["body"][1]["then"][0]["lhs"]["address_space"], "global")
+        self.assertEqual(metadata["kernel_attributes"], ["CUDAGlobalAttr"])
+
+    def test_fixture_is_explicit_schema_conformance_data(self) -> None:
+        provenance = json.loads(AST_FIXTURE_META.read_text())
+        self.assertEqual(provenance["status"], "SYNTHETIC_SCHEMA_CONFORMANCE")
+        self.assertFalse(provenance["capture"]["native_clang_capture"])
+        self.assertEqual(provenance["fixture_sha256"], hashlib.sha256(AST_FIXTURE.read_bytes()).hexdigest())
+        self.assertEqual(provenance["compiler_identity"]["validation_status"], "NOT_RUN")
+        self.assertEqual(provenance["capture"]["status"], "NOT_CAPTURED")
+        self.assertEqual(provenance["producer"], "cuda4AS hand-authored Clang JSON schema conformance fixture")
 
     def test_compiler_ast_mutations_change_or_fail_import(self) -> None:
         root = json.loads(AST_FIXTURE.read_text())
@@ -156,12 +190,32 @@ class NativeAOTCompilerTests(unittest.TestCase):
         self.assertEqual(changed_kernel["body"][1]["then"][0]["rhs"]["operator"], "-")
         malformed = json.loads(AST_FIXTURE.read_text())
         builtin = next(node for node in _walk_dicts(malformed) if node.get("kind") == "VarDecl" and node.get("name") == "blockIdx")
-        builtin["attrs"] = []
+        builtin["inner"] = [node for node in builtin["inner"] if node.get("kind") != "CUDADeviceBuiltinAttr"]
         for node in _walk_dicts(malformed):
             if node.get("kind") == "DeclRefExpr" and node.get("name") == "blockIdx":
-                node["referencedDecl"]["attrs"] = []
+                node["referencedDecl"]["id"] = "missing-blockIdx"
         with self.assertRaises(ClangASTImportError):
             import_ast(malformed, "vector_add")
+
+        missing_device = json.loads(AST_FIXTURE.read_text())
+        builtin = next(node for node in _walk_dicts(missing_device) if node.get("kind") == "VarDecl" and node.get("name") == "blockIdx")
+        builtin["inner"] = [node for node in builtin["inner"] if node.get("kind") != "CUDADeviceAttr"]
+        with self.assertRaises(ClangASTImportError):
+            import_ast(missing_device, "vector_add")
+
+        conflicting_builtin = json.loads(AST_FIXTURE.read_text())
+        builtin = next(node for node in _walk_dicts(conflicting_builtin) if node.get("kind") == "VarDecl" and node.get("name") == "blockIdx")
+        builtin["inner"].append({"kind": "CUDAHostAttr"})
+        with self.assertRaises(ClangASTImportError):
+            import_ast(conflicting_builtin, "vector_add")
+
+        old_layout = json.loads(AST_FIXTURE.read_text())
+        old_function = next(node for node in _walk_dicts(old_layout) if node.get("kind") == "FunctionDecl" and node.get("name") == "vector_add")
+        old_function["isCUDAKernel"] = True
+        old_function["attrs"] = [{"kind": "CUDAKernelAttr"}]
+        old_function["inner"] = [node for node in old_function["inner"] if node.get("kind") != "CUDAGlobalAttr"]
+        with self.assertRaises(ClangASTImportError):
+            import_ast(old_layout, "vector_add")
 
         missing_body = json.loads(AST_FIXTURE.read_text())
         function = next(node for node in _walk_dicts(missing_body) if node.get("kind") == "FunctionDecl" and node.get("name") == "vector_add")
@@ -188,6 +242,58 @@ class NativeAOTCompilerTests(unittest.TestCase):
         with self.assertRaises(AOTError):
             verify_source_compiler_signature(source_kernel, compiler_kernel)
 
+    def test_address_space_is_preserved_and_backend_rejects_unknown(self) -> None:
+        generic_ast = json.loads(AST_FIXTURE.read_text())
+        generic_param = next(node for node in _walk_dicts(generic_ast) if node.get("kind") == "ParmVarDecl" and node.get("name") == "a")
+        generic_param["type"]["addressSpace"] = "generic"
+        generic_kernel, _ = import_ast(generic_ast, "vector_add")
+        self.assertEqual(generic_kernel["params"][0]["address_space"], "generic")
+        with self.assertRaises(AOTError):
+            SSABuilder(generic_kernel).build()
+
+        unknown_ast = json.loads(AST_FIXTURE.read_text())
+        unknown_param = next(node for node in _walk_dicts(unknown_ast) if node.get("kind") == "ParmVarDecl" and node.get("name") == "a")
+        unknown_param["type"].pop("addressSpace")
+        unknown_kernel, _ = import_ast(unknown_ast, "vector_add")
+        self.assertEqual(unknown_kernel["params"][0]["address_space"], "unknown")
+        with self.assertRaises(AOTError):
+            SSABuilder(unknown_kernel).build()
+
+        constant_ast = json.loads(AST_FIXTURE.read_text())
+        constant_param = next(node for node in _walk_dicts(constant_ast) if node.get("kind") == "ParmVarDecl" and node.get("name") == "a")
+        constant_param["type"]["addressSpace"] = "constant"
+        constant_kernel, _ = import_ast(constant_ast, "vector_add")
+        self.assertEqual(constant_kernel["params"][0]["address_space"], "constant")
+        with self.assertRaises(AOTError):
+            SSABuilder(constant_kernel).build()
+
+    def test_builtin_binding_uses_compiler_identity_not_same_name(self) -> None:
+        extra = json.loads(AST_FIXTURE.read_text())
+        extra["inner"].insert(1, {"kind": "VarDecl", "id": "user-blockIdx", "name": "blockIdx", "type": {"qualType": "int"}, "loc": {"line": 50, "col": 1}})
+        kernel, _ = import_ast(extra, "vector_add")
+        self.assertEqual(kernel["body"][0]["init"]["left"]["left"]["base"]["builtin"], "blockIdx")
+        wrong_ref = json.loads(AST_FIXTURE.read_text())
+        wrong_ref["inner"].insert(1, {"kind": "VarDecl", "id": "user-blockIdx", "name": "blockIdx", "type": {"qualType": "int"}, "loc": {"line": 50, "col": 1}})
+        first_ref = next(node for node in _walk_dicts(wrong_ref) if node.get("kind") == "DeclRefExpr" and node.get("name") == "blockIdx")
+        first_ref["referencedDecl"]["id"] = "user-blockIdx"
+        with self.assertRaises(ClangASTImportError):
+            import_ast(wrong_ref, "vector_add")
+
+    def test_offset_location_is_exact_and_parent_fallback_is_inherited(self) -> None:
+        source = CU.read_bytes()
+        exact = _location({"loc": {"offset": 4}}, source_bytes=source)
+        self.assertEqual(exact["provenance"], "exact_offset")
+        self.assertEqual((exact["line"], exact["column"]), (1, 5))
+        inherited = _location({}, {"line": 9, "column": 7, "provenance": "exact"}, source_bytes=source)
+        self.assertEqual(inherited["provenance"], "inherited")
+        self.assertEqual((inherited["line"], inherited["column"]), (9, 7))
+        offset_ast = json.loads(AST_FIXTURE.read_text())
+        function = next(node for node in _walk_dicts(offset_ast) if node.get("kind") == "FunctionDecl" and node.get("name") == "vector_add")
+        function["loc"] = {"offset": source.index(b"__global__")}
+        kernel, _ = import_ast(offset_ast, "vector_add", source_bytes=source)
+        self.assertEqual(kernel["source_location"]["provenance"], "exact_offset")
+        self.assertEqual((kernel["source_location"]["line"], kernel["source_location"]["column"]), (8, 1))
+
     def test_facade_is_pinned_and_annotation_surface_is_explicit(self) -> None:
         text = FACADE.read_text()
         self.assertIn('CUDA4AS_CLANG_CUDA_FACADE_VERSION "1.0.0"', text)
@@ -199,7 +305,10 @@ class NativeAOTCompilerTests(unittest.TestCase):
     def test_facade_manifest_binds_hash_target_arguments_and_locations(self) -> None:
         contract = load_facade_contract(FACADE.parent)
         self.assertEqual(contract["version"], "1.0.0")
-        self.assertEqual(contract["supported_clang"]["validated_major"], 23)
+        self.assertEqual(contract["supported_clang"]["intended_major"], 23)
+        self.assertEqual(contract["supported_clang"]["validation_status"], "NOT_RUN")
+        self.assertNotIn("validated_identity", contract["supported_clang"])
+        self.assertNotIn("validated_major", contract["supported_clang"])
         self.assertEqual(contract["target"]["cuda_gpu_arch"], "sm_86")
         self.assertEqual(contract["header_sha256"], "e9fabf30365d3b5e3ecaab8e3119d80723eb5c8a20ee32a95ebbb95497d8208b")
         args = materialize_facade_arguments(CU, FACADE.parent)

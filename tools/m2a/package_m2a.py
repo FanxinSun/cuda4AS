@@ -56,7 +56,7 @@ def build(output: Path) -> dict[str, object]:
             "xcode_version": machine["xcode_version"], "metal_compiler": machine["metal_compiler"],
             "metal_devices": machine["metal_devices"],
         },
-        "llvm": {"origin": "/opt/homebrew/opt/llvm", "version": "23.1.0", "minimum_major": 18, "maximum_major_exclusive": 24},
+        "llvm": {"origin": "/opt/homebrew/opt/llvm", "version": "23.1.0", "facade_validation_status": "NOT_RUN", "minimum_major": 18, "maximum_major_exclusive": 24},
         "limits": {"max_jobs": 4, "min_free_gib": 5, "max_task_disk_gib": 20, "max_minutes": 30},
     }
     expected = {
@@ -81,7 +81,7 @@ def build(output: Path) -> dict[str, object]:
         files["tools/m2a/clang_cuda_facade/manifest.json"] = (ROOT / "tools/m2a/clang_cuda_facade/manifest.json").read_bytes()
         files["inventory-binding.json"] = canonical(binding)
         files["expected.json"] = canonical(expected)
-        readme = f"""# {PACKAGE_ID}\n\nThis is the user-operated M2A Native AOT Core v1 drop. It performs no network, install, update, sudo, or CPU fallback. The runner writes all evidence beneath this extracted directory and returns one archive.\n\nBound machine: {machine['model']} / {machine['cpu_brand']} / {machine['os_version']} ({machine['os_build']}); Xcode {machine['xcode_version'].replace(chr(10), ' ')}; SDK {machine['sdk_version']}; LLVM 23.1.0.\n\nThe package contains the unchanged oracle source and header. Do not edit them.\n""".encode()
+        readme = f"""# {PACKAGE_ID}\n\nThis is the user-operated M2A Native AOT Core v1 drop. It performs no network, install, update, sudo, or CPU fallback. The runner writes all evidence beneath this extracted directory and returns one archive.\n\nBound machine: {machine['model']} / {machine['cpu_brand']} / {machine['os_version']} ({machine['os_build']}); Xcode {machine['xcode_version'].replace(chr(10), ' ')}; SDK {machine['sdk_version']}; intended LLVM 23.1.0 facade (validation NOT_RUN).\n\nThe package contains the unchanged oracle source and header. Do not edit them.\n""".encode()
         files["README.md"] = readme
         for rel, data in files.items():
             target = stage / rel
