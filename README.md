@@ -134,3 +134,9 @@ blueprint; they are work, not walls.
 `oracle/ref/` holds the bit-exact reference outputs for the nine-kernel corpus
 G-C1's translator will be checked against — produced on the RTX 5080 in this
 box, which is a **correctness oracle only**.
+
+## Buy me a coffee
+
+cuda4AS is free and open source. If the work is useful to you —
+
+### [☕ **Buy me a coffee**](https://buymeacoffee.com/fanxinsun)
