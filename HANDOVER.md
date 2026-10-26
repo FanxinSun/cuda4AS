@@ -191,6 +191,75 @@ These are settled. Reopen one only with the user.
 **Current next step (N10 / caloml S4):**
 - **N10. Size and propose Geant4 11.2.x + Xerces-C + physics datasets in `~/system-env` (Stage S4)** to the user before downloading any sources (standing rule 3). Once approved and built, rebuild the Celeritas CPU and GPU float builds with `-DCELERITAS_USE_Geant4=ON` and run the S5 physics gate (`cms-2018.gdml` / `testem3-flat.gdml`).
 
+### 5.1 Handoff Guide for the Next Apple Silicon Machine
+
+For a dedicated, standalone copy, see [`HANDOFF.md`](HANDOFF.md).
+
+#### 1. Target Machine Prerequisites
+- macOS 14+ (Sonoma) or 15+ (Sequoia) on Apple Silicon (AArch64).
+- Xcode Command Line Tools (`xcode-select --install`).
+- Required packages:
+  ```bash
+  brew install llvm ninja cmake gh
+  ```
+  *(Homebrew LLVM provides upstream Clang with the NVPTX target enabled).*
+
+#### 2. Repo Layout & Environment Setup
+```bash
+cd ~
+git clone --recursive https://github.com/FanxinSun/YFCE.git
+cd ~/YFCE/cuda4AS
+
+mkdir -p ~/system-env/{src,build,install,logs,cuda4AS}
+
+cat << 'EOF' > ~/system-env/cuda4AS/env.sh
+export CUDA4AS_HOME="$HOME/system-env/install/cuda4AS-toolkit-0.1.0"
+export CUDA4AS_LLVM="$(brew --prefix llvm)"
+export PATH="$CUDA4AS_HOME/bin:$PATH"
+export CELERITAS_CPU="$HOME/system-env/install/celeritas-0.6.3-cpu"
+export CELERITAS_CPU_FLOAT="$HOME/system-env/install/celeritas-0.6.3-cpu-float"
+EOF
+
+source ~/system-env/cuda4AS/env.sh
+```
+
+#### 3. Build & Install cuda4AS Toolkit (v0.1.0)
+```bash
+cmake -B ~/system-env/build/cuda4AS-toolkit -S toolkit -G Ninja \
+  -DCMAKE_INSTALL_PREFIX="$HOME/system-env/install/cuda4AS-toolkit-0.1.0" \
+  -DCMAKE_BUILD_TYPE=Release
+ninja -C ~/system-env/build/cuda4AS-toolkit install
+nvcc --version
+```
+
+#### 4. Hardware Probes & G-C1 Oracle Verification
+```bash
+# 1. Hardware probe suite
+cd ~/YFCE/cuda4AS/drop/as-phase0 && ./run.sh
+
+# 2. 9-Kernel G-C1 Oracle
+cd ~/YFCE/cuda4AS
+gh release download v0.1.0-oracle-ref -R FanxinSun/cuda4AS -D oracle/ref/
+python3 oracle/run_oracle.py --driver ~/system-env/install/cuda4AS-toolkit-0.1.0/bin/nvcc
+# Expect 9/9 PASS (bit-identical to Linux RTX 5080)
+```
+
+#### 5. Verify Celeritas 0.6.3 Float Build (S2 & S3)
+```bash
+cmake -B ~/system-env/build/celeritas-0.6.3-cuda-float -S ~/system-env/src/celeritas-0.6.3 -G Ninja \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INSTALL_PREFIX="$HOME/system-env/install/celeritas-0.6.3-cuda-float" \
+  -DCMAKE_CUDA_COMPILER="$HOME/system-env/install/cuda4AS-toolkit-0.1.0/bin/nvcc" \
+  -DCELERITAS_BUILD_TESTS=ON -DCELERITAS_USE_CUDA=ON -DCELERITAS_REAL_TYPE=float \
+  -DCELERITAS_USE_Geant4=OFF -DFETCHCONTENT_FULLY_DISCONNECTED=ON \
+  -DCLI11_SOURCE_DIR="$HOME/system-env/src/CLI11-2.5.0" \
+  -Dgoogletest_SOURCE_DIR="$HOME/system-env/src/googletest-1.17.0" \
+  -Dnlohmann_json_SOURCE_DIR="$HOME/system-env/src/nlohmann_json-3.12.0"
+ninja -C ~/system-env/build/celeritas-0.6.3-cuda-float
+ctest --test-dir ~/system-env/build/celeritas-0.6.3-cuda-float --output-on-failure -L gpu
+# Expect 39/39 GPU CTests PASS; 214/215 overall PASS.
+```
+
 ## 6. Open items: each needs an answer or a decision
 
 | id | item | status / who decides |
@@ -233,30 +302,22 @@ These are settled. Reopen one only with the user.
 - **R15.** `cuda-projects/ready/` is a directory, so `.gitignore`'s `cuda-projects/*/` excludes it. If
   those 381 sources are meant to be committed, that's for "cuda projects" and the user to settle.
 
-## 8. Uncommitted work, for the user to commit
+## 8. Git and repository state
 
-**cuda4AS (`git status`):**
+- **Committed in `cuda4AS` (`b74839a` on `origin/master`):**
+  - Toolkit: `toolkit/` (`nvcc` driver, IR translator, runtime `libcudart`, clean-room headers).
+  - Probes & results: `RESULTS/g-c1/` (9/9 pass), `RESULTS/as-phase0/masshjs-Mac-mini/` (M4 full p0–p8 run), `RESULTS/s1/` (`p9_lookback`, `p10_fp64`).
+  - Documentation & plans: `HANDOVER.md`, `README.md`, `probe/SELF_REVIEW.md`, `samples/caloml/PLAN.md`.
+- **Committed in `~/YFCE` (`ff2ab52` on `origin/master`):**
+  - Registered and pointed `cuda4AS` submodule to `b74839a`, committed `.gitmodules`.
+- **Handoff guide:**
+  - Standalone guide added in `HANDOFF.md` and summarized in Section 5.1 above.
 
-| change | author |
-|---|---|
-| `README.md` (modified) | Committee |
-| `.gitignore` (modified) | "cuda projects" |
-| `HANDOVER.md` (new) | Committee |
-| `samples/caloml/`: `PLAN.md`, `S1-BRIEF.md`, `S1b-BRIEF.md`, `S1c-BRIEF.md` | Committee and you |
-| `probe/p9_lookback.swift`, `probe/p10_fp64.swift` | you |
-| `RESULTS/s1/`, `RESULTS/as-phase0/masshjs-Mac-mini/` (O5) | you |
-| `RESULTS/cuda-projects/`, `oracle/colab/`, `tools/cuda_projects.py`, and the top-level files of `cuda-projects/` (`README.md`, `corpus.json`, `ready.json`, `retest.json`) | "cuda projects" |
-| `.DS_Store`, `tools/__pycache__/` (O6) | clutter |
-
-**`~/YFCE`:** `.gitmodules` and the cuda4AS gitlink, staged (R12).
-
-**`~/system-env`** (not git):
-
-- in `src/`: the sources and tarballs of `celeritas-0.6.3`, `CLI11-2.5.0`, `googletest-1.17.0` and
-  `nlohmann_json-3.12.0`, with sha256 in `logs/source-sha256.txt`;
-- `build/` and `install/` `celeritas-0.6.3-cpu` and `celeritas-0.6.3-cpu-float`, with their logs;
-- `cuda4AS/build-celeritas-cpu.sh` (`REAL=float|double`) and `cuda4AS/env.sh`, which sets
-  `CELERITAS_CPU`, `CELERITAS_CPU_FLOAT` and `CUDA4AS_LLVM`.
+**`~/system-env`** (local environment, not tracked in git):
+- `src/`: sources and tarballs for `celeritas-0.6.3`, `CLI11-2.5.0`, `googletest-1.17.0`, `nlohmann_json-3.12.0`, CCCL 3.2.0.
+- `build/`: `cuda4AS-toolkit/`, `celeritas-0.6.3-cpu/`, `celeritas-0.6.3-cpu-float/`, `celeritas-0.6.3-cuda-float/`.
+- `install/`: `cuda4AS-toolkit-0.1.0/`, `celeritas-0.6.3-cpu/`, `celeritas-0.6.3-cpu-float/`, `celeritas-0.6.3-cuda-float/`.
+- `cuda4AS/`: `env.sh`, `build-celeritas-cpu.sh`.
 
 ## 9. People and sessions
 

@@ -17,6 +17,8 @@ why, so it is not reopened by accident.
 README.md          this file
 HANDOVER.md        who owns the project now, its rules, open items, residuals
                    and next step (from 2026-10-26: the agy session "cuda4AS")
+HANDOFF.md         handoff guide: setting up and verifying cuda4AS on another
+                   Apple Silicon machine
 toolkit/           the cuda4AS compiler driver (nvcc), translator, clean-room
                    CUDA headers, and Metal/unified-memory runtime (libcudart)
 probe/             the Swift + MSL probes -- source of truth
