@@ -1,0 +1,27 @@
+logging all output to /content/logs/bench_lectures.log
+name, driver_version, compute_cap
+Tesla T4, 580.82.07, 7.5
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+cmake version 3.31.10
+ok lectures
+Writing cuda_projects.py
+Writing manifest.json
+--- round 1/2, default run timeout
+ok         lectures/lecture_002/vector_addition/vector_addition.cu
+ok         lectures/lecture_008/coalesce.cu
+ok         lectures/lecture_008/coarsening.cu
+ok         lectures/lecture_008/divergence.cu
+ok         lectures/lecture_008/privatization.cu
+ok         lectures/lecture_008/occupancy.cu
+ok         lectures/lecture_008/privatization2.cu
+ok         lectures/lecture_009/control_divergence_reduce.cu
+ok         lectures/lecture_009/multistream-reduce.cu
+ok         lectures/lecture_009/reduce_coarsening.cu
+ok         lectures/lecture_009/segment_reduce.cu
+ok         lectures/lecture_009/shared_reduce.cu
+ok         lectures/lecture_009/simple_reduce.cu
+ok         lectures/lecture_012/main.cu
+== gpu-mode/lectures {'ok': 14}
+done: {'ok': 14}
+gpu-mode/lectures                                {'ok': 14}

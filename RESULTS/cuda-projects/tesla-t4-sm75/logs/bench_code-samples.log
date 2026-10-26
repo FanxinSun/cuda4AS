@@ -1,0 +1,37 @@
+logging all output to /content/logs/bench_code-samples.log
+name, driver_version, compute_cap
+Tesla T4, 580.82.07, 7.5
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+cmake version 3.31.10
+ok code-samples
+Writing cuda_projects.py
+Writing manifest.json
+build-fail code-samples/c++11_cuda/c++11_cuda.cu
+build-fail code-samples/posts/american-options/longstaff_schwartz_svd_2.cu
+build-fail code-samples/posts/cufft-callbacks/cufft_callbacks.cu
+ok         code-samples/posts/cufft-callbacks/cufft_no_callbacks.cu
+ok         code-samples/posts/gups/gups.cu
+ok         code-samples/posts/math-libraries-intro/cublas-example.cu
+ok         code-samples/posts/mixed-precision/haxpy.cu
+build-fail code-samples/posts/nvml/nvml_test.cu
+ok         code-samples/posts/nvtx/compiler_inst_nvtx.cu
+build-fail code-samples/posts/parallel_reduction_with_shfl/main.cu
+timeout    code-samples/posts/cuda-vmm/sync_main.cu
+ok         code-samples/posts/printf-alternative/main.cu
+build-fail code-samples/posts/rnn/LSTM.cu
+ok         code-samples/posts/unified-memory/dataElem.cu
+ok         code-samples/posts/unified-memory/dataElem_um.cu
+ok         code-samples/posts/unified-memory/dataElem_um_c++_1.cu
+ok         code-samples/posts/unified-memory/dataElem_um_c++_2.cu
+build-fail code-samples/posts/unified-memory-oversubscription/uvm_oversubs.cu
+ok         code-samples/series/cuda-cpp/coalescing-global/coalescing.cu
+ok         code-samples/series/cuda-cpp/finite-difference/finite-difference.cu
+ok         code-samples/posts/tensor-cores/simpleTensorCoreGEMM.cu
+ok         code-samples/series/cuda-cpp/optimize-data-transfers/bandwidthtest.cu
+ok         code-samples/series/cuda-cpp/optimize-data-transfers/profile.cu
+ok         code-samples/series/cuda-cpp/overlap-data-transfers/async.cu
+ok         code-samples/series/cuda-cpp/shared-memory/shared-memory.cu
+ok         code-samples/series/cuda-cpp/transpose/transpose.cu
+== NVIDIA-developer-blog/code-samples {'build-fail': 7, 'timeout': 1, 'ok': 18}
+NVIDIA-developer-blog/code-samples               {'build-fail': 7, 'timeout': 1, 'ok': 18}

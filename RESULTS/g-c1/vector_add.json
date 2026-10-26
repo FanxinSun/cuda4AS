@@ -1,0 +1,33 @@
+{
+  "gate": "G-C1",
+  "kernel": "vector_add",
+  "source": "oracle/src/vector_add.cu",
+  "reference_sha256": "ed551637cf393112d0093037a0b41b9d1e9bd213c6037e8efcde30cf480f0332",
+  "actual_sha256": "ed551637cf393112d0093037a0b41b9d1e9bd213c6037e8efcde30cf480f0332",
+  "bytes": 4194304,
+  "elements": 1048576,
+  "dtype": "f32",
+  "shape": [1048576],
+  "compare": "exact",
+  "bitwise_match": true,
+  "mismatches": 0,
+  "mechanisms_exercised": [
+    "D2_arrival_ticket_blockIdx_remap",
+    "D3_gpuAddress_device_pointer_residency",
+    "clean_room_cuda_runtime_headers",
+    "native_metal_msl_lowering"
+  ],
+  "machine": {
+    "collected_utc": "2026-10-25T23:55:45Z",
+    "hostname": "masshjs-mac-mini.local",
+    "os_product": "macOS",
+    "os_version": "15.4.1",
+    "os_build": "24E263",
+    "arch": "arm64",
+    "cpu_brand": "Apple M4",
+    "gpu_core_count": 10,
+    "metal_compiler": "Apple metal version 32023.619",
+    "llvm_version": "Homebrew clang version 23.1.3",
+    "device": "Apple M4"
+  }
+}

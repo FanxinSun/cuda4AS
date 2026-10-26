@@ -1,0 +1,660 @@
+{
+ "slug": "karpathy/llm.c",
+ "commit": "f1e2ace651495b74ae22d45d1723443fd00ecd3a",
+ "complete": true,
+ "tally": {
+  "ok": 20
+ },
+ "skipped_at_discovery": [
+  {
+   "path": "dev/cuda/attention_forward.cu",
+   "reason": "needs cuDNN"
+  },
+  {
+   "path": "dev/cuda/nccl_all_reduce.cu",
+   "reason": "needs NCCL"
+  }
+ ],
+ "results": [
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "07f5d7c9cf7c0635b6d4b329d6fdf0845ab1b5084a5d12182f18a5d49266fa42",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 1\nChecking correctness...\nparameters:\n0.680444 0.680444\n-0.211316 -0.211316\n0.566177 0.566177\n0.597074 0.597074\n0.823041 0.823041\nfirst moment:\n-0.389171 -0.389171\n0.291040 0.291040\n0.104704 0.104704\n-0.302807 -0.302807\n0.713738 0.713738\nsecond moment:\n0.754159 0.754159\n0.299961 0.299961\n0.586026 0.586026\n0.057003 0.057003\n0.186383 0.186383\nAll results match.\n\ntime gpu 0.1246 ms\ntime cpu 0.0548 ms\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 2.7
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 0.9
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/adamw.cu",
+   "kind": "single",
+   "seconds": 8.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": null,
+    "stdout_sha256": "092dadd692578efee58880bc04be09534f6e778ddb33b95472e918e178ce4853",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 1\nChecking the forward pass CPU <-> GPU...\n[preatt]\n0.218705 0.218706\n5.026537 5.026536\n2.511088 2.511087\n-4.672425 -4.672425\n-1.514510 -1.514510\n[att]\n1.000000 1.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n[out]\n-0.529510 -0.529510\n0.889394 0.889394\n0.881674 0.881674\n0.651789 0.651789\n-0.483486 -0.483486\nChecking the backward pass CPU <-> GPU...\n[datt]\n3.555104 3.555104\n0.576998 0.576998\n1.178012 1.178012\n0.229580 0.229580\n1.770526 1.770526\n[dpreatt]\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n[dinp]\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\nix 2370967 [b=   1, t=   5, qkv=   0, nh=   2, hs=  23]: ref: -0.106785 gpu: -0.106785\nix 2371735 [b=   1, t=   5, qkv=   1, nh=   2, hs=  23]: ref: 0.001080 gpu: 0.001080\nix 2372503 [b=   1, t=   5, qkv=   2, nh=   2, hs=  23]: ref: -0.286986 gpu: -0.286986\nNumber of matching gradients: 9437184 (100.00% of total)\nNumber of non-matching gradients: 0 (0.00% of total)\nNumber of gradients that are exactly zero: 2624 (0.03% of total)\nAll results match. Starting benchmarks.\n\nblock_size  256 | time 118392.507812 ms\n",
+    "stderr_head": "",
+    "rescued": true,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 124,
+      "seconds": 300.4
+     },
+     {
+      "timeout": 900,
+      "rc": 0,
+      "seconds": 361.3
+     }
+    ]
+   },
+   "shortened": true,
+   "path": "dev/cuda/attention_backward.cu",
+   "kind": "single",
+   "seconds": 675.1,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "f8202cac31ded0f41f48cf143407dab3deb105c19603a46a6be1cfa069fce508",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 1\nChecking block size 32.\n11.123796 11.123796\n13.224319 13.224317\n19.941282 19.941282\n11.331387 11.331387\n10.984687 10.984687\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\nChecking block size 64.\n11.123796 11.123796\n13.224319 13.224317\n19.941282 19.941282\n11.331387 11.331387\n10.984687 10.984687\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\nChecking block size 128.\n11.123796 11.123796\n13.224319 13.224317\n19.941282 19.941282\n11.331387 11.331387\n10.984687 10.984687\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\nChecking block size 256.\n11.123796 11.123796\n13.224319 13.224317\n19.941282 19.941282\n11.331387 11.331387\n10.984687 10.984687\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\nChecking block size 512.\n11.123796 11.123796\n13.224319 13.224317\n19.941282 19.941282\n11.331387 11.331387\n10.984687 10.984687\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\nChecking block size 1024.\n11.123796 11.123796\n13.224319 13.224317\n19.941282 19.941282\n11.331387 11.331387\n10.984687 10.984687\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\n0.000000 0.000000\nAll results match. Starting benchmarks.\n\nblock_size   32 | time 28.767168 ms\nblock_size   64 | time 25.364256 ms\nblock_size  128 | time 25.325567 ms\nblock_size  256 | time 25.252768 ms\nblock_size ",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 53.6
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 52.0
+     }
+    ]
+   },
+   "shortened": true,
+   "path": "dev/cuda/classifier_fused.cu",
+   "kind": "single",
+   "seconds": 115.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "02b6a3388cffc9d878679b8d70c6d34b48a1e9ef64dcbdfdc7de57dadc4ef2dd",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 1\nChecking block size 32.\n0.158846 0.158846\n0.256866 0.256866\n0.983417 0.983417\n2.400865 2.400865\n1.171537 1.171537\nChecking block size 64.\n0.158846 0.158846\n0.256866 0.256866\n0.983417 0.983417\n2.400865 2.400865\n1.171537 1.171537\nChecking block size 128.\n0.158846 0.158846\n0.256866 0.256866\n0.983417 0.983417\n2.400865 2.400865\n1.171537 1.171537\nChecking block size 256.\n0.158846 0.158846\n0.256866 0.256866\n0.983417 0.983417\n2.400865 2.400865\n1.171537 1.171537\nChecking block size 512.\n0.158846 0.158846\n0.256866 0.256866\n0.983417 0.983417\n2.400865 2.400865\n1.171537 1.171537\nChecking block size 1024.\n0.158846 0.158846\n0.256866 0.256866\n0.983417 0.983417\n2.400865 2.400865\n1.171537 1.171537\nAll results match. Starting benchmarks.\n\nblock_size   32 | time 0.0136 ms | per token 1.66 ns\nblock_size   64 | time 0.0136 ms | per token 1.66 ns\nblock_size  128 | time 0.0135 ms | per token 1.65 ns\nblock_size  256 | time 0.0133 ms | per token 1.63 ns\nblock_size  512 | time 0.0137 ms | per token 1.67 ns\nblock_size 1024 | time 0.0133 ms | per token 1.63 ns\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 26.3
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 26.4
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/crossentropy_forward.cu",
+   "kind": "single",
+   "seconds": 56.1,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "1622b90acae4befb49104359f1a51e4adae2093be3d8adc27ab690ec5d87ed65",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 1\nChecking block size 32.\n-0.541547 -0.541547\n-0.254201 -0.254201\n-0.504750 -0.504750\n-0.514638 -0.514638\n-0.587607 -0.587607\nChecking block size 64.\n-0.541547 -0.541547\n-0.254201 -0.254201\n-0.504750 -0.504750\n-0.514638 -0.514638\n-0.587607 -0.587607\nChecking block size 128.\n-0.541547 -0.541547\n-0.254201 -0.254201\n-0.504750 -0.504750\n-0.514638 -0.514638\n-0.587607 -0.587607\nChecking block size 256.\n-0.541547 -0.541547\n-0.254201 -0.254201\n-0.504750 -0.504750\n-0.514638 -0.514638\n-0.587607 -0.587607\nChecking block size 512.\n-0.541547 -0.541547\n-0.254201 -0.254201\n-0.504750 -0.504750\n-0.514638 -0.514638\n-0.587607 -0.587607\nChecking block size 1024.\n-0.541547 -0.541547\n-0.254201 -0.254201\n-0.504750 -0.504750\n-0.514638 -0.514638\n-0.587607 -0.587607\nAll results match. Starting benchmarks.\n\nblock_size   32 | time 60.1930 ms | per token 7.35 \u00b5s\nblock_size   64 | time 42.0381 ms | per token 5.13 \u00b5s\nblock_size  128 | time 41.8521 ms | per token 5.11 \u00b5s\nblock_size  256 | time 41.6915 ms | per token 5.09 \u00b5s\nblock_size  512 | time 41.8887 ms | per token 5.11 \u00b5s\nblock_size 1024 | time 46.4110 ms | per token 5.67 \u00b5s\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 59.3
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 58.9
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/crossentropy_softmax_backward.cu",
+   "kind": "single",
+   "seconds": 121.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "f5e6c7e117462abff65bfcec1186742f9c5d357a7a7a27cf09f1681f6f569330",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 1\nChecking block size 32.\n0.363504 0.363504\n-0.024923 -0.024923\n-0.640767 -0.640767\n0.363258 0.363258\n-0.679936 -0.679936\n1.009853 1.009853\n-1.287850 -1.287850\n2.498815 2.498815\n0.434538 0.434538\n-0.443991 -0.443991\nChecking block size 64.\n0.363504 0.363504\n-0.024923 -0.024923\n-0.640767 -0.640767\n0.363258 0.363258\n-0.679936 -0.679936\n1.009853 1.009853\n-1.287850 -1.287850\n2.498815 2.498815\n0.434538 0.434538\n-0.443991 -0.443991\nChecking block size 128.\n0.363504 0.363504\n-0.024923 -0.024923\n-0.640767 -0.640767\n0.363258 0.363258\n-0.679936 -0.679936\n1.009853 1.009853\n-1.287850 -1.287850\n2.498815 2.498815\n0.434538 0.434538\n-0.443991 -0.443991\nChecking block size 256.\n0.363504 0.363504\n-0.024923 -0.024923\n-0.640767 -0.640767\n0.363258 0.363258\n-0.679936 -0.679936\n1.009853 1.009853\n-1.287850 -1.287850\n2.498815 2.498815\n0.434538 0.434538\n-0.443991 -0.443991\nChecking block size 512.\n0.363504 0.363504\n-0.024923 -0.024923\n-0.640767 -0.640767\n0.363258 0.363258\n-0.679936 -0.679936\n1.009853 1.009853\n-1.287850 -1.287850\n2.498815 2.498815\n0.434538 0.434538\n-0.443991 -0.443991\nChecking block size 1024.\n0.363504 0.363504\n-0.024923 -0.024923\n-0.640767 -0.640767\n0.363258 0.363258\n-0.679936 -0.679936\n1.009853 1.009853\n-1.287850 -1.287850\n2.498815 2.498815\n0.434538 0.434538\n-0.443991 -0.443991\nAll results match. Starting benchmarks.\n\nblock_size   32 | time 0.5322 ms\nblock_size   64 | time 0.5132 ms\nblock_size  128 | time 0.5159 ms\nblock_size  256 | time 0.5092 ms\nblock_size  512 | time ",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 10.5
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 5.8
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/encoder_backward.cu",
+   "kind": "single",
+   "seconds": 19.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "f652ba6d9064acc2c2e3ab6159e8c2acec3925c4dea869f387835ee8767747cf",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 2\nChecking block size 32.\n1.383219 1.382812\n1.368474 1.375000\n-0.635097 -0.632812\n-0.992271 -0.992188\n0.099410 0.097656\nChecking block size 64.\n1.383219 1.382812\n1.368474 1.375000\n-0.635097 -0.632812\n-0.992271 -0.992188\n0.099410 0.097656\nChecking block size 128.\n1.383219 1.382812\n1.368474 1.375000\n-0.635097 -0.632812\n-0.992271 -0.992188\n0.099410 0.097656\nChecking block size 256.\n1.383219 1.382812\n1.368474 1.375000\n-0.635097 -0.632812\n-0.992271 -0.992188\n0.099410 0.097656\nChecking block size 512.\n1.383219 1.382812\n1.368474 1.375000\n-0.635097 -0.632812\n-0.992271 -0.992188\n0.099410 0.097656\nChecking block size 1024.\n1.383219 1.382812\n1.368474 1.375000\n-0.635097 -0.632812\n-0.992271 -0.992188\n0.099410 0.097656\nAll results match. Starting benchmarks.\n\nblock_size   32 | time 0.4636 ms | bandwidth 217.12 GB/s\nblock_size   64 | time 0.2568 ms | bandwidth 391.94 GB/s\nblock_size  128 | time 0.2579 ms | bandwidth 390.25 GB/s\nblock_size  256 | time 0.2515 ms | bandwidth 400.20 GB/s\nblock_size  512 | time 0.2552 ms | bandwidth 394.49 GB/s\nblock_size 1024 | time 0.2791 ms | bandwidth 360.63 GB/s\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 4.2
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 4.1
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/encoder_forward.cu",
+   "kind": "single",
+   "seconds": 11.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "ccd9c10d928d860b994217ccc1e7a49bcde2ecb4e04832e6a2853483f655ad2f",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 1\nChecking block size 32.\n1.437263 1.437500\n-0.600894 -0.601562\n1.334550 1.335938\n-0.346003 -0.343750\n0.380541 0.380859\n0.022639 0.022705\n-0.013207 -0.013184\n0.028468 0.028442\n-0.051255 -0.051270\n-0.059892 -0.059814\n1.221914 1.218750\n1.239262 1.242188\n1.225189 1.226562\n1.227049 1.226562\n1.234066 1.234375\n-0.470800 -0.470703\n-0.653982 -0.656250\n0.231692 0.231445\n-0.653282 -0.652344\n-0.151269 -0.151367\nChecking block size 64.\n1.437263 1.437500\n-0.600894 -0.601562\n1.334550 1.335938\n-0.346003 -0.343750\n0.380541 0.380859\n0.022639 0.022705\n-0.013207 -0.013184\n0.028468 0.028442\n-0.051255 -0.051270\n-0.059892 -0.059814\n1.221914 1.218750\n1.239262 1.242188\n1.225189 1.226562\n1.227049 1.226562\n1.234066 1.234375\n-0.470800 -0.470703\n-0.653982 -0.656250\n0.231692 0.231445\n-0.653282 -0.652344\n-0.151269 -0.151367\nChecking block size 128.\n1.437263 1.437500\n-0.600894 -0.601562\n1.334550 1.335938\n-0.346003 -0.343750\n0.380541 0.380859\n0.022639 0.022705\n-0.013207 -0.013184\n0.028468 0.028442\n-0.051255 -0.051270\n-0.059892 -0.059814\n1.221914 1.218750\n1.239262 1.242188\n1.225189 1.226562\n1.227049 1.226562\n1.234066 1.234375\n-0.470800 -0.470703\n-0.653982 -0.656250\n0.231692 0.231445\n-0.653282 -0.652344\n-0.151269 -0.151367\nChecking block size 256.\n1.437263 1.437500\n-0.600894 -0.601562\n1.334550 1.335938\n-0.346003 -0.343750\n0.380541 0.380859\n0.022639 0.022705\n-0.013207 -0.013184\n0.028468 0.028442\n-0.051255 -0.051270\n-0.059892 -0.059814\n1.221914 1.218750\n1.239262 1.242188\n1.225189 1.226562\n1.227049 ",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 14.0
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 14.3
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/fused_residual_forward.cu",
+   "kind": "single",
+   "seconds": 33.3,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "2cb2e05761401f3a80587218c7042687f5e5509768496b29768b903666f32eac",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 1\nChecking block size 32.\n0.730469 0.734375\n-0.129883 -0.130859\n0.695312 0.699219\n-0.871094 -0.871094\n-0.455078 -0.457031\nChecking block size 64.\n0.730469 0.734375\n-0.129883 -0.130859\n0.695312 0.699219\n-0.871094 -0.871094\n-0.455078 -0.457031\nChecking block size 128.\n0.730469 0.734375\n-0.129883 -0.130859\n0.695312 0.699219\n-0.871094 -0.871094\n-0.455078 -0.457031\nChecking block size 256.\n0.730469 0.734375\n-0.129883 -0.130859\n0.695312 0.699219\n-0.871094 -0.871094\n-0.455078 -0.457031\nChecking block size 512.\n0.730469 0.734375\n-0.129883 -0.130859\n0.695312 0.699219\n-0.871094 -0.871094\n-0.455078 -0.457031\nChecking block size 1024.\n0.730469 0.734375\n-0.129883 -0.130859\n0.695312 0.699219\n-0.871094 -0.871094\n-0.455078 -0.457031\nAll results match. Starting benchmarks.\n\nblock_size   32 | time 0.4766 ms | bandwidth 105.62 GB/s\nblock_size   64 | time 0.2808 ms | bandwidth 179.22 GB/s\nblock_size  128 | time 0.2748 ms | bandwidth 183.15 GB/s\nblock_size  256 | time 0.2705 ms | bandwidth 186.06 GB/s\nblock_size  512 | time 0.2890 ms | bandwidth 174.14 GB/s\nblock_size 1024 | time 0.3083 ms | bandwidth 163.27 GB/s\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 4.0
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 3.7
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/gelu_backward.cu",
+   "kind": "single",
+   "seconds": 11.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "5879043d98650b29016901b2276b33e8ea4575235e4f22d0e42c069b2d7489c3",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 1\nChecking block size 32.\n0.511501 0.511719\n-0.087948 -0.087891\n0.404449 0.404297\n0.432530 0.433594\n0.654288 0.656250\nChecking block size 64.\n0.511501 0.511719\n-0.087948 -0.087891\n0.404449 0.404297\n0.432530 0.433594\n0.654288 0.656250\nChecking block size 128.\n0.511501 0.511719\n-0.087948 -0.087891\n0.404449 0.404297\n0.432530 0.433594\n0.654288 0.656250\nChecking block size 256.\n0.511501 0.511719\n-0.087948 -0.087891\n0.404449 0.404297\n0.432530 0.433594\n0.654288 0.656250\nChecking block size 512.\n0.511501 0.511719\n-0.087948 -0.087891\n0.404449 0.404297\n0.432530 0.433594\n0.654288 0.656250\nChecking block size 1024.\n0.511501 0.511719\n-0.087948 -0.087891\n0.404449 0.404297\n0.432530 0.433594\n0.654288 0.656250\nAll results match. Starting benchmarks.\n\nblock_size   32 | time 0.4375 ms | bandwidth 57.53 GB/s\nblock_size   64 | time 0.1683 ms | bandwidth 149.52 GB/s\nblock_size  128 | time 0.1621 ms | bandwidth 155.27 GB/s\nblock_size  256 | time 0.1597 ms | bandwidth 157.54 GB/s\nblock_size  512 | time 0.1680 ms | bandwidth 149.76 GB/s\nblock_size 1024 | time 0.1817 ms | bandwidth 138.48 GB/s\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 2.6
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 2.4
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/gelu_forward.cu",
+   "kind": "single",
+   "seconds": 8.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "c3831910df4d768b2f8228a1ff9d3b32a8a30a5317a52912089e46688fcc6bf4",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 1\nChecking block size 32.\n23.586632 23.586618\nChecking block size 64.\n23.586632 23.586603\nChecking block size 128.\n23.586632 23.586613\nChecking block size 256.\n23.586632 23.586615\nChecking block size 512.\n23.586632 23.586618\nChecking block size 768.\n23.586632 23.586611\nChecking block size 1024.\n23.586632 23.586613\nAll results match. Starting benchmarks.\n\nblock_size   32 | time 1.6786 ms | bandwidth 84.33 GB/s\nblock_size   64 | time 1.1418 ms | bandwidth 123.98 GB/s\nblock_size  128 | time 1.1006 ms | bandwidth 128.61 GB/s\nblock_size  256 | time 1.0750 ms | bandwidth 131.68 GB/s\nblock_size  512 | time 1.0584 ms | bandwidth 133.74 GB/s\nblock_size  768 | time 1.6279 ms | bandwidth 86.96 GB/s\nblock_size 1024 | time 1.0333 ms | bandwidth 136.99 GB/s\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 29.3
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 29.3
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/global_norm.cu",
+   "kind": "single",
+   "seconds": 67.3,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "225d717888ec788a4e9f51fcb7c517d05910361ced99d2970cde3c7c8a6fb6b2",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 2\nChecking correctness...\ndinp:\n-0.059879 -0.060059\n-0.728206 -0.726562\n0.028147 0.028076\n0.150571 0.150391\n-0.022580 -0.022461\ndweight:\n-48.304440 -48.250000\n53.003799 53.000000\n-84.482285 -84.500000\n61.840015 61.750000\n-66.404800 -66.500000\ndbias:\n-43.977375 -44.000000\n-19.179672 -19.125000\n-8.159845 -8.062500\n-6.934554 -6.812500\n-51.450600 -51.500000\nAll results match for block_size=32.\n\nChecking correctness...\ndinp:\n-0.059879 -0.060059\n-0.728206 -0.726562\n0.028147 0.028076\n0.150571 0.150391\n-0.022580 -0.022461\ndweight:\n-48.304440 -48.250000\n53.003799 53.000000\n-84.482285 -84.500000\n61.840015 61.750000\n-66.404800 -66.500000\ndbias:\n-43.977375 -44.000000\n-19.179672 -19.125000\n-8.159845 -8.062500\n-6.934554 -6.812500\n-51.450600 -51.500000\nAll results match for block_size=64.\n\nChecking correctness...\ndinp:\n-0.059879 -0.060059\n-0.728206 -0.726562\n0.028147 0.028076\n0.150571 0.150391\n-0.022580 -0.022461\ndweight:\n-48.304440 -48.250000\n53.003799 53.000000\n-84.482285 -84.500000\n61.840015 61.750000\n-66.404800 -66.500000\ndbias:\n-43.977375 -44.000000\n-19.179672 -19.125000\n-8.159845 -8.062500\n-6.934554 -6.812500\n-51.450600 -51.500000\nAll results match for block_size=128.\n\nChecking correctness...\ndinp:\n-0.059879 -0.060059\n-0.728206 -0.726562\n0.028147 0.028076\n0.150571 0.150391\n-0.022580 -0.022461\ndweight:\n-48.304440 -48.250000\n53.003799 53.000000\n-84.482285 -84.500000\n61.840015 61.750000\n-66.404800 -66.500000\ndbias:\n-43.977375 -44.000000\n-19.179672 -19.125000\n-8.159845 -8.062",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 6.3
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 6.2
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/layernorm_backward.cu",
+   "kind": "single",
+   "seconds": 22.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "ba50fbdd471b0c93a2d831291885a87cf2eb14387387e167e6164376ca17eef8",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 2\nChecking block size 32.\n1.063294 1.063294\n0.972172 0.972172\n1.483327 1.483328\n-1.535176 -1.535176\n-0.582220 -0.582220\n0.029502 0.029502\n-0.021896 -0.021896\n0.004282 0.004282\n-0.014936 -0.014936\n-0.000940 -0.000940\n1.771574 1.771575\n1.744412 1.744412\n1.696058 1.696058\n1.726418 1.726418\n1.705486 1.705486\nChecking block size 64.\n1.063294 1.063294\n0.972172 0.972172\n1.483327 1.483328\n-1.535176 -1.535176\n-0.582220 -0.582220\n0.029502 0.029502\n-0.021896 -0.021896\n0.004282 0.004282\n-0.014936 -0.014936\n-0.000940 -0.000940\n1.771574 1.771575\n1.744412 1.744412\n1.696058 1.696058\n1.726418 1.726418\n1.705486 1.705486\nChecking block size 128.\n1.063294 1.063294\n0.972172 0.972172\n1.483327 1.483328\n-1.535176 -1.535176\n-0.582220 -0.582220\n0.029502 0.029502\n-0.021896 -0.021896\n0.004282 0.004282\n-0.014936 -0.014936\n-0.000940 -0.000940\n1.771574 1.771575\n1.744412 1.744412\n1.696058 1.696058\n1.726418 1.726418\n1.705486 1.705486\nChecking block size 256.\n1.063294 1.063294\n0.972172 0.972172\n1.483327 1.483328\n-1.535176 -1.535176\n-0.582220 -0.582220\n0.029502 0.029502\n-0.021896 -0.021896\n0.004282 0.004282\n-0.014936 -0.014936\n-0.000940 -0.000940\n1.771574 1.771575\n1.744412 1.744412\n1.696058 1.696058\n1.726418 1.726418\n1.705486 1.705486\nChecking block size 512.\n1.063294 1.063294\n0.972172 0.972172\n1.483327 1.483328\n-1.535176 -1.535176\n-0.582220 -0.582220\n0.029502 0.029502\n-0.021896 -0.021896\n0.004282 0.004282\n-0.014936 -0.014936\n-0.000940 -0.000940\n1.771574 1.771575\n1.744412 1.744412\n1.696058 1.69605",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 39.4
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 36.2
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/layernorm_forward.cu",
+   "kind": "single",
+   "seconds": 84.3,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "bccfd55f3cc01bac69d7fd216fb0c8ca4b84d4a31280a9241c2da2a0f179f4b4",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Device 0: Tesla T4\nenable_tf32: 0\nUsing kernel 1\nChecking correctness...\ndinp:\n-13.589551 -13.589561\n-10.310637 -10.310644\n22.597532 22.597557\n9.732639 9.732655\n8.793335 8.793336\ndweight:\n-7.693955 -7.693974\n-39.825802 -39.825729\n-35.285854 -35.285904\n-0.170389 -0.170364\n-20.444283 -20.444269\ndbias:\n-26.381468 -26.381462\n-18.585657 -18.585653\n-43.469513 -43.469509\n34.793152 34.793152\n32.977776 32.977776\nAll results match.\n\ntime 43.1431 ms\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 60.2
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 58.1
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/matmul_backward.cu",
+   "kind": "single",
+   "seconds": 121.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "1045fb08c7b6ba65e528c4798c47664b7a556846bf4f8bba6e2e5e7911ad4caa",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 1\nChecking correctness...\n-26.381468 -26.375000\n-18.585657 -18.500000\n-43.469513 -43.500000\n34.793152 35.000000\n32.977776 33.000000\nAll results match for block_size=32.\n\nChecking correctness...\n-26.381468 -26.375000\n-18.585657 -18.500000\n-43.469513 -43.500000\n34.793152 35.000000\n32.977776 33.000000\nAll results match for block_size=64.\n\nChecking correctness...\n-26.381468 -26.375000\n-18.585657 -18.500000\n-43.469513 -43.500000\n34.793152 35.000000\n32.977776 33.000000\nAll results match for block_size=128.\n\nChecking correctness...\n-26.381468 -26.375000\n-18.585657 -18.500000\n-43.469513 -43.500000\n34.793152 35.000000\n32.977776 33.000000\nAll results match for block_size=256.\n\nChecking correctness...\n-26.381468 -26.375000\n-18.585657 -18.500000\n-43.469513 -43.500000\n34.793152 35.000000\n32.977776 33.000000\nAll results match for block_size=512.\n\nChecking correctness...\n-26.381468 -26.375000\n-18.585657 -18.500000\n-43.469513 -43.500000\n34.793152 35.000000\n32.977776 33.000000\nAll results match for block_size=768.\n\nChecking correctness...\n-26.381468 -26.375000\n-18.585657 -18.500000\n-43.469513 -43.500000\n34.793152 35.000000\n32.977776 33.000000\nAll results match for block_size=1024.\n\nblock_size 32 time 1.1075 ms\nblock_size 64 time 1.3614 ms\nblock_size 128 time 1.2731 ms\nblock_size 256 time 1.2922 ms\nblock_size 512 time 1.3302 ms\nblock_size 768 time 1.3511 ms\nblock_size 1024 time 1.4680 ms\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 21.0
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 21.3
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/matmul_backward_bias.cu",
+   "kind": "single",
+   "seconds": 51.4,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "986a40aa5054dcff82e707a8b8bd3e7716399422cc31486f84d9f7937067bb0d",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Device 0: Tesla T4\nenable_tf32: 0\nUsing kernel 1\nChecking block size 4 x 4.\n-13.092483 -13.092481\n-4.174163 -4.174165\n-9.112658 -9.112654\n8.353960 8.353964\n22.357595 22.357599\nChecking block size 8 x 8.\n-13.092483 -13.092481\n-4.174163 -4.174165\n-9.112658 -9.112654\n8.353960 8.353964\n22.357595 22.357599\nChecking block size 16 x 16.\n-13.092483 -13.092481\n-4.174163 -4.174165\n-9.112658 -9.112654\n8.353960 8.353964\n22.357595 22.357599\nChecking block size 32 x 32.\n-13.092483 -13.092481\n-4.174163 -4.174165\n-9.112658 -9.112654\n8.353960 8.353964\n22.357595 22.357599\nAll results match. Starting benchmarks.\n\nsqrt_block_size    4 | time 3451.6169 ms | tflops 0.04\nsqrt_block_size    8 | time 2598.5852 ms | tflops 0.06\nsqrt_block_size   16 | time 3489.4719 ms | tflops 0.04\nsqrt_block_size   32 | time 6068.6938 ms | tflops 0.03\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 152.3
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 141.6
+     }
+    ]
+   },
+   "shortened": true,
+   "path": "dev/cuda/matmul_forward.cu",
+   "kind": "single",
+   "seconds": 297.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "fe63e12fdd46fc865f0b50e3c8e69c088910b6845b2c55677a2439d1a3cc5777",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Device 0: Tesla T4\nChecking correctness...\n0.680375 0.680375\n-0.689327 -0.689327\n-0.465731 -0.465731\n0.789422 0.789422\n-0.418401 -0.418401\nAll results match.\n\ntime gpu 0.0027 ms\ntime cpu 0.0159 ms\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/permute.cu",
+   "kind": "single",
+   "seconds": 4.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "d96a894b4f141520f78f9080a976490a987ba8048915f86a2e342b081e010f81",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 1\nChecking block size 32.\n1.437263 1.437500\n-0.600894 -0.601562\n1.334550 1.335938\n-0.346003 -0.343750\n0.380541 0.380859\nChecking block size 64.\n1.437263 1.437500\n-0.600894 -0.601562\n1.334550 1.335938\n-0.346003 -0.343750\n0.380541 0.380859\nChecking block size 128.\n1.437263 1.437500\n-0.600894 -0.601562\n1.334550 1.335938\n-0.346003 -0.343750\n0.380541 0.380859\nChecking block size 256.\n1.437263 1.437500\n-0.600894 -0.601562\n1.334550 1.335938\n-0.346003 -0.343750\n0.380541 0.380859\nChecking block size 512.\n1.437263 1.437500\n-0.600894 -0.601562\n1.334550 1.335938\n-0.346003 -0.343750\n0.380541 0.380859\nChecking block size 1024.\n1.437263 1.437500\n-0.600894 -0.601562\n1.334550 1.335938\n-0.346003 -0.343750\n0.380541 0.380859\nAll results match. Starting benchmarks.\n\nblock_size   32 | time 0.4234 ms | bandwidth 178.31 GB/s\nblock_size   64 | time 0.1708 ms | bandwidth 441.89 GB/s\nblock_size  128 | time 0.1647 ms | bandwidth 458.49 GB/s\nblock_size  256 | time 0.1646 ms | bandwidth 458.54 GB/s\nblock_size  512 | time 0.1689 ms | bandwidth 446.99 GB/s\nblock_size 1024 | time 0.1817 ms | bandwidth 415.51 GB/s\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 2.5
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 2.4
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/residual_forward.cu",
+   "kind": "single",
+   "seconds": 8.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "5db65eda09c6060eef00b2e854711f75e91528795a118e43ad8fa9218a0b8816",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 1\nLargest output is: 0.999878\nChecking block size 32.\n0.000001 0.000001\n0.000001 0.000001\n0.000001 0.000001\n0.000001 0.000001\n0.000002 0.000002\nChecking block size 64.\n0.000001 0.000001\n0.000001 0.000001\n0.000001 0.000001\n0.000001 0.000001\n0.000002 0.000002\nChecking block size 128.\n0.000001 0.000001\n0.000001 0.000001\n0.000001 0.000001\n0.000001 0.000001\n0.000002 0.000002\nChecking block size 256.\n0.000001 0.000001\n0.000001 0.000001\n0.000001 0.000001\n0.000001 0.000001\n0.000002 0.000002\nChecking block size 512.\n0.000001 0.000001\n0.000001 0.000001\n0.000001 0.000001\n0.000001 0.000001\n0.000002 0.000002\nChecking block size 1024.\n0.000001 0.000001\n0.000001 0.000001\n0.000001 0.000001\n0.000001 0.000001\n0.000002 0.000002\nAll results match. Starting benchmarks.\n\nblock_size   32 | time 184.7862 ms | per token 22.56 \u00b5s\nblock_size   64 | time 342.6555 ms | per token 41.83 \u00b5s\nblock_size  128 | time 188.5949 ms | per token 23.02 \u00b5s\nblock_size  256 | time 184.8942 ms | per token 22.57 \u00b5s\nblock_size  512 | time 232.7995 ms | per token 28.42 \u00b5s\nblock_size 1024 | time 293.1338 ms | per token 35.78 \u00b5s\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 179.9
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 188.4
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/softmax_forward.cu",
+   "kind": "single",
+   "seconds": 377.4,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "891cd8375afbfde98a3c40de852c54d0502a98e073747d7746a3b65d6a0cfe72",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using kernel 1\n0.027338 0.027338\nAll results match. Starting benchmarks.\n\ntime 153.31 ms vs 8.57 ms for CuBLAS\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 24.0
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 23.4
+     }
+    ]
+   },
+   "shortened": false,
+   "path": "dev/cuda/trimat_forward.cu",
+   "kind": "single",
+   "seconds": 55.6,
+   "status": "ok"
+  }
+ ]
+}

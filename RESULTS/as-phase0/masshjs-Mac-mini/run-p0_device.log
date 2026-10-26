@@ -1,0 +1,10 @@
+device: Apple M4
+  MSL 2.4: accepted
+  MSL 3.0: accepted
+  MSL 3.1: accepted
+  MSL 3.2: accepted
+  MSL 4.0: refused
+  MSL 4.1: refused
+  MSL 4.2: refused
+  threadExecutionWidth: 32
+wrote /Users/masshj/YFCE/cuda4AS/drop/as-phase0/results/p0_device.json

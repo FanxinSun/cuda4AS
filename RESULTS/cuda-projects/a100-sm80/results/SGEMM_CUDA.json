@@ -1,0 +1,45 @@
+{
+ "slug": "siboehm/SGEMM_CUDA",
+ "commit": "5a7dcc513d951ba764d51bc9d587b3163f3a894d",
+ "complete": true,
+ "tally": {
+  "run-fail": 1
+ },
+ "skipped_at_discovery": [],
+ "results": [
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/SGEMM_CUDA/src/kernels/12_kernel_double_buffering.cuh(108): warning #20054-D: dynamic initialization is not supported for a function-scope static __shared__ variable within a __device__/__global__ function\n    __attribute__((shared)) cuda::barrier<cuda::thread_scope::thread_scope_block> frontBarrier;\n                                                                                  ^\n          detected during instantiation of \"void runSgemmDoubleBuffering2<BM,BN,BK,WM,WN,WNITER,TM,TN,NUM_THREADS>(int, int, int, float, float *, float *, float, float *) [with BM=128, BN=128, BK=16, WM=64, WN=64, WNITER=4, TM=8, TN=4, NUM_THREADS=128]\" at line 499 of /content/cuda-projects/SGEMM_CUDA/src/runner.cu\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/SGEMM_CUDA/src/kernels/12_kernel_double_buffering.cuh(109): warning #20054-D: dynamic initialization is not supported for a function-scope static __shared__ variable within a __device__/__global__ function\n    __attribute__((shared)) cuda::barrier<cuda::thread_scope::thread_scope_block> backBarrier;\n                                                                                  ^\n          detected during instantiation of \"void runSgemmDoubleBuffering2<BM,BN,BK,WM,WN,WNITER,TM,TN,NUM_THREADS>(int, int, int, float, float *, float *, float, float *) [with BM=128, BN=128, BK=16, WM=64, WN=64, WNITER=4, TM=8, TN=4, NUM_THREADS=128]\" at line 499 of /content/cuda-projects/SGEMM_CUDA/src/runner.cu\n\n",
+   "runs": {
+    "11": {
+     "rc": 1,
+     "rc2": 1,
+     "stdout_sha256": "21f013b476b0207a4a53b3b438d58bdec2fb20b5111d0579c6914fdc3e7a59d2",
+     "deterministic": false,
+     "pass_marker": true,
+     "fail_marker": true,
+     "stdout_head": "Running kernel 11 on device 0.\nMax size: 4096\ndimensions(m=n=k) 128, alpha: 0.5, beta: 3\nDivergence! Should 50.74, Is 50.54 (Diff  0.20) at 132\nFailed to pass the correctness verification against NVIDIA cuBLAS.\n Logging faulty output into matrixValidationFailure.txt\n",
+     "stderr_head": "",
+     "rescued": false,
+     "attempts": [
+      {
+       "timeout": 300,
+       "rc": 1,
+       "seconds": 5.4
+      },
+      {
+       "timeout": 300,
+       "rc": 1,
+       "seconds": 3.8
+      }
+     ]
+    }
+   },
+   "path": "sgemm.cu",
+   "kind": "sgemm",
+   "seconds": 20.6,
+   "status": "run-fail",
+   "retest": true
+  }
+ ]
+}

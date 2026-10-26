@@ -1,0 +1,550 @@
+{
+  "probe": "p10_fp64",
+  "schema": 1,
+  "machine": {
+    "collected_utc": "2026-10-25T19:27:44Z",
+    "hostname": "masshjs-mac-mini.local",
+    "os_product": "macOS",
+    "os_version": "15.4.1",
+    "os_build": "24E263",
+    "os_version_string": "Version 15.4.1 (Build 24E263)",
+    "arch": "arm64",
+    "cpu_brand": "Apple M4",
+    "cpu_logical": 10,
+    "cpu_perf_cores": 4,
+    "cpu_eff_cores": 6,
+    "ram_bytes": 25769803776,
+    "ram_bytes_sysctl": 25769803776,
+    "page_size": 16384,
+    "developer_dir": "/Applications/Xcode.app/Contents/Developer",
+    "swiftc_version": "Apple Swift version 6.1 (swiftlang-6.1.0.110.21 clang-1700.0.13.3)\nTarget: arm64-apple-macosx15.0",
+    "sdk_version": "15.4",
+    "metal_compiler": "Apple metal version 32023.619 (metalfe-32023.619)\nTarget: air64-apple-darwin24.4.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/metal/current/bin",
+    "gpu_core_count": 10,
+    "device_acquisition_route": "MTLCreateSystemDefaultDevice()",
+    "session": {
+      "launchctl_managername": "Aqua",
+      "is_aqua_session": true,
+      "ssh_env_present": false,
+      "ssh_connection": null,
+      "ssh_tty": null,
+      "term_program": "Apple_Terminal",
+      "metal_device_count": 1,
+      "reading": "a window-server session; a nil device here would be a real finding"
+    },
+    "gpu_name": "Apple M4",
+    "gpu_registry_id": 4294968395,
+    "has_unified_memory": true,
+    "recommended_max_working_set_size": 17179885568,
+    "max_buffer_length": 12884901888,
+    "max_threadgroup_memory_length": 32768,
+    "max_threads_per_threadgroup": {
+      "width": 1024,
+      "height": 1024,
+      "depth": 1024
+    },
+    "gpu_families": [
+      {
+        "raw": 1001,
+        "name": "apple1",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1002,
+        "name": "apple2",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1003,
+        "name": "apple3",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1004,
+        "name": "apple4",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1005,
+        "name": "apple5",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1006,
+        "name": "apple6",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1007,
+        "name": "apple7",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1008,
+        "name": "apple8",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1009,
+        "name": "apple9",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1010,
+        "name": "apple10",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 1011,
+        "name": "apple11",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 2001,
+        "name": "mac1",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 2002,
+        "name": "mac2",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 3001,
+        "name": "common1",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 3002,
+        "name": "common2",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 3003,
+        "name": "common3",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 4001,
+        "name": "macCatalyst1",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 4002,
+        "name": "macCatalyst2",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 5001,
+        "name": "metal3",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 5002,
+        "name": "metal4",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 5003,
+        "name": "metal5",
+        "known_to_sdk": true,
+        "supported": false
+      }
+    ]
+  },
+  "conversion_self_test": {
+    "samples_tested": 1000000,
+    "max_ulp": 8.0,
+    "p50_ulp": 1.0,
+    "p99_ulp": 8.0,
+    "exact_ratio": 0.388924
+  },
+  "accuracy_evaluations": {
+    "range_a_standard": [
+      {
+        "op": "add",
+        "samples": 1000000,
+        "df64_max_ulp": 29.0,
+        "df64_p50_ulp": 1.0,
+        "df64_p99_ulp": 14.0,
+        "df64_exact_ratio": 0.480331,
+        "df64_non_finite_errors": 0,
+        "soft64_max_ulp": 1.0,
+        "soft64_p50_ulp": 0.0,
+        "soft64_p99_ulp": 1.0,
+        "soft64_exact_ratio": 0.82833,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "sub",
+        "samples": 1000000,
+        "df64_max_ulp": 128.0,
+        "df64_p50_ulp": 1.0,
+        "df64_p99_ulp": 18.0,
+        "df64_exact_ratio": 0.477002,
+        "df64_non_finite_errors": 0,
+        "soft64_max_ulp": 1.0,
+        "soft64_p50_ulp": 0.0,
+        "soft64_p99_ulp": 1.0,
+        "soft64_exact_ratio": 0.831663,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "mul",
+        "samples": 1000000,
+        "df64_max_ulp": 86599643.0,
+        "df64_p50_ulp": 5.0,
+        "df64_p99_ulp": 41.0,
+        "df64_exact_ratio": 0.117656,
+        "df64_non_finite_errors": 0,
+        "soft64_max_ulp": 1.0,
+        "soft64_p50_ulp": 0.0,
+        "soft64_p99_ulp": 1.0,
+        "soft64_exact_ratio": 0.501665,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "div",
+        "samples": 1000000,
+        "df64_max_ulp": 4.02717e+18,
+        "df64_p50_ulp": 10.0,
+        "df64_p99_ulp": null,
+        "df64_exact_ratio": 0.043674,
+        "df64_non_finite_errors": 66664,
+        "soft64_max_ulp": 1.0,
+        "soft64_p50_ulp": 1.0,
+        "soft64_p99_ulp": 1.0,
+        "soft64_exact_ratio": 0.496319,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "fma",
+        "samples": 1000000,
+        "df64_max_ulp": 86599638.0,
+        "df64_p50_ulp": 4.0,
+        "df64_p99_ulp": 38.0,
+        "df64_exact_ratio": 0.141668,
+        "df64_non_finite_errors": 0,
+        "soft64_max_ulp": 2.0,
+        "soft64_p50_ulp": 1.0,
+        "soft64_p99_ulp": 2.0,
+        "soft64_exact_ratio": 0.38433,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "sqrt",
+        "samples": 1000000,
+        "df64_max_ulp": 28633506.0,
+        "df64_p50_ulp": 3.0,
+        "df64_p99_ulp": 1514740.0,
+        "df64_exact_ratio": 0.115353,
+        "df64_non_finite_errors": 0,
+        "soft64_max_ulp": 1.0,
+        "soft64_p50_ulp": 0.0,
+        "soft64_p99_ulp": 1.0,
+        "soft64_exact_ratio": 0.752315,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "sincos",
+        "status": "not implemented",
+        "reason": "Transcendental sincos requires polynomial range reduction; bit-exact emulation omitted"
+      }
+    ],
+    "range_b_full_binary64": [
+      {
+        "op": "add",
+        "samples": 1000000,
+        "df64_max_ulp": 19.0,
+        "df64_p50_ulp": null,
+        "df64_p99_ulp": null,
+        "df64_exact_ratio": 0.070691,
+        "df64_non_finite_errors": 808295,
+        "soft64_max_ulp": 1.0,
+        "soft64_p50_ulp": 0.0,
+        "soft64_p99_ulp": 1.0,
+        "soft64_exact_ratio": 0.982999,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "sub",
+        "samples": 1000000,
+        "df64_max_ulp": 48.0,
+        "df64_p50_ulp": null,
+        "df64_p99_ulp": null,
+        "df64_exact_ratio": 0.071025,
+        "df64_non_finite_errors": 808295,
+        "soft64_max_ulp": 1.0,
+        "soft64_p50_ulp": 0.0,
+        "soft64_p99_ulp": 1.0,
+        "soft64_exact_ratio": 0.983333,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "mul",
+        "samples": 1000000,
+        "df64_max_ulp": 4.32692e+18,
+        "df64_p50_ulp": null,
+        "df64_p99_ulp": null,
+        "df64_exact_ratio": 0.012335,
+        "df64_non_finite_errors": 808295,
+        "soft64_max_ulp": 1.0,
+        "soft64_p50_ulp": 0.0,
+        "soft64_p99_ulp": 1.0,
+        "soft64_exact_ratio": 0.504347,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "div",
+        "samples": 1000000,
+        "df64_max_ulp": 4.02565e+18,
+        "df64_p50_ulp": null,
+        "df64_p99_ulp": null,
+        "df64_exact_ratio": 0.004331,
+        "df64_non_finite_errors": 673362,
+        "soft64_max_ulp": 9.21039e+18,
+        "soft64_p50_ulp": 1.0,
+        "soft64_p99_ulp": null,
+        "soft64_exact_ratio": 0.345361,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "fma",
+        "samples": 1000000,
+        "df64_max_ulp": 4.32692e+18,
+        "df64_p50_ulp": null,
+        "df64_p99_ulp": null,
+        "df64_exact_ratio": 0.017004,
+        "df64_non_finite_errors": 808295,
+        "soft64_max_ulp": 2.0,
+        "soft64_p50_ulp": 0.0,
+        "soft64_p99_ulp": 2.0,
+        "soft64_exact_ratio": 0.721604,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "sqrt",
+        "samples": 1000000,
+        "df64_max_ulp": 4.32301e+18,
+        "df64_p50_ulp": 4.03112e+18,
+        "df64_p99_ulp": null,
+        "df64_exact_ratio": 0.013008,
+        "df64_non_finite_errors": 434887,
+        "soft64_max_ulp": 1.0,
+        "soft64_p50_ulp": 0.0,
+        "soft64_p99_ulp": 1.0,
+        "soft64_exact_ratio": 0.749324,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "sincos",
+        "status": "not implemented",
+        "reason": "Transcendental sincos requires polynomial range reduction; bit-exact emulation omitted"
+      }
+    ],
+    "range_c_edge_cases": [
+      {
+        "op": "add",
+        "samples": 1000000,
+        "df64_max_ulp": 4.04805e+15,
+        "df64_p50_ulp": 0.0,
+        "df64_p99_ulp": null,
+        "df64_exact_ratio": 0.555556,
+        "df64_non_finite_errors": 111111,
+        "soft64_max_ulp": 1.0,
+        "soft64_p50_ulp": 0.0,
+        "soft64_p99_ulp": 1.0,
+        "soft64_exact_ratio": 0.888889,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "sub",
+        "samples": 1000000,
+        "df64_max_ulp": 0.0,
+        "df64_p50_ulp": 0.0,
+        "df64_p99_ulp": null,
+        "df64_exact_ratio": 0.666667,
+        "df64_non_finite_errors": 111111,
+        "soft64_max_ulp": 1.0,
+        "soft64_p50_ulp": 0.0,
+        "soft64_p99_ulp": 1.0,
+        "soft64_exact_ratio": 0.888889,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "mul",
+        "samples": 1000000,
+        "df64_max_ulp": 1.0,
+        "df64_p50_ulp": 0.0,
+        "df64_p99_ulp": null,
+        "df64_exact_ratio": 0.555556,
+        "df64_non_finite_errors": 111111,
+        "soft64_max_ulp": 4.62092e+18,
+        "soft64_p50_ulp": 0.0,
+        "soft64_p99_ulp": null,
+        "soft64_exact_ratio": 0.777778,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "div",
+        "samples": 1000000,
+        "df64_max_ulp": 1.0,
+        "df64_p50_ulp": 1.0,
+        "df64_p99_ulp": null,
+        "df64_exact_ratio": 0.333334,
+        "df64_non_finite_errors": 111111,
+        "soft64_max_ulp": 0.0,
+        "soft64_p50_ulp": 0.0,
+        "soft64_p99_ulp": null,
+        "soft64_exact_ratio": 0.666666,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "fma",
+        "samples": 1000000,
+        "df64_max_ulp": 2.02402e+15,
+        "df64_p50_ulp": 2.0,
+        "df64_p99_ulp": null,
+        "df64_exact_ratio": 0.444445,
+        "df64_non_finite_errors": 0,
+        "soft64_max_ulp": 4.6189e+18,
+        "soft64_p50_ulp": 0.0,
+        "soft64_p99_ulp": null,
+        "soft64_exact_ratio": 0.555556,
+        "soft64_non_finite_errors": 0
+      },
+      {
+        "op": "sqrt",
+        "samples": 1000000,
+        "df64_max_ulp": 2.30287e+18,
+        "df64_p50_ulp": 0.0,
+        "df64_p99_ulp": null,
+        "df64_exact_ratio": 0.555556,
+        "df64_non_finite_errors": 111111,
+        "soft64_max_ulp": 4.60718e+18,
+        "soft64_p50_ulp": 0.0,
+        "soft64_p99_ulp": null,
+        "soft64_exact_ratio": 0.777778,
+        "soft64_non_finite_errors": 111111
+      },
+      {
+        "op": "sincos",
+        "status": "not implemented",
+        "reason": "Transcendental sincos requires polynomial range reduction; bit-exact emulation omitted"
+      }
+    ]
+  },
+  "throughput_benchmark": {
+    "assumed_m4_fp32_peak_tflops": 3.712,
+    "native_fp32_tflops": 1.31346,
+    "native_fp32_fraction_of_peak": 0.353842,
+    "native_fp32_elapsed_seconds": 0.00798329,
+    "df64_fma_gops": 31.5888,
+    "df64_elapsed_seconds": 0.0165972,
+    "soft64_fma_gops": 5.62616,
+    "soft64_elapsed_seconds": 0.00931875
+  },
+  "memory_conversion_cost": {
+    "df64_conversion_seconds": 0.00865904,
+    "native_float_seconds": 0.00505708,
+    "conversion_overhead_factor": 1.71226
+  },
+  "atomic_add_double": {
+    "threads": 65536,
+    "actual_gpu_sum": 65536,
+    "actual_gpu_sum_str": "65536.0019529602577677",
+    "host_sequential_arrival_sum": 65536,
+    "host_sequential_arrival_sum_str": "65536.0019530977297109",
+    "host_sequential_index_sum": 65536,
+    "host_sequential_index_sum_str": "65536.0019530691206455",
+    "exact_kahan_sum": 65536,
+    "exact_kahan_sum_str": "65536.0019530951976776",
+    "float_sum_baseline": 65536.0,
+    "ulp_vs_arrival_order": 9447.0,
+    "ulp_vs_index_order": 7481.0,
+    "ulp_vs_exact_kahan": 9273.0,
+    "float_baseline_ulp_vs_exact": 134215680.0,
+    "elapsed_seconds": 2.62345,
+    "msl_version_probes": [
+      {
+        "msl_version": "default",
+        "supported": false,
+        "refusal_verbatim": "Error Domain=MTLLibraryErrorDomain Code=3 \"program_source:4:34: error: use of undeclared identifier 'memory_order_release'; did you mean 'memory_order_relaxed'?\n    atomic_store_explicit(f, 1u, memory_order_release);\n                                 ^~~~~~~~~~~~~~~~~~~~\n                                 memory_order_relaxed\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_types:192:3: note: 'memory_order_relaxed' declared here\n  memory_order_relaxed = __METAL_MEMORY_ORDER_RELAXED__,\n  ^\nprogram_source:5:38: error: use of undeclared identifier 'memory_order_acquire'; did you mean 'memory_order_relaxed'?\n    uint v = atomic_load_explicit(f, memory_order_acquire);\n                                     ^~~~~~~~~~~~~~~~~~~~\n                                     memory_order_relaxed\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_types:192:3: note: 'memory_order_relaxed' declared here\n  memory_order_relaxed = __METAL_MEMORY_ORDER_RELAXED__,\n  ^\n\" UserInfo={NSLocalizedDescription=program_source:4:34: error: use of undeclared identifier 'memory_order_release'; did you mean 'memory_order_relaxed'?\n    atomic_store_explicit(f, 1u, memory_order_release);\n                                 ^~~~~~~~~~~~~~~~~~~~\n                                 memory_order_relaxed\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_types:192:3: note: 'memory_order_relaxed' declared here\n  memory_order_relaxed = __METAL_MEMORY_ORDER_RELAXED__,\n  ^\nprogram_source:5:38: error: use of undeclared identifier 'memory_order_acquire'; did you mean 'memory_order_relaxed'?\n    uint v = atomic_load_explicit(f, memory_order_acquire);\n                                     ^~~~~~~~~~~~~~~~~~~~\n                                     memory_order_relaxed\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_types:192:3: note: 'memory_order_relaxed' declared here\n  memory_order_relaxed = __METAL_MEMORY_ORDER_RELAXED__,\n  ^\n}"
+      },
+      {
+        "msl_version": "version3_0",
+        "supported": false,
+        "refusal_verbatim": "Error Domain=MTLLibraryErrorDomain Code=3 \"program_source:4:34: error: use of undeclared identifier 'memory_order_release'; did you mean 'memory_order_relaxed'?\n    atomic_store_explicit(f, 1u, memory_order_release);\n                                 ^~~~~~~~~~~~~~~~~~~~\n                                 memory_order_relaxed\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_types:192:3: note: 'memory_order_relaxed' declared here\n  memory_order_relaxed = __METAL_MEMORY_ORDER_RELAXED__,\n  ^\nprogram_source:5:38: error: use of undeclared identifier 'memory_order_acquire'; did you mean 'memory_order_relaxed'?\n    uint v = atomic_load_explicit(f, memory_order_acquire);\n                                     ^~~~~~~~~~~~~~~~~~~~\n                                     memory_order_relaxed\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_types:192:3: note: 'memory_order_relaxed' declared here\n  memory_order_relaxed = __METAL_MEMORY_ORDER_RELAXED__,\n  ^\n\" UserInfo={NSLocalizedDescription=program_source:4:34: error: use of undeclared identifier 'memory_order_release'; did you mean 'memory_order_relaxed'?\n    atomic_store_explicit(f, 1u, memory_order_release);\n                                 ^~~~~~~~~~~~~~~~~~~~\n                                 memory_order_relaxed\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_types:192:3: note: 'memory_order_relaxed' declared here\n  memory_order_relaxed = __METAL_MEMORY_ORDER_RELAXED__,\n  ^\nprogram_source:5:38: error: use of undeclared identifier 'memory_order_acquire'; did you mean 'memory_order_relaxed'?\n    uint v = atomic_load_explicit(f, memory_order_acquire);\n                                     ^~~~~~~~~~~~~~~~~~~~\n                                     memory_order_relaxed\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_types:192:3: note: 'memory_order_relaxed' declared here\n  memory_order_relaxed = __METAL_MEMORY_ORDER_RELAXED__,\n  ^\n}"
+      },
+      {
+        "msl_version": "version3_1",
+        "supported": false,
+        "refusal_verbatim": "Error Domain=MTLLibraryErrorDomain Code=3 \"program_source:4:34: error: use of undeclared identifier 'memory_order_release'; did you mean 'memory_order_relaxed'?\n    atomic_store_explicit(f, 1u, memory_order_release);\n                                 ^~~~~~~~~~~~~~~~~~~~\n                                 memory_order_relaxed\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_types:192:3: note: 'memory_order_relaxed' declared here\n  memory_order_relaxed = __METAL_MEMORY_ORDER_RELAXED__,\n  ^\nprogram_source:5:38: error: use of undeclared identifier 'memory_order_acquire'; did you mean 'memory_order_relaxed'?\n    uint v = atomic_load_explicit(f, memory_order_acquire);\n                                     ^~~~~~~~~~~~~~~~~~~~\n                                     memory_order_relaxed\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_types:192:3: note: 'memory_order_relaxed' declared here\n  memory_order_relaxed = __METAL_MEMORY_ORDER_RELAXED__,\n  ^\n\" UserInfo={NSLocalizedDescription=program_source:4:34: error: use of undeclared identifier 'memory_order_release'; did you mean 'memory_order_relaxed'?\n    atomic_store_explicit(f, 1u, memory_order_release);\n                                 ^~~~~~~~~~~~~~~~~~~~\n                                 memory_order_relaxed\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_types:192:3: note: 'memory_order_relaxed' declared here\n  memory_order_relaxed = __METAL_MEMORY_ORDER_RELAXED__,\n  ^\nprogram_source:5:38: error: use of undeclared identifier 'memory_order_acquire'; did you mean 'memory_order_relaxed'?\n    uint v = atomic_load_explicit(f, memory_order_acquire);\n                                     ^~~~~~~~~~~~~~~~~~~~\n                                     memory_order_relaxed\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_types:192:3: note: 'memory_order_relaxed' declared here\n  memory_order_relaxed = __METAL_MEMORY_ORDER_RELAXED__,\n  ^\n}"
+      },
+      {
+        "msl_version": "version3_2",
+        "supported": false,
+        "refusal_verbatim": "Error Domain=MTLLibraryErrorDomain Code=3 \"program_source:4:34: error: use of undeclared identifier 'memory_order_release'; did you mean 'memory_order_relaxed'?\n    atomic_store_explicit(f, 1u, memory_order_release);\n                                 ^~~~~~~~~~~~~~~~~~~~\n                                 memory_order_relaxed\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_types:192:3: note: 'memory_order_relaxed' declared here\n  memory_order_relaxed = __METAL_MEMORY_ORDER_RELAXED__,\n  ^\nprogram_source:5:38: error: use of undeclared identifier 'memory_order_acquire'; did you mean 'memory_order_relaxed'?\n    uint v = atomic_load_explicit(f, memory_order_acquire);\n                                     ^~~~~~~~~~~~~~~~~~~~\n                                     memory_order_relaxed\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_types:192:3: note: 'memory_order_relaxed' declared here\n  memory_order_relaxed = __METAL_MEMORY_ORDER_RELAXED__,\n  ^\n\" UserInfo={NSLocalizedDescription=program_source:4:34: error: use of undeclared identifier 'memory_order_release'; did you mean 'memory_order_relaxed'?\n    atomic_store_explicit(f, 1u, memory_order_release);\n                                 ^~~~~~~~~~~~~~~~~~~~\n                                 memory_order_relaxed\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_types:192:3: note: 'memory_order_relaxed' declared here\n  memory_order_relaxed = __METAL_MEMORY_ORDER_RELAXED__,\n  ^\nprogram_source:5:38: error: use of undeclared identifier 'memory_order_acquire'; did you mean 'memory_order_relaxed'?\n    uint v = atomic_load_explicit(f, memory_order_acquire);\n                                     ^~~~~~~~~~~~~~~~~~~~\n                                     memory_order_relaxed\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_types:192:3: note: 'memory_order_relaxed' declared here\n  memory_order_relaxed = __METAL_MEMORY_ORDER_RELAXED__,\n  ^\n}"
+      }
+    ],
+    "compiler_refusal_acquire_release": "MSL rejects memory_order_acquire and memory_order_release verbatim: 'use of undeclared identifier memory_order_acquire'. Fenced atomic_exchange_explicit + atomic_thread_fence(mem_device, memory_order_seq_cst) is mandatory on Apple Metal."
+  },
+  "celeritas_range_check": {
+    "df64_safe_range_min": 1e-30,
+    "df64_safe_range_max": 1e+30,
+    "df64_denormal_threshold": 1e-31,
+    "extreme_celeritas_values": [
+      {
+        "constant": "migdal_constant",
+        "value": 5.28e-33,
+        "note": "Bremsstrahlung Migdal constant [cm^3], outside [1e-30, 1e30]"
+      },
+      {
+        "constant": "vacuum_macroscopic_xs",
+        "value": 1e-31,
+        "note": "Macroscopic cross section in low-density vacuum [cm^-1]"
+      },
+      {
+        "constant": "barn",
+        "value": 1e-24,
+        "note": "Standard nuclear cross section [cm^2]"
+      },
+      {
+        "constant": "electron_mass_cgs",
+        "value": 9.10938e-28,
+        "note": "Electron mass in grams [g]"
+      },
+      {
+        "constant": "planck_constant_cgs",
+        "value": 6.62607e-27,
+        "note": "Planck constant in erg*s"
+      },
+      {
+        "constant": "h_squared_cgs",
+        "value": 4.39e-53,
+        "note": "Squared Planck constant [erg^2*s^2], severely underflows float/df64"
+      }
+    ]
+  },
+  "status": "ok"
+}

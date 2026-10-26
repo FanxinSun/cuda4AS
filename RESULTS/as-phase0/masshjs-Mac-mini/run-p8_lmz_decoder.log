@@ -1,0 +1,6 @@
+streams  512 x 32768 B = 16.8 MB out, 5.8 MB compressed
+device   Apple M4  unified=true  threadgroupMemory=32768 B
+
+kernel                                     time   throughput  verdict
+plane, direct device reads             31.68 ms     0.5 GB/s  byte-identical
+plane, threadgroup prefetch            31.70 ms     0.5 GB/s  byte-identical

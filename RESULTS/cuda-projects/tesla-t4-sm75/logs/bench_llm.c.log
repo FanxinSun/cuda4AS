@@ -1,0 +1,37 @@
+logging all output to /content/logs/bench_llm.c.log
+name, driver_version, compute_cap
+Tesla T4, 580.82.07, 7.5
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+cmake version 3.31.10
+ok llm.c
+Writing cuda_projects.py
+Writing manifest.json
+--- round 1/2, default run timeout
+ok         llm.c/dev/cuda/adamw.cu
+ok         llm.c/dev/cuda/classifier_fused.cu
+ok         llm.c/dev/cuda/crossentropy_forward.cu
+ok         llm.c/dev/cuda/crossentropy_softmax_backward.cu
+ok         llm.c/dev/cuda/encoder_backward.cu
+ok         llm.c/dev/cuda/encoder_forward.cu
+ok         llm.c/dev/cuda/fused_residual_forward.cu
+ok         llm.c/dev/cuda/gelu_backward.cu
+ok         llm.c/dev/cuda/gelu_forward.cu
+ok         llm.c/dev/cuda/global_norm.cu
+ok         llm.c/dev/cuda/layernorm_backward.cu
+ok         llm.c/dev/cuda/layernorm_forward.cu
+ok         llm.c/dev/cuda/attention_backward.cu
+ok         llm.c/dev/cuda/matmul_backward.cu
+ok         llm.c/dev/cuda/matmul_backward_bias.cu
+ok         llm.c/dev/cuda/permute.cu
+ok         llm.c/dev/cuda/residual_forward.cu
+ok         llm.c/dev/cuda/matmul_forward.cu
+ok         llm.c/dev/cuda/trimat_forward.cu
+ok         llm.c/dev/cuda/softmax_forward.cu
+== karpathy/llm.c {'ok': 20}
+done: {'ok': 20}
+karpathy/llm.c                                   {'ok': 20}
+tar: The following options were used after non-option arguments.  These options are positional and affect only arguments that follow them.  Please, rearrange them properly.
+tar: --exclude ‘out/build’ has no effect
+tar: Exiting with failure status due to previous errors
+karpathy/llm.c                                   {'ok': 20}

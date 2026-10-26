@@ -1,0 +1,54 @@
+{
+ "slug": "hoshuaclawdbot/cuda-learning-lab",
+ "commit": "074789981264018bb2c8c0e9eb81d33c288693a4",
+ "complete": true,
+ "tally": {
+  "ok": 1
+ },
+ "skipped_at_discovery": [
+  {
+   "path": "modules/01-gpu-architecture/exercises/01_device_query.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "modules/02-first-kernel/exercises/01_hello_gpu.cu",
+   "reason": "exercise template"
+  }
+ ],
+ "results": [
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "02ab6a02bd235a755cde6f5b2642dd9b4fb595ae4ceef2cd7c7126065e82c864",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Hello from thread 0\nHello from thread 1\nHello from thread 2\nHello from thread 3\nHello from thread 4\nHello from thread 5\nHello from thread 6\nHello from thread 7\nHello from thread 8\nHello from thread 9\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/02-first-kernel/solutions/01_hello_gpu.cu",
+   "kind": "single",
+   "seconds": 3.3,
+   "status": "ok"
+  }
+ ]
+}

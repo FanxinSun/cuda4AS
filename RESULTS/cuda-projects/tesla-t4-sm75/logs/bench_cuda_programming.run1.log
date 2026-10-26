@@ -1,0 +1,36 @@
+logging all output to /content/logs/bench_cuda_programming.log
+name, driver_version, compute_cap
+Tesla T4, 580.82.07, 7.5
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+cmake version 3.31.10
+ok cuda_programming
+Writing cuda_projects.py
+Writing manifest.json
+--- round 1/2, default run timeout
+ok         cuda_programming/01_vector_addition/baseline/vectorAdd.cu
+ok         cuda_programming/01_vector_addition/unified_memory/vectorAdd_um_baseline.cu
+build-fail cuda_programming/01_vector_addition/unified_memory/vectorAdd_um_prefetch.cu
+ok         cuda_programming/01_vector_addition/pinned_memory/vectorAdd_pinned.cu
+ok         cuda_programming/02_matrix_mul/baseline/mmul.cu
+ok         cuda_programming/02_matrix_mul/noAliasing/restrict/mmul.cu
+ok         cuda_programming/02_matrix_mul/noAliasing/tmp/mmul.cu
+ok         cuda_programming/02_matrix_mul/nonMultiple/mmul.cu
+ok         cuda_programming/02_matrix_mul/tiled/mmul.cu
+ok         cuda_programming/03_sum_reduction/bank_conflicts/sumReduction.cu
+ok         cuda_programming/03_sum_reduction/cooperative_groups/sumReduction.cu
+ok         cuda_programming/03_sum_reduction/device_function/sumReduction.cu
+ok         cuda_programming/03_sum_reduction/diverged/sumReduction.cu
+ok         cuda_programming/03_sum_reduction/no_confliicts/sumReduction.cu
+ok         cuda_programming/03_sum_reduction/reduce_idle/sumReduction.cu
+ok         cuda_programming/04_histogram/global_atomic/histogram.cu
+ok         cuda_programming/04_histogram/shmem_atomic/histogram.cu
+ok         cuda_programming/05_convolution/1d_cache/convolution.cu
+ok         cuda_programming/05_convolution/1d_constant_memory/convolution.cu
+ok         cuda_programming/05_convolution/1d_naive/convolution.cu
+ok         cuda_programming/05_convolution/1d_tiled/convolution.cu
+ok         cuda_programming/05_convolution/2d_constant_memory/convolution.cu
+ok         cuda_programming/02_matrix_mul/rectangular/mmul.cu
+== CoffeeBeforeArch/cuda_programming {'ok': 22, 'build-fail': 1}
+done: {'ok': 22, 'build-fail': 1}
+CoffeeBeforeArch/cuda_programming                {'ok': 22, 'build-fail': 1}

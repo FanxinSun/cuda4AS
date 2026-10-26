@@ -1,0 +1,8 @@
+{
+ "gpu": "NVIDIA A100-SXM4-80GB, 580.82.07, 81920 MiB, 8.0",
+ "nvcc": [
+  "Build cuda_13.0.r13.0/compiler.36424714_0"
+ ],
+ "date": "2026-10-16T13:16:10+00:00",
+ "note": "Subset runs, not a full baseline: the 5 cuda-samples the T4 waived for lacking sm_80 features (bf16/tf32/dmma tensor cores, L2 persistence, compressible memory), and the retest of programs that failed on the T4 (code-samples cufft/parallel_reduction, SGEMM_CUDA kernel 11)."
+}

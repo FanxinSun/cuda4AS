@@ -1,0 +1,5 @@
+fp32 FMA: 0.10 TFLOPS (iters=103)
+fp16 FMA: 0.21 TFLOPS (iters=120)
+bf16 FMA: 0.12 TFLOPS (iters=114)
+simdgroup_matrix half: 0.50 TFLOPS (iters=88)
+wrote /Users/masshj/YFCE/cuda4AS/drop/as-phase0/results/p5_simd.json

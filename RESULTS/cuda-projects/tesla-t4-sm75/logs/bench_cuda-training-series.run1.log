@@ -1,0 +1,49 @@
+logging all output to /content/logs/bench_cuda-training-series.log
+name, driver_version, compute_cap
+Tesla T4, 580.82.07, 7.5
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+cmake version 3.31.10
+ok cuda-training-series
+Writing cuda_projects.py
+Writing manifest.json
+--- round 1/2, default run timeout
+ok         cuda-training-series/exercises/hw1/hello_solution.cu
+ok         cuda-training-series/exercises/hw1/vector_add_solution.cu
+ok         cuda-training-series/exercises/hw1/matrix_mul_solution.cu
+ok         cuda-training-series/exercises/hw10/streams.cu
+ok         cuda-training-series/exercises/hw10/streams_solution.cu
+ok         cuda-training-series/exercises/hw12/task1.cu
+ok         cuda-training-series/exercises/hw12/task1_solution.cu
+ok         cuda-training-series/exercises/hw12/task2.cu
+build-fail cuda-training-series/exercises/hw13/axpy_cublas_from_scratch.cu
+ok         cuda-training-series/exercises/hw12/task2_solution.cu
+ok         cuda-training-series/exercises/hw13/axpy_stream_capture_from_scratch.cu
+ok         cuda-training-series/exercises/hw13/Solutions/axpy_cublas_solution.cu
+ok         cuda-training-series/exercises/hw13/axpy_stream_capture_timer.cu
+ok         cuda-training-series/exercises/hw2/matrix_mul_shared_solution.cu
+ok         cuda-training-series/exercises/hw2/stencil_1d_solution.cu
+ok         cuda-training-series/exercises/hw13/Solutions/axpy_stream_capture_solution.cu
+ok         cuda-training-series/exercises/hw4/matrix_sums_solution.cu
+ok         cuda-training-series/exercises/hw5/matrix_sums.cu
+ok         cuda-training-series/exercises/hw3/vector_add_solution.cu
+ok         cuda-training-series/exercises/hw5/max_reduction.cu
+ok         cuda-training-series/exercises/hw5/matrix_sums_solution.cu
+ok         cuda-training-series/exercises/hw5/max_reduction_solution.cu
+ok         cuda-training-series/exercises/hw5/reductions.cu
+build-fail cuda-training-series/exercises/hw6/array_inc_solution.cu
+ok         cuda-training-series/exercises/hw6/array_inc.cu
+run-fail   cuda-training-series/exercises/hw6/linked_list.cu
+ok         cuda-training-series/exercises/hw6/linked_list_solution.cu
+run-fail   cuda-training-series/exercises/hw7/multi_solution.cu
+ok         cuda-training-series/exercises/hw7/overlap_solution.cu
+ok         cuda-training-series/exercises/hw8/task1/task1_solution.cu
+ok         cuda-training-series/exercises/hw7/multi.cu
+ok         cuda-training-series/exercises/hw8/task2/task2_solution.cu
+ok         cuda-training-series/exercises/hw8/task3/task3.cu
+ok         cuda-training-series/exercises/hw8/task3/task3_solution.cu
+ok         cuda-training-series/exercises/hw9/task1_solution.cu
+ok         cuda-training-series/exercises/hw9/task2_solution.cu
+== olcf/cuda-training-series {'ok': 32, 'build-fail': 2, 'run-fail': 2}
+done: {'ok': 32, 'build-fail': 2, 'run-fail': 2}
+olcf/cuda-training-series                        {'ok': 32, 'build-fail': 2, 'run-fail': 2}

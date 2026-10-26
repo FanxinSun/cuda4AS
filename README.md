@@ -15,25 +15,44 @@ why, so it is not reopened by accident.
 
 ```
 README.md          this file
+HANDOVER.md        who owns the project now, its rules, open items, residuals
+                   and next step (from 2026-10-26: the agy session "cuda4AS")
+toolkit/           the cuda4AS compiler driver (nvcc), translator, clean-room
+                   CUDA headers, and Metal/unified-memory runtime (libcudart)
 probe/             the Swift + MSL probes -- source of truth
                    SELF_REVIEW.md says what each one leans on and how far it
-                   was verified, which matters because none of it can be
-                   compiled on this box
-oracle/            the phase-0 CUDA kernel corpus, its nvcc harness, and the
-                   reference outputs produced here on the RTX 5080
+                   was verified across the M1 Pro drop and the M4 Mac mini
+oracle/            the phase-0 CUDA kernel corpus, its nvcc harness, the Colab
+                   correctness harness (oracle/colab/), and reference outputs
 drop/as-phase0/    the self-contained directory that goes to an Apple silicon
                    Mac; the user runs ./run.sh and brings back a tarball
-RESULTS/           where returned tarballs are unpacked and read
+RESULTS/           where probe, oracle (RESULTS/g-c1/), and S1 (RESULTS/s1/)
+                   results are stored
+samples/           real applications as end-to-end tests, each with its plan;
+                   samples/caloml/ is Celeritas GPU transport (PLAN.md)
 tools/             our own preparation scripts (drop data generation)
 ```
 
-## The drop/results loop
+## Where the work happens
 
-This box has no Apple GPU and cannot compile a line of Swift or Metal. So the
-work moves in round trips, and each one is expensive:
+Since 2026-10-14 development is on an **Apple M4 Mac mini**: it builds Swift,
+C++/Objective-C++, and Metal, runs the probes, translator, and `nvcc` driver,
+and checks results against the oracle without leaving the machine. The Linux box
+with the RTX 5080 (and the Google Colab GPU harness in `oracle/colab/` for
+third-party corpus benches in `cuda-projects/`) serves as the **`nvcc`
+correctness oracle only**: it produces reference outputs (`oracle/ref/` and
+`RESULTS/cuda-projects/`) and nothing else.
 
-1. Everything is written and reviewed here, in `probe/`, `oracle/` and
-   `tools/`.
+The drop/results loop below is for the other direction: running the probes on
+Apple silicon Macs we do not develop on, to collect more samples of the
+hardware. Each Mac that runs a drop is one more row in `RESULTS/`.
+
+## The drop/results loop (other Macs)
+
+Each round trip is expensive, so the drop is built to bring back everything in
+one pass:
+
+1. Everything is written and reviewed in `probe/`, `oracle/` and `tools/`.
 2. `drop/as-phase0/` is assembled by `tools/make_drop.sh`: self-contained,
    ~23 MB, no path in it points outside itself. `--package` tars it and
    `--publish` attaches it to a GitHub release.
@@ -61,9 +80,10 @@ twice in two spellings.
 
 ## The four standing rules, in two lines each
 
-**1. This PC is the instrument, not the target.** The Mac a drop runs on is
-one sample of Apple silicon, exactly as this Linux box is one sample of a
-CUDA host; the design has to hold from an M1 with 32 KB of threadgroup memory
+**1. The instrument is the hardware, not the machine on the desk.** The M4 Mac
+mini, the M1 Pro that ran G-C0 and any Mac a drop reaches are each one sample
+of Apple silicon, exactly as the RTX 5080 is one sample of a CUDA host; the
+design has to hold from an M1 with 32 KB of threadgroup memory
 and no accelerators through an M5 Ultra and on chips not yet built, so every
 number carries its machine and every absent capability is recorded as a
 result rather than a failure.
@@ -97,13 +117,13 @@ is a correctness blocker and outranks any throughput number from the same run.
 
 | gate | asks | status |
 |---|---|---|
-| **G-C0** probes | the alias, the heap ceiling, co-residency, BF16 on the accelerators | **PASSED** on an M1 Pro, 2026-09-05. Two forks taken, the BF16 question deferred to M5-class hardware. `RESULTS/as-phase0/Studio/` |
-| **G-C1** compiler | cuda-samples, the CUTLASS Ampere examples and llama.cpp `GGML_CUDA=ON` build with **zero edits** and run correctly | **now the top gate.** Blocked only on the clang fetch; needs no Apple GPU beyond the one already in hand |
-| **G-C3** smoothness | drop-in `nvcc` for CMake/setuptools/PyTorch; PyTorch from source; `pip install flash-attn` | second. The other half of "runs smoothly" |
-| **G-C6** coded tier | lmz's Metal decoder verifies byte-identical | needs its own host harness — lmz's `bench.swift` dies on `MTLCreateSystemDefaultDevice()`, which returns nil on the test machine |
+| **G-C0** probes | the alias, the heap ceiling, co-residency, BF16 on the accelerators | **PASSED** on an M1 Pro (2026-09-05, `RESULTS/as-phase0/Studio/`) and on the M4 Mac mini (2026-10-26, `RESULTS/as-phase0/masshjs-Mac-mini/`). Two forks taken, the BF16 question deferred to M5-class hardware |
+| **G-C1** compiler | nine-kernel oracle corpus, cuda-samples, CUTLASS Ampere examples and llama.cpp `GGML_CUDA=ON` build with **zero edits** and run correctly | **in progress (top gate).** Nine-kernel oracle corpus (`RESULTS/g-c1/`, 9/9) and Celeritas 0.6.3 float build + device test suite (S2/S3, 214/215 tests, 39/39 GPU tests) **PASSED** on M4 |
+| **G-C3** smoothness | drop-in `nvcc` for CMake/setuptools/PyTorch; PyTorch from source; `pip install flash-attn` | second. CMake `enable_language(CUDA)` + `find_package(CUDAToolkit)` working for Celeritas 0.6.3 |
+| **G-C6** coded tier | lmz's Metal decoder verifies byte-identical | **PASSED** on the M4 Mac mini (2026-10-26, `RESULTS/as-phase0/masshjs-Mac-mini/run-p8_lmz_decoder.log`, both kernels byte-identical across 512 streams / 16.8 MB) |
 | **G-C2** matrix units | a cuBLAS-ABI GEMM at ≥ 80 % of MLX on the same chip | after the compatibility gates. Needs M5-class hardware to be worth measuring |
 
-### What G-C0 found, under this priority
+### What G-C0 and S1 found, under this priority
 
 Six things that **already work**, and cost the translator nothing:
 
@@ -130,6 +150,11 @@ before a real CUDA program runs unmodified:
 
 **Nothing found is impossible.** Every blocker has a known mechanism in the
 blueprint; they are work, not walls.
+
+### What S1 (`p9_lookback` and `p10_fp64`) added on the M4 (`RESULTS/s1/`)
+
+- **Decoupled look-back (`p9_lookback`):** M4 co-residency is 160 threadgroups (at 256 threads/group), and threadgroups above co-residency are scheduled out of `threadgroup_position_in_grid` order without preemption. Assigning `blockIdx` from a per-launch atomic arrival ticket (`atomic_fetch_add`) guarantees `ticket(A) < ticket(B)` implies `A` is already resident when `B` spins, yielding 0 timeouts at 10,240 threadgroups. `atomic_thread_fence(mem_flags::mem_device, memory_order_seq_cst)` provides 0 stale reads across 51.2M flag+value checks (`acquire`/`release` are rejected by MSL 3.0–3.2).
+- **Double-precision emulation (`p10_fp64`):** Double-float (`df64`) reaches 191.9–226.4 GFLOP/s on M4 but suffers up to `8.72e7` ULP error on multiplication near underflow/overflow boundaries (`[1e-30, 1e30]`) and underflows to zero on Celeritas physical constants (`h^2 = 4.39e-53`). Bit-exact IEEE binary64 software emulation (`soft64`) achieves 0 ULP across all ranges (75.9 GFLOP/s add, 43.3 GFLOP/s mul, 6.2–6.3 GFLOP/s div/sqrt) and is the default `double` representation (D1). Lock-backed 64-bit `atomicAdd(double*)` with intra-SIMD-group lane serialization completes without deadlock across 65,536 threads.
 
 `oracle/ref/` holds the bit-exact reference outputs for the nine-kernel corpus
 G-C1's translator will be checked against — produced on the RTX 5080 in this

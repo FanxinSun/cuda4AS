@@ -1,0 +1,610 @@
+{
+ "slug": "Infatoshi/cuda-course",
+ "commit": "79681bfd003d403170dd93c0436c6f2a45cb390f",
+ "complete": true,
+ "tally": {
+  "ok": 17
+ },
+ "skipped_at_discovery": [
+  {
+   "path": "05_Writing_your_First_Kernels/03 Profiling/00 nvtx_matmul.cu",
+   "reason": "NVTX v2 header was removed from recent toolkits"
+  },
+  {
+   "path": "06_CUDA_APIs/02 CUDNN/00 Tanh.cu",
+   "reason": "needs cuDNN"
+  },
+  {
+   "path": "06_CUDA_APIs/02 CUDNN/01 Conv2d_NCHW.cu",
+   "reason": "needs cuDNN"
+  },
+  {
+   "path": "06_CUDA_APIs/02 CUDNN/02 compare_conv.cu",
+   "reason": "needs cuDNN"
+  },
+  {
+   "path": "06_CUDA_APIs/optional/CUTLASS/compare.cu",
+   "reason": "needs the CUTLASS include path"
+  }
+ ],
+ "results": [
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "962dbd7362c34a20baac8afd13fba734d3d51cc2944477d96ee05a730e5edcb7",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "boo!\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.0
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.0
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "03_C_and_C++_Review/06 Makefiles/03.cu",
+   "kind": "single",
+   "seconds": 7.2,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "8a5f88179375d7958544e890fb8d9abd1c16d2a6a697bdb4800dea11f78737ae",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "24 blocks/grid\n64 threads/block\n1536 total threads\n0288 | Block(0 2 0) =   4 | Thread(0 0 2) =  32\n0289 | Block(0 2 0) =   4 | Thread(1 0 2) =  33\n0290 | Block(0 2 0) =   4 | Thread(2 0 2) =  34\n0291 | Block(0 2 0) =   4 | Thread(3 0 2) =  35\n0292 | Block(0 2 0) =   4 | Thread(0 1 2) =  36\n0293 | Block(0 2 0) =   4 | Thread(1 1 2) =  37\n0294 | Block(0 2 0) =   4 | Thread(2 1 2) =  38\n0295 | Block(0 2 0) =   4 | Thread(3 1 2) =  39\n0296 | Block(0 2 0) =   4 | Thread(0 2 2) =  40\n0297 | Block(0 2 0) =   4 | Thread(1 2 2) =  41\n0298 | Block(0 2 0) =   4 | Thread(2 2 2) =  42\n0299 | Block(0 2 0) =   4 | Thread(3 2 2) =  43\n0300 | Block(0 2 0) =   4 | Thread(0 3 2) =  44\n0301 | Block(0 2 0) =   4 | Thread(1 3 2) =  45\n0302 | Block(0 2 0) =   4 | Thread(2 3 2) =  46\n0303 | Block(0 2 0) =   4 | Thread(3 3 2) =  47\n0304 | Block(0 2 0) =   4 | Thread(0 0 3) =  48\n0305 | Block(0 2 0) =   4 | Thread(1 0 3) =  49\n0306 | Block(0 2 0) =   4 | Thread(2 0 3) =  50\n0307 | Block(0 2 0) =   4 | Thread(3 0 3) =  51\n0308 | Block(0 2 0) =   4 | Thread(0 1 3) =  52\n0309 | Block(0 2 0) =   4 | Thread(1 1 3) =  53\n0310 | Block(0 2 0) =   4 | Thread(2 1 3) =  54\n0311 | Block(0 2 0) =   4 | Thread(3 1 3) =  55\n0312 | Block(0 2 0) =   4 | Thread(0 2 3) =  56\n0313 | Block(0 2 0) =   4 | Thread(1 2 3) =  57\n0314 | Block(0 2 0) =   4 | Thread(2 2 3) =  58\n0315 | Block(0 2 0) =   4 | Thread(3 2 3) =  59\n0316 | Block(0 2 0) =   4 | Thread(0 3 3) =  60\n0317 | Block(0 2 0) =   4 | Thread(1 3 3) =  61\n0318 | Bl",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.0
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.2
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "05_Writing_your_First_Kernels/01 CUDA Basics/01_idxing.cu",
+   "kind": "single",
+   "seconds": 7.4,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "0e60bdab7d35522aefb6e09fef639ad6e4f1f7cc49445d9e47026d2a5c5fb34a",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Performing warm-up runs...\nBenchmarking CPU implementation...\nBenchmarking GPU implementation...\nCPU average time: 10.616204 milliseconds\nGPU average time: 0.472530 milliseconds\nSpeedup: 22.466708x\nResults are correct\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "05_Writing_your_First_Kernels/02 Kernels/00_vector_add_v1.cu",
+   "kind": "single",
+   "seconds": 6.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "aba13c233efc8b3aec683aa74c6314c4942aaa46827c76bb6ec590c917e3b4c2",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Performing warm-up runs...\nBenchmarking CPU implementation...\nBenchmarking GPU 1D implementation...\n1D Results are correct\nBenchmarking GPU 3D implementation...\n3D Results are correct\nCPU average time: 17.270594 milliseconds\nGPU 1D average time: 0.642028 milliseconds\nGPU 3D average time: 0.897822 milliseconds\nSpeedup (CPU vs GPU 1D): 26.900056x\nSpeedup (CPU vs GPU 3D): 19.236106x\nSpeedup (GPU 1D vs GPU 3D): 0.715095x\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.6
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.2
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "05_Writing_your_First_Kernels/02 Kernels/01_vector_add_v2.cu",
+   "kind": "single",
+   "seconds": 7.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "21d158c06e4ff6c96645452c5246efa4302d42167048a3eb080b56db54f57cb7",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Performing warm-up runs...\nBenchmarking CPU implementation...\nBenchmarking GPU implementation...\nCPU average time: 13318.439850 microseconds\nGPU average time: 106.046250 microseconds\nSpeedup: 125.590861x\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.7
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "05_Writing_your_First_Kernels/02 Kernels/02 matmul.cu",
+   "kind": "single",
+   "seconds": 3.2,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "05_Writing_your_First_Kernels/03 Profiling/01_naive_matmul.cu",
+   "kind": "single",
+   "seconds": 3.6,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "05_Writing_your_First_Kernels/03 Profiling/02_tiled_matmul.cu",
+   "kind": "single",
+   "seconds": 3.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "6a2f5178612c3c5f7c7172c06177bba042bae8860fdd430ab72de71f00a7c301",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Non-atomic counter value: 51\nAtomic counter value: 1000000\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "05_Writing_your_First_Kernels/04 Atomics/00_atomicAdd.cu",
+   "kind": "single",
+   "seconds": 2.6,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "19b43e0a8c307c64c618e3ce93116fde0ad9e89eaf9f232d322880a4140da977",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Test PASSED\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "05_Writing_your_First_Kernels/05 Streams/01_stream_basics.cu",
+   "kind": "single",
+   "seconds": 2.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda-course/05_Writing_your_First_Kernels/05 Streams/02_stream_advanced.cu(38): warning #549-D: variable \"event\" is used before its value is set\n      std::cout << event << std::endl;\n                   ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda-course/05_Writing_your_First_Kernels/05 Streams/02_stream_advanced.cu(38): warning #549-D: variable \"event\" is used before its value is set\n      std::cout << event << std::endl;\n                   ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "62831b6f1eabb44117ee505a7aa06e66fc8dbe4a3b538634e0d8604fdf392444",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "0\nStream callback: Operation completed\nTest PASSED\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "05_Writing_your_First_Kernels/05 Streams/02_stream_advanced.cu",
+   "kind": "single",
+   "seconds": 3.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "b7b99b7815a0451d6327f2b86b4ca0cf3067e3ee34926ff655d8d26d8e5e1001",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Matrix A (3x4):\n   1.000    2.000    3.000    4.000 \n   5.000    6.000    7.000    8.000 \n   9.000   10.000   11.000   12.000 \n\nMatrix B (4x2):\n   1.000    2.000 \n   3.000    4.000 \n   5.000    6.000 \n   7.000    8.000 \n\nCPU Result (3x2):\n  50.000   60.000 \n 114.000  140.000 \n 178.000  220.000 \n\ncuBLAS SGEMM Result (3x2):\n  50.000   60.000 \n 114.000  140.000 \n 178.000  220.000 \n\ncuBLAS HGEMM Result (3x2):\n  50.000   60.000 \n 114.000  140.000 \n 178.000  220.000 \n\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 2.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.6
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "06_CUDA_APIs/01 CUBLAS/01 cuBLAS/01_Hgemm_Sgemm.cu",
+   "kind": "single",
+   "seconds": 6.4,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "10bc59eccb0975d0c206aa2485d442160c40cc6058e61c5fe21cd90144afc634",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Matrix A:\n    1.00     2.00     3.00     4.00 \n    5.00     6.00     7.00     8.00 \n    9.00    10.00    11.00    12.00 \n   13.00    14.00    15.00    16.00 \n\nMatrix B:\n    1.00     2.00     4.00     4.00 \n    5.00     6.00     7.00     8.00 \n    9.00    10.00    11.00    12.00 \n   17.00    18.00    19.00    20.00 \n\nMatrix C (CPU):\n  106.00   116.00   127.00   136.00 \n  234.00   260.00   291.00   312.00 \n  362.00   404.00   455.00   488.00 \n  490.00   548.00   619.00   664.00 \n\nMatrix C (GPU FP32):\n  106.00   116.00   127.00   136.00 \n  234.00   260.00   291.00   312.00 \n  362.00   404.00   455.00   488.00 \n  490.00   548.00   619.00   664.00 \n\nMatrix C (GPU FP16):\n  106.00   116.00   127.00   136.00 \n  234.00   260.00   291.00   312.00 \n  362.00   404.00   455.00   488.00 \n  490.00   548.00   619.00   664.00 \n\nFP32 Results match\nFP16 Results match\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.6
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "06_CUDA_APIs/01 CUBLAS/02 cuBLASLt/01_LtMatmul.cu",
+   "kind": "single",
+   "seconds": 5.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "1b76d25cd983eb5a5904b050c79990780b9c0e658ad06f0ff006a129108765ba",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": true,
+    "stdout_head": "matrix size: 4096x1024 * 1024x4096\ncuBLAS FP32 average time: 8.42182 ms\ncuBLASLt FP32 average time: 7.97758 ms\ncuBLAS FP16 average time: 0.778754 ms\ncuBLASLt FP16 average time: 0.769032 ms\nNaive CUDA kernel average time: 57.7658 ms\nmax error fp16 cublas: 0.0675936\nmax error fp16 cublasLt: 0.0675936\ncuBLAS FP32 results match the naive kernel results within tolerance of 1e-2.\ncuBLASLt FP32 results match the naive kernel results within tolerance of 1e-2.\ncuBLAS FP16 results match the naive kernel results within tolerance of 5e-1.\ncuBLASLt FP16 results match the naive kernel results within tolerance of 5e-1.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 3.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 3.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "06_CUDA_APIs/01 CUBLAS/02 cuBLASLt/02_compare.cu",
+   "kind": "single",
+   "seconds": 13.4,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "cecacd2b6ec2bf30a037d745f610b2884053eb3257590b4fc58eff9c062cf569",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Maximum difference between CPU and GPU results: 0.0001\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "06_CUDA_APIs/01 CUBLAS/03 cuBLASXt/01_demo.cu",
+   "kind": "single",
+   "seconds": 5.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": null,
+    "stdout_sha256": "945eafbbf342f60b46d86188399d518978e629e9fa9bce3adbceb2cb2d9cdd0e",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "CUBLAS run 1 time: 2.18486 seconds\nCUBLAS run 2 time: 2.18949 seconds\nCUBLAS run 3 time: 2.33519 seconds\nCUBLAS run 4 time: 2.21829 seconds\nCUBLAS run 5 time: 2.28084 seconds\nCUBLAS-XT run 1 time: 8.32679 seconds\nCUBLAS-XT run 2 time: 8.36203 seconds\nCUBLAS-XT run 3 time: 8.37694 seconds\nCUBLAS-XT run 4 time: 8.4092 seconds\nCUBLAS-XT run 5 time: 8.34112 seconds\nAverage CUBLAS time: 2.24173 seconds\nAverage CUBLAS-XT time: 8.36322 seconds\nResults match within tolerance.\n",
+    "stderr_head": "",
+    "rescued": true,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 124,
+      "seconds": 60.3
+     },
+     {
+      "timeout": 180,
+      "rc": 0,
+      "seconds": 76.9
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "06_CUDA_APIs/01 CUBLAS/03 cuBLASXt/02_compare.cu",
+   "kind": "single",
+   "seconds": 142.2,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "c7a9554d2e699ef7bd3f6b0e3366baf486123e9bf68514ebd729b850d7729663",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Average time for kernel without unrolling: 0.637126 ms\nAverage time for kernel with unrolling: 0.637238 ms\nResults are correct\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "07_Faster_Matmul/unrolling_example.cu",
+   "kind": "single",
+   "seconds": 3.0,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "de766c88d486393767e5d89c92334ec24ba38c891a0841c4fe1e53a7c93dc445",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Maximum difference between CPU and GPU results (first batch): 1.164153e-10\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "08_Triton/02_softmax.cu",
+   "kind": "single",
+   "seconds": 2.7,
+   "status": "ok"
+  }
+ ]
+}

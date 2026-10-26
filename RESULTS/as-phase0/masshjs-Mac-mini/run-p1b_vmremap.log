@@ -1,0 +1,5 @@
+cpu=0x106a28000  gpu=0x10000018000
+vm_remap -> KERN_SUCCESS (target 0x10000018000)
+wrote /Users/masshj/YFCE/cuda4AS/drop/as-phase0/results/p1b_vmremap.json
+alias readback: identical
+wrote /Users/masshj/YFCE/cuda4AS/drop/as-phase0/results/p1b_vmremap.json

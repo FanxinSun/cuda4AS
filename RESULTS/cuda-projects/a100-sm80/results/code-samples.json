@@ -1,0 +1,100 @@
+{
+ "slug": "NVIDIA-developer-blog/code-samples",
+ "commit": "3350d216083a902ccbf5b31665e3b82096a75b55",
+ "complete": true,
+ "tally": {
+  "ok": 2,
+  "build-fail": 1
+ },
+ "skipped_at_discovery": [
+  {
+   "path": "posts/nvtx/manual_nvtx.cu",
+   "reason": "NVTX v2 header was removed from recent toolkits"
+  }
+ ],
+ "results": [
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "d37191c8e2c9d2ba87465782e7735b58ce8a17103cee085bb8f4adead3a0eed5",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": true,
+    "stdout_head": "Preparing input: 1000x1024\nComputing reference solution\nCreating FFT plan\nRunning 100 iterations\nTime for the FFT: 15.897504ms\n328: (-2.19,-0.58) != (16.59, 247.90)\n           *** FAILED ***\n!!! Verification Failed !!!\nDone\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "CUFFT_LICENSE_ERROR no longer exists in cuFFT (the license check was dropped); the copy removes that one branch and keeps the status check.",
+   "linked_with": [],
+   "path": "posts/cufft-callbacks/cufft_callbacks.cu",
+   "kind": "single",
+   "seconds": 6.1,
+   "status": "ok",
+   "retest": true
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "d1cfe565e23fabe4ae2efb300711d101a073e703090093ac16e304f1beb98e52",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": true,
+    "stdout_head": "Preparing input: 1000x1024\nComputing reference solution\nCreating FFT plan\nRunning 100 iterations\nTime for the FFT: 15.747072ms\n102000: (-0.37,-2.43) != (-0.37, -2.43)\n           *** FAILED ***\n!!! Verification Failed !!!\nDone\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 0.9
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "posts/cufft-callbacks/cufft_no_callbacks.cu",
+   "kind": "single",
+   "seconds": 4.5,
+   "status": "ok",
+   "retest": true
+  },
+  {
+   "build_rc": 2,
+   "build_log": ": conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_warp_atomic\",device_reduce_warp_atomic,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(179): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_warp_atomic_vector2\",device_reduce_warp_atomic_vector2,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(182): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_block_atomic\",device_reduce_block_atomic,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(183): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_block_atomic_vector2\",device_reduce_block_atomic_vector2,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(186): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_stable\",device_reduce_stable,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(187): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_stable_vector2\",device_reduce_stable_vector2,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(190): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTestCub(\"device_reduce_cub\",NUM_ELEMS,REPEAT,vals,checksum);\n               ^\n\n4 errors detected in the compilation of \"/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu\".\n",
+   "run": null,
+   "shortened": false,
+   "patched": "the vendored 2016 NVlabs/cub submodule collides with the CCCL cub that ships in CUDA 13 (#error CUB_NS_QUALIFIER); the copy includes the toolkit's <cub/cub.cuh> instead.",
+   "linked_with": [],
+   "path": "posts/parallel_reduction_with_shfl/main.cu",
+   "kind": "single",
+   "seconds": 4.1,
+   "status": "build-fail",
+   "retest": true
+  }
+ ]
+}

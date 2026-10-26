@@ -22,3 +22,14 @@ dist/
 drop/as-phase0/results/
 drop/as-phase0/build/
 drop/as-phase0/*.tgz
+
+# Third-party CUDA reference repos (shallow clones, see cuda-projects/README.md).
+# Each is its own git checkout; they do not belong in this repository.
+cuda-projects/*/
+
+# OS / Python clutter
+.DS_Store
+*/.DS_Store
+__pycache__/
+*/__pycache__/
+

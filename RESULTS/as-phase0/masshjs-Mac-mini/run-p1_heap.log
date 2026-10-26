@@ -1,0 +1,5 @@
+largest shared buffer: 12884901888 B (12.0 GiB)
+largest private buffer: 12884901888 B (12.0 GiB)
+ordinary buffer: cpu=0x1062fc000 gpu=0x10000018000
+bytesNoCopy coherence: GPU writes visible through the mmap pointer
+wrote /Users/masshj/YFCE/cuda4AS/drop/as-phase0/results/p1_heap.json

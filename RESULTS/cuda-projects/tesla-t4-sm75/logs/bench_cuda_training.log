@@ -1,0 +1,74 @@
+logging all output to /content/logs/bench_cuda_training.log
+name, driver_version, compute_cap
+Tesla T4, 580.82.07, 7.5
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+cmake version 3.31.10
+ok cuda_training
+Writing cuda_projects.py
+Writing manifest.json
+--- round 1/2, default run timeout
+ok         cuda_training/playground_kernel.cu
+ok         cuda_training/playground.cu
+ok         cuda_training/kernels/practice/gpu_check.cu
+ok         cuda_training/kernels/practice/grid_stride_loop.cu
+ok         cuda_training/kernels/practice/reduce_block.cu
+ok         cuda_training/kernels/practice/reduce_two_stage.cu
+ok         cuda_training/kernels/practice/register_pressure_kernel.cu
+ok         cuda_training/kernels/practice/tile_reverse.cu
+ok         cuda_training/kernels/practice/matrixAddKernel.cu
+ok         cuda_training/kernels/practice/vector_dot_reduction.cu
+ok         cuda_training/kernels/practice/vector_add.cu
+run-fail   cuda_training/src/cuda_systems/module2/2.1_lambdas_function_objects/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module2/2.1_lambdas_function_objects/exercise/champion_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module2/2.2_templates_type_traits/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module2/2.1_lambdas_function_objects/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module2/2.3_raii_smart_pointers_streams/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module2/2.2_templates_type_traits/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module2/2.3_raii_smart_pointers_streams/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module2/2.3_raii_smart_pointers_streams/exercise/champion_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module3/3.1_threads_registers/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module3/3.1_threads_registers/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module3/3.2_warps_simt_shuffles/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/champion_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/champion_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module4/4.2_shared_memory_tiling/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module5/5.2_atomic_operations/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module5/5.2_atomic_operations/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module6/6.1_bfloat16_math/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module6/6.1_bfloat16_math/exercise/champion_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module6/6.1_bfloat16_math/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/champion_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.1_elementwise_reshape/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.1_elementwise_reshape/exercise/champion_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.1_elementwise_reshape/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.2_embedding_lookup/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.2_embedding_lookup/exercise/champion_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.2_embedding_lookup/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/champion_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/champion_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.5_gemm_projections/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.5_gemm_projections/exercise/champion_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.5_gemm_projections/exercise/intermediate_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.6_flash_attention/exercise/beginner_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.6_flash_attention/exercise/champion_workbook.cu
+run-fail   cuda_training/src/cuda_systems/module7/7.6_flash_attention/exercise/intermediate_workbook.cu
+== rahul238xaviers/cuda_training {'ok': 11, 'run-fail': 50}
+done: {'ok': 11, 'run-fail': 50}
+rahul238xaviers/cuda_training                    {'ok': 11, 'run-fail': 50}

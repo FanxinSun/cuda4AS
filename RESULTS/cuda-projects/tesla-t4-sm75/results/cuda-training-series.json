@@ -1,0 +1,1276 @@
+{
+ "slug": "olcf/cuda-training-series",
+ "commit": "9cd77d539d85ee3457e09a083ba299b787b7a16e",
+ "complete": true,
+ "tally": {
+  "ok": 33,
+  "build-fail": 1,
+  "run-fail": 2
+ },
+ "skipped_at_discovery": [
+  {
+   "path": "exercises/hw1/hello.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "exercises/hw1/matrix_mul.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "exercises/hw1/vector_add.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "exercises/hw11/test.cu",
+   "reason": "needs MPI"
+  },
+  {
+   "path": "exercises/hw13/axpy_cublas_with_fixme.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "exercises/hw13/axpy_stream_capture_with_fixme.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "exercises/hw2/matrix_mul_shared.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "exercises/hw2/stencil_1d.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "exercises/hw3/vector_add.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "exercises/hw4/matrix_sums.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "exercises/hw7/overlap.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "exercises/hw8/task1/task1.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "exercises/hw8/task2/task2.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "exercises/hw9/task1.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "exercises/hw9/task2.cu",
+   "reason": "exercise template"
+  }
+ ],
+ "results": [
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "2627f8a28658974a99f42f82e205c8978dc34f87e6eee61c7a1c816b78461c30",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Hello from block: 0, thread: 0\nHello from block: 0, thread: 1\nHello from block: 1, thread: 0\nHello from block: 1, thread: 1\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw1/hello_solution.cu",
+   "kind": "single",
+   "seconds": 4.0,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "332eccfac62f5605480307c15eb4a76ad7f72d0c6f43f25b0a022a230414371b",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Init took 0.473117 seconds.  Begin compute\nDone. Compute took 1.850286 seconds\nSuccess!\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 3.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 3.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw1/matrix_mul_solution.cu",
+   "kind": "single",
+   "seconds": 9.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "ba67edaa4d91eee75e7c7452c618a58ca16c56c0cc39048dd80f39a991071b65",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "A[0] = 0.840188\nB[0] = 0.394383\nC[0] = 1.234571\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw1/vector_add_solution.cu",
+   "kind": "single",
+   "seconds": 2.6,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "f19acbc6ec2e3c42174570f0098a9fffe18f2dc4aeb2efb6210c9bef9bad0cac",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "non-stream elapsed time: 0.069379\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 2.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 3.1
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw10/streams.cu",
+   "kind": "single",
+   "seconds": 9.1,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "aee815d013ba6d9dbeff567e2cb197a97272bd5096b94e3ed01013fa981ba2e5",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "non-stream elapsed time: 0.077184\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 3.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 2.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw10/streams_solution.cu",
+   "kind": "single",
+   "seconds": 8.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "1d9d5fa0b79b738602aae44bd823d9e2ba706f84b7befc7d6351ad9c6dd78cb8",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": true,
+    "stdout_head": "an illegal memory access was encountered\nMismatch at index: 0 expected: 128 got: 0\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.1
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.1
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw12/task1.cu",
+   "kind": "single",
+   "seconds": 5.1,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "2b28e627f8ab4e9d1f9c46085110745ba54fde2faee4210ef8d2add6b04ccf80",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "no error\nSuccess!\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw12/task1_solution.cu",
+   "kind": "single",
+   "seconds": 4.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "294c0559ed60418affd7d270ae1fcfab5f393cf77e3e6c19b7617150c5346f8c",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Estimated value: -inf Expected value: 0.693147\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw12/task2.cu",
+   "kind": "single",
+   "seconds": 3.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "8a057b6501dba45e9380d71702eead37a18408e24456cb29005826b925c7b7bb",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Estimated value: 0.693148 Expected value: 0.693147\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw12/task2_solution.cu",
+   "kind": "single",
+   "seconds": 3.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 2,
+   "build_log": "/content/cuda-projects/cuda-training-series/exercises/hw13/axpy_cublas_from_scratch.cu(79): error: identifier \"thread\" is undefined\n      kernel_a<<<blocks, thread, 0, stream1>>>(d_x, d_y)\n                         ^\n\n/content/cuda-projects/cuda-training-series/exercises/hw13/axpy_cublas_from_scratch.cu(82): error: expected a \";\"\n      cublasSaxpy_v2(cublas_handle, 500000, &d_a, d_x, 1, d_y, 1);\n      ^\n\n/content/cuda-projects/cuda-training-series/exercises/hw13/axpy_cublas_from_scratch.cu(86): error: expected a \";\"\n      cudaStreamSynchronize(stream1);\n      ^\n\n3 errors detected in the compilation of \"/content/cuda-projects/cuda-training-series/exercises/hw13/axpy_cublas_from_scratch.cu\".\n",
+   "run": null,
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw13/axpy_cublas_from_scratch.cu",
+   "kind": "single",
+   "seconds": 1.4,
+   "status": "build-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "43fa75e83506d053d367f992a5d251ec71f7e4e5c244082d6a2c8231e5ca7acf",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "\n 0 801 1602 2403 3204 4005 4806 5607 6408 7209 8010 8811 9612 10413 11214 12015 12816 13617 14418 15219 16020 16821 17622 18423 19224 \n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.9
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.8
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw13/axpy_stream_capture_from_scratch.cu",
+   "kind": "single",
+   "seconds": 3.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9adf8f17749d3c6f3828ca448dc9e2c13c04cf72227ec1643ac8c0cb0b26d20c",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "\nTime 5.36953 s\n 0 8801 17602 26403 35204 44005 52806 61607 70408 79209 88010 96811 105612 114413 123214 132015 140816 149617 158418 167219 176020 184821 193622 202423 211224 \n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 6.2
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 8.0
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw13/axpy_stream_capture_timer.cu",
+   "kind": "single",
+   "seconds": 17.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "1420bd949ee4f3df7104bb2afc5c32314108370eda41769281ec1a06086cae19",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": " 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 \nNumber of the nodes in the graph = 3\n200 701 1202 1703 2204 2705 3206 3707 4208 4709 5210 5711 6212 6713 7214 7715 8216 8717 9218 9719 10220 10721 11222 11723 12224 \n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 2.8
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.8
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw13/Solutions/axpy_cublas_solution.cu",
+   "kind": "single",
+   "seconds": 7.1,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "4552f51e2ef9082c41c4cd29e3597a6be47e871e30eb96ce5ecceec372a141ba",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "\nNumber of the nodes in the graph = 4\nTime 7.84941 s\n 0 8801 17602 26403 35204 44005 52806 61607 70408 79209 88010 96811 105612 114413 123214 132015 140816 149617 158418 167219 176020 184821 193622 202423 211224 \n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 9.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 7.1
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw13/Solutions/axpy_stream_capture_solution.cu",
+   "kind": "single",
+   "seconds": 19.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "7f79fc210e8a83e24fdd475035d62eec2978f2da511c1732f0e43396e93dd00b",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Init took 0.461029 seconds.  Begin compute\nDone. Compute took 2.588570 seconds\nSuccess!\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 3.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 3.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw2/matrix_mul_shared_solution.cu",
+   "kind": "single",
+   "seconds": 8.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "ecbe8676c39b35dfd172d6c15cc79c9fd570d117487d5911fba7788886e2bbe4",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Success!\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw2/stencil_1d_solution.cu",
+   "kind": "single",
+   "seconds": 2.4,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "ba67edaa4d91eee75e7c7452c618a58ca16c56c0cc39048dd80f39a991071b65",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "A[0] = 0.840188\nB[0] = 0.394383\nC[0] = 1.234571\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 5.2
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 4.8
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw3/vector_add_solution.cu",
+   "kind": "single",
+   "seconds": 11.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "7b6d9b8b2bf9edc577bf80aaca5f3f9bf6933777b040c328a9bc7e9eaecac5c2",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "row sums correct!\ncolumn sums correct!\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.7
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw4/matrix_sums_solution.cu",
+   "kind": "single",
+   "seconds": 4.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "7b6d9b8b2bf9edc577bf80aaca5f3f9bf6933777b040c328a9bc7e9eaecac5c2",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "row sums correct!\ncolumn sums correct!\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw5/matrix_sums.cu",
+   "kind": "single",
+   "seconds": 4.4,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "7b6d9b8b2bf9edc577bf80aaca5f3f9bf6933777b040c328a9bc7e9eaecac5c2",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "row sums correct!\ncolumn sums correct!\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw5/matrix_sums_solution.cu",
+   "kind": "single",
+   "seconds": 4.6,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "0dc532ccdbaac10af19417944b1a4727c3ec4e32e16d3c15ca129f5194a15937",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "reduction output: 8388612.000000, expected sum reduction output: 8388612.000000, expected max reduction output: 5.000000\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw5/max_reduction.cu",
+   "kind": "single",
+   "seconds": 3.1,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9fac610c535e3d1b6d8bb797f5562d47bc4a371e85269441ba544ffc264ec13a",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "reduction output: 5.000000, expected sum reduction output: 8388612.000000, expected max reduction output: 5.000000\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw5/max_reduction_solution.cu",
+   "kind": "single",
+   "seconds": 2.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "954fa1c4339ed0a9e1c2b35eb745364c4731836ce63fd99f34977c45bf4eeff8",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "atomic sum reduction correct!\nreduction w/atomic sum correct!\nreduction warp shuffle sum correct!\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw5/reductions.cu",
+   "kind": "single",
+   "seconds": 2.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "490c307f3bb439e5dfdb50bf3b43c71539a62e72640d5b4b9eb3baf64b1e3d30",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "success!\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.7
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw6/array_inc.cu",
+   "kind": "single",
+   "seconds": 3.0,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "490c307f3bb439e5dfdb50bf3b43c71539a62e72640d5b4b9eb3baf64b1e3d30",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "success!\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.6
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "written for CUDA <= 12 -- not a bug in the program. cudaMemPrefetchAsync(ptr, bytes, device) was replaced in CUDA 13 by a form taking a cudaMemLocation and flags (nvcc 13: 'no suitable constructor exists to convert from int to cudaMemLocation'). The copy uses the CUDA 13 form.",
+   "linked_with": [],
+   "path": "exercises/hw6/array_inc_solution.cu",
+   "kind": "single",
+   "seconds": 3.1,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "3dd76db4315f42bb84645a46c89cbf182f09bf94e5ad97d1e6585f1760a470d7",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": true,
+    "stdout_head": "key = 3\n",
+    "stderr_head": "Fatal error: cuda error! (an illegal memory access was encountered at /content/cuda-projects/cuda-training-series/exercises/hw6/linked_list.cu:53)\n*** FAILED - ABORTING\n",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.6
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw6/linked_list.cu",
+   "kind": "single",
+   "seconds": 3.0,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "7cbc2c1f474a83dace2d78195d43b2e2a33157389a957d131a91c57f14eebd59",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "key = 3\nkey = 3\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.7
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw6/linked_list_solution.cu",
+   "kind": "single",
+   "seconds": 2.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "e417c3ff373673148af5c3571bef83ca5007478b145acfb838c69bb34bb2bb2a",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "elapsed time: 0.068897\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 7.1
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 7.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw7/multi.cu",
+   "kind": "single",
+   "seconds": 17.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": true,
+    "stdout_head": "",
+    "stderr_head": "Fatal error: allocation error (invalid device ordinal at /content/cuda-projects/cuda-training-series/exercises/hw7/multi_solution.cu:71)\n*** FAILED - ABORTING\n",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw7/multi_solution.cu",
+   "kind": "single",
+   "seconds": 3.7,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "2a91e8a89a60a23346f22288fd5aafb677241d29b3e43b60d5015e5dcad11f52",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "non-stream elapsed time: 0.069384\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 2.9
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 2.9
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw7/overlap_solution.cu",
+   "kind": "single",
+   "seconds": 8.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "821588a6b80c336ad2ac5f11fb0c70e23058f490ef1a6ba020f11867ad08f038",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Matrix size is 4096\nTotal memory required per matrix is 134.217728 MB\nTotal time CPU is 0.331444 sec\nPerformance is 0.809897 GB/s\nTotal time GPU is 0.003306 sec\nPerformance is 81.185839 GB/s\nPASS\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw8/task1/task1_solution.cu",
+   "kind": "single",
+   "seconds": 4.4,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "1b6e9739a400865423f3cbdacdb358843f95d35df789d7cdafbce90d530d82d4",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Matrix size is 4096\nTotal memory required per matrix is 134.217728 MB\nTotal time CPU is 0.378371 sec\nPerformance is 0.709451 GB/s\nTotal time GPU is 0.001948 sec\nPerformance is 137.775648 GB/s\nPASS\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw8/task2/task2_solution.cu",
+   "kind": "single",
+   "seconds": 4.3,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "6620f4aeeb21907898a7048c23f92854456133740f02cee9ae522ed195a3b373",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Matrix size is 4096\nTotal memory required per matrix is 134.217728 MB\nTotal time CPU is 0.383763 sec\nPerformance is 0.699483 GB/s\nTotal time GPU is 0.001669 sec\nPerformance is 160.873892 GB/s\nPASS\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw8/task3/task3.cu",
+   "kind": "single",
+   "seconds": 4.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "4a95598052e3469cc407cf5f5e242d8443e2009a2cb380100501656dc0acece7",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Matrix size is 4096\nTotal memory required per matrix is 134.217728 MB\nTotal time CPU is 0.369047 sec\nPerformance is 0.727375 GB/s\nTotal time GPU is 0.001395 sec\nPerformance is 192.390437 GB/s\nPASS\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw8/task3/task3_solution.cu",
+   "kind": "single",
+   "seconds": 4.3,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "de6e14733386d31b5568612a93c886bb8a14c050cabc544c0d69cbb5ae01b196",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "group partial sum: 16\ngroup partial sum: 16\ngroup partial sum: 16\ngroup partial sum: 16\ngroup partial sum: 16\ngroup partial sum: 16\ngroup partial sum: 16\ngroup partial sum: 16\ngroup partial sum: 16\ngroup partial sum: 16\ngroup partial sum: 16\ngroup partial sum: 16\ngroup partial sum: 16\ngroup partial sum: 16\ngroup partial sum: 16\ngroup partial sum: 16\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw9/task1_solution.cu",
+   "kind": "single",
+   "seconds": 7.4,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "6baf1466db25de2ceaa0a7942c24a4b44171dc9afee618fa2aa5dfa25299bfd9",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "number of SMs = 40\nnumber of blocks per SM = 4\nkernel time: 0.016960ms\nthrust time: 0.226144ms\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "exercises/hw9/task2_solution.cu",
+   "kind": "single",
+   "seconds": 14.5,
+   "status": "ok"
+  }
+ ]
+}

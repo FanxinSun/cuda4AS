@@ -1,0 +1,181 @@
+{
+ "slug": "NVIDIA/cuda-samples",
+ "commit": "5443602d89ed99aede2e4b7bf329daddeadb320e",
+ "complete": true,
+ "tally": {
+  "ok": 5
+ },
+ "skipped_at_discovery": [],
+ "results": [
+  {
+   "build_rc": 0,
+   "build_log": "-- The C compiler identification is GNU 13.3.0\n-- The CXX compiler identification is GNU 13.3.0\n-- The CUDA compiler identification is NVIDIA 13.0.88 with host compiler GNU 13.3.0\n-- Detecting C compiler ABI info\n-- Detecting C compiler ABI info - done\n-- Check for working C compiler: /usr/bin/cc - skipped\n-- Detecting C compile features\n-- Detecting C compile features - done\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Detecting CUDA compiler ABI info\n-- Detecting CUDA compiler ABI info - done\n-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc - skipped\n-- Detecting CUDA compile features\n-- Detecting CUDA compile features - done\n-- Found CUDAToolkit: /usr/local/cuda/targets/x86_64-linux/include;/usr/local/cuda/targets/x86_64-linux/include/cccl (found version \"13.0.88\")\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n-- Found Threads: TRUE\n-- CUDA Samples installation configured:\n--   Architecture: x86_64\n--   OS: linux\n--   Build Type: release\n--   Install Prefix: /content/out/build/cuda-samples/simpleAttributes/bin\n--   Install Directory: /content/out/build/cuda-samples/simpleAttributes/bin/x86_64/linux/release\n-- Configuring done (4.1s)\n-- Generating done (0.0s)\n-- Build files have been written to: /content/out/build/cuda-samples/simpleAttributes\n[ 50%] Building CUDA object CMakeFiles/simpleAttributes.dir/simpleAttributes.cu.o\n[100%] Linking CUDA executable simpleAttributes\n[100%] Built target simpleAttributes\n",
+   "runs": [
+    {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "3b703b18e131f2a94569cb3ed9e142df6bff33c33b52fc404cd856e98a682734",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "/content/out/build/cuda-samples/simpleAttributes/simpleAttributes Starting...\n\nGPU Device 0: \"Ampere\" with compute capability 8.0\n\nProcessing time: 10733.670898 (ms)\n",
+     "stderr_head": "",
+     "rescued": false,
+     "attempts": [
+      {
+       "timeout": 60,
+       "rc": 0,
+       "seconds": 11.2
+      },
+      {
+       "timeout": 60,
+       "rc": 0,
+       "seconds": 11.2
+      }
+     ],
+     "args": []
+    }
+   ],
+   "path": "cpp/0_Introduction/simpleAttributes",
+   "kind": "cmake-sample",
+   "seconds": 29.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "-- The C compiler identification is GNU 13.3.0\n-- The CXX compiler identification is GNU 13.3.0\n-- The CUDA compiler identification is NVIDIA 13.0.88 with host compiler GNU 13.3.0\n-- Detecting C compiler ABI info\n-- Detecting C compiler ABI info - done\n-- Check for working C compiler: /usr/bin/cc - skipped\n-- Detecting C compile features\n-- Detecting C compile features - done\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Detecting CUDA compiler ABI info\n-- Detecting CUDA compiler ABI info - done\n-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc - skipped\n-- Detecting CUDA compile features\n-- Detecting CUDA compile features - done\n-- Found CUDAToolkit: /usr/local/cuda/targets/x86_64-linux/include;/usr/local/cuda/targets/x86_64-linux/include/cccl (found version \"13.0.88\")\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n-- Found Threads: TRUE\n-- CUDA Samples installation configured:\n--   Architecture: x86_64\n--   OS: linux\n--   Build Type: release\n--   Install Prefix: /content/out/build/cuda-samples/bf16TensorCoreGemm/bin\n--   Install Directory: /content/out/build/cuda-samples/bf16TensorCoreGemm/bin/x86_64/linux/release\n-- Configuring done (4.2s)\n-- Generating done (0.0s)\n-- Build files have been written to: /content/out/build/cuda-samples/bf16TensorCoreGemm\n[ 50%] Building CUDA object CMakeFiles/bf16TensorCoreGemm.dir/bf16TensorCoreGemm.cu.o\n[100%] Linking CUDA executable bf16TensorCoreGemm\n[100%] Built target bf16TensorCoreGemm\n",
+   "runs": [
+    {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "b3554127397be1e81cbefc5a8128d5ce1e51176a029c7d856e9275ec5f0488f9",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "Initializing...\nGPU Device 0: \"Ampere\" with compute capability 8.0\n\nM: 8192 (16 x 512)\nN: 8192 (16 x 512)\nK: 8192 (16 x 512)\nPreparing data for GPU...\nRequired shared memory size: 72 Kb\nComputing using high performance kernel = 0 - compute_bf16gemm_async_copy\nTime: 9.502720 ms\nTFLOPS: 115.70\n",
+     "stderr_head": "",
+     "rescued": false,
+     "attempts": [
+      {
+       "timeout": 60,
+       "rc": 0,
+       "seconds": 5.0
+      },
+      {
+       "timeout": 60,
+       "rc": 0,
+       "seconds": 5.1
+      }
+     ],
+     "args": []
+    }
+   ],
+   "path": "cpp/3_CUDA_Features/bf16TensorCoreGemm",
+   "kind": "cmake-sample",
+   "seconds": 23.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "-- The C compiler identification is GNU 13.3.0\n-- The CXX compiler identification is GNU 13.3.0\n-- The CUDA compiler identification is NVIDIA 13.0.88 with host compiler GNU 13.3.0\n-- Detecting C compiler ABI info\n-- Detecting C compiler ABI info - done\n-- Check for working C compiler: /usr/bin/cc - skipped\n-- Detecting C compile features\n-- Detecting C compile features - done\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Detecting CUDA compiler ABI info\n-- Detecting CUDA compiler ABI info - done\n-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc - skipped\n-- Detecting CUDA compile features\n-- Detecting CUDA compile features - done\n-- Found CUDAToolkit: /usr/local/cuda/targets/x86_64-linux/include;/usr/local/cuda/targets/x86_64-linux/include/cccl (found version \"13.0.88\")\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n-- Found Threads: TRUE\n-- CUDA Samples installation configured:\n--   Architecture: x86_64\n--   OS: linux\n--   Build Type: release\n--   Install Prefix: /content/out/build/cuda-samples/cudaCompressibleMemory/bin\n--   Install Directory: /content/out/build/cuda-samples/cudaCompressibleMemory/bin/x86_64/linux/release\n-- Configuring done (2.8s)\n-- Generating done (0.0s)\n-- Build files have been written to: /content/out/build/cuda-samples/cudaCompressibleMemory\n[ 33%] Building CXX object CMakeFiles/cudaCompressibleMemory.dir/compMalloc.cpp.o\n[ 66%] Building CUDA object CMakeFiles/cudaCompressibleMemory.dir/saxpy.cu.o\n[100%] Linking CXX executable cudaCompressibleMemory\n[100%] Built target cudaCompressibleMemory\n",
+   "runs": [
+    {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "b674ead8f8ba1dbae0fd97800e183c9594fdf45ddbebad64597680b664be6fa8",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "GPU Device 0: \"Ampere\" with compute capability 8.0\n\nGeneric memory compression support is available\nallocating non-compressible Z buffer\nRunning saxpy on 167772160 bytes of Compressible memory\nRunning saxpy with 216 blocks x 1024 threads = 0.300 ms 1.678 TB/s\nRunning saxpy on 167772160 bytes of Non-Compressible memory\nRunning saxpy with 216 blocks x 1024 threads = 0.316 ms 1.590 TB/s\n\nNOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.\n",
+     "stderr_head": "",
+     "rescued": false,
+     "attempts": [
+      {
+       "timeout": 60,
+       "rc": 0,
+       "seconds": 0.9
+      },
+      {
+       "timeout": 60,
+       "rc": 0,
+       "seconds": 0.9
+      }
+     ],
+     "args": []
+    }
+   ],
+   "path": "cpp/3_CUDA_Features/cudaCompressibleMemory",
+   "kind": "cmake-sample",
+   "seconds": 7.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "-- The C compiler identification is GNU 13.3.0\n-- The CXX compiler identification is GNU 13.3.0\n-- The CUDA compiler identification is NVIDIA 13.0.88 with host compiler GNU 13.3.0\n-- Detecting C compiler ABI info\n-- Detecting C compiler ABI info - done\n-- Check for working C compiler: /usr/bin/cc - skipped\n-- Detecting C compile features\n-- Detecting C compile features - done\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Detecting CUDA compiler ABI info\n-- Detecting CUDA compiler ABI info - done\n-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc - skipped\n-- Detecting CUDA compile features\n-- Detecting CUDA compile features - done\n-- Found CUDAToolkit: /usr/local/cuda/targets/x86_64-linux/include;/usr/local/cuda/targets/x86_64-linux/include/cccl (found version \"13.0.88\")\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n-- Found Threads: TRUE\n-- CUDA Samples installation configured:\n--   Architecture: x86_64\n--   OS: linux\n--   Build Type: release\n--   Install Prefix: /content/out/build/cuda-samples/dmmaTensorCoreGemm/bin\n--   Install Directory: /content/out/build/cuda-samples/dmmaTensorCoreGemm/bin/x86_64/linux/release\n-- Configuring done (3.0s)\n-- Generating done (0.0s)\n-- Build files have been written to: /content/out/build/cuda-samples/dmmaTensorCoreGemm\n[ 50%] Building CUDA object CMakeFiles/dmmaTensorCoreGemm.dir/dmmaTensorCoreGemm.cu.o\n[100%] Linking CUDA executable dmmaTensorCoreGemm\n[100%] Built target dmmaTensorCoreGemm\n",
+   "runs": [
+    {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "c96efe9d80afcb365276e920b6174d64fd332c005a3bde0f1fef7fab5acee367",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "Initializing...\nGPU Device 0: \"Ampere\" with compute capability 8.0\n\nM: 8192 (8 x 1024)\nN: 8192 (8 x 1024)\nK: 4096 (4 x 1024)\nPreparing data for GPU...\nRequired shared memory size: 68 Kb\nComputing using high performance kernel = 0 - compute_dgemm_async_copy\nTime: 51.312641 ms\nFP64 TFLOPS: 10.71\n",
+     "stderr_head": "",
+     "rescued": false,
+     "attempts": [
+      {
+       "timeout": 60,
+       "rc": 0,
+       "seconds": 3.8
+      },
+      {
+       "timeout": 60,
+       "rc": 0,
+       "seconds": 3.8
+      }
+     ],
+     "args": []
+    }
+   ],
+   "path": "cpp/3_CUDA_Features/dmmaTensorCoreGemm",
+   "kind": "cmake-sample",
+   "seconds": 28.0,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "-- The C compiler identification is GNU 13.3.0\n-- The CXX compiler identification is GNU 13.3.0\n-- The CUDA compiler identification is NVIDIA 13.0.88 with host compiler GNU 13.3.0\n-- Detecting C compiler ABI info\n-- Detecting C compiler ABI info - done\n-- Check for working C compiler: /usr/bin/cc - skipped\n-- Detecting C compile features\n-- Detecting C compile features - done\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Detecting CUDA compiler ABI info\n-- Detecting CUDA compiler ABI info - done\n-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc - skipped\n-- Detecting CUDA compile features\n-- Detecting CUDA compile features - done\n-- Found CUDAToolkit: /usr/local/cuda/targets/x86_64-linux/include;/usr/local/cuda/targets/x86_64-linux/include/cccl (found version \"13.0.88\")\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n-- Found Threads: TRUE\n-- CUDA Samples installation configured:\n--   Architecture: x86_64\n--   OS: linux\n--   Build Type: release\n--   Install Prefix: /content/out/build/cuda-samples/tf32TensorCoreGemm/bin\n--   Install Directory: /content/out/build/cuda-samples/tf32TensorCoreGemm/bin/x86_64/linux/release\n-- Configuring done (3.1s)\n-- Generating done (0.0s)\n-- Build files have been written to: /content/out/build/cuda-samples/tf32TensorCoreGemm\n[ 50%] Building CUDA object CMakeFiles/tf32TensorCoreGemm.dir/tf32TensorCoreGemm.cu.o\n[100%] Linking CUDA executable tf32TensorCoreGemm\n[100%] Built target tf32TensorCoreGemm\n",
+   "runs": [
+    {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "11f35976ce27b7b693bf32adb2315bd8839b99fc3043bdf65dbb4c6cc0cb3f2b",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "Initializing...\nGPU Device 0: \"Ampere\" with compute capability 8.0\n\nM: 8192 (16 x 512)\nN: 8192 (16 x 512)\nK: 4096 (8 x 512)\nPreparing data for GPU...\nRequired shared memory size: 72 Kb\nComputing using high performance kernel = 0 - compute_tf32gemm_async_copy\nTime: 43.385857 ms\nTFLOPS: 12.67\n",
+     "stderr_head": "",
+     "rescued": false,
+     "attempts": [
+      {
+       "timeout": 60,
+       "rc": 0,
+       "seconds": 3.5
+      },
+      {
+       "timeout": 60,
+       "rc": 0,
+       "seconds": 3.5
+      }
+     ],
+     "args": []
+    }
+   ],
+   "path": "cpp/3_CUDA_Features/tf32TensorCoreGemm",
+   "kind": "cmake-sample",
+   "seconds": 24.5,
+   "status": "ok"
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+logging all output to /content/logs/bench_cuda-samples_a100.log
+name, driver_version, compute_cap
+NVIDIA A100-SXM4-80GB, 580.82.07, 8.0
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+cmake version 3.31.10
+ok cuda-samples
+Writing cuda_projects.py
+Writing manifest.json
+--- round 1/2, default run timeout
+ok         cuda-samples/cpp/3_CUDA_Features/bf16TensorCoreGemm
+ok         cuda-samples/cpp/0_Introduction/simpleAttributes
+ok         cuda-samples/cpp/3_CUDA_Features/cudaCompressibleMemory
+ok         cuda-samples/cpp/3_CUDA_Features/tf32TensorCoreGemm
+ok         cuda-samples/cpp/3_CUDA_Features/dmmaTensorCoreGemm
+== NVIDIA/cuda-samples {'ok': 5}
+done: {'ok': 5}
+NVIDIA/cuda-samples                              {'ok': 5}

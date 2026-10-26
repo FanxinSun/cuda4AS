@@ -1,0 +1,793 @@
+{
+ "slug": "CoffeeBeforeArch/cuda_programming",
+ "commit": "8711be08e2060680820304594f3691cc0016edd1",
+ "complete": true,
+ "tally": {
+  "ok": 23
+ },
+ "skipped_at_discovery": [],
+ "results": [
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "01_vector_addition/baseline/vectorAdd.cu",
+   "kind": "single",
+   "seconds": 5.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 4.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 4.0
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "01_vector_addition/pinned_memory/vectorAdd_pinned.cu",
+   "kind": "single",
+   "seconds": 13.3,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "4993c78d9956735e0644052e46629c40118862664077bee163260063ea8f6525",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY!\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "01_vector_addition/unified_memory/vectorAdd_um_baseline.cu",
+   "kind": "single",
+   "seconds": 3.3,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "4993c78d9956735e0644052e46629c40118862664077bee163260063ea8f6525",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY!\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "written for CUDA <= 12 -- not a bug in the program. In CUDA 13 both cudaMemPrefetchAsync(ptr, bytes, device) and cudaMemAdvise(ptr, bytes, advice, device) take a cudaMemLocation instead of a device id (the same break as in cuda-training-series hw6). The copy uses the CUDA 13 form at all ten call sites (4 cudaMemAdvise, 6 cudaMemPrefetchAsync).",
+   "linked_with": [],
+   "path": "01_vector_addition/unified_memory/vectorAdd_um_prefetch.cu",
+   "kind": "single",
+   "seconds": 3.4,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 13.7
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 15.6
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "02_matrix_mul/baseline/mmul.cu",
+   "kind": "single",
+   "seconds": 33.1,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 13.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 15.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "02_matrix_mul/noAliasing/restrict/mmul.cu",
+   "kind": "single",
+   "seconds": 32.6,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 13.1
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 8.6
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "02_matrix_mul/noAliasing/tmp/mmul.cu",
+   "kind": "single",
+   "seconds": 25.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 18.0
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 16.1
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "02_matrix_mul/nonMultiple/mmul.cu",
+   "kind": "single",
+   "seconds": 38.0,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": null,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": true,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 124,
+      "seconds": 60.2
+     },
+     {
+      "timeout": 180,
+      "rc": 0,
+      "seconds": 78.7
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "02_matrix_mul/rectangular/mmul.cu",
+   "kind": "single",
+   "seconds": 143.1,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 13.7
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 17.1
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "02_matrix_mul/tiled/mmul.cu",
+   "kind": "single",
+   "seconds": 34.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "03_sum_reduction/bank_conflicts/sumReduction.cu",
+   "kind": "single",
+   "seconds": 4.2,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "03_sum_reduction/cooperative_groups/sumReduction.cu",
+   "kind": "single",
+   "seconds": 7.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_programming/03_sum_reduction/device_function/sumReduction.cu(32): warning #177-D: variable \"tid\" was declared but never referenced\n   int tid = blockIdx.x * blockDim.x + threadIdx.x;\n       ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "03_sum_reduction/device_function/sumReduction.cu",
+   "kind": "single",
+   "seconds": 2.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "03_sum_reduction/diverged/sumReduction.cu",
+   "kind": "single",
+   "seconds": 4.1,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "03_sum_reduction/no_confliicts/sumReduction.cu",
+   "kind": "single",
+   "seconds": 2.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_programming/03_sum_reduction/reduce_idle/sumReduction.cu(20): warning #177-D: variable \"tid\" was declared but never referenced\n   int tid = blockIdx.x * blockDim.x + threadIdx.x;\n       ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "03_sum_reduction/reduce_idle/sumReduction.cu",
+   "kind": "single",
+   "seconds": 2.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.8
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.7
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "04_histogram/global_atomic/histogram.cu",
+   "kind": "single",
+   "seconds": 5.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "04_histogram/shmem_atomic/histogram.cu",
+   "kind": "single",
+   "seconds": 4.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "05_convolution/1d_cache/convolution.cu",
+   "kind": "single",
+   "seconds": 4.2,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "05_convolution/1d_constant_memory/convolution.cu",
+   "kind": "single",
+   "seconds": 4.0,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "05_convolution/1d_naive/convolution.cu",
+   "kind": "single",
+   "seconds": 4.4,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9018c16075667c3d6766ac51c17550eb3737aedcaabb2f8a5121a0cb7e2d62e5",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "05_convolution/1d_tiled/convolution.cu",
+   "kind": "single",
+   "seconds": 4.1,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "da8d0b082da4aec632bfe25112f4a6081dd5bc53c26b641f10877fbd747d440d",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "COMPLETED SUCCESSFULLY!",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "05_convolution/2d_constant_memory/convolution.cu",
+   "kind": "single",
+   "seconds": 4.4,
+   "status": "ok"
+  }
+ ]
+}

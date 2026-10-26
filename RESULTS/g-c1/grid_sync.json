@@ -1,0 +1,33 @@
+{
+  "gate": "G-C1",
+  "kernel": "grid_sync",
+  "source": "oracle/src/grid_sync.cu",
+  "reference_sha256": "4fbd942528ebeb6cb546cbbbd2177efc399f9ec609356d727d864368cb66b089",
+  "actual_sha256": "4fbd942528ebeb6cb546cbbbd2177efc399f9ec609356d727d864368cb66b089",
+  "bytes": 2016,
+  "elements": 504,
+  "dtype": "u32",
+  "shape": [504],
+  "compare": "exact",
+  "bitwise_match": true,
+  "mismatches": 0,
+  "mechanisms_exercised": [
+    "cooperative_groups_grid_sync",
+    "cudaLaunchCooperativeKernel",
+    "multi_phase_grid_barrier",
+    "occupancy_derived_grid_blocks"
+  ],
+  "machine": {
+    "collected_utc": "2026-10-26T00:11:06Z",
+    "hostname": "masshjs-mac-mini.local",
+    "os_product": "macOS",
+    "os_version": "15.4.1",
+    "os_build": "24E263",
+    "arch": "arm64",
+    "cpu_brand": "Apple M4",
+    "gpu_core_count": 10,
+    "metal_compiler": "Apple metal version 32023.619",
+    "llvm_version": "Homebrew clang version 23.1.3",
+    "device": "Apple M4"
+  }
+}

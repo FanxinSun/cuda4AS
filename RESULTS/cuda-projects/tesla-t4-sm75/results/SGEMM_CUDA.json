@@ -1,0 +1,177 @@
+{
+ "slug": "siboehm/SGEMM_CUDA",
+ "commit": "5a7dcc513d951ba764d51bc9d587b3163f3a894d",
+ "tally": {
+  "run-fail": 1
+ },
+ "skipped_at_discovery": [],
+ "results": [
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "runs": {
+    "0": {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "ed32bf5f93645b0b214d24057ba53743646e0e100b192818754627d450804bba",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "Running kernel 0 on device 0.\nMax size: 4096\ndimensions(m=n=k) 128, alpha: 0.5, beta: 3\nAverage elapsed time: (0.001200) s, performance: (    3.5) GFLOPS. size: (128).\ndimensions(m=n=k) 256, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000645) s, performance: (   52.0) GFLOPS. size: (256).\ndimensions(m=n=k) 512, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000137) s, performance: ( 1958.1) GFLOPS. size: (512).\ndimensions(m=n=k) 1024, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000831) s, performance: ( 2583.6) GFLOPS. size: (1024).\ndimensions(m=n=k) 2048, alpha: 0.5, beta: 3\nAverage elapsed time: (0.004783) s, performance: ( 3592.2) GFLOPS. size: (2048).\ndimensions(m=n=k) 4096, alpha: 0.5, beta: 3\nAverage elapsed time: (0.034493) s, performance: ( 3984.5) GFLOPS. size: (4096).\n",
+     "stderr_head": ""
+    },
+    "1": {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "56e0e3250d4aa80b824f88cdb1940b8bc2501124306c19008047757fe8d363fe",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "Running kernel 1 on device 0.\nMax size: 4096\ndimensions(m=n=k) 128, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000243) s, performance: (   17.3) GFLOPS. size: (128).\ndimensions(m=n=k) 256, alpha: 0.5, beta: 3\nAverage elapsed time: (0.001868) s, performance: (   18.0) GFLOPS. size: (256).\ndimensions(m=n=k) 512, alpha: 0.5, beta: 3\nAverage elapsed time: (0.006673) s, performance: (   40.2) GFLOPS. size: (512).\ndimensions(m=n=k) 1024, alpha: 0.5, beta: 3\nAverage elapsed time: (0.035131) s, performance: (   61.1) GFLOPS. size: (1024).\ndimensions(m=n=k) 2048, alpha: 0.5, beta: 3\nAverage elapsed time: (0.278130) s, performance: (   61.8) GFLOPS. size: (2048).\ndimensions(m=n=k) 4096, alpha: 0.5, beta: 3\nAverage elapsed time: (2.265783) s, performance: (   60.7) GFLOPS. size: (4096).\n",
+     "stderr_head": "",
+     "rescued": false,
+     "attempts": [
+      {
+       "timeout": 300,
+       "rc": 0,
+       "seconds": 135.6
+      },
+      {
+       "timeout": 300,
+       "rc": 0,
+       "seconds": 135.6
+      }
+     ]
+    },
+    "2": {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "4c8bf50dac6cb7ec381ffb869da08c9522bad7164f9b9542c2534c5767591786",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "Running kernel 2 on device 0.\nMax size: 4096\ndimensions(m=n=k) 128, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000035) s, performance: (  118.8) GFLOPS. size: (128).\ndimensions(m=n=k) 256, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000131) s, performance: (  255.3) GFLOPS. size: (256).\ndimensions(m=n=k) 512, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000885) s, performance: (  303.2) GFLOPS. size: (512).\ndimensions(m=n=k) 1024, alpha: 0.5, beta: 3\nAverage elapsed time: (0.005269) s, performance: (  407.6) GFLOPS. size: (1024).\ndimensions(m=n=k) 2048, alpha: 0.5, beta: 3\nAverage elapsed time: (0.034804) s, performance: (  493.6) GFLOPS. size: (2048).\ndimensions(m=n=k) 4096, alpha: 0.5, beta: 3\nAverage elapsed time: (0.285345) s, performance: (  481.7) GFLOPS. size: (4096).\n",
+     "stderr_head": ""
+    },
+    "3": {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "7cc16d3349b9be6f94b34a9b731472eac957114d23cf8c0306e1ad60dc8de153",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "Running kernel 3 on device 0.\nMax size: 4096\ndimensions(m=n=k) 128, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000026) s, performance: (  163.0) GFLOPS. size: (128).\ndimensions(m=n=k) 256, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000106) s, performance: (  316.4) GFLOPS. size: (256).\ndimensions(m=n=k) 512, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000700) s, performance: (  383.4) GFLOPS. size: (512).\ndimensions(m=n=k) 1024, alpha: 0.5, beta: 3\nAverage elapsed time: (0.003704) s, performance: (  579.8) GFLOPS. size: (1024).\ndimensions(m=n=k) 2048, alpha: 0.5, beta: 3\nAverage elapsed time: (0.022373) s, performance: (  767.9) GFLOPS. size: (2048).\ndimensions(m=n=k) 4096, alpha: 0.5, beta: 3\nAverage elapsed time: (0.178222) s, performance: (  771.2) GFLOPS. size: (4096).\n",
+     "stderr_head": ""
+    },
+    "4": {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "9db0b01756c16b52ecb9398f60fd4fb1acd3a63179d02afac10230c03348118e",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "Running kernel 4 on device 0.\nMax size: 4096\ndimensions(m=n=k) 128, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000044) s, performance: (   95.5) GFLOPS. size: (128).\ndimensions(m=n=k) 256, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000081) s, performance: (  414.4) GFLOPS. size: (256).\ndimensions(m=n=k) 512, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000378) s, performance: (  710.6) GFLOPS. size: (512).\ndimensions(m=n=k) 1024, alpha: 0.5, beta: 3\nAverage elapsed time: (0.002324) s, performance: (  924.2) GFLOPS. size: (1024).\ndimensions(m=n=k) 2048, alpha: 0.5, beta: 3\nAverage elapsed time: (0.010581) s, performance: ( 1623.6) GFLOPS. size: (2048).\ndimensions(m=n=k) 4096, alpha: 0.5, beta: 3\nAverage elapsed time: (0.083280) s, performance: ( 1650.3) GFLOPS. size: (4096).\n",
+     "stderr_head": ""
+    },
+    "5": {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "4d91e30b176c0d0719498cf7625ba8bc6349c98c1c5b94c178b409b8bebe4813",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "Running kernel 5 on device 0.\nMax size: 4096\ndimensions(m=n=k) 128, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000115) s, performance: (   36.4) GFLOPS. size: (128).\ndimensions(m=n=k) 256, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000196) s, performance: (  170.9) GFLOPS. size: (256).\ndimensions(m=n=k) 512, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000360) s, performance: (  745.6) GFLOPS. size: (512).\ndimensions(m=n=k) 1024, alpha: 0.5, beta: 3\nAverage elapsed time: (0.001581) s, performance: ( 1358.2) GFLOPS. size: (1024).\ndimensions(m=n=k) 2048, alpha: 0.5, beta: 3\nAverage elapsed time: (0.006087) s, performance: ( 2822.6) GFLOPS. size: (2048).\ndimensions(m=n=k) 4096, alpha: 0.5, beta: 3\nAverage elapsed time: (0.046764) s, performance: ( 2939.0) GFLOPS. size: (4096).\n",
+     "stderr_head": ""
+    },
+    "6": {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "de685b467f3e3018e607eaa1db9cfcf15afd3f1400bc7262ee3d68a99ddba829",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "Running kernel 6 on device 0.\nMax size: 4096\ndimensions(m=n=k) 128, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000094) s, performance: (   44.8) GFLOPS. size: (128).\ndimensions(m=n=k) 256, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000170) s, performance: (  197.1) GFLOPS. size: (256).\ndimensions(m=n=k) 512, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000327) s, performance: (  820.1) GFLOPS. size: (512).\ndimensions(m=n=k) 1024, alpha: 0.5, beta: 3\nAverage elapsed time: (0.001425) s, performance: ( 1506.5) GFLOPS. size: (1024).\ndimensions(m=n=k) 2048, alpha: 0.5, beta: 3\nAverage elapsed time: (0.005473) s, performance: ( 3139.1) GFLOPS. size: (2048).\ndimensions(m=n=k) 4096, alpha: 0.5, beta: 3\nAverage elapsed time: (0.042421) s, performance: ( 3239.9) GFLOPS. size: (4096).\n",
+     "stderr_head": ""
+    },
+    "7": {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "5b331073759ab69e0c930bc7eb826ebfc94bd6ef5859ba0a5687c857709ca6f4",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "Running kernel 7 on device 0.\nMax size: 4096\ndimensions(m=n=k) 128, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000093) s, performance: (   44.9) GFLOPS. size: (128).\ndimensions(m=n=k) 256, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000171) s, performance: (  195.8) GFLOPS. size: (256).\ndimensions(m=n=k) 512, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000330) s, performance: (  813.3) GFLOPS. size: (512).\ndimensions(m=n=k) 1024, alpha: 0.5, beta: 3\nAverage elapsed time: (0.001299) s, performance: ( 1653.3) GFLOPS. size: (1024).\ndimensions(m=n=k) 2048, alpha: 0.5, beta: 3\nAverage elapsed time: (0.005420) s, performance: ( 3169.5) GFLOPS. size: (2048).\ndimensions(m=n=k) 4096, alpha: 0.5, beta: 3\nAverage elapsed time: (0.040485) s, performance: ( 3394.8) GFLOPS. size: (4096).\n",
+     "stderr_head": ""
+    },
+    "8": {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "31371d2a3e6597acf9bcc12bef4f3991ee71b828bd10b1fb18dc9ad256aaf38a",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "Running kernel 8 on device 0.\nMax size: 4096\ndimensions(m=n=k) 128, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000094) s, performance: (   44.6) GFLOPS. size: (128).\ndimensions(m=n=k) 256, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000173) s, performance: (  193.9) GFLOPS. size: (256).\ndimensions(m=n=k) 512, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000332) s, performance: (  807.5) GFLOPS. size: (512).\ndimensions(m=n=k) 1024, alpha: 0.5, beta: 3\nAverage elapsed time: (0.001631) s, performance: ( 1316.9) GFLOPS. size: (1024).\ndimensions(m=n=k) 2048, alpha: 0.5, beta: 3\nAverage elapsed time: (0.006514) s, performance: ( 2637.4) GFLOPS. size: (2048).\ndimensions(m=n=k) 4096, alpha: 0.5, beta: 3\nAverage elapsed time: (0.048922) s, performance: ( 2809.3) GFLOPS. size: (4096).\n",
+     "stderr_head": ""
+    },
+    "9": {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "0d730770db71fc654eaf2bac5dd8dbfc335969285d002d33fe04d931b2c74a35",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "Running kernel 9 on device 0.\nMax size: 4096\ndimensions(m=n=k) 128, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000086) s, performance: (   49.0) GFLOPS. size: (128).\ndimensions(m=n=k) 256, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000157) s, performance: (  214.1) GFLOPS. size: (256).\ndimensions(m=n=k) 512, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000300) s, performance: (  893.4) GFLOPS. size: (512).\ndimensions(m=n=k) 1024, alpha: 0.5, beta: 3\nAverage elapsed time: (0.001400) s, performance: ( 1534.1) GFLOPS. size: (1024).\ndimensions(m=n=k) 2048, alpha: 0.5, beta: 3\nAverage elapsed time: (0.005890) s, performance: ( 2916.9) GFLOPS. size: (2048).\ndimensions(m=n=k) 4096, alpha: 0.5, beta: 3\nAverage elapsed time: (0.042658) s, performance: ( 3221.9) GFLOPS. size: (4096).\n",
+     "stderr_head": ""
+    },
+    "10": {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "0789c2081b3635df1afe5f4c4da8f38221babb47b17b6b305fb4f3cf7f6be511",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "Running kernel 10 on device 0.\nMax size: 4096\ndimensions(m=n=k) 128, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000092) s, performance: (   45.5) GFLOPS. size: (128).\ndimensions(m=n=k) 256, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000165) s, performance: (  203.9) GFLOPS. size: (256).\ndimensions(m=n=k) 512, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000311) s, performance: (  863.9) GFLOPS. size: (512).\ndimensions(m=n=k) 1024, alpha: 0.5, beta: 3\nAverage elapsed time: (0.001172) s, performance: ( 1832.8) GFLOPS. size: (1024).\ndimensions(m=n=k) 2048, alpha: 0.5, beta: 3\nAverage elapsed time: (0.005290) s, performance: ( 3247.7) GFLOPS. size: (2048).\ndimensions(m=n=k) 4096, alpha: 0.5, beta: 3\nAverage elapsed time: (0.037367) s, performance: ( 3678.1) GFLOPS. size: (4096).\n",
+     "stderr_head": ""
+    },
+    "11": {
+     "rc": 1,
+     "rc2": 1,
+     "stdout_sha256": "9898a2a31aee88ca3921245a779171661f3d2c9f9ee52b7cd705a6df9d93351a",
+     "deterministic": false,
+     "pass_marker": true,
+     "fail_marker": true,
+     "stdout_head": "Running kernel 11 on device 0.\nMax size: 4096\ndimensions(m=n=k) 128, alpha: 0.5, beta: 3\nDivergence! Should 18.27, Is 11.89 (Diff  6.38) at 132\nFailed to pass the correctness verification against NVIDIA cuBLAS.\n Logging faulty output into matrixValidationFailure.txt\n",
+     "stderr_head": "",
+     "rescued": false,
+     "attempts": [
+      {
+       "timeout": 300,
+       "rc": 1,
+       "seconds": 3.4
+      },
+      {
+       "timeout": 300,
+       "rc": 1,
+       "seconds": 3.5
+      }
+     ]
+    },
+    "12": {
+     "rc": 0,
+     "rc2": 0,
+     "stdout_sha256": "9ada547eb529cead4eb1ec7c3428d40519c0bbdb60ba6d14f0413bdbc20a15d3",
+     "deterministic": false,
+     "pass_marker": false,
+     "fail_marker": false,
+     "stdout_head": "Running kernel 12 on device 0.\nMax size: 4096\ndimensions(m=n=k) 128, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000115) s, performance: (   36.5) GFLOPS. size: (128).\ndimensions(m=n=k) 256, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000211) s, performance: (  159.0) GFLOPS. size: (256).\ndimensions(m=n=k) 512, alpha: 0.5, beta: 3\nAverage elapsed time: (0.000405) s, performance: (  662.6) GFLOPS. size: (512).\ndimensions(m=n=k) 1024, alpha: 0.5, beta: 3\nAverage elapsed time: (0.001543) s, performance: ( 1391.4) GFLOPS. size: (1024).\ndimensions(m=n=k) 2048, alpha: 0.5, beta: 3\nAverage elapsed time: (0.006434) s, performance: ( 2670.2) GFLOPS. size: (2048).\ndimensions(m=n=k) 4096, alpha: 0.5, beta: 3\nAverage elapsed time: (0.044532) s, performance: ( 3086.3) GFLOPS. size: (4096).\n",
+     "stderr_head": ""
+    }
+   },
+   "path": "sgemm.cu",
+   "kind": "sgemm",
+   "seconds": 323.5,
+   "status": "run-fail",
+   "retest": true
+  }
+ ]
+}

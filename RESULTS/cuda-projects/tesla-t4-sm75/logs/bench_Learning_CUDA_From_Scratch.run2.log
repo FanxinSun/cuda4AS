@@ -1,0 +1,124 @@
+logging all output to /content/logs/bench_Learning_CUDA_From_Scratch.log
+name, driver_version, compute_cap
+Tesla T4, 580.82.07, 7.5
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+cmake version 3.31.10
+ok Learning_CUDA_From_Scratch
+Writing cuda_projects.py
+Writing manifest.json
+--- round 1/1, run timeout 300s
+ok         Learning_CUDA_From_Scratch/Day 11/reduction_kernel_v5.cu
+ok         Learning_CUDA_From_Scratch/Day 11/reduction_kernel_v6.cu
+ok         Learning_CUDA_From_Scratch/Day 12/reduction_kernel_v8.cu
+ok         Learning_CUDA_From_Scratch/Day 11/reduction_kernel_v7.cu
+ok         Learning_CUDA_From_Scratch/Day 13/Flash_Attention_V1.cu
+ok         Learning_CUDA_From_Scratch/Day 14/OptimizedDotProduct.cu
+ok         Learning_CUDA_From_Scratch/Day 14/dotproduct.cu
+run-fail   Learning_CUDA_From_Scratch/Day 14/leetgpuDotProduct.cu
+ok         Learning_CUDA_From_Scratch/Day 15/matrixTranspose.cu
+ok         Learning_CUDA_From_Scratch/Day 14/reduction_sum_cpu_vs_gpu.cu
+ok         Learning_CUDA_From_Scratch/Day 17/GEMM.cu
+ok         Learning_CUDA_From_Scratch/Day 16/hadamardProduct.cu
+ok         Learning_CUDA_From_Scratch/Day 17/L2Norm.cu
+ok         Learning_CUDA_From_Scratch/Day 17/OptimizedGEMM.cu
+ok         Learning_CUDA_From_Scratch/Day 18/OptimizedL2Norm.cu
+ok         Learning_CUDA_From_Scratch/Day 18/OptimizedL2BlockSizes.cu
+ok         Learning_CUDA_From_Scratch/Day 18/Relu.cu
+ok         Learning_CUDA_From_Scratch/Day 18/SigmoidAct.cu
+ok         Learning_CUDA_From_Scratch/Day 2/vector_addition.cu
+ok         Learning_CUDA_From_Scratch/Day 20/SoftmaxKernel.cu
+ok         Learning_CUDA_From_Scratch/Day 21/SigmoidLinearUnit.cu
+ok         Learning_CUDA_From_Scratch/Day 3/vector_subtraction.cu
+ok         Learning_CUDA_From_Scratch/Day 4/arrayMultiplication.cu
+ok         Learning_CUDA_From_Scratch/Day 4/vectorAdditionTiming.cu
+ok         Learning_CUDA_From_Scratch/Day 5/additionofvectorby2.cu
+ok         Learning_CUDA_From_Scratch/Day 5/arrayMulCPUvsGPU.cu
+ok         Learning_CUDA_From_Scratch/Day 6/matrixAddition.cu
+ok         Learning_CUDA_From_Scratch/Day 7/matrixAdditionCPUvsGPU.cu
+ok         Learning_CUDA_From_Scratch/Day 8/arrayMulOptimized.cu
+ok         Learning_CUDA_From_Scratch/Day 8/matrixMulTiled.cu
+ok         Learning_CUDA_From_Scratch/Day 9/reduction_kernel_v1.cu
+ok         Learning_CUDA_From_Scratch/Day 9/reduction_kernel_v2.cu
+ok         Learning_CUDA_From_Scratch/Day 9/reduction_kernel_v3.cu
+ok         Learning_CUDA_From_Scratch/Day 9/reduction_kernel_v4.cu
+ok         Learning_CUDA_From_Scratch/Day 19/max_reduction.cu
+ok         Learning_CUDA_From_Scratch/Problems/L0-Setup and foundations/hello_from_gpu.cu
+ok         Learning_CUDA_From_Scratch/Problems/L0-Setup and foundations/mem_cpy.cu
+ok         Learning_CUDA_From_Scratch/Problems/L0-Setup and foundations/thread_index.cu
+ok         Learning_CUDA_From_Scratch/Problems/L1-Map Patterns/SAXPY.cu
+ok         Learning_CUDA_From_Scratch/Problems/L1-Map Patterns/polynomial_Evaluation.cu
+ok         Learning_CUDA_From_Scratch/Problems/L1-Map Patterns/vector_Subtraction.cu
+ok         Learning_CUDA_From_Scratch/Problems/L1-Map Patterns/vector_addition.cu
+ok         Learning_CUDA_From_Scratch/Problems/L1-Map Patterns/vector_division.cu
+ok         Learning_CUDA_From_Scratch/Problems/L1-Map Patterns/vector_multiply.cu
+ok         Learning_CUDA_From_Scratch/Problems/L1-Map Patterns/vector_scaling.cu
+ok         Learning_CUDA_From_Scratch/Problems/L3-Memory Patterns/SOA_VS_AOS.cu
+ok         Learning_CUDA_From_Scratch/Problems/L3-Memory Patterns/constat memory test.cu
+ok         Learning_CUDA_From_Scratch/Problems/L3-Memory Patterns/matrix multiplication optimized.cu
+ok         Learning_CUDA_From_Scratch/Problems/L3-Memory Patterns/matrix transpose (optimized).cu
+ok         Learning_CUDA_From_Scratch/Problems/L3-Memory Patterns/matrix transpose(optimized with padding).cu
+ok         Learning_CUDA_From_Scratch/Problems/L3-Memory Patterns/matrix_multiply(naive).cu
+ok         Learning_CUDA_From_Scratch/Problems/L3-Memory Patterns/shared memory bank conflicts.cu
+ok         Learning_CUDA_From_Scratch/Problems/L3-Memory Patterns/shared memory double buffering.cu
+ok         Learning_CUDA_From_Scratch/Problems/L3-Memory Patterns/strided_access_analysis.cu
+ok         Learning_CUDA_From_Scratch/Problems/L3-Memory Patterns/transpose (naive).cu
+run-fail   Learning_CUDA_From_Scratch/Problems/L4-Scan Pattern - Prefix Sums/Partition.cu
+ok         Learning_CUDA_From_Scratch/Problems/L4-Scan Pattern - Prefix Sums/Run length encoding.cu
+ok         Learning_CUDA_From_Scratch/Problems/L4-Scan Pattern - Prefix Sums/prefix sum (Blelloch).cu
+ok         Learning_CUDA_From_Scratch/Problems/L4-Scan Pattern - Prefix Sums/prefix sum (Multi Block).cu
+ok         Learning_CUDA_From_Scratch/Problems/L4-Scan Pattern - Prefix Sums/prefix-sum (Hills-Steele).cu
+ok         Learning_CUDA_From_Scratch/Problems/L4-Scan Pattern - Prefix Sums/scan with comparison.cu
+ok         Learning_CUDA_From_Scratch/Problems/L4-Scan Pattern - Prefix Sums/scan_with_comparison_hills_steele.cu
+ok         Learning_CUDA_From_Scratch/Problems/L4-Scan Pattern - Prefix Sums/segmented scan.cu
+ok         Learning_CUDA_From_Scratch/Problems/L4-Scan Pattern - Prefix Sums/segmented_Scan_blocklevel.cu
+ok         Learning_CUDA_From_Scratch/Problems/L4-Scan Pattern - Prefix Sums/sparse to dense.cu
+ok         Learning_CUDA_From_Scratch/Problems/L4-Scan Pattern - Prefix Sums/stream compaction.cu
+ok         Learning_CUDA_From_Scratch/Problems/L5-Stencil Pattern - Neighbout Access/1D Heat Equation.cu
+ok         Learning_CUDA_From_Scratch/Problems/L5-Stencil Pattern - Neighbout Access/2D Box Filter.cu
+ok         Learning_CUDA_From_Scratch/Problems/L5-Stencil Pattern - Neighbout Access/1D Wave Equation.cu
+ok         Learning_CUDA_From_Scratch/Problems/L5-Stencil Pattern - Neighbout Access/2D Convolution.cu
+ok         Learning_CUDA_From_Scratch/Problems/L5-Stencil Pattern - Neighbout Access/2D Heat Equation.cu
+ok         Learning_CUDA_From_Scratch/Problems/L5-Stencil Pattern - Neighbout Access/2D Laplace Equation.cu
+ok         Learning_CUDA_From_Scratch/Problems/L5-Stencil Pattern - Neighbout Access/Box Filter (1D).cu
+ok         Learning_CUDA_From_Scratch/Problems/L5-Stencil Pattern - Neighbout Access/Gaussuan Blur (1D).cu
+ok         Learning_CUDA_From_Scratch/Problems/L5-Stencil Pattern - Neighbout Access/sobel edge detection.cu
+ok         Learning_CUDA_From_Scratch/Problems/L6-Advanced Patterns/Atomic Histogram.cu
+ok         Learning_CUDA_From_Scratch/Problems/L6-Advanced Patterns/Atomic Operations Comparison.cu
+ok         Learning_CUDA_From_Scratch/Problems/L5-Stencil Pattern - Neighbout Access/Game of Life.cu
+ok         Learning_CUDA_From_Scratch/Problems/L6-Advanced Patterns/Graph Traversal.cu
+ok         Learning_CUDA_From_Scratch/Problems/L6-Advanced Patterns/Connected Components (BFS).cu
+build-fail Learning_CUDA_From_Scratch/Problems/L6-Advanced Patterns/LockFreeQueue.cu
+ok         Learning_CUDA_From_Scratch/Problems/L6-Advanced Patterns/K-Means Clustering.cu
+ok         Learning_CUDA_From_Scratch/Problems/L6-Advanced Patterns/Radix Sort (1 bit).cu
+ok         Learning_CUDA_From_Scratch/Problems/L6-Advanced Patterns/Tree Reduction vs Atomic Reduction.cu
+ok         Learning_CUDA_From_Scratch/Problems/L6-Advanced Patterns/Triangular Solve.cu
+ok         Learning_CUDA_From_Scratch/Problems/L6-Advanced Patterns/sparse matrix vector multiply.cu
+ok         Learning_CUDA_From_Scratch/Problems/L7-Optimization Masterclass/Fast Math Study.cu
+ok         Learning_CUDA_From_Scratch/Problems/L7-Optimization Masterclass/Fused Multiply Add.cu
+run-fail   Learning_CUDA_From_Scratch/Problems/L7-Optimization Masterclass/Loop Unrolling.cu
+run-fail   Learning_CUDA_From_Scratch/Problems/L6-Advanced Patterns/Radix Sort (Complete).cu
+ok         Learning_CUDA_From_Scratch/Problems/L7-Optimization Masterclass/Register Pressure Tuning.cu
+ok         Learning_CUDA_From_Scratch/Problems/L7-Optimization Masterclass/Pinned Memory Tranfers.cu
+ok         Learning_CUDA_From_Scratch/Problems/L7-Optimization Masterclass/Texture Memory Example.cu
+ok         Learning_CUDA_From_Scratch/Problems/L7-Optimization Masterclass/Unified Memory Perfomance.cu
+ok         Learning_CUDA_From_Scratch/Problems/L7-Optimization Masterclass/block size tuning.cu
+ok         Learning_CUDA_From_Scratch/Problems/L7-Optimization Masterclass/Zero-Copy Memory.cu
+ok         Learning_CUDA_From_Scratch/Problems/L7-Optimization Masterclass/cache blocking study.cu
+ok         Learning_CUDA_From_Scratch/Problems/L7-Optimization Masterclass/grid stride loop perfomance.cu
+ok         Learning_CUDA_From_Scratch/Problems/L7-Optimization Masterclass/occupancy calculator.cu
+run-fail   Learning_CUDA_From_Scratch/Problems/L8-Production Quality Code/Multi-GPU.cu
+ok         Learning_CUDA_From_Scratch/Problems/L8-Production Quality Code/Stream Callbacks.cu
+ok         Learning_CUDA_From_Scratch/Problems/L8-Production Quality Code/basic streams.cu
+ok         Learning_CUDA_From_Scratch/Problems/L8-Production Quality Code/multi stream data processing.cu
+ok         Learning_CUDA_From_Scratch/Problems/L8-Production Quality Code/overlapping compute and copy.cu
+build-fail Learning_CUDA_From_Scratch/Problems/L8-Production Quality Code/template kernel library.cu
+ok         Learning_CUDA_From_Scratch/Problems/L8-Production Quality Code/perfomance benchmarking.cu
+ok         Learning_CUDA_From_Scratch/Problems/L9-Domain Applications/2D Poisson Solver.cu
+ok         Learning_CUDA_From_Scratch/Problems/L9-Domain Applications/Matrix Multiply.cu
+ok         Learning_CUDA_From_Scratch/Profiling_Lab/Sum Reduction/reduction_kernel2.cu
+ok         Learning_CUDA_From_Scratch/Profiling_Lab/Sum Reduction/reduction_sum.cu
+timeout    Learning_CUDA_From_Scratch/Problems/L9-Domain Applications/batch normalization.cu
+== yasin-arafat-05/Learning_CUDA_From_Scratch {'ok': 103, 'run-fail': 5, 'build-fail': 2, 'timeout': 1}
+still not finished after 1 rounds: {'ok': 103, 'run-fail': 5, 'build-fail': 2, 'timeout': 1} -- recorded as timeouts; run this cell again to keep going
+yasin-arafat-05/Learning_CUDA_From_Scratch       {'ok': 103, 'run-fail': 5, 'build-fail': 2, 'timeout': 1}

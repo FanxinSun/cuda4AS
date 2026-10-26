@@ -1,0 +1,229 @@
+{
+  "probe": "p7_fp64_atomics",
+  "schema": 1,
+  "machine": {
+    "collected_utc": "2026-10-26T15:04:18Z",
+    "hostname": "masshjs-mac-mini.local",
+    "os_product": "macOS",
+    "os_version": "15.4.1",
+    "os_build": "24E263",
+    "os_version_string": "Version 15.4.1 (Build 24E263)",
+    "arch": "arm64",
+    "cpu_brand": "Apple M4",
+    "cpu_logical": 10,
+    "cpu_perf_cores": 4,
+    "cpu_eff_cores": 6,
+    "ram_bytes": 25769803776,
+    "ram_bytes_sysctl": 25769803776,
+    "page_size": 16384,
+    "developer_dir": "/Applications/Xcode.app/Contents/Developer",
+    "swiftc_version": "Apple Swift version 6.1 (swiftlang-6.1.0.110.21 clang-1700.0.13.3)\nTarget: arm64-apple-macosx15.0",
+    "sdk_version": "15.4",
+    "metal_compiler": "Apple metal version 32023.619 (metalfe-32023.619)\nTarget: air64-apple-darwin24.4.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/metal/current/bin",
+    "gpu_core_count": 10,
+    "device_acquisition_route": "MTLCreateSystemDefaultDevice()",
+    "session": {
+      "launchctl_managername": "Aqua",
+      "is_aqua_session": true,
+      "ssh_env_present": false,
+      "ssh_connection": null,
+      "ssh_tty": null,
+      "term_program": "Apple_Terminal",
+      "metal_device_count": 1,
+      "reading": "a window-server session; a nil device here would be a real finding"
+    },
+    "gpu_name": "Apple M4",
+    "gpu_registry_id": 4294968395,
+    "has_unified_memory": true,
+    "recommended_max_working_set_size": 17179885568,
+    "max_buffer_length": 12884901888,
+    "max_threadgroup_memory_length": 32768,
+    "max_threads_per_threadgroup": {
+      "width": 1024,
+      "height": 1024,
+      "depth": 1024
+    },
+    "gpu_families": [
+      {
+        "raw": 1001,
+        "name": "apple1",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1002,
+        "name": "apple2",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1003,
+        "name": "apple3",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1004,
+        "name": "apple4",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1005,
+        "name": "apple5",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1006,
+        "name": "apple6",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1007,
+        "name": "apple7",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1008,
+        "name": "apple8",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1009,
+        "name": "apple9",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 1010,
+        "name": "apple10",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 1011,
+        "name": "apple11",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 2001,
+        "name": "mac1",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 2002,
+        "name": "mac2",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 3001,
+        "name": "common1",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 3002,
+        "name": "common2",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 3003,
+        "name": "common3",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 4001,
+        "name": "macCatalyst1",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 4002,
+        "name": "macCatalyst2",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 5001,
+        "name": "metal3",
+        "known_to_sdk": true,
+        "supported": true
+      },
+      {
+        "raw": 5002,
+        "name": "metal4",
+        "known_to_sdk": true,
+        "supported": false
+      },
+      {
+        "raw": 5003,
+        "name": "metal5",
+        "known_to_sdk": true,
+        "supported": false
+      }
+    ]
+  },
+  "threads": 65536,
+  "cas_cap": 4096,
+  "cases": [
+    {
+      "case": "fp64_arithmetic",
+      "expectation": "expected to be REFUSED; the message is the finding",
+      "compiled": false,
+      "compiler_message": "Error Domain=MTLLibraryErrorDomain Code=3 \"program_source:5:22: error: 'double' is not supported in Metal\nkernel void k(device double *out [[buffer(0)]],\n                     ^\nprogram_source:9:5: error: 'double' is not supported in Metal\n    double a = double(gid) * 1.0000000001;\n    ^\nprogram_source:9:16: error: 'double' is not supported in Metal\n    double a = double(gid) * 1.0000000001;\n               ^\nprogram_source:10:5: error: 'double' is not supported in Metal\n    double b = a * a + 1.0;\n    ^\n\" UserInfo={NSLocalizedDescription=program_source:5:22: error: 'double' is not supported in Metal\nkernel void k(device double *out [[buffer(0)]],\n                     ^\nprogram_source:9:5: error: 'double' is not supported in Metal\n    double a = double(gid) * 1.0000000001;\n    ^\nprogram_source:9:16: error: 'double' is not supported in Metal\n    double a = double(gid) * 1.0000000001;\n               ^\nprogram_source:10:5: error: 'double' is not supported in Metal\n    double b = a * a + 1.0;\n    ^\n}",
+      "reading": "refused by this Metal compiler; the message above is the result, and §2.6 requires the translator to recognise and rewrite it rather than pass it through"
+    },
+    {
+      "case": "atomic_uint_add",
+      "expectation": "control: acc == THREADS",
+      "compiled": true,
+      "compiler_message": null,
+      "ran": true,
+      "gpu_seconds": 0.00790292,
+      "observed": 65536,
+      "correct": true
+    },
+    {
+      "case": "atomic_ulong_add",
+      "expectation": "acc == THREADS * 2^33",
+      "compiled": false,
+      "compiler_message": "Error Domain=MTLLibraryErrorDomain Code=3 \"program_source:8:18: error: no matching function for call to 'atomic_fetch_add_explicit'\n    if (gid < n) atomic_fetch_add_explicit(acc, 8589934592ul,\n                 ^~~~~~~~~~~~~~~~~~~~~~~~~\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_atomic:488:14: note: candidate template ignored: requirement '_valid_fetch_add_type<threadgroup unsigned long *, void>::value' was not satisfied [with T = unsigned long, U = unsigned long]\nMETAL_FUNC T atomic_fetch_add_explicit(volatile threadgroup _atomic<T> *object, U operand, memory_order order) METAL_CONST_ARG(order) METAL_VALID_MODIFY_ORDER(order)\n             ^\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_atomic:493:14: note: candidate template ignored: requirement '_valid_fetch_add_type<device unsigned long *, void>::value' was not satisfied [with T = unsigned long, U = unsigned long]\nMETAL_FUNC T atomic_fetch_add_explicit(\n             ^\n\" UserInfo={NSLocalizedDescription=program_source:8:18: error: no matching function for call to 'atomic_fetch_add_explicit'\n    if (gid < n) atomic_fetch_add_explicit(acc, 8589934592ul,\n                 ^~~~~~~~~~~~~~~~~~~~~~~~~\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_atomic:488:14: note: candidate template ignored: requirement '_valid_fetch_add_type<threadgroup unsigned long *, void>::value' was not satisfied [with T = unsigned long, U = unsigned long]\nMETAL_FUNC T atomic_fetch_add_explicit(volatile threadgroup _atomic<T> *object, U operand, memory_order order) METAL_CONST_ARG(order) METAL_VALID_MODIFY_ORDER(order)\n             ^\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_atomic:493:14: note: candidate template ignored: requirement '_valid_fetch_add_type<device unsigned long *, void>::value' was not satisfied [with T = unsigned long, U = unsigned long]\nMETAL_FUNC T atomic_fetch_add_explicit(\n             ^\n}",
+      "reading": "refused by this Metal compiler; the message above is the result, and §2.6 requires the translator to recognise and rewrite it rather than pass it through"
+    },
+    {
+      "case": "atomic_ulong_min",
+      "expectation": "acc == 1000 (the smallest value offered)",
+      "compiled": false,
+      "compiler_message": "Error Domain=MTLLibraryErrorDomain Code=3 \"program_source:6:18: error: no matching function for call to 'atomic_fetch_min_explicit'\n    if (gid < n) atomic_fetch_min_explicit(acc, ulong(gid) + 1000ul,\n                 ^~~~~~~~~~~~~~~~~~~~~~~~~\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_atomic:539:14: note: candidate template ignored: requirement '_valid_fetch_min_type<threadgroup unsigned long *, void>::value' was not satisfied [with T = unsigned long, U = unsigned long]\nMETAL_FUNC T atomic_fetch_min_explicit(volatile threadgroup _atomic<T> *object, U operand, memory_order order) METAL_CONST_ARG(order) METAL_VALID_MODIFY_ORDER(order)\n             ^\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_atomic:544:14: note: candidate template ignored: requirement '_valid_fetch_min_type<device unsigned long *, void>::value' was not satisfied [with T = unsigned long, U = unsigned long]\nMETAL_FUNC T atomic_fetch_min_explicit(\n             ^\n\" UserInfo={NSLocalizedDescription=program_source:6:18: error: no matching function for call to 'atomic_fetch_min_explicit'\n    if (gid < n) atomic_fetch_min_explicit(acc, ulong(gid) + 1000ul,\n                 ^~~~~~~~~~~~~~~~~~~~~~~~~\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_atomic:539:14: note: candidate template ignored: requirement '_valid_fetch_min_type<threadgroup unsigned long *, void>::value' was not satisfied [with T = unsigned long, U = unsigned long]\nMETAL_FUNC T atomic_fetch_min_explicit(volatile threadgroup _atomic<T> *object, U operand, memory_order order) METAL_CONST_ARG(order) METAL_VALID_MODIFY_ORDER(order)\n             ^\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_atomic:544:14: note: candidate template ignored: requirement '_valid_fetch_min_type<device unsigned long *, void>::value' was not satisfied [with T = unsigned long, U = unsigned long]\nMETAL_FUNC T atomic_fetch_min_explicit(\n             ^\n}",
+      "reading": "refused by this Metal compiler; the message above is the result, and §2.6 requires the translator to recognise and rewrite it rather than pass it through"
+    },
+    {
+      "case": "atomic_ulong_compare_exchange",
+      "expectation": "acc == 1000 + THREADS - 1 (the largest value offered)",
+      "compiled": false,
+      "compiler_message": "Error Domain=MTLLibraryErrorDomain Code=3 \"program_source:11:18: error: no matching function for call to 'atomic_load_explicit'\n    ulong seen = atomic_load_explicit(acc, memory_order_relaxed);\n                 ^~~~~~~~~~~~~~~~~~~~\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_atomic:248:14: note: candidate template ignored: requirement '_valid_load_type<threadgroup unsigned long *, void>::value' was not satisfied [with T = unsigned long]\nMETAL_FUNC T atomic_load_explicit(const volatile threadgroup _atomic<T> *object, memory_order order) METAL_CONST_ARG(order) METAL_VALID_LOAD_ORDER(order)\n             ^\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_atomic:253:14: note: candidate template ignored: requirement '_valid_load_type<device unsigned long *, void>::value' was not satisfied [with T = unsigned long]\nMETAL_FUNC T atomic_load_explicit(\n             ^\nprogram_source:14:13: error: no matching function for call to 'atomic_compare_exchange_weak_explicit'\n        if (atomic_compare_exchange_weak_explicit(acc, &seen, mine,\n            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_atomic:343:17: note: candidate template ignored: requirement '_valid_compare_exchange_type<threadgroup unsigned long *, void>::value' was not satisfied [with T = unsigned long, U = unsigned long]\nMETAL_FUNC bool atomic_compare_exchange_weak_explicit(volatile threadgroup _atomic<T> *object, thread T *expected, U desired, memory_order success, memory_order failure) METAL_CONST_ARG(success) METAL_CONST_ARG(failure) METAL_VALID_COMPARE_EXCHANGE_FAILURE_ORDER(failure) METAL_VALID_COMPARE_EXCHANGE_SUCCESS_ORDER(success, failure)\n                ^\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_atomic:351:17: note: candidate template ignored: requirement '_valid_compare_exchange_type<device unsigned long *, void>::value' was not satisfied [with T = unsigned long, U = unsigned long]\nMETAL_FUNC bool atomic_compare_exchange_weak_explicit(\n                ^\n\" UserInfo={NSLocalizedDescription=program_source:11:18: error: no matching function for call to 'atomic_load_explicit'\n    ulong seen = atomic_load_explicit(acc, memory_order_relaxed);\n                 ^~~~~~~~~~~~~~~~~~~~\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_atomic:248:14: note: candidate template ignored: requirement '_valid_load_type<threadgroup unsigned long *, void>::value' was not satisfied [with T = unsigned long]\nMETAL_FUNC T atomic_load_explicit(const volatile threadgroup _atomic<T> *object, memory_order order) METAL_CONST_ARG(order) METAL_VALID_LOAD_ORDER(order)\n             ^\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_atomic:253:14: note: candidate template ignored: requirement '_valid_load_type<device unsigned long *, void>::value' was not satisfied [with T = unsigned long]\nMETAL_FUNC T atomic_load_explicit(\n             ^\nprogram_source:14:13: error: no matching function for call to 'atomic_compare_exchange_weak_explicit'\n        if (atomic_compare_exchange_weak_explicit(acc, &seen, mine,\n            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_atomic:343:17: note: candidate template ignored: requirement '_valid_compare_exchange_type<threadgroup unsigned long *, void>::value' was not satisfied [with T = unsigned long, U = unsigned long]\nMETAL_FUNC bool atomic_compare_exchange_weak_explicit(volatile threadgroup _atomic<T> *object, thread T *expected, U desired, memory_order success, memory_order failure) METAL_CONST_ARG(success) METAL_CONST_ARG(failure) METAL_VALID_COMPARE_EXCHANGE_FAILURE_ORDER(failure) METAL_VALID_COMPARE_EXCHANGE_SUCCESS_ORDER(success, failure)\n                ^\n/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/lib/clang/32023.619/include/metal/metal_atomic:351:17: note: candidate template ignored: requirement '_valid_compare_exchange_type<device unsigned long *, void>::value' was not satisfied [with T = unsigned long, U = unsigned long]\nMETAL_FUNC bool atomic_compare_exchange_weak_explicit(\n                ^\n}",
+      "reading": "refused by this Metal compiler; the message above is the result, and §2.6 requires the translator to recognise and rewrite it rather than pass it through"
+    },
+    {
+      "case": "atomic_float_add",
+      "expectation": "acc == THREADS as a float",
+      "compiled": true,
+      "compiler_message": null,
+      "ran": true,
+      "gpu_seconds": 0.00485913,
+      "observed": 65536.0,
+      "expected": 65536.0,
+      "correct": true
+    }
+  ],
+  "status": "ok"
+}

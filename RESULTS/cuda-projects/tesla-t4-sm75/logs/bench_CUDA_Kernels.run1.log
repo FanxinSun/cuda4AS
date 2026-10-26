@@ -1,0 +1,32 @@
+logging all output to /content/logs/bench_CUDA_Kernels.log
+name, driver_version, compute_cap
+Tesla T4, 580.82.07, 7.5
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+cmake version 3.31.10
+ok CUDA_Kernels
+Writing cuda_projects.py
+Writing manifest.json
+--- round 1/2, default run timeout
+ok         CUDA_Kernels/modules/01_fundamentals/01_kernel_basics/src/kernel.cu
+ok         CUDA_Kernels/modules/01_fundamentals/02_grid_block/src/checkDimension.cu
+ok         CUDA_Kernels/modules/01_fundamentals/03_hardware/src/props.cu
+ok         CUDA_Kernels/modules/02_memory_management/02_vector_dot/src/vecDot_non_reduction.cu
+ok         CUDA_Kernels/modules/02_memory_management/01_vector_ops/src/main.cu
+build-fail CUDA_Kernels/modules/02_memory_management/04_unified_memory/src/unified_mem.cu
+ok         CUDA_Kernels/modules/02_memory_management/03_constant_memory/src/constant_vec_dot.cu
+ok         CUDA_Kernels/modules/03_advanced_math/01_matrix_vector_ops/src/main.cu
+ok         CUDA_Kernels/modules/03_advanced_math/02_fft/src/main.cu
+ok         CUDA_Kernels/modules/04_optimizations/02_reduction/src/reduction.cu
+ok         CUDA_Kernels/modules/04_optimizations/01_tiled_matmul/src/tiled_matmul.cu
+ok         CUDA_Kernels/modules/05_concurrency/01_streams/src/streams.cu
+ok         CUDA_Kernels/modules/06_advanced_algorithms/01_histogram/src/histogram.cu
+ok         CUDA_Kernels/modules/07_ecosystem/01_cublas/src/gemm.cu
+ok         CUDA_Kernels/modules/07_ecosystem/03_curand/src/monte_carlo.cu
+ok         CUDA_Kernels/modules/07_ecosystem/04_cusparse/src/sparse.cu
+ok         CUDA_Kernels/modules/07_ecosystem/05_cusolver/src/cholesky.cu
+build-fail CUDA_Kernels/modules/07_ecosystem/07_dynamic_parallelism/src/cdp.cu
+ok         CUDA_Kernels/modules/07_ecosystem/02_thrust/src/thrust_demo.cu
+== ridash2005/CUDA_Kernels {'ok': 17, 'build-fail': 2}
+done: {'ok': 17, 'build-fail': 2}
+ridash2005/CUDA_Kernels                          {'ok': 17, 'build-fail': 2}

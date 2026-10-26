@@ -1,0 +1,490 @@
+{
+ "slug": "gpu-mode/lectures",
+ "commit": "77a8df418834e5789c12da23e7d2719e0efabef1",
+ "complete": true,
+ "tally": {
+  "ok": 14
+ },
+ "skipped_at_discovery": [],
+ "results": [
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "6e88ffe1491256168ba52cc2e0b429bf0831965529542031378df144c90e614e",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "   0.000,    1.001,    2.002,    3.003,    4.004,    5.005,    6.006,    7.007,    8.008,    9.009, \n  10.010,   11.011,   12.012,   13.013,   14.014,   15.015,   16.016,   17.017,   18.018,   19.019, \n  20.020,   21.021,   22.022,   23.023,   24.024,   25.025,   26.026,   27.027,   28.028,   29.029, \n  30.030,   31.031,   32.032,   33.033,   34.034,   35.035,   36.036,   37.037,   38.038,   39.039, \n  40.040,   41.041,   42.042,   43.043,   44.044,   45.045,   46.046,   47.047,   48.048,   49.049, \n  50.050,   51.051,   52.052,   53.053,   54.054,   55.055,   56.056,   57.057,   58.058,   59.059, \n  60.060,   61.061,   62.062,   63.063,   64.064,   65.065,   66.066,   67.067,   68.068,   69.069, \n  70.070,   71.071,   72.072,   73.073,   74.074,   75.075,   76.076,   77.077,   78.078,   79.079, \n  80.080,   81.081,   82.082,   83.083,   84.084,   85.085,   86.086,   87.087,   88.088,   89.089, \n  90.090,   91.091,   92.092,   93.093,   94.094,   95.095,   96.096,   97.097,   98.098,   99.099, \n 100.100,  101.101,  102.102,  103.103,  104.104,  105.105,  106.106,  107.107,  108.108,  109.109, \n 110.110,  111.111,  112.112,  113.113,  114.114,  115.115,  116.116,  117.117,  118.118,  119.119, \n 120.120,  121.121,  122.122,  123.123,  124.124,  125.125,  126.126,  127.127,  128.128,  129.129, \n 130.130,  131.131,  132.132,  133.133,  134.134,  135.135,  136.136,  137.137,  138.138,  139.139, \n 140.140,  141.141,  142.142,  143.143,  144.144,  145.145,  146.146,  147.147,  148.1",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "lecture_002/vector_addition/vector_addition.cu",
+   "kind": "single",
+   "seconds": 4.4,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "lecture_008/coalesce.cu",
+   "kind": "single",
+   "seconds": 4.6,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "961d758dfad7e07c034e9e3753d7fe1547eda12fa8cd3835995daf759ffabf45",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "VecAdd execution time: 0.009408 ms\nVecAddCoarsened execution time: 0.008160 ms\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "lecture_008/coarsening.cu",
+   "kind": "single",
+   "seconds": 2.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "a5a857735f84bddcc107bcf25e3cf039afc7fb366541e9721295b87680ed2506",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "processArrayWithDivergence took 0.146560 milliseconds\nprocessArrayWithoutDivergence took 0.033888 milliseconds\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "lecture_008/divergence.cu",
+   "kind": "single",
+   "seconds": 2.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "fc61c9eaa83adc30726ec6ffd7d73591ee980c936739aa1f5159bb1884dd3516",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Recommended block size: 1024, Minimum grid size: 40\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "lecture_008/occupancy.cu",
+   "kind": "single",
+   "seconds": 3.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "lecture_008/privatization.cu",
+   "kind": "single",
+   "seconds": 2.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "lecture_008/privatization2.cu",
+   "kind": "single",
+   "seconds": 2.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "40f2572bbfa9dffe04d0385368731f8e6ca965cb6af57ac647ed078d5766c52c",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Sum is 2048\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "lecture_009/control_divergence_reduce.cu",
+   "kind": "single",
+   "seconds": 3.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "1f4c60448cd5fe14794a8c64e1edb7b2f3306b2d302ae9bfd99ff2de6f11225f",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Sum is 20000\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "lecture_009/multistream-reduce.cu",
+   "kind": "single",
+   "seconds": 4.0,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "ac9bd54bd175f209fdf1686aa5f7cbff13b4d8a6cd457fd24bd574965ac2a847",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Sum is 10000\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "lecture_009/reduce_coarsening.cu",
+   "kind": "single",
+   "seconds": 3.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "a9f78e1232673f23b6359b11b0223f55cfc372372f7f5a08969affafce7afdda",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Sum is 100000\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "lecture_009/segment_reduce.cu",
+   "kind": "single",
+   "seconds": 3.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "40f2572bbfa9dffe04d0385368731f8e6ca965cb6af57ac647ed078d5766c52c",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Sum is 2048\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "lecture_009/shared_reduce.cu",
+   "kind": "single",
+   "seconds": 3.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "40f2572bbfa9dffe04d0385368731f8e6ca965cb6af57ac647ed078d5766c52c",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Sum is 2048\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "lecture_009/simple_reduce.cu",
+   "kind": "single",
+   "seconds": 3.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/lectures/lecture_012/flash_attention_spilling_from_registers.cu(4): warning #177-D: variable \"block_dim_x\" was declared but never referenced\n  constexpr int block_dim_x = 16;\n                ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/lectures/lecture_012/flash_attention_spilling_from_registers.cu(5): warning #177-D: variable \"block_dim_y\" was declared but never referenced\n  constexpr int block_dim_y = 16;\n                ^\n\n",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "170d396a6677069ff86e31b7db5eb272e7d5c4d0052157f8225609a834a44aa9",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Launching kernel...\nKernel finished.\nLaunching kernel...\nKernel finished.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "main.cu allocates head dim 64 and launches 32x16 threads for both kernels, but the kernels are compiled for head dim 128 with their own tiles (16x16 / 8x32) and blocks (16x16 / 128x8): out-of-bounds reads, 'illegal memory access' on any NVIDIA GPU. The copy uses d=128 and gives each kernel its own tile count, block and grid.",
+   "linked_with": [
+    "lecture_012/flash_attention.cu",
+    "lecture_012/flash_attention_spilling_from_registers.cu"
+   ],
+   "path": "lecture_012/main.cu",
+   "kind": "single",
+   "seconds": 6.2,
+   "status": "ok"
+  }
+ ]
+}

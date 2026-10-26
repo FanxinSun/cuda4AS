@@ -1,0 +1,50 @@
+logging all output to /content/logs/bench_cuda-course.log
+name, driver_version, compute_cap
+Tesla T4, 580.82.07, 7.5
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+cmake version 3.31.10
+ok cuda-course
+Writing cuda_projects.py
+Writing manifest.json
+--- round 1/2, default run timeout
+ok         cuda-course/03_C_and_C++_Review/06 Makefiles/03.cu
+ok         cuda-course/05_Writing_your_First_Kernels/01 CUDA Basics/01_idxing.cu
+ok         cuda-course/05_Writing_your_First_Kernels/02 Kernels/00_vector_add_v1.cu
+ok         cuda-course/05_Writing_your_First_Kernels/02 Kernels/01_vector_add_v2.cu
+ok         cuda-course/05_Writing_your_First_Kernels/02 Kernels/02 matmul.cu
+ok         cuda-course/05_Writing_your_First_Kernels/03 Profiling/01_naive_matmul.cu
+ok         cuda-course/05_Writing_your_First_Kernels/03 Profiling/02_tiled_matmul.cu
+ok         cuda-course/05_Writing_your_First_Kernels/04 Atomics/00_atomicAdd.cu
+ok         cuda-course/05_Writing_your_First_Kernels/05 Streams/01_stream_basics.cu
+ok         cuda-course/05_Writing_your_First_Kernels/05 Streams/02_stream_advanced.cu
+ok         cuda-course/06_CUDA_APIs/01 CUBLAS/01 cuBLAS/01_Hgemm_Sgemm.cu
+ok         cuda-course/06_CUDA_APIs/01 CUBLAS/02 cuBLASLt/01_LtMatmul.cu
+ok         cuda-course/06_CUDA_APIs/01 CUBLAS/03 cuBLASXt/01_demo.cu
+ok         cuda-course/06_CUDA_APIs/01 CUBLAS/02 cuBLASLt/02_compare.cu
+ok         cuda-course/07_Faster_Matmul/unrolling_example.cu
+ok         cuda-course/08_Triton/02_softmax.cu
+ok         cuda-course/06_CUDA_APIs/01 CUBLAS/03 cuBLASXt/02_compare.cu
+== Infatoshi/cuda-course {'ok': 17}
+done: {'ok': 17}
+Infatoshi/cuda-course                            {'ok': 17}
+logging all output to /content/logs/bench_cuda-course.log
+logging all output to /content/logs/bench_cuda-course.log
+name, driver_version, compute_cap
+Tesla T4, 580.82.07, 7.5
+name, driver_version, compute_cap
+Tesla T4, 580.82.07, 7.5
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+cmake version 3.31.10
+cmake version 3.31.10
+Overwriting cuda_projects.py
+Overwriting cuda_projects.py
+Overwriting manifest.json
+Overwriting manifest.json
+done: {'ok': 17}
+done: {'ok': 17}
+Infatoshi/cuda-course                            {'ok': 17}
+Infatoshi/cuda-course                            {'ok': 17}

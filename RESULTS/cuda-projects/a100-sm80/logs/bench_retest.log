@@ -1,0 +1,22 @@
+logging all output to /content/logs/bench_retest.log
+name, driver_version, compute_cap
+NVIDIA A100-SXM4-80GB, 580.82.07, 8.0
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+cmake version 3.31.10
+ok code-samples
+ok SGEMM_CUDA
+ok code-samples c++11_cuda/cpp11-range
+Writing cuda_projects.py
+Writing manifest.json
+--- round 1/2, run timeout 300s
+ok         code-samples/posts/cufft-callbacks/cufft_no_callbacks.cu
+ok         code-samples/posts/cufft-callbacks/cufft_callbacks.cu
+build-fail code-samples/posts/parallel_reduction_with_shfl/main.cu
+== NVIDIA-developer-blog/code-samples {'ok': 2, 'build-fail': 1}
+run-fail   SGEMM_CUDA/sgemm.cu
+== siboehm/SGEMM_CUDA {'run-fail': 1}
+siboehm/SGEMM_CUDA {'run-fail': 1}
+NVIDIA-developer-blog/code-samples {'ok': 2, 'build-fail': 1}
+siboehm/SGEMM_CUDA                               {'run-fail': 1}
+NVIDIA-developer-blog/code-samples               {'ok': 2, 'build-fail': 1}

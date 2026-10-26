@@ -1,0 +1,625 @@
+{
+ "slug": "NVIDIA-developer-blog/code-samples",
+ "commit": "3350d216083a902ccbf5b31665e3b82096a75b55",
+ "tally": {
+  "ok": 26
+ },
+ "skipped_at_discovery": [
+  {
+   "path": "posts/nvtx/manual_nvtx.cu",
+   "reason": "NVTX v2 header was removed from recent toolkits"
+  }
+ ],
+ "results": [
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/code-samples/c++11_cuda/cpp11-range/range.hpp:19:38: warning: \u2018template<class _Category, class _Tp, class _Distance, class _Pointer, class _Reference> struct std::iterator\u2019 is deprecated [-Wdeprecated-declarations]\n   19 | struct range_iter_base : std::iterator<std::input_iterator_tag, T> {\n      |                                      ^~~~~~~~\n/usr/include/c++/13/bits/stl_iterator_base_types.h:127:27: note: declared here\n  127 |     struct _GLIBCXX17_DEPRECATED iterator\n      |                           ^~~~~~~~\n",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "502b09af79514ee48779c285ec62f65f145444b06e7361400ef3ebaee45ec9fa",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Read 3288846 byte corpus from warandpeace.txt\ncounted 107310 instances of 'x', 'y', 'z', or 'w' in \"warandpeace.txt\"\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "c++11_cuda/c++11_cuda.cu",
+   "kind": "single",
+   "seconds": 12.1,
+   "status": "ok",
+   "retest": true
+  },
+  {
+   "build_rc": 0,
+   "build_log": "le*, double*); cudaError_t = cudaError]\u2019 is deprecated [-Wdeprecated-declarations]\n 1154 |   CHECK_CUDA(cudaFuncSetSharedMemConfig(compute_partial_sums_kernel<NUM_THREADS_PER_BLOCK4>, cudaSharedMemBankSizeEightByte));\n      |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/usr/local/cuda/bin/../targets/x86_64-linux/include/cuda_runtime.h:1740:1: note: declared here\n 1740 | __host__ cudaError_t cudaFuncSetSharedMemConfig(\n      | ^~~~~~~~~~~~~~~~~~~~~~~~~~\n/content/out/build/code-samples/timing1__posts__american-options__longstaff_schwartz_svd_2.cu:1161:53: warning: \u2018cudaError_t cudaFuncSetSharedMemConfig(T*, cudaSharedMemConfig) [with T = void(int, int, double, double*); cudaError_t = cudaError]\u2019 is deprecated [-Wdeprecated-declarations]\n 1161 |   CHECK_CUDA(cudaFuncSetSharedMemConfig(compute_final_sum_kernel<NUM_THREADS_PER_BLOCK4>, cudaSharedMemBankSizeEightByte));\n      |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/usr/local/cuda/bin/../targets/x86_64-linux/include/cuda_runtime.h:1740:1: note: declared here\n 1740 | __host__ cudaError_t cudaFuncSetSharedMemConfig(\n      | ^~~~~~~~~~~~~~~~~~~~~~~~~~\n/content/out/build/code-samples/timing1__posts__american-options__longstaff_schwartz_svd_2.cu:1161:53: warning: \u2018cudaError_t cudaFuncSetSharedMemConfig(T*, cudaSharedMemConfig) [with T = void(int, int, double, double*); cudaError_t = cudaError]\u2019 is deprecated [-Wdeprecated-declarations]\n 1161 |   CHECK_CUDA(cudaFuncSetSharedMemConfig(compute_final_sum_kernel<NUM_THREADS_PER_BLOCK4>, cudaSharedMemBankSizeEightByte));\n      |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/usr/local/cuda/bin/../targets/x86_64-linux/include/cuda_runtime.h:1740:1: note: declared here\n 1740 | __host__ cudaError_t cudaFuncSetSharedMemConfig(\n      | ^~~~~~~~~~~~~~~~~~~~~~~~~~\n",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "d1af4074d857d9e847ecdc9e0beed6552e2267225cf3fca2fc16202ceee69423",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "==============\nNum Timesteps         : 100\nNum Paths             : 32K\nNum Runs              : 1\nT                     : 1.000000\nS0                    : 3.600000\nK                     : 4.000000\nr                     : 0.060000\nsigma                 : 0.200000\nOption Type           : American Put\n==============\nGPU Longstaff-Schwartz: 0.44789491\nBinonmial             : 0.44880498\nEuropean Price        : 0.38443078\n==============\nElapsed time          : 97.189ms\n==============\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "written for CUDA <= 8: __any(pred) was removed for sm_70+ (ptxas: 'vote without .sync is not supported'). The copy uses __any_sync(0xffffffff, pred), the full-warp form that call site already assumes.",
+   "linked_with": [],
+   "path": "posts/american-options/longstaff_schwartz_svd_2.cu",
+   "kind": "single",
+   "seconds": 13.2,
+   "status": "ok",
+   "retest": true
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 1.1
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 1.1
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "posts/cuda-vmm/sync_main.cu",
+   "kind": "single",
+   "seconds": 4.9,
+   "status": "ok",
+   "retest": true
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "dc483fbee659fabc0f21292594fe9e50b38e8a2fc1b991f0229131a8dbb0af14",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": true,
+    "stdout_head": "Preparing input: 1000x1024\nComputing reference solution\nCreating FFT plan\nRunning 100 iterations\nTime for the FFT: 24.344736ms\n80: (-0.67,-0.81) != (16.59, 247.90)\n           *** FAILED ***\n!!! Verification Failed !!!\nDone\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "CUFFT_LICENSE_ERROR no longer exists in cuFFT (the license check was dropped); the copy removes that one branch and keeps the status check.",
+   "linked_with": [],
+   "path": "posts/cufft-callbacks/cufft_callbacks.cu",
+   "kind": "single",
+   "seconds": 4.7,
+   "status": "ok",
+   "retest": true
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "934c3ee33a0f0e7a1e1382f1dffc45f804337680c0ac71694ea0d9b630be0538",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": true,
+    "stdout_head": "Preparing input: 1000x1024\nComputing reference solution\nCreating FFT plan\nRunning 100 iterations\nTime for the FFT: 53.127167ms\n102000: (-0.37,-2.43) != (-0.37, -2.43)\n           *** FAILED ***\n!!! Verification Failed !!!\nDone\n",
+    "stderr_head": ""
+   },
+   "path": "posts/cufft-callbacks/cufft_no_callbacks.cu",
+   "kind": "single",
+   "seconds": 3.3,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "1cd049bd38c90e875194aa8c39218a6cdda862ba31dfb25af4eb62a6d18ee58f",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Using GPU 0 of 1 GPUs.\nWarp size = 32.\nMulti-processor count = 40.\nMax threads per multi-processor = 1024.\nTable size = 536870912 (4.294967 GB.)\nTotal number of threads 536870912\nEach thread access 8 locations.\nNumber of iterations = 1\nElapsed time = 15.010403 seconds\nResult Gupdates/s ATOM.CAS.64(loop) = 0.286133\nVerification: Found 0 errors.\n",
+    "stderr_head": ""
+   },
+   "path": "posts/gups/gups.cu",
+   "kind": "single",
+   "seconds": 63.4,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "2cf450a3e6893021835c580a6d567ee2470e6567e6a33d5059a64722019a50d7",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "\n This example computes real matrix C=alpha*A*B+beta*C using \n cuBLAS dgemm, where A, B, and  C are matrices and \n alpha and beta are double precision scalars\n\n Initializing data for matrix multiplication C=A*B for matrix \n A(4092x4092) and matrix B(4092x4092)\n\n Allocating memory for matrices aligned on 64-byte boundary for better \n performance \n\n Computing matrix product using cuBLAS dgemm function \n\n\n Computations completed.\n\n Time Elapsed: 1214.69 ms \n\n\n Deallocating memory \n\n Example completed. \n\n",
+    "stderr_head": ""
+   },
+   "path": "posts/math-libraries-intro/cublas-example.cu",
+   "kind": "single",
+   "seconds": 31.2,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "bcdac8668dfadd5cd55888551e39100ab1962d65aab73054d2c4a7c84d4dce7c",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "2.000000\n3.000000\n4.000000\n5.000000\n6.000000\n7.000000\n8.000000\n9.000000\n10.000000\n11.000000\n12.000000\n13.000000\n14.000000\n15.000000\n16.000000\n17.000000\n18.000000\n19.000000\n20.000000\n21.000000\n22.000000\n23.000000\n24.000000\n25.000000\n26.000000\n27.000000\n28.000000\n29.000000\n30.000000\n31.000000\n32.000000\n33.000000\n34.000000\n35.000000\n36.000000\n37.000000\n38.000000\n39.000000\n40.000000\n41.000000\n42.000000\n43.000000\n44.000000\n45.000000\n46.000000\n47.000000\n48.000000\n49.000000\n50.000000\n51.000000\n52.000000\n53.000000\n54.000000\n55.000000\n56.000000\n57.000000\n58.000000\n59.000000\n60.000000\n61.000000\n62.000000\n63.000000\n64.000000\n65.000000\n66.000000\n67.000000\n68.000000\n69.000000\n70.000000\n71.000000\n72.000000\n73.000000\n74.000000\n75.000000\n76.000000\n77.000000\n78.000000\n79.000000\n80.000000\n81.000000\n82.000000\n83.000000\n84.000000\n85.000000\n86.000000\n87.000000\n88.000000\n89.000000\n90.000000\n91.000000\n92.000000\n93.000000\n94.000000\n95.000000\n96.000000\n97.000000\n98.000000\n99.000000\n100.000000\n101.000000\n",
+    "stderr_head": ""
+   },
+   "path": "posts/mixed-precision/haxpy.cu",
+   "kind": "single",
+   "seconds": 3.1,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "4015da2e7aee33294fdb18784cba4e16d5078a3536b941674edaf076404535fb",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Setting Application Clocks = (5001,585)\n\tRunning Matrix Multiplication CUDA Kernel...\n\tPerformance= 903.70 GFlop/s, Time= 2.376 msec, Size= 2147483648 Ops\n\tChecking computed result for correctness: OK\n\n\tNote: For peak performance, please refer to the matrixMulCUBLAS example.\nSetting Application Clocks = (5001,585)\n\tRunning Matrix Multiplication CUDA Kernel...\n\tPerformance= 918.84 GFlop/s, Time= 2.337 msec, Size= 2147483648 Ops\n\tChecking computed result for correctness: OK\n\n\tNote: For peak performance, please refer to the matrixMulCUBLAS example.\nSetting Application Clocks = (5001,585)\n\tRunning Matrix Multiplication CUDA Kernel...\n\tPerformance= 983.25 GFlop/s, Time= 2.184 msec, Size= 2147483648 Ops\n\tChecking computed result for correctness: OK\n\n\tNote: For peak performance, please refer to the matrixMulCUBLAS example.\nSetting Application Clocks = (5001,585)\n\tRunning Matrix Multiplication CUDA Kernel...\n\tPerformance= 983.94 GFlop/s, Time= 2.183 msec, Size= 2147483648 Ops\n\tChecking computed result for correctness: OK\n\n\tNote: For peak performance, please refer to the matrixMulCUBLAS example.\nSetting Application Clocks = (5001,585)\n\tRunning Matrix Multiplication CUDA Kernel...\n\tPerformance= 957.26 GFlop/s, Time= 2.243 msec, Size= 2147483648 Ops\n\tChecking computed result for correctness: OK\n\n\tNote: For peak performance, please refer to the matrixMulCUBLAS example.\nSetting Application Clocks = (5001,585)\n\tRunning Matrix Multiplication CUDA Kernel...\n\tPerformance= 957.70 GFlop/s, Time",
+    "stderr_head": "NVML_ERROR: Not Found (6) in 113 line of /content/cuda-projects/code-samples/posts/nvml/nvml_test.cu\nNVML_ERROR: Not Supported (3) in 126 line of /content/cuda-projects/code-samples/posts/nvml/nvml_test.cu\nNVML_ERROR: Invalid Argument (2) in 136 line of /content/cuda-projects/code-samples/posts/nvml/nvml_test.cu\nNVML_ERROR: Invalid Argument (2) in 136 line of /content/cuda-projects/code-samples/posts/nvml/nvml_test.cu\nNVML_ERROR: Invalid Argument (2) in 136 line of /content/cuda-projects/code-sa",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 36.6
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 37.8
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [
+    "posts/nvml/matrixMul.cu"
+   ],
+   "path": "posts/nvml/nvml_test.cu",
+   "kind": "single",
+   "seconds": 79.5,
+   "status": "ok",
+   "retest": true
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "",
+    "stderr_head": ""
+   },
+   "path": "posts/nvtx/compiler_inst_nvtx.cu",
+   "kind": "single",
+   "seconds": 2.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "CT\";\n           ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(174): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_atomic\", device_reduce_atomic,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(175): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_atomic_vector2\", device_reduce_atomic_vector2,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(178): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_warp_atomic\",device_reduce_warp_atomic,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(179): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_warp_atomic_vector2\",device_reduce_warp_atomic_vector2,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(182): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_block_atomic\",device_reduce_block_atomic,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(183): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_block_atomic_vector2\",device_reduce_block_atomic_vector2,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(186): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_stable\",device_reduce_stable,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(187): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_stable_vector2\",device_reduce_stable_vector2,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(190): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTestCub(\"device_reduce_cub\",NUM_ELEMS,REPEAT,vals,checksum);\n               ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(90): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n      valid=\"CORRECT\";\n           ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(92): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n      valid=\"INCORRECT\";\n           ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(143): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n      valid=\"CORRECT\";\n           ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(145): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n      valid=\"INCORRECT\";\n           ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(174): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_atomic\", device_reduce_atomic,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(175): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_atomic_vector2\", device_reduce_atomic_vector2,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(178): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_warp_atomic\",device_reduce_warp_atomic,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(179): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_warp_atomic_vector2\",device_reduce_warp_atomic_vector2,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(182): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_block_atomic\",device_reduce_block_atomic,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(183): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_block_atomic_vector2\",device_reduce_block_atomic_vector2,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(186): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_stable\",device_reduce_stable,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(187): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTest(\"device_reduce_stable_vector2\",device_reduce_stable_vector2,NUM_ELEMS,REPEAT,vals,checksum);\n            ^\n\n/content/out/build/code-samples/timing1__posts__parallel_reduction_with_shfl__main.cu(190): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    RunTestCub(\"device_reduce_cub\",NUM_ELEMS,REPEAT,vals,checksum);\n               ^\n\n",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "97195153c4e2cea33f1beaf585a77f715ccb35452bd09cd2ac7000eb85b1c9f1",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "NUM_ELEMS: 1048576, REPEAT: 100\ndevice_reduce_atomic: CORRECT, Time: 0.003142 s, GB/s: 133.501724\ndevice_reduce_atomic_vector2: CORRECT, Time: 0.003088 s, GB/s: 135.825912\ndevice_reduce_warp_atomic: CORRECT, Time: 0.003781 s, GB/s: 110.942581\ndevice_reduce_warp_atomic_vector2: CORRECT, Time: 0.003468 s, GB/s: 120.946358\ndevice_reduce_block_atomic: CORRECT, Time: 0.005532 s, GB/s: 75.823769\ndevice_reduce_block_atomic_vector2: CORRECT, Time: 0.004671 s, GB/s: 89.785805\ndevice_reduce_stable: CORRECT, Time: 0.005214 s, GB/s: 80.439903\ndevice_reduce_stable_vector2: CORRECT, Time: 0.004940 s, GB/s: 84.908234\ndevice_reduce_cub: CORRECT, Time: 0.001432 s, GB/s: 292.976929\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ],
+    "args": [
+     "1048576",
+     "100"
+    ]
+   },
+   "shortened": false,
+   "patched": "the vendored 2016 NVlabs/cub submodule collides with the CCCL cub that ships in CUDA 13 (#error CUB_NS_QUALIFIER); the copy includes the toolkit's <cub/cub.cuh> instead, and replaces cub::Sum() (removed in CCCL 3) with cuda::std::plus<int>() and the init value 0 that CCCL 3's Reduce now requires. The header warp_reduce.h calls __shfl_down() without a mask (removed for sm_70+); the build force-includes a one-function shim giving it the full-warp __shfl_down_sync form.",
+   "linked_with": [],
+   "path": "posts/parallel_reduction_with_shfl/main.cu",
+   "kind": "single",
+   "seconds": 15.3,
+   "status": "ok",
+   "retest": true
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "b10377568b85bdc5ec1fe0e52114f5f0684ced9594e73cc6f8b7664f6612ad5b",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": true,
+    "stdout_head": "concurrentManagedAccess supported\nERROR! code: 2\nNo error\nLaunch memcpy\nERROR! code: 2\nERROR! code: 3\nNo error\n",
+    "stderr_head": "ERROR 2, line 160. block 92, thread 20, value = 1e+06\nERROR 2, line 160. block 92, thread 20, value = 1e+06\nERROR 3, line 187, file /content/cuda-projects/code-samples/posts/printf-alternative/main.cu\u0000. block 31, thread 31\n"
+   },
+   "path": "posts/printf-alternative/main.cu",
+   "kind": "single",
+   "seconds": 8.3,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "b42d6f8ccd761993871f6d53522674799e7101f72a24a307e2ec12faa5eb4a51",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Running with default settings\nseqLength 100, numLayers 4, hiddenSize 512, miniBatch 64\ni checksum (example 0) 5.113463E+04\nh checksum (example 0) 2.048000E+03\nc checksum (example 0) 2.058137E+05\ni checksum 3.272639E+06     c checksum 1.317278E+07     h checksum 1.310720E+05\nRuntime 89.989120ms\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 2.1
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "upstream bug: `return time < 0;` compares the libc function time() with 0, which g++ now rejects. The copy returns totalTime < 0 (always 0), the evident intent.",
+   "linked_with": [],
+   "path": "posts/rnn/LSTM.cu",
+   "kind": "single",
+   "seconds": 4.9,
+   "status": "ok",
+   "retest": true
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "1102972c053e267994e39d969245efdc2b42a9d06d6dc18dcf97253d222449be",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "\nM = 16384, N = 16384, K = 16384. alpha = 2.000000, beta = 2.000000\n\nRunning with wmma...\nRunning with cuBLAS...\n\nChecking results...\nResults verified: cublas and WMMA agree.\n\nwmma took 3846.515137ms\ncublas took 509.821838ms\n\nFor a faster code using wmma you should check out the cudaTensorCoreGemm sample in the CUDA Toolkit.\nThis code was written as a demo only!\n\n",
+    "stderr_head": ""
+   },
+   "path": "posts/tensor-cores/simpleTensorCoreGEMM.cu",
+   "kind": "single",
+   "seconds": 20.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9a9cc7b75f0b1f76728531df8d376492308ac821edaa9ec8876b84d573602388",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "On device: name=hello, value=10\nOn host: name=dello, value=11\n",
+    "stderr_head": ""
+   },
+   "path": "posts/unified-memory/dataElem.cu",
+   "kind": "single",
+   "seconds": 2.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9a9cc7b75f0b1f76728531df8d376492308ac821edaa9ec8876b84d573602388",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "On device: name=hello, value=10\nOn host: name=dello, value=11\n",
+    "stderr_head": ""
+   },
+   "path": "posts/unified-memory/dataElem_um.cu",
+   "kind": "single",
+   "seconds": 2.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9a9cc7b75f0b1f76728531df8d376492308ac821edaa9ec8876b84d573602388",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "On device: name=hello, value=10\nOn host: name=dello, value=11\n",
+    "stderr_head": ""
+   },
+   "path": "posts/unified-memory/dataElem_um_c++_1.cu",
+   "kind": "single",
+   "seconds": 2.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "f6560c0aac836bc6d0a5ddc0d767f1150d9d81b6d1d3f9b5d48dd7b07a605056",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "On device by pointer:       name=hello, value=10\nOn host (after by-pointer): name=pello, value=11\nOn device by ref:           name=pello, value=11\nOn host (after by-ref):     name=rello, value=12\nOn device by value:         name=rello, value=12\nOn host (after by-value):   name=rello, value=12\n",
+    "stderr_head": ""
+   },
+   "path": "posts/unified-memory/dataElem_um_c++_2.cu",
+   "kind": "single",
+   "seconds": 2.4,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "0622286b05503b3af223e76487283c158209757a130184ef1db5907079a246ea",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Read,Page_Fault,streaming,1.000000,2MB,blocksize=128,loop_count=3, 8408.125977 ms, 1.733463 GB/s\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 33.9
+     },
+     {
+      "timeout": 300,
+      "rc": 0,
+      "seconds": 34.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "posts/unified-memory-oversubscription/uvm_oversubs.cu",
+   "kind": "single",
+   "seconds": 70.5,
+   "status": "ok",
+   "retest": true
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "e41b63e69e365dc4796d052fd1ee147e3bc4bfce433bb810eb836d407ce789fd",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Device: Tesla T4\nTransfer size (MB): 4\nSingle Precision\nOffset, Bandwidth (GB/s):\n0, 377.073914\n1, 390.625000\n2, 392.464661\n3, 390.625000\n4, 391.236328\n5, 368.731567\n6, 370.919861\n7, 385.208008\n8, 390.625000\n9, 396.196533\n10, 414.593689\n11, 405.186401\n12, 403.225800\n13, 413.907288\n14, 390.625000\n15, 418.060181\n16, 402.576477\n17, 325.520813\n18, 389.408112\n19, 390.625000\n20, 390.625000\n21, 393.700775\n22, 388.198761\n23, 390.625000\n24, 412.541229\n25, 414.593689\n26, 425.894379\n27, 428.082184\n28, 423.011841\n29, 391.236328\n30, 425.894379\n31, 407.166107\n32, 403.225800\n\nStride, Bandwidth (GB/s):\n1, 428.816467\n2, 144.927536\n3, 88.589653\n4, 64.350067\n5, 50.080132\n6, 41.118420\n7, 34.674065\n8, 29.733587\n9, 26.368526\n10, 24.262423\n11, 22.092613\n12, 20.345051\n13, 19.091257\n14, 17.935289\n15, 17.166792\n16, 16.802204\n17, 15.150597\n18, 14.455880\n19, 13.331912\n20, 12.765523\n21, 12.400793\n22, 11.595547\n23, 11.076160\n24, 10.615711\n25, 10.604903\n26, 10.204082\n27, 9.435030\n28, 9.504258\n29, 8.957363\n30, 9.105477\n31, 8.760249\n32, 9.088926\n",
+    "stderr_head": ""
+   },
+   "path": "series/cuda-cpp/coalescing-global/coalescing.cu",
+   "kind": "single",
+   "seconds": 2.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "71f185e176365bdf4f7bb54221aa7e4a52233ce9cff05a0b8b49de7c225c74ce",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": true,
+    "stdout_head": "\nDevice Name: Tesla T4\nCompute Capability: 7.5\n\nX derivatives\n\n  Using shared memory tile of 64 x 4\n   RMS error: 7.136262e-06\n   MAX error: 2.861023e-05\n   Average time (ms): 0.010608\n   Average Bandwidth (GB/s): 197.695319\n\n  Using shared memory tile of 64 x 32\n   RMS error: 7.136262e-06\n   MAX error: 2.861023e-05\n   Average time (ms): 0.010547\n   Average Bandwidth (GB/s): 198.834954\n\nY derivatives\n\n  Using shared memory tile of 4 x 64\n   RMS error: 7.136262e-06\n   MAX error: 2.861023e-05\n   Average time (ms): 0.015357\n   Average Bandwidth (GB/s): 136.561784\n\n  Using shared memory tile of 32 x 64\n   RMS error: 7.136262e-06\n   MAX error: 2.861023e-05\n   Average time (ms): 0.009675\n   Average Bandwidth (GB/s): 216.755410\n\nZ derivatives\n\n  Using shared memory tile of 4 x 64\n   RMS error: 7.136262e-06\n   MAX error: 2.861023e-05\n   Average time (ms): 0.015392\n   Average Bandwidth (GB/s): 136.249485\n\n  Using shared memory tile of 32 x 64\n   RMS error: 7.136262e-06\n   MAX error: 2.861023e-05\n   Average time (ms): 0.009640\n   Average Bandwidth (GB/s): 217.546888\n\n",
+    "stderr_head": ""
+   },
+   "path": "series/cuda-cpp/finite-difference/finite-difference.cu",
+   "kind": "single",
+   "seconds": 3.0,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/code-samples/series/cuda-cpp/optimize-data-transfers/bandwidthtest.cu(122): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    profileCopies(h_aPageable, h_bPageable, d_a, nElements, \"Pageable\");\n                                                            ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/code-samples/series/cuda-cpp/optimize-data-transfers/bandwidthtest.cu(123): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    profileCopies(h_aPinned, h_bPinned, d_a, nElements, \"Pinned\");\n                                                        ^\n\n/content/cuda-projects/code-samples/series/cuda-cpp/optimize-data-transfers/bandwidthtest.cu(122): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    profileCopies(h_aPageable, h_bPageable, d_a, nElements, \"Pageable\");\n                                                            ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/code-samples/series/cuda-cpp/optimize-data-transfers/bandwidthtest.cu(123): warning #2464-D: conversion from a string literal to \"char *\" is deprecated\n    profileCopies(h_aPinned, h_bPinned, d_a, nElements, \"Pinned\");\n                                                        ^\n\n",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "e3ccf2b5e1ce0a23e05ba9a41bdda9bec80852d1210efb5d27fb5865a167876c",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "\nDevice: Tesla T4\nTransfer size (MB): 16\n\nPageable transfers\n  Host to Device bandwidth (GB/s): 4.134731\n  Device to Host bandwidth (GB/s): 4.272508\n\nPinned transfers\n  Host to Device bandwidth (GB/s): 7.583978\n  Device to Host bandwidth (GB/s): 12.489589\n\n",
+    "stderr_head": ""
+   },
+   "path": "series/cuda-cpp/optimize-data-transfers/bandwidthtest.cu",
+   "kind": "single",
+   "seconds": 2.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "",
+    "stderr_head": ""
+   },
+   "path": "series/cuda-cpp/optimize-data-transfers/profile.cu",
+   "kind": "single",
+   "seconds": 3.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "a45d7f70e5138544058bdd073de70bae7d4591f5b8356b5f0418faed9e66c945",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": true,
+    "stdout_head": "Device : Tesla T4\nTime for sequential transfer and execute (ms): 4.815008\n  max error: 1.192093e-07\nTime for asynchronous V1 transfer and execute (ms): 2.000096\n  max error: 1.192093e-07\nTime for asynchronous V2 transfer and execute (ms): 1.910176\n  max error: 1.192093e-07\n",
+    "stderr_head": ""
+   },
+   "path": "series/cuda-cpp/overlap-data-transfers/async.cu",
+   "kind": "single",
+   "seconds": 3.3,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "",
+    "stderr_head": ""
+   },
+   "path": "series/cuda-cpp/shared-memory/shared-memory.cu",
+   "kind": "single",
+   "seconds": 2.6,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "82f076dcd3e4eef54fafdb2bcffe579035e4c88233d39a32cd7cb9db64b8c947",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "\nDevice : Tesla T4\nMatrix size: 1024 1024, Block size: 32 8, Tile size: 32 32\ndimGrid: 32 32 1. dimBlock: 32 8 1\n                  Routine         Bandwidth (GB/s)\n                     copy              222.58\n       shared memory copy              226.67\n          naive transpose              105.94\n      coalesced transpose              175.69\n  conflict-free transpose              207.46\n",
+    "stderr_head": ""
+   },
+   "path": "series/cuda-cpp/transpose/transpose.cu",
+   "kind": "single",
+   "seconds": 2.7,
+   "status": "ok"
+  }
+ ]
+}

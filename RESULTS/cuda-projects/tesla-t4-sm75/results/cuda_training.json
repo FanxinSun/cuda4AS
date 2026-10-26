@@ -1,0 +1,2451 @@
+{
+ "slug": "rahul238xaviers/cuda_training",
+ "commit": "cf2826dcbb09997011473699498cc9c1ebc48d2f",
+ "complete": true,
+ "tally": {
+  "ok": 11,
+  "run-fail": 50
+ },
+ "skipped_at_discovery": [
+  {
+   "path": "src/cuda_systems/module2/2.2_templates_type_traits/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/cuda_systems/module2/2.4_move_semantics_views/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/cuda_systems/module2/2.4_move_semantics_views/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/cuda_systems/module2/2.4_move_semantics_views/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/cuda_systems/module2/2.5_stl_parallel_execution/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/cuda_systems/module2/2.5_stl_parallel_execution/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/cuda_systems/module2/2.5_stl_parallel_execution/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/cuda_systems/module3/3.1_threads_registers/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/cuda_systems/module3/3.2_warps_simt_shuffles/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/cuda_systems/module3/3.2_warps_simt_shuffles/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/cuda_systems/module4/4.2_shared_memory_tiling/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/cuda_systems/module4/4.2_shared_memory_tiling/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/cuda_systems/module5/5.1_warp_block_reductions/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/cuda_systems/module5/5.2_atomic_operations/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module1/1.1_dense_gemv/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module1/1.1_dense_gemv/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module1/1.1_dense_gemv/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module1/1.2_block_tiled_gemm/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module1/1.2_block_tiled_gemm/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module1/1.2_block_tiled_gemm/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module1/1.3_tensor_core_wmma_gemm/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module1/1.3_tensor_core_wmma_gemm/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module1/1.3_tensor_core_wmma_gemm/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module1/1.4_split_k_gemm/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module1/1.4_split_k_gemm/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module1/1.4_split_k_gemm/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module2/2.1_moe_topk_gating/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module2/2.1_moe_topk_gating/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module2/2.1_moe_topk_gating/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module2/2.2_fused_moe_expert_gemm/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module2/2.2_fused_moe_expert_gemm/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module2/2.2_fused_moe_expert_gemm/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module2/2.3_csr_spmv_kernel/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module2/2.3_csr_spmv_kernel/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module2/2.3_csr_spmv_kernel/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module2/2.4_structured_sparsity_2to4/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module2/2.4_structured_sparsity_2to4/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module2/2.4_structured_sparsity_2to4/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module3/3.1_flash_attention_forward/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module3/3.1_flash_attention_forward/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module3/3.1_flash_attention_forward/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module3/3.2_flash_decoding_split_kv/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module3/3.2_flash_decoding_split_kv/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module3/3.2_flash_decoding_split_kv/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module3/3.3_rotary_positional_embedding/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module3/3.3_rotary_positional_embedding/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module3/3.3_rotary_positional_embedding/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module3/3.4_state_space_model_scan/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module3/3.4_state_space_model_scan/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module3/3.4_state_space_model_scan/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module4/4.1_fused_rmsnorm/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module4/4.1_fused_rmsnorm/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module4/4.1_fused_rmsnorm/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module4/4.2_fused_layernorm_residual/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module4/4.2_fused_layernorm_residual/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module4/4.2_fused_layernorm_residual/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module4/4.3_fused_swiglu_activation/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module4/4.3_fused_swiglu_activation/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module4/4.3_fused_swiglu_activation/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module4/4.4_numerically_stable_softmax/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module4/4.4_numerically_stable_softmax/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module4/4.4_numerically_stable_softmax/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module5/5.1_stft_mel_spectrogram/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module5/5.1_stft_mel_spectrogram/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module5/5.1_stft_mel_spectrogram/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module5/5.2_causal_dilated_conv1d/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module5/5.2_causal_dilated_conv1d/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module5/5.2_causal_dilated_conv1d/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module5/5.3_fused_ctc_loss_decode/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module5/5.3_fused_ctc_loss_decode/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module5/5.3_fused_ctc_loss_decode/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module6/6.1_vit_patchify_embedding/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module6/6.1_vit_patchify_embedding/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module6/6.1_vit_patchify_embedding/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module6/6.2_windowed_video_attention/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module6/6.2_windowed_video_attention/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module6/6.2_windowed_video_attention/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module6/6.3_bilinear_bicubic_grid_sample/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module6/6.3_bilinear_bicubic_grid_sample/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module6/6.3_bilinear_bicubic_grid_sample/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module7/7.1_fp8_int4_gemv_dequant/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module7/7.1_fp8_int4_gemv_dequant/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module7/7.1_fp8_int4_gemv_dequant/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module7/7.2_fused_adamw_optimizer/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module7/7.2_fused_adamw_optimizer/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module7/7.2_fused_adamw_optimizer/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module7/7.3_distributed_grad_norm_clipping/exercise/beginner_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module7/7.3_distributed_grad_norm_clipping/exercise/champion_workbook.cu",
+   "reason": "exercise template"
+  },
+  {
+   "path": "src/gpu_kernels/module7/7.3_distributed_grad_norm_clipping/exercise/intermediate_workbook.cu",
+   "reason": "exercise template"
+  }
+ ],
+ "results": [
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "2937c3be9282448dc7763ed550baf0a505286c63925cafc8edbf8f7cde6fc9ef",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "=== CUDA GPU Playground Sandbox ===\nActive GPU: Tesla T4\nCompute Capability: 7.5\nStreaming Multiprocessors (SMs): 40\nTotal Global Memory: 14912 MB\nVerification: PASSED (c[i] == 3.0)\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "playground.cu",
+   "kind": "single",
+   "seconds": 6.0,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/playground_kernel.cu(62): warning #177-D: variable \"K\" was declared but never referenced\n    const int K = 2048;\n              ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/playground_kernel.cu(63): warning #177-D: variable \"alpha\" was declared but never referenced\n    const float alpha = 1.0f;\n                ^\n\n/content/cuda-projects/cuda_training/playground_kernel.cu(64): warning #177-D: variable \"beta\" was declared but never referenced\n    const float beta = 0.0f;\n                ^\n\n",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "88b5e5e8b9888f3d52bb734d330203df7c3989327d479668f000c2648f68f135",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "==========================================================\n  Evaluating: Fused GEMV Matrix-Vector Dot Product\n==========================================================\n[1/3] CPU Reference check completed.\n[2/3] GPU Execution completed with return code 0.\n[3/3] Verification: PASSED (max_diff < 1e-4).\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.2
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.1
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "playground_kernel.cu",
+   "kind": "single",
+   "seconds": 5.3,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "3077d80d6e41810111747e1a3e9b6889151a63b38c4be3f453f5a36ec8971e27",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "CUDA runtime version:  13.0\nCUDA driver version:   13.0\nDevice count:          1\n\nname:                  Tesla T4\ncompute capability:    7.5\ntotal global mem:      14.56 GB\nL2 cache:              4.00 MB\nintegrated:            no\n\nSMs:                   40\nregisters/SM:          65536\nmax threads/SM:        1024\nmax threads/block:     1024\nmax block dims:        (1024, 1024, 64)\nmax grid dims:         (2147483647, 65535, 65535)\nshared mem/block:      49152 bytes\nshared mem/SM:         65536 bytes\nwarp size:             32\nmax blocks/SM:         16\n\ncore clock:            1590 MHz\nmemory clock:          5001 MHz\nmemory bus width:      256 bits\nmemory bandwidth:      320 GB/s\n\nPCI location:          0000:00:04\nasync engines:         3\nconcurrent kernels:    yes\nhost memory mapped:    yes\nmanaged memory:        yes\ncooperative launch:    yes\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.1
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.1
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "kernels/practice/gpu_check.cu",
+   "kind": "single",
+   "seconds": 2.0,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "b84d9484330e2a78ae5dfea20d180c18b90ebe8867d4ef3afbca1003b87c974b",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "The total number of blocks are 16\nTotal time taken by the GPU kernel addHalf to process 268435456 is 14.7789ms\nSpeedup: 15.6037x\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 2.7
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 2.7
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "kernels/practice/grid_stride_loop.cu",
+   "kind": "single",
+   "seconds": 9.1,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "6818ae6623d575d77388c1b06dde8bcb514d7d63e0bba06b4c9cadbf46217654",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Matrix Dimensions: 16384 x 16384 (268435456 elements)\nMatrices successfully initialized!\nLaunching CUDA kernel with total threads in a block 1024... and total blocks in the grid 262144\nTotal time taken by the GPU kernel to process 268435456 is 13.0131ms\nSpeedup: 25.499x\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 16.6
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 18.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "kernels/practice/matrixAddKernel.cu",
+   "kind": "single",
+   "seconds": 38.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "0dbde99174d3359f387a6bbf43eafb21a482301bea8916886437656ca2a06a05",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "GPU: 549755781120.000000  CPU: 549755289600.000000  rel err: 8.94071e-07\n[PASSED]\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "kernels/practice/reduce_block.cu",
+   "kind": "single",
+   "seconds": 3.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "9f775130d841cf9353dd7d3e89426b45d2e6535c4d5d07bfa81b836882935b0d",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "The summation of the total number 8388608 is 3.51844e+13\nrel diff = 0  PASS\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "kernels/practice/reduce_two_stage.cu",
+   "kind": "single",
+   "seconds": 4.1,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "a40c0bd6c66f36d51ba0526f9c2591dc76788099f2259d2bed56c2937f5ce29a",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Allocating memory for 1048576 elements...\nValue of out \nLaunching kernel...\nValue of out 3.68935e+19\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "kernels/practice/register_pressure_kernel.cu",
+   "kind": "single",
+   "seconds": 3.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "2ddd70983064fde9e714471746ba5ac588a99686916c78c1190f63e7d259ba4c",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "The test passed\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "kernels/practice/tile_reverse.cu",
+   "kind": "single",
+   "seconds": 3.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "e2381d407a5f2baf4ee0492c1987e7f093cba80a1cae198e16181a572a97562f",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Allocating memory for 536870912 elements...\nLaunching CUDA kernel with 2097152 blocks...\nMax error: 0\n\u2705 Success! The GPU added massive numbers flawlessly.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 7.7
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 7.9
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "kernels/practice/vector_add.cu",
+   "kind": "single",
+   "seconds": 18.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "abe1360858507b1197ff47960142413d16a96e295d10ee1ef163d1b86a99edc0",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": true,
+    "stdout_head": "name:               Tesla T4\nSMs:                40\nthreads/SM (max):   1024\nthreads/block(max): 1024\nshared mem/block:   49152 bytes\nwarp size:          32\nGPU: 19676523640121196544.000000  CPU: 19608169201245618176.000000  rel err: 0.00348602\n[FAILED]\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "kernels/practice/vector_dot_reduction.cu",
+   "kind": "single",
+   "seconds": 3.2,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "e64aebf8117de1920d3f83a83763d2ebac186c966c979ed311cb166fe4249642",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "[Test 1: Host Affine Lambda] FAILED\n[Test 2: Mutable Lambda with State] FAILED\n[Test 3: Templated Host Transform] FAILED\n[Test 4: Device Lambda (ReLU)] FAILED\n[Test 5: Captured Device Lambda (LeakyReLU)] FAILED\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module2/2.1_lambdas_function_objects/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 5.3,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "7e55d83e6c738913c0c8a2707a93b05e2786c407c5a17dcbfb9db1f19ec88453",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "[Test 1: SwiGLU Activation Lambda] FAILED\n[Test 2: Function Composition] FAILED\n[Test 3: Strided 2D Transform] FAILED\n[Test 4: Vectorized float4 Lambda] FAILED\n[Test 5: Branchless HardSwish Lambda] FAILED\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module2/2.1_lambdas_function_objects/exercise/champion_workbook.cu",
+   "kind": "single",
+   "seconds": 5.0,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "0162cdbff1cba6c50b485267df7bbbcdb5b1afbd69933ad19b8ad7b19c837bee",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "[Test 1: Host Scaled Add Lambda] FAILED\n[Test 2: GPU SiLU Device Lambda] FAILED\n[Test 3: GPU GELU Device Lambda] FAILED\n[Test 4: In-Place GPU Clamp] FAILED\n[Test 5: Fused Residual + SiLU] FAILED\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module2/2.1_lambdas_function_objects/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 5.3,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "471e8bba79e5a2c51c54bc57f355b2503d0bf38ddfff5043cd72d59ef5f6c72f",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "[Test 1: Generic Host Add] FAILED\n[Test 2: if constexpr Dispatch] FAILED\n[Test 3: SFINAE Reciprocal] FAILED\n[Test 4: Generic CUDA Kernel] FAILED\n[Test 5: Widened Accumulator Traits] FAILED\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module2/2.2_templates_type_traits/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 5.0,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module2/2.2_templates_type_traits/exercise/intermediate_workbook.cu(73): warning #177-D: variable \"tid\" was declared but never referenced\n      int tid = threadIdx.x;\n          ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module2/2.2_templates_type_traits/exercise/intermediate_workbook.cu(74): warning #177-D: variable \"gid\" was declared but never referenced\n      int gid = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "d9ff94d042a29159b840044787b2f223474a1f2b1d3299e8398d54c824c61e47",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "[Test 1: Half TypeConverter] FAILED\n[Test 2: Generic Block Reduction] FAILED\n[Test 3: SFINAE Vectorizable Check] FAILED\n[Test 4: Epsilon Traits] FAILED\n[Test 5: Matrix Accessor Specialization] FAILED\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module2/2.2_templates_type_traits/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 5.7,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "873ef79a0fc8cd5187a36a04a46b9807a047fcd4b7998fac7da83db3782731d4",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "[Test 1: DevicePtr Deleter] FAILED\n[Test 2: make_device_unique] FAILED\n[Test 3: Pinned Host Memory] FAILED\n[Test 4: StreamRAII] FAILED\n[Test 5: EventTimer] FAILED\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module2/2.3_raii_smart_pointers_streams/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 5.4,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module2/2.3_raii_smart_pointers_streams/exercise/champion_workbook.cu(60): warning #177-D: variable \"aligned_bytes\" was declared but never referenced\n          size_t aligned_bytes = (bytes + 255) & ~255;\n                 ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "032d4718f077e71547aaa7edb4be4db30d8df090879d9d134c2f3584906aa3f2",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "[Test 1: DeviceArena] FAILED\n[Test 2: ScopedStreamContext] FAILED\n[Test 3: DoubleBufferPipeline] FAILED\n[Test 4: Statistical Profiler] FAILED\n[Test 5: CudaGraphRAII] FAILED\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module2/2.3_raii_smart_pointers_streams/exercise/champion_workbook.cu",
+   "kind": "single",
+   "seconds": 5.0,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "eaf6c4d3115aaba592873af4590bba219e0fc26ea4fdfbcda801bc228f7bc3dc",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "[Test 1: CudaBuffer RAII] FAILED\n[Test 2: Multi-Stream Execution] FAILED\n[Test 3: ScopedStream] FAILED\n[Test 4: Cross-Stream EventBarrier] FAILED\n[Test 5: DualBufferManager Composite] FAILED\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.0
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.0
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module2/2.3_raii_smart_pointers_streams/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 4.0,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "21585011a55f20ee3ec3a2c5291d8b874104781bc3b727d66220b7c5d56d00b2",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 3.1 Threads & Registers (Beginner Level) ---\n=================================================================\n  Problem 1: 1D Global Thread Indexing with Bounds Check           \u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: 2D Matrix Coordinate Indexing                         \u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: Register Accumulation (Fused Scale + Bias + ReLU)     \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Vectorized float2 64-bit Memory Access                \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: 3D Grid Indexing for Multi-Head Tensors               \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module3/3.1_threads_registers/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 4.8,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "945e900f61ec5c6aeddbea2dea0bf3589f0b647232df22f95dd346d208a53a33",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 3.1 Threads & Registers (Intermediate Level) ---\n=================================================================\n  Problem 1: 128-bit Vectorized float4 with Epilogue               \u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: Fast GELU Activation in Thread Registers              \u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: Row-Strided Pitch Indexing for Padded 2D Tensors      \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Thread Register Multi-Accumulator (4x Unrolled)       \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: In-Register Pairwise Dimension Reversal               \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module3/3.1_threads_registers/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 4.7,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.2_warps_simt_shuffles/exercise/intermediate_workbook.cu(44): warning #177-D: variable \"lane\" was declared but never referenced\n      int lane = threadIdx.x % 32;\n          ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.2_warps_simt_shuffles/exercise/intermediate_workbook.cu(86): warning #177-D: variable \"val\" was declared but never referenced\n      float val = in[gid];\n            ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.2_warps_simt_shuffles/exercise/intermediate_workbook.cu(100): warning #177-D: variable \"val\" was declared but never referenced\n          float2 val = in[gid];\n                 ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "221f6fb24adb8ede52e14c13b0fa6a4aec6e4d1ac9f51beca16b5aec6bebd410",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 3.2 Warps & Shuffles (Intermediate Level) ---\n=================================================================\n  Problem 1: Warp-Level Maximum Reduction                          \u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: Inclusive Warp Prefix Scan                            \u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: Exclusive Warp Prefix Scan                            \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Warp Ballot & Population Count                        \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: Vectorized Pair Shuffle                               \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module3/3.2_warps_simt_shuffles/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 4.9,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "da_systems/module3/3.3_blocks_shared_banking/exercise/beginner_workbook.cu(33): warning #177-D: variable \"s_data\" was declared but never referenced\n      __attribute__((shared)) float s_data[256];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/beginner_workbook.cu(34): warning #177-D: variable \"tid\" was declared but never referenced\n      int tid = threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/beginner_workbook.cu(45): warning #177-D: variable \"s_tile\" was declared but never referenced\n      __attribute__((shared)) float s_tile[16][16];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/beginner_workbook.cu(48): warning #177-D: variable \"gx\" was declared but never referenced\n      int gx = blockIdx.x * blockDim.x + tx;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/beginner_workbook.cu(49): warning #177-D: variable \"gy\" was declared but never referenced\n      int gy = blockIdx.y * blockDim.y + ty;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/beginner_workbook.cu(62): warning #177-D: variable \"tid\" was declared but never referenced\n      int tid = threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/beginner_workbook.cu(63): warning #177-D: variable \"gid\" was declared but never referenced\n      int gid = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/beginner_workbook.cu(75): warning #177-D: variable \"s_words\" was declared but never referenced\n      __attribute__((shared)) int s_words[32];\n                                  ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "59bbd856174e01de5ab51986d45201bc7e1916e95347c44e6d5d283246cb3042",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 3.3 Thread Blocks & Shared Memory (Beginner Level) ---\n=================================================================\n  Problem 1: Static Shared Memory Load & Store                     \u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: Block-Level Array Reversal in Shared Memory           \u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: 2D 16x16 Tile Staging in Shared Memory                \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Dynamic Shared Memory Allocation                      \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: Stride-1 Bank Mapping Verification                    \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 4.9,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "_exp;\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/champion_workbook.cu(75): warning #177-D: variable \"lane\" was declared but never referenced\n      int lane = tid % 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/champion_workbook.cu(76): warning #177-D: variable \"warp_id\" was declared but never referenced\n      int warp_id = tid / 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/champion_workbook.cu(77): warning #177-D: variable \"row\" was declared but never referenced\n      int row = blockIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/champion_workbook.cu(91): warning #177-D: variable \"s_tile\" was declared but never referenced\n      __attribute__((shared)) float s_tile[64][65];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/champion_workbook.cu(92): warning #177-D: variable \"tx\" was declared but never referenced\n      int tx = threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/champion_workbook.cu(93): warning #177-D: variable \"ty\" was declared but never referenced\n      int ty = threadIdx.y;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/champion_workbook.cu(102): warning #177-D: variable \"s_warp_bins\" was declared but never referenced\n      __attribute__((shared)) int s_warp_bins[8][16];\n                                  ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/champion_workbook.cu(104): warning #177-D: variable \"warp_id\" was declared but never referenced\n      int warp_id = tid / 32;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "8e3baf7c0af93f6b6770be752a3964aaac807ee7e178ee5d164c6c435981d44c",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 3.3 Thread Blocks & Shared Memory (Champion Level) ---\n=================================================================\n  Problem 1: Two-Pass Block Reduction (Intra-Warp + Scratchpad)    \u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: Double-Buffered Shared Memory Streaming               \u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: Row-Wise Block Softmax using Shared Scratchpad        \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Conflict-Free 8-Way Sub-Matrix Tile Transpose         \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: Shared Memory Fast Histogram (Replicated Bins)        \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.6
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/champion_workbook.cu",
+   "kind": "single",
+   "seconds": 5.2,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/3.3_blocks_shared_banking/exercise/intermediate_workbook.cu(38): warning #177-D: variable \"tid\" was declared but never referenced\n      int tid = threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/intermediate_workbook.cu(39): warning #177-D: variable \"gid\" was declared but never referenced\n      int gid = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/intermediate_workbook.cu(56): warning #177-D: variable \"s_halo\" was declared but never referenced\n      __attribute__((shared)) float s_halo[258];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/intermediate_workbook.cu(57): warning #177-D: variable \"tid\" was declared but never referenced\n      int tid = threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/intermediate_workbook.cu(58): warning #177-D: variable \"gid\" was declared but never referenced\n      int gid = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/intermediate_workbook.cu(71): warning #177-D: variable \"s_buf\" was declared but never referenced\n      __attribute__((shared)) float s_buf[256];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/intermediate_workbook.cu(84): warning #177-D: variable \"temp\" was declared but never referenced\n      __attribute__((shared)) int temp[256];\n                                  ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/intermediate_workbook.cu(85): warning #177-D: variable \"tid\" was declared but never referenced\n      int tid = threadIdx.x;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "37b01253d4f37099e3642196090307367f7af8a1c981af8eb74abbe96cfdeba0",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 3.3 Thread Blocks & Shared Memory (Intermediate Level) ---\n=================================================================\n  Problem 1: 32x32 Matrix Transpose with Padded Shared Memory      \u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: Block-Wide Reduction in Shared Memory (1024 -> 1)     \u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: 1D 3-Point Stencil with Shared Memory Halo            \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Shared Memory Multi-Row Circular Shift                \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: Parallel Exclusive Prefix Scan in Shared Memory       \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 4.9,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "c53c1533145069661d250baed204b78501c2b637f0931b41dcd7aaeb5f048d7f",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 3.4 Grids & Grid-Stride Loops (Beginner Level) ---\n=================================================================\n  Problem 1: Canonical 1D Grid-Stride Loop (Few Blocks -> Large Array)\u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: Grid Stride Step Identification                       \u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: 2D Grid-Stride Loop for Arbitrary Matrices            \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Vectorized float4 Grid-Stride Loop                    \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: Strided Batch Array Addition                          \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 4.9,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/champion_workbook.cu(33): warning #177-D: variable \"s_scratch\" was declared but never referenced\n      __attribute__((shared)) float s_scratch[32];\n                                    ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/champion_workbook.cu(34): warning #177-D: variable \"local_sum\" was declared but never referenced\n      float local_sum = 0.0f;\n            ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/champion_workbook.cu(67): warning #177-D: variable \"s_tile\" was declared but never referenced\n      __attribute__((shared)) float s_tile[16][17];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/champion_workbook.cu(100): warning #177-D: variable \"total_elements\" was declared but never referenced\n      int total_elements = B * H * S * D;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "f807c3dfdb4843182c530ea4ed5c6d140330c1f0bf9ef6fa489a37b844dd4226",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 3.4 Grids & Grid-Stride Loops (Champion Level) ---\n=================================================================\n  Problem 1: Single-Pass Global Sum with Atomic Block Counter      \u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: Grid-Stride 2D Tiled Transpose (Arbitrary Giant Matrices)\u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: Persistent Work-Queue Consumer Kernel                 \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Grid-Stride Multi-Head Softmax Pre-Scaler             \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: Dual-Grid Split Pipeline (Even vs Odd Rows)           \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/champion_workbook.cu",
+   "kind": "single",
+   "seconds": 4.9,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/intermediate_workbook.cu(27): warning #177-D: variable \"s_scratch\" was declared but never referenced\n      __attribute__((shared)) float s_scratch[32];\n                                    ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/intermediate_workbook.cu(28): warning #177-D: variable \"local_sum\" was declared but never referenced\n      float local_sum = 0.0f;\n            ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/intermediate_workbook.cu(52): warning #177-D: variable \"total\" was declared but never referenced\n      int total = B * C * N;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/intermediate_workbook.cu(76): warning #177-D: variable \"n4\" was declared but never referenced\n      int n4 = n / 4;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/intermediate_workbook.cu(77): warning #177-D: variable \"in4\" was declared but never referenced\n      const float4 *in4 = reinterpret_cast<const float4*>(in);\n                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/intermediate_workbook.cu(78): warning #177-D: variable \"out4\" was declared but never referenced\n      float4 *out4 = reinterpret_cast<float4*>(out);\n              ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "666a79e1e4cc587f322d2b95d9d51ba5789cf81feb0e25af991d9f559419fec8",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 3.4 Grids & Grid-Stride Loops (Intermediate Level) ---\n=================================================================\n  Problem 1: Grid-Stride Local Reduction into Registers            \u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: 3D Multi-Channel Grid-Stride Loop                     \u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: Grid-Stride Conditional Filter & Thresholding         \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Vectorized Grid-Stride Scaling with Non-Aligned Tail  \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: Host-Side Max Potential Block Size Query              \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 4.9,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/beginner_workbook.cu(20): warning #177-D: variable \"gid\" was declared but never referenced\n      int gid = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/beginner_workbook.cu(68): warning #177-D: variable \"gid\" was declared but never referenced\n      int gid = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "fcd437748dd60ae96f5321299cf33976a420f422b352c73964f5e3648a7d7b62",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 4.1 Coalescing & Read-Only Cache (Beginner Level) ---\n=================================================================\n  Problem 1: Coalesced 1D Vector Scale                             \u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: Fixing Strided Access into Coalesced Matrix Memory    \u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: Explicit Read-Only Cache Load via __ldg()             \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Constant Memory Broadcasting (__constant__)           \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: 128-bit Aligned Vectorized Memory Read (float4)       \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 4.9,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": " was declared but never referenced\n      int gid = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/intermediate_workbook.cu(27): warning #177-D: variable \"total_elements\" was declared but never referenced\n      int total_elements = num_tokens * hidden_dim;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/intermediate_workbook.cu(43): warning #177-D: variable \"s_tile\" was declared but never referenced\n      __attribute__((shared)) float s_tile[32][33];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/intermediate_workbook.cu(44): warning #177-D: variable \"tx\" was declared but never referenced\n      int tx = threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/intermediate_workbook.cu(45): warning #177-D: variable \"ty\" was declared but never referenced\n      int ty = threadIdx.y;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/intermediate_workbook.cu(55): warning #177-D: variable \"gid\" was declared but never referenced\n      int gid = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/intermediate_workbook.cu(74): warning #177-D: variable \"c\" was declared but never referenced\n      int c = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/intermediate_workbook.cu(75): warning #177-D: variable \"r\" was declared but never referenced\n      int r = blockIdx.y * blockDim.y + threadIdx.y;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "2567ff5190fbd08d39f44d3fadbd695c5636cd8d11374d9e456764c7ed9ba83f",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 4.1 Coalescing & Read-Only Cache (Intermediate Level) ---\n=================================================================\n  Problem 1: Embedding Gather via Read-Only Cache (__restrict__)   \u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: Coalesced Column-Wise Reduction via Shared Transposition\u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: Vectorized Interleaved Merge (float2 to float)        \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Non-Aligned Memory Boundary Offset Alignment          \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: 3x3 2D Constant Memory Filter Convolution             \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.7
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 5.4,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "warning #177-D: variable \"s_B\" was declared but never referenced\n      __attribute__((shared)) float s_B[TILE][TILE];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module4/4.2_shared_memory_tiling/exercise/intermediate_workbook.cu(88): warning #177-D: variable \"s_A\" was declared but never referenced\n      __attribute__((shared)) float s_A[TILE][TILE];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module4/4.2_shared_memory_tiling/exercise/intermediate_workbook.cu(89): warning #177-D: variable \"s_B\" was declared but never referenced\n      __attribute__((shared)) float s_B[TILE][TILE];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module4/4.2_shared_memory_tiling/exercise/intermediate_workbook.cu(93): warning #177-D: variable \"row\" was declared but never referenced\n      int row = blockIdx.y * TILE + ty;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module4/4.2_shared_memory_tiling/exercise/intermediate_workbook.cu(94): warning #177-D: variable \"col\" was declared but never referenced\n      int col = blockIdx.x * TILE + tx;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module4/4.2_shared_memory_tiling/exercise/intermediate_workbook.cu(112): warning #177-D: variable \"cur_A\" was declared but never referenced\n      const float *cur_A = A + b * batch_stride_A;\n                   ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module4/4.2_shared_memory_tiling/exercise/intermediate_workbook.cu(113): warning #177-D: variable \"cur_B\" was declared but never referenced\n      const float *cur_B = B + b * batch_stride_B;\n                   ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module4/4.2_shared_memory_tiling/exercise/intermediate_workbook.cu(114): warning #177-D: variable \"cur_C\" was declared but never referenced\n      float *cur_C = C + b * batch_stride_C;\n             ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "74c8b252d2fb4b92f2035f2e2be4f59140ea60b7d0b8b26473f9be61adba71ee",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 4.2 Shared Memory Matrix Tiling (Intermediate Level) ---\n=================================================================\n  Problem 1: Rectangular Shared Memory Tiling (BM=32, BN=32, BK=8) \u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: 1D Thread Tiling (TM=2, TN=1, 2 Outputs/Thread)       \u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: Transpose-B Tiled GEMM (C = A * B^T)                  \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Fused Bias Addition in Tiled GEMM (C = A * B + bias)  \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: Batched Tiled GEMM across Independent Matrices        \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module4/4.2_shared_memory_tiling/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 5.0,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": ") ? in[gid] : 1e30f;\n            ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/beginner_workbook.cu(80): warning #177-D: variable \"s_scratch\" was declared but never referenced\n      __attribute__((shared)) float s_scratch[8];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/beginner_workbook.cu(82): warning #177-D: variable \"lane\" was declared but never referenced\n      int lane = tid % 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/beginner_workbook.cu(83): warning #177-D: variable \"warp_id\" was declared but never referenced\n      int warp_id = tid / 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/beginner_workbook.cu(85): warning #177-D: variable \"local_sum\" was declared but never referenced\n      float local_sum = 0.0f;\n            ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/beginner_workbook.cu(95): warning #177-D: variable \"s_scratch\" was declared but never referenced\n      __attribute__((shared)) float s_scratch[8];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/beginner_workbook.cu(97): warning #177-D: variable \"lane\" was declared but never referenced\n      int lane = tid % 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/beginner_workbook.cu(98): warning #177-D: variable \"warp_id\" was declared but never referenced\n      int warp_id = tid / 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/beginner_workbook.cu(102): warning #177-D: variable \"sq\" was declared but never referenced\n      float sq = val * val;\n            ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "0b8b555ff5dbbe5121d781cb547daa7abd4cebec601e228c68150419ea7fa253",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 5.1 Two-Pass Block & Warp Reductions (Beginner Level) ---\n=================================================================\n  Problem 1: 256-Thread Block Sum Reduction                        \u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: 256-Thread Block Max Reduction                        \u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: 256-Thread Block Min Reduction                        \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Grid Reduction with Global Atomic Accumulation        \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: Block Sum of Squares (for RMSNorm)                    \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.7
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module5/5.1_warp_block_reductions/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 5.2,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "-projects/cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/intermediate_workbook.cu(116): warning #177-D: variable \"s_scratch\" was declared but never referenced\n      __attribute__((shared)) float s_scratch[8];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/intermediate_workbook.cu(117): warning #177-D: variable \"row\" was declared but never referenced\n      int row = blockIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/intermediate_workbook.cu(119): warning #177-D: variable \"lane\" was declared but never referenced\n      int lane = tid % 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/intermediate_workbook.cu(120): warning #177-D: variable \"warp_id\" was declared but never referenced\n      int warp_id = tid / 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/intermediate_workbook.cu(129): warning #177-D: variable \"s_scratch\" was declared but never referenced\n      __attribute__((shared)) float s_scratch[32];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/intermediate_workbook.cu(131): warning #177-D: variable \"lane\" was declared but never referenced\n      int lane = tid % 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/intermediate_workbook.cu(132): warning #177-D: variable \"warp_id\" was declared but never referenced\n      int warp_id = tid / 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.1_warp_block_reductions/exercise/intermediate_workbook.cu(134): warning #177-D: variable \"val\" was declared but never referenced\n      float val = (tid < n) ? in[tid] : 0.0f;\n            ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "c20991b1e2b384c1300b211a0fdc1b7e23fb82b24a108be1022db1c0eb0f3519",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 5.1 Two-Pass Block & Warp Reductions (Intermediate Level) ---\n=================================================================\n  Problem 1: Dual-Statistic Reduction (Mean & Variance for LayerNorm)\u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: Row-Wise RMSNorm Forward Kernel (1 Block per Row)     \u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: Block ArgMax Reduction (Tracking Value AND Index)     \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Multi-Row Batched Sum Reduction (Output Vector)       \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: 1024-Thread Block Reduction (32 Warps -> 1)           \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module5/5.1_warp_block_reductions/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 5.0,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.2_atomic_operations/exercise/beginner_workbook.cu(20): warning #177-D: variable \"gid\" was declared but never referenced\n      int gid = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.2_atomic_operations/exercise/beginner_workbook.cu(29): warning #177-D: variable \"gid\" was declared but never referenced\n      int gid = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.2_atomic_operations/exercise/beginner_workbook.cu(37): warning #177-D: variable \"gid\" was declared but never referenced\n      int gid = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.2_atomic_operations/exercise/beginner_workbook.cu(57): warning #177-D: variable \"gid\" was declared but never referenced\n      int gid = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "beb46ac69b4e86377ec8e640ec088be6697887e9088d83612d5b271f748046a5",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 5.2 Atomic Operations (Beginner Level) ---\n=================================================================\n  Problem 1: Global Integer Counter with atomicAdd                 \u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: Global Floating-Point Loss Accumulation               \u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: Integer Global Min & Max Tracking                     \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Atomic Exchange for Flag Grabbing                     \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: 10-Class Histogram Binning with atomicAdd             \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module5/5.2_atomic_operations/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 5.2,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "ations/exercise/intermediate_workbook.cu(27): warning #177-D: variable \"s_scratch\" was declared but never referenced\n      __attribute__((shared)) float s_scratch[8];\n                                    ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.2_atomic_operations/exercise/intermediate_workbook.cu(29): warning #177-D: variable \"lane\" was declared but never referenced\n      int lane = tid % 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.2_atomic_operations/exercise/intermediate_workbook.cu(30): warning #177-D: variable \"warp_id\" was declared but never referenced\n      int warp_id = tid / 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.2_atomic_operations/exercise/intermediate_workbook.cu(32): warning #177-D: variable \"local_sum\" was declared but never referenced\n      float local_sum = 0.0f;\n            ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.2_atomic_operations/exercise/intermediate_workbook.cu(44): warning #177-D: variable \"tid\" was declared but never referenced\n      int tid = threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.2_atomic_operations/exercise/intermediate_workbook.cu(58): warning #177-D: variable \"assumed\" was declared but never referenced\n      int old = *address_as_int, assumed;\n                                 ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.2_atomic_operations/exercise/intermediate_workbook.cu(69): warning #177-D: variable \"gid\" was declared but never referenced\n      int gid = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.2_atomic_operations/exercise/intermediate_workbook.cu(93): warning #177-D: variable \"gid\" was declared but never referenced\n      int gid = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "16d77e006affc6344b76b68732efe1aabc843364d048a1468f645bfb934a5bda",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 5.2 Atomic Operations (Intermediate Level) ---\n=================================================================\n  Problem 1: Contention-Mitigated Loss Aggregator                  \u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: Shared-Memory Pre-Accumulated Histogram               \u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: Custom Floating-Point atomicMax using atomicCAS       \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Atomic Spin-Lock Critical Section                     \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: Scattered Token Gradient Row Accumulator              \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module5/5.2_atomic_operations/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 5.1,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "nner_workbook.cu(83): warning #177-D: variable \"s_sum_exp\" was declared but never referenced\n      __attribute__((shared)) float s_sum_exp;\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/beginner_workbook.cu(86): warning #177-D: variable \"lane\" was declared but never referenced\n      int lane = tid % 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/beginner_workbook.cu(87): warning #177-D: variable \"warp_id\" was declared but never referenced\n      int warp_id = tid / 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/beginner_workbook.cu(97): warning #177-D: variable \"s_scratch\" was declared but never referenced\n      __attribute__((shared)) float s_scratch[8];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/beginner_workbook.cu(98): warning #177-D: variable \"s_max\" was declared but never referenced\n      __attribute__((shared)) float s_max;\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/beginner_workbook.cu(99): warning #177-D: variable \"s_sum_exp\" was declared but never referenced\n      __attribute__((shared)) float s_sum_exp;\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/beginner_workbook.cu(102): warning #177-D: variable \"lane\" was declared but never referenced\n      int lane = tid % 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/beginner_workbook.cu(103): warning #177-D: variable \"warp_id\" was declared but never referenced\n      int warp_id = tid / 32;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "d4ec5a16825f7e420cd7c174271b13474168a3ca5a373a7f82c2b6ebd469f4c6",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 5.3 Numerically Stable Reductions (Beginner Level) ---\n=================================================================\n  Problem 1: Safe Max Subtraction                                  \u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: Overflow-Free Exponentiation with Clamping            \u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: Stable 256-Element Block Softmax (Huge Logits)        \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Softmax Cross-Entropy Loss Single-Row                 \u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: Temperature-Scaled Softmax (z_i / T)                  \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 5.1,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "d\n      const float *token_logits = logits + token_idx * vocab_size;\n                   ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/intermediate_workbook.cu(66): warning #177-D: variable \"target\" was declared but never referenced\n      int target = targets[token_idx];\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/intermediate_workbook.cu(84): warning #177-D: variable \"tid\" was declared but never referenced\n      int tid = threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/intermediate_workbook.cu(85): warning #177-D: variable \"target\" was declared but never referenced\n      int target = targets[token_idx];\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/intermediate_workbook.cu(95): warning #177-D: variable \"s_scratch\" was declared but never referenced\n      __attribute__((shared)) float s_scratch[8];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/intermediate_workbook.cu(96): warning #177-D: variable \"s_max\" was declared but never referenced\n      __attribute__((shared)) float s_max;\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/intermediate_workbook.cu(97): warning #177-D: variable \"s_sum_exp\" was declared but never referenced\n      __attribute__((shared)) float s_sum_exp;\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/intermediate_workbook.cu(102): warning #177-D: variable \"s\" was declared but never referenced\n      float s = (col < seq_len) ? scores[row * seq_len + col] : -1e30f;\n            ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "1ba9fc288034a13d1f478f3750977066b76e75d9411dae84244d9ef141b396f2",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "=================================================================\n--- WORKBOOK: 5.3 Numerically Stable Reductions (Intermediate Level) ---\n=================================================================\n  Problem 1: Online Softmax Rescaling between Sequential Chunks    \u001b[1;31m[FAILED]\u001b[0m\n  Problem 2: Batched Cross-Entropy Loss with Target Gathering      \u001b[1;31m[FAILED]\u001b[0m\n  Problem 3: Softmax Cross-Entropy Backward Pass (p - target)      \u001b[1;31m[FAILED]\u001b[0m\n  Problem 4: Softmax with Causal Masking (Autoregressive Attention)\u001b[1;31m[FAILED]\u001b[0m\n  Problem 5: Label Smoothing Cross-Entropy Loss                    \u001b[1;31m[FAILED]\u001b[0m\n\n=================================================================\n--- SCORECARD ---\n=================================================================\n  Passed: 0 / 5 tests.\n\u001b[1;31m  [STATUS] INCOMPLETE (5 tests failed) \u001b[0m\n=================================================================\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 5.0,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "b73471de28dfc5df95634ac88a5d8d733d7bbcfd1f6a3f07ba043ecf3f03314c",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: Float to BF16 round-trip mismatch.\nTest 2 Failed: BF16 vector scaling.\nTest 3 Failed: Elementwise BF16 FMA.\nTest 4 Failed: BF16 ReLU activation.\nTest 5 Failed: FP32 to BF16 quantization.\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module6/6.1_bfloat16_math/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 6.5,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module6/6.1_bfloat16_math/exercise/champion_workbook.cu(82): warning #177-D: variable \"tid\" was declared but never referenced\n      int tid = threadIdx.x;\n          ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "7cecf8a76fdc1c988e1287aa1e30aa618f6bd7a7dd9d96f4788a83876223a290",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: 128-bit vectorized float4 BF16 scaling.\nTest 2 Failed: Fused BF16 SwiGLU activation.\nTest 3 Failed: Block-wide mixed-precision L2 normalization.\nTest 4 Failed: BF16 gradient threshold clipping.\nTest 5 Failed: Fused BF16 residual add with bias broadcasting.\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module6/6.1_bfloat16_math/exercise/champion_workbook.cu",
+   "kind": "single",
+   "seconds": 6.5,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module6/6.1_bfloat16_math/exercise/intermediate_workbook.cu(77): warning #177-D: variable \"num_pairs\" was declared but never referenced\n      int num_pairs = N / 2;\n          ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module6/6.1_bfloat16_math/exercise/intermediate_workbook.cu(78): warning #177-D: variable \"idx\" was declared but never referenced\n      int idx = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module6/6.1_bfloat16_math/exercise/intermediate_workbook.cu(94): warning #177-D: variable \"lane\" was declared but never referenced\n      int lane = threadIdx.x;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "eea4b00076b0234e9d1e06e1a25688887412e82e97da0fe962f7725377031fa6",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: Packed __nv_bfloat162 vector addition.\nTest 2 Failed: Packed __nv_bfloat162 FMA.\nTest 3 Failed: Odd array length packed processing.\nTest 4 Failed: Mixed-precision warp dot product (got 0, exp 528).\nTest 5 Failed: BF16 GELU activation.\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module6/6.1_bfloat16_math/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 6.5,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "2585eef51b463e6cd1bd4dd74a0b60e400f749905317228f31ac5b35a3f15a23",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: Single-warp WMMA GEMM with Col-Major B.\nTest 2 Failed: Single-warp WMMA GEMM with Row-Major B.\nTest 3 Failed: WMMA FMA with pre-loaded accumulator (got 5, exp 21).\nTest 4 Failed: WMMA in-fragment scaling.\nTest 5 Failed: 16x32 multi-tile WMMA GEMM (got 0, exp 32).\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 6.6,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/champion_workbook.cu(44): warning #177-D: variable \"tile_r\" was declared but never referenced\n      int tile_r = blockIdx.y;\n          ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/champion_workbook.cu(45): warning #177-D: variable \"tile_c\" was declared but never referenced\n      int tile_c = blockIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/champion_workbook.cu(106): warning #177-D: variable \"s_tile\" was declared but never referenced\n      __attribute__((shared)) float s_tile[16][16];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/champion_workbook.cu(107): warning #177-D: variable \"tid\" was declared but never referenced\n      int tid = threadIdx.x;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "0ecbf734398df43aadc6f56c1559b4ff56693fce78a817d2586ba92e2de1b475",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: 2D Grid of WMMA blocks (got 0, exp 32).\nTest 2 Failed: Attention QK^T tile (got 0, exp 8.0).\nTest 3 Failed: A * B^T transpose via layout (got 0, exp 16).\nTest 4 Failed: Fused WMMA GEMM + GELU activation (got 0, exp 1.9546).\nTest 5 Failed: Boundary predicated WMMA store.\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/champion_workbook.cu",
+   "kind": "single",
+   "seconds": 6.6,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/intermediate_workbook.cu(46): warning #177-D: variable \"warp_row\" was declared but never referenced\n      int warp_row = warp_id / 2;\n          ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/intermediate_workbook.cu(47): warning #177-D: variable \"warp_col\" was declared but never referenced\n      int warp_col = warp_id % 2;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/intermediate_workbook.cu(82): warning #177-D: variable \"s_A\" was declared but never referenced\n      __attribute__((shared)) half s_A[16 * 16];\n                                   ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/intermediate_workbook.cu(83): warning #177-D: variable \"s_B\" was declared but never referenced\n      __attribute__((shared)) half s_B[16 * 16];\n                                   ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/intermediate_workbook.cu(84): warning #177-D: variable \"tid\" was declared but never referenced\n      int tid = threadIdx.x;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "e5a9a0b517432fa6df3c2bf4aa524a8ddd5384346efe05e6c2abded56915efd0",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: 32x32 multi-warp WMMA GEMM (got 0, exp 32).\nTest 2 Failed: K-loop WMMA accumulation (got 0, exp 96).\nTest 3 Failed: Shared memory staged WMMA GEMM (got 0, exp 96).\nTest 4 Failed: Fused bias addition with WMMA GEMM.\nTest 5 Failed: In-fragment ReLU activation (got -99, exp 0.0).\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 6.5,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "dfbb74ad83df01b523099e02fa2dfe145dbc82e411e476ff0b9ce1eb13077e13",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: reshape_3d.\nTest 2 Failed: reshape_4d.\nTest 3 Failed: residual_add.\nTest 4 Failed: swiglu_forward.\nTest 5 Failed: swiglu_backward_up.\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.1_elementwise_reshape/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 4.9,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "da047b3c30760b3b41e0762cbe12f701181c3088fb7a1c972ad5d6eca3b325a7",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: Full SwiGLU backward pass.\nTest 2 Failed: 128-bit vectorized SwiGLU forward.\nTest 3 Failed: Tiled 4D reshape.\nTest 4 Failed: Fused dual residual addition.\nTest 5 Failed: SwiGLU backward with accumulation.\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.1_elementwise_reshape/exercise/champion_workbook.cu",
+   "kind": "single",
+   "seconds": 6.4,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "8e085f5646413c40664698d8de8bbb11c608cee962e3b2de97ba44f58c51fae6",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: swiglu_backward_gate.\nTest 2 Failed: residual_add_vec4.\nTest 3 Failed: reshape_to_4d.\nTest 4 Failed: swiglu_forward_bf16.\nTest 5 Failed: fused_residual_swiglu.\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.1_elementwise_reshape/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 6.5,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "4eb3f52740d60a7e52b63e537600d86dbeb637217126c71dc76c66498ffd0cca",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: Basic embedding forward lookup.\nTest 2 Failed: Bounds-checked embedding lookup.\nTest 3 Failed: Scaled embedding lookup.\nTest 4 Failed: Fused token + positional embedding.\nTest 5 Failed: BF16 embedding forward lookup.\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.2_embedding_lookup/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 6.4,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.2_embedding_lookup/exercise/champion_workbook.cu(61): warning #177-D: variable \"token_pos\" was declared but never referenced\n      int token_pos = blockIdx.x;\n          ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.2_embedding_lookup/exercise/champion_workbook.cu(62): warning #177-D: variable \"tid\" was declared but never referenced\n      int tid = threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.2_embedding_lookup/exercise/champion_workbook.cu(84): warning #177-D: variable \"total_elements\" was declared but never referenced\n      int total_elements = total_tokens * hidden_dim;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "3e71b32de12a7d47016d9c9309c8e0df7ba69b2cd893437af4375d98e7c776fe",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: 128-bit vectorized BF16 embedding lookup.\nTest 2 Failed: Fused embedding lookup + RMS pre-norm.\nTest 3 Failed: Grid-stride embedding lookup.\nTest 4 Failed: Padding token zero-masking.\nTest 5 Failed: Deterministic embedding backward pass.\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.2_embedding_lookup/exercise/champion_workbook.cu",
+   "kind": "single",
+   "seconds": 6.9,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.2_embedding_lookup/exercise/intermediate_workbook.cu(56): warning #177-D: variable \"s_token_id\" was declared but never referenced\n      __attribute__((shared)) unsigned int s_token_id;\n                                           ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.2_embedding_lookup/exercise/intermediate_workbook.cu(57): warning #177-D: variable \"token_pos\" was declared but never referenced\n      int token_pos = blockIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.2_embedding_lookup/exercise/intermediate_workbook.cu(58): warning #177-D: variable \"tid\" was declared but never referenced\n      int tid = threadIdx.x;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "fc6c2a24bd16ba9143ae25bb304417fbcac45678bd6ee386113a15b3932545fb",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: 128-bit vectorized embedding lookup.\nTest 2 Failed: Block-per-token cooperative embedding copy.\nTest 3 Failed: Embedding backward sparse atomic accumulation.\nTest 4 Failed: Embedding lookup with inverted dropout.\nTest 5 Failed: 2D [Batch, Seq] embedding mapping.\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.2_embedding_lookup/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 5.6,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "ca4d606b99c52695bff85ed510298e2b71259fd0d36346b941d8d0183a06b1c7",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: Single-warp RMSNorm forward.\nTest 2 Failed: RoPE forward 2D rotation.\nTest 3 Failed: RoPE backward transposed rotation.\nTest 4 Failed: Fused residual add + square accumulation.\nTest 5 Failed: Unweighted RMSNorm normalization.\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.3_normalization_rope/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 5.5,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "uda-projects/cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/champion_workbook.cu(72): warning #177-D: variable \"lane_id\" was declared but never referenced\n      int lane_id = tid % 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/champion_workbook.cu(73): warning #177-D: variable \"base_vec\" was declared but never referenced\n      int base_vec = row_idx * num_vec;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/champion_workbook.cu(131): warning #177-D: variable \"s_warp_sums\" was declared but never referenced\n      __attribute__((shared)) float s_warp_sums[8];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/champion_workbook.cu(132): warning #177-D: variable \"s_rms\" was declared but never referenced\n      __attribute__((shared)) float s_rms;\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/champion_workbook.cu(133): warning #177-D: variable \"s_inner_mean\" was declared but never referenced\n      __attribute__((shared)) float s_inner_mean;\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/champion_workbook.cu(137): warning #177-D: variable \"warp_id\" was declared but never referenced\n      int warp_id = tid / 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/champion_workbook.cu(138): warning #177-D: variable \"lane_id\" was declared but never referenced\n      int lane_id = tid % 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/champion_workbook.cu(139): warning #177-D: variable \"base\" was declared but never referenced\n      int base = row_idx * D;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "d16fd137490ad1f7c75210af4c99e39e7c02219def450b8826ba39cd9a490e8d",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: RMSNorm backward weight gradient (dw).\nTest 2 Failed: 128-bit vectorized RMSNorm forward.\nTest 3 Failed: Joint Q and K RoPE forward.\nTest 4 Failed: Fused backward add-norm.\nTest 5 Failed: Joint Q and K RoPE backward.\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.3_normalization_rope/exercise/champion_workbook.cu",
+   "kind": "single",
+   "seconds": 6.7,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "aining/src/cuda_systems/module7/7.3_normalization_rope/exercise/intermediate_workbook.cu(115): warning #177-D: variable \"lane_id\" was declared but never referenced\n      int lane_id = tid % 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/intermediate_workbook.cu(116): warning #177-D: variable \"base\" was declared but never referenced\n      int base = row_idx * D;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/intermediate_workbook.cu(137): warning #177-D: variable \"s_warp_sums\" was declared but never referenced\n      __attribute__((shared)) float s_warp_sums[8];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/intermediate_workbook.cu(138): warning #177-D: variable \"s_rms\" was declared but never referenced\n      __attribute__((shared)) float s_rms;\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/intermediate_workbook.cu(139): warning #177-D: variable \"s_inner_mean\" was declared but never referenced\n      __attribute__((shared)) float s_inner_mean;\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/intermediate_workbook.cu(143): warning #177-D: variable \"warp_id\" was declared but never referenced\n      int warp_id = tid / 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/intermediate_workbook.cu(144): warning #177-D: variable \"lane_id\" was declared but never referenced\n      int lane_id = tid % 32;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.3_normalization_rope/exercise/intermediate_workbook.cu(145): warning #177-D: variable \"base\" was declared but never referenced\n      int base = row_idx * D;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "ccff0e5dc991fabdd3ba1b74d515fa57ee1392ebb5111f0f72d30b0ec3f33876",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: Multi-warp RMSNorm forward.\nTest 2 Failed: Multi-head RoPE forward.\nTest 3 Failed: Fused add-norm.\nTest 4 Failed: RMSNorm backward input gradient (dx).\nTest 5 Failed: Multi-head RoPE backward.\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.3_normalization_rope/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 5.3,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/beginner_workbook.cu(38): warning #177-D: variable \"lane\" was declared but never referenced\n      int lane = threadIdx.x;\n          ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/beginner_workbook.cu(64): warning #177-D: variable \"lane\" was declared but never referenced\n      int lane = threadIdx.x;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "e33a2614850ee34bc85b53c4cba3ba51304ebbc20efb73013f8bd0c3f43445a5",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: Single-token cross-entropy loss (got 0, exp 1.64777).\nTest 2 Failed: Single-token logits gradient.\nTest 3 Failed: Global loss atomic accumulation.\nTest 4 Failed: Basic fused AdamW step.\nTest 5 Failed: Decoupled weight decay.\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 4.8,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/champion_workbook.cu(54): warning #177-D: variable \"shared_mem\" was declared but never referenced\n      __attribute__((shared)) float shared_mem[256];\n                                    ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/champion_workbook.cu(55): warning #177-D: variable \"tid\" was declared but never referenced\n      int tid = threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/champion_workbook.cu(56): warning #177-D: variable \"token_logits\" was declared but never referenced\n      const __nv_bfloat16* token_logits = logits + t * vocab_size;\n                           ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/champion_workbook.cu(57): warning #177-D: variable \"token_grads\" was declared but never referenced\n      float* token_grads = grad_logits + t * vocab_size;\n             ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/champion_workbook.cu(58): warning #177-D: variable \"target_id\" was declared but never referenced\n      unsigned int target_id = targets[t];\n                   ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/champion_workbook.cu(141): warning #177-D: variable \"idx\" was declared but never referenced\n      int idx = blockIdx.x * blockDim.x + threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/champion_workbook.cu(142): warning #177-D: variable \"lane\" was declared but never referenced\n      int lane = threadIdx.x % 32;\n          ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "be8a33ce19607e87723f6ae9b3dd8006bbfaaa1c66317023617d7039e94e14bd",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: Full fused cross-entropy kernel.\nTest 2 Failed: 128-bit vectorized AdamW step.\nTest 3 Failed: Online LogSumExp cross entropy (got 0, exp 3.75993).\nTest 4 Failed: AdamW with AdamWParams struct.\nTest 5 Failed: Hierarchical warp-reduced loss.\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/champion_workbook.cu",
+   "kind": "single",
+   "seconds": 6.8,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "orkbook.cu(94): warning #177-D: variable \"tid\" was declared but never referenced\n      int tid = threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/intermediate_workbook.cu(95): warning #177-D: variable \"token_logits\" was declared but never referenced\n      const float* token_logits = logits + t * vocab_size;\n                   ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/intermediate_workbook.cu(96): warning #177-D: variable \"token_grads\" was declared but never referenced\n      float* token_grads = grad_logits + t * vocab_size;\n             ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/intermediate_workbook.cu(97): warning #177-D: variable \"target_id\" was declared but never referenced\n      unsigned int target_id = targets[t];\n                   ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/intermediate_workbook.cu(119): warning #177-D: variable \"s_mem\" was declared but never referenced\n      __attribute__((shared)) float s_mem[256];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/intermediate_workbook.cu(120): warning #177-D: variable \"tid\" was declared but never referenced\n      int tid = threadIdx.x;\n          ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/intermediate_workbook.cu(121): warning #177-D: variable \"token_logits\" was declared but never referenced\n      const __nv_bfloat16* token_logits = logits + t * vocab_size;\n                           ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/intermediate_workbook.cu(122): warning #177-D: variable \"target_id\" was declared but never referenced\n      unsigned int target_id = targets[t];\n                   ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "17ba56bce3b86a95eda463e9bb36f4967438c268be71b66bea96b72b069f3555",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Test 1 Failed: Block cross-entropy loss (got 0, exp 3.27492).\nTest 2 Failed: Block logits gradient generation.\nTest 3 Failed: Minimal compute loss kernel (got 0, exp 3.27492).\nTest 4 Failed: Mixed-precision AdamW update.\nTest 5 Failed: AdamW step with gradient clipping.\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 6.7,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.5_gemm_projections/exercise/beginner_workbook.cu(56): warning #177-D: variable \"s_A\" was declared but never referenced\n      __attribute__((shared)) float s_A[TILE_DIM][TILE_DIM];\n                                    ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.5_gemm_projections/exercise/beginner_workbook.cu(57): warning #177-D: variable \"s_B\" was declared but never referenced\n      __attribute__((shared)) float s_B[TILE_DIM][TILE_DIM];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.5_gemm_projections/exercise/beginner_workbook.cu(80): warning #177-D: variable \"s_A\" was declared but never referenced\n      __attribute__((shared)) float s_A[TILE_DIM][TILE_DIM];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.5_gemm_projections/exercise/beginner_workbook.cu(81): warning #177-D: variable \"s_B\" was declared but never referenced\n      __attribute__((shared)) float s_B[TILE_DIM][TILE_DIM];\n                                    ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "f887608d8f2540754f35bf0227661e0a3e8f47c11c070fd4f0f8360cafdc1aea",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "[Test 1: Naive GEMM] FAILED\n[Test 2: Tiled 16x16 Shared Memory GEMM] FAILED\n[Test 3: Transposed-B GEMM] FAILED\n[Test 4: Batched GEMM] FAILED\n[Test 5: Projection with Bias] FAILED\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.5_gemm_projections/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 5.1,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.5_gemm_projections/exercise/champion_workbook.cu(61): warning #177-D: variable \"s_A\" was declared but never referenced\n      __attribute__((shared)) float s_A[BM][BK + 1];\n                                    ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.5_gemm_projections/exercise/champion_workbook.cu(62): warning #177-D: variable \"s_B\" was declared but never referenced\n      __attribute__((shared)) float s_B[BK][BN + 1];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.5_gemm_projections/exercise/champion_workbook.cu(120): warning #177-D: variable \"s_A\" was declared but never referenced\n      __attribute__((shared)) float s_A[16][16];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.5_gemm_projections/exercise/champion_workbook.cu(121): warning #177-D: variable \"s_B\" was declared but never referenced\n      __attribute__((shared)) float s_B[16][16];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.5_gemm_projections/exercise/champion_workbook.cu(56): warning #177-D: variable \"TM\" was declared but never referenced\n  const int TM = 4;\n            ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.5_gemm_projections/exercise/champion_workbook.cu(57): warning #177-D: variable \"TN\" was declared but never referenced\n  const int TN = 4;\n            ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "059db96a0a4e73ccda10a23fddcd9d3479fe28aefe925d9c22fba810dd406a68",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "[Test 1: 64x64 Register Micro-Tiled GEMM] FAILED\n[Test 2: Fused Dual-Proj SwiGLU FFN GEMM] FAILED\n[Test 3: Fused SwiGLU Down-Proj GEMM] FAILED\n[Test 4: BF16 GEMM with FP32 Accumulators] FAILED\n[Test 5: Fused QKV Projection GEMM] FAILED\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.5_gemm_projections/exercise/champion_workbook.cu",
+   "kind": "single",
+   "seconds": 6.8,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.5_gemm_projections/exercise/intermediate_workbook.cu(129): warning #177-D: variable \"s_A\" was declared but never referenced\n      __attribute__((shared)) float s_A[32][33];\n                                    ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.5_gemm_projections/exercise/intermediate_workbook.cu(130): warning #177-D: variable \"s_B\" was declared but never referenced\n      __attribute__((shared)) float s_B[32][33];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.5_gemm_projections/exercise/intermediate_workbook.cu(32): warning #177-D: variable \"TILE_32\" was declared but never referenced\n  const int TILE_32 = 32;\n            ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "29f0591a309fb200c8682c0126da1d89f4fd23475bea1743f0e4a73ae8a01909",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "[Test 1: 32x32 Padded GEMM] FAILED\n[Test 2: Backward Input Gradient] FAILED\n[Test 3: Backward Weight Gradient] FAILED\n[Test 4: GQA KV Head Broadcasting] FAILED\n[Test 5: 2x2 Register Tiled GEMM] FAILED\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.5_gemm_projections/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 5.2,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.6_flash_attention/exercise/beginner_workbook.cu(109): warning #177-D: variable \"s_Q\" was declared but never referenced\n      __attribute__((shared)) float s_Q[BR][HD_DIM];\n                                    ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.6_flash_attention/exercise/beginner_workbook.cu(110): warning #177-D: variable \"s_K\" was declared but never referenced\n      __attribute__((shared)) float s_K[BC][HD_DIM];\n                                    ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "d52c07e753a7080cfa9056191071de7e83126f0baabee4b24776731ac5d004c6",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "[Test 1: Causal Masking & Scaling] FAILED\n[Test 2: Online Softmax State Update] FAILED\n[Test 3: Output Rescaling Accumulator] FAILED\n[Test 4: Tiled QK^T Dot Product] FAILED\n[Test 5: Naive Causal Attention Reference] FAILED\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.6_flash_attention/exercise/beginner_workbook.cu",
+   "kind": "single",
+   "seconds": 5.5,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "                                ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.6_flash_attention/exercise/champion_workbook.cu(44): warning #177-D: variable \"s_K\" was declared but never referenced\n      __attribute__((shared)) float s_K[16][16];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.6_flash_attention/exercise/champion_workbook.cu(45): warning #177-D: variable \"s_V\" was declared but never referenced\n      __attribute__((shared)) float s_V[16][16];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.6_flash_attention/exercise/champion_workbook.cu(46): warning #177-D: variable \"s_S\" was declared but never referenced\n      __attribute__((shared)) float s_S[16][16];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.6_flash_attention/exercise/champion_workbook.cu(47): warning #177-D: variable \"s_m\" was declared but never referenced\n      __attribute__((shared)) float s_m[16];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.6_flash_attention/exercise/champion_workbook.cu(48): warning #177-D: variable \"s_l\" was declared but never referenced\n      __attribute__((shared)) float s_l[16];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.6_flash_attention/exercise/champion_workbook.cu(49): warning #177-D: variable \"s_alpha\" was declared but never referenced\n      __attribute__((shared)) float s_alpha[16];\n                                    ^\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.6_flash_attention/exercise/champion_workbook.cu(50): warning #177-D: variable \"s_O\" was declared but never referenced\n      __attribute__((shared)) float s_O[16][16];\n                                    ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "cfc9fedd8f275404594cce0199a14414ff91a3bd58788a39d763c23f09f13e3d",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "[Test 1: Multi-Head FlashAttn-2 Forward] FAILED\n[Test 2: Backward Precompute D Vector] FAILED\n[Test 3: Backward Value Gradient dV] FAILED\n[Test 4: Backward dQ & dK Gradients] FAILED\n[Test 5: Fused Joint Attention Backward Kernel] FAILED\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.6_flash_attention/exercise/champion_workbook.cu",
+   "kind": "single",
+   "seconds": 6.5,
+   "status": "run-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.6_flash_attention/exercise/intermediate_workbook.cu(132): warning #177-D: variable \"s_P\" was declared but never referenced\n      __attribute__((shared)) float s_P[16][16];\n                                    ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/cuda_training/src/cuda_systems/module7/7.6_flash_attention/exercise/intermediate_workbook.cu(133): warning #177-D: variable \"s_V\" was declared but never referenced\n      __attribute__((shared)) float s_V[16][16];\n                                    ^\n\n",
+   "run": {
+    "rc": 1,
+    "rc2": 1,
+    "stdout_sha256": "76f2569d648a70c8e8beffa94fb5e21fab4884db82e2ffec68718a7e4232a755",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "[Test 1: Warp-Level Max & Sum Reductions] FAILED\n[Test 2: Single-Tile Online Softmax] FAILED\n[Test 3: Causal Block Predication] FAILED\n[Test 4: P * V Tile Accumulation] FAILED\n[Test 5: FlashAttention-2 Single Head Forward] FAILED\nPassed: 0 / 5 tests.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 1,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "src/cuda_systems/module7/7.6_flash_attention/exercise/intermediate_workbook.cu",
+   "kind": "single",
+   "seconds": 5.0,
+   "status": "run-fail"
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+  "cuda": {
+    "name": "CUDA SDK",
+    "version": "@CUDA_COMPAT_VERSION@"
+  },
+  "cuda_cudart": {
+    "name": "CUDA Runtime",
+    "version": "@CUDA_COMPAT_VERSION@"
+  },
+  "cuda4as": {
+    "name": "cuda4AS Native Toolchain",
+    "version": "@PROJECT_VERSION@",
+    "target": "Apple Silicon (Metal 3+)"
+  }
+}

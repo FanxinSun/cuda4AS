@@ -1,0 +1,626 @@
+{
+ "slug": "ridash2005/CUDA_Kernels",
+ "commit": "95b69c7636e3b6df4e6864f14344cf99b839b0ca",
+ "complete": true,
+ "tally": {
+  "ok": 17,
+  "build-fail": 2
+ },
+ "skipped_at_discovery": [
+  {
+   "path": "modules/07_ecosystem/06_nvtx/src/profiling.cu",
+   "reason": "NVTX v2 header was removed from recent toolkits"
+  }
+ ],
+ "results": [
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "0507a4036d209b43983f27dfc01e4954d8ef60aae70e738d1dabdefdf796f621",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "\u2713 Kernel execution successful! All 100 elements verified.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/01_fundamentals/01_kernel_basics/src/kernel.cu",
+   "kind": "single",
+   "seconds": 4.0,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "416d3338133f0220d540da6cd4f8820579f4cc11615a9413f6fe71ca935aede4",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "grid.x 2, grid.x 1, grid.x 1\nblock.x 3, block.x 1, block.x 1\nthreadIdx:(0, 0, 0) blockIdx:(1, 0, 0)\nblockDim:(3, 1, 1) gridDim:(2, 1, 1)\n\nthreadIdx:(1, 0, 0) blockIdx:(1, 0, 0)\nblockDim:(3, 1, 1) gridDim:(2, 1, 1)\n\nthreadIdx:(2, 0, 0) blockIdx:(1, 0, 0)\nblockDim:(3, 1, 1) gridDim:(2, 1, 1)\n\nthreadIdx:(0, 0, 0) blockIdx:(0, 0, 0)\nblockDim:(3, 1, 1) gridDim:(2, 1, 1)\n\nthreadIdx:(1, 0, 0) blockIdx:(0, 0, 0)\nblockDim:(3, 1, 1) gridDim:(2, 1, 1)\n\nthreadIdx:(2, 0, 0) blockIdx:(0, 0, 0)\nblockDim:(3, 1, 1) gridDim:(2, 1, 1)\n\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.7
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/01_fundamentals/02_grid_block/src/checkDimension.cu",
+   "kind": "single",
+   "seconds": 4.1,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "1e91eac63bd804a5efbf53797662a59e9ae595b8bfcfa97d6ba4f2db05e169fe",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "The device Id is: 0\nThe major compute capability is: 7\nThe minor compute capability is: 5\nThe number of SM is: 40\nThe warp size is: 32\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.1
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.1
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/01_fundamentals/03_hardware/src/props.cu",
+   "kind": "single",
+   "seconds": 3.2,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "c09425c828a9bf1ff06de453f094041e76e960a6aa0c914d384b368ac2113f16",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "[PASSED] GPU Vector Add\n[PASSED] GPU Vector Sub\n[PASSED] GPU Vector Mul\n\nResults:\nGPU Dot Product (float atomicAdd): 666665943040.000000\nCPU Dot Product (double precision): 666665729996.441772\n[PASSED] Dot Product Comparison (within tolerance)\n\nTiming Results (milliseconds):\nCPU Vector Add: 3.312 ms\nGPU Vector Add: 0.089 ms\nCPU Vector Sub: 1.008 ms\nGPU Vector Sub: 0.109 ms\nCPU Vector Mul: 0.907 ms\nGPU Vector Mul: 0.089 ms\nCPU Dot Product: 1.313 ms\nGPU Dot Product: 0.134 ms\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [
+    "modules/02_memory_management/01_vector_ops/src/vector_ops.cu"
+   ],
+   "path": "modules/02_memory_management/01_vector_ops/src/main.cu",
+   "kind": "single",
+   "seconds": 7.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "ebcd533998cdb9ce9ebde9e5d129f378173696450efe45e9396f42ba1578ba01",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "The result of the dot product from the GPU is: 8192\n\t-Time of calculation on GPU is:0.16368[ms]\n\nThe result of the dot product from the CPU is: 8192\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/02_memory_management/02_vector_dot/src/vecDot_non_reduction.cu",
+   "kind": "single",
+   "seconds": 4.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "d21a12c86d873598be2dcc174175c49aebf5cb5c90ad637404a4cdf21560d910",
+    "deterministic": true,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "The result is: 120.000000\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/02_memory_management/03_constant_memory/src/constant_vec_dot.cu",
+   "kind": "single",
+   "seconds": 2.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 2,
+   "build_log": "/content/cuda-projects/CUDA_Kernels/modules/02_memory_management/04_unified_memory/src/unified_mem.cu(44): error: no suitable constructor exists to convert from \"int\" to \"cudaMemLocation\"\n    cudaError_t err = cudaMemPrefetchAsync(mData_A, bytes, deviceId);\n                                                           ^\n\n/content/cuda-projects/CUDA_Kernels/modules/02_memory_management/04_unified_memory/src/unified_mem.cu(44): error: too few arguments in function call\n    cudaError_t err = cudaMemPrefetchAsync(mData_A, bytes, deviceId);\n                                                                   ^\n\n/content/cuda-projects/CUDA_Kernels/modules/02_memory_management/04_unified_memory/src/unified_mem.cu(52): error: no suitable constructor exists to convert from \"int\" to \"cudaMemLocation\"\n      cudaMemPrefetchAsync(mData_B, bytes, deviceId);\n                                           ^\n\n/content/cuda-projects/CUDA_Kernels/modules/02_memory_management/04_unified_memory/src/unified_mem.cu(52): error: too few arguments in function call\n      cudaMemPrefetchAsync(mData_B, bytes, deviceId);\n                                                   ^\n\n/content/cuda-projects/CUDA_Kernels/modules/02_memory_management/04_unified_memory/src/unified_mem.cu(53): error: no suitable constructor exists to convert from \"int\" to \"cudaMemLocation\"\n      cudaMemPrefetchAsync(mData_C, bytes, deviceId);\n                                           ^\n\n/content/cuda-projects/CUDA_Kernels/modules/02_memory_management/04_unified_memory/src/unified_mem.cu(53): error: too few arguments in function call\n      cudaMemPrefetchAsync(mData_C, bytes, deviceId);\n                                                   ^\n\n6 errors detected in the compilation of \"/content/cuda-projects/CUDA_Kernels/modules/02_memory_management/04_unified_memory/src/unified_mem.cu\".\n",
+   "run": null,
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/02_memory_management/04_unified_memory/src/unified_mem.cu",
+   "kind": "single",
+   "seconds": 1.1,
+   "status": "build-fail"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "d58aeeafe6d4665e25217bb098badc9f4c3b000c6f3b769bcd34abac147cd60b",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Running with CPU validation ENABLED\nRunning matvec_mul...\nmatvec_mul finished in 0.645 ms\nCPU matvec_mul time: 1.403 ms\nGPU matvec_mul time: 0.717 ms\nValidating results for matvec_mul...\nmatvec_mul PASSED\nRunning band_matvec_mul...\nband_matvec_mul finished in 0.046 ms\nCPU band_matvec_mul time: 0.018 ms\nGPU band_matvec_mul time: 0.066 ms\nValidating results for band_matvec_mul...\nband_matvec_mul PASSED\nRunning sym_matvec_mul...\nsym_matvec_mul finished in 0.457 ms\nCPU sym_matvec_mul time: 1.409 ms\nGPU sym_matvec_mul time: 0.511 ms\nValidating results for sym_matvec_mul...\nsym_matvec_mul PASSED\nRunning tri_matvec_mul_lower...\ntri_matvec_mul_lower finished in 0.417 ms\nCPU tri_matvec_mul_lower time: 0.800 ms\nGPU tri_matvec_mul_lower time: 0.479 ms\nValidating results for tri_matvec_mul_lower...\ntri_matvec_mul_lower PASSED\nRunning tri_matvec_mul_upper...\ntri_matvec_mul_upper finished in 0.290 ms\nCPU tri_matvec_mul_upper time: 0.716 ms\nGPU tri_matvec_mul_upper time: 0.330 ms\nValidating results for tri_matvec_mul_upper...\ntri_matvec_mul_upper PASSED\nRunning rank1_update...\nrank1_update finished in 0.079 ms\nCPU rank1_update time: 0.716 ms\nGPU rank1_update time: 0.123 ms\nValidating results for rank1_update...\nrank1_update PASSED\nRunning rank2_update...\nrank2_update finished in 0.101 ms\nCPU rank2_update time: 0.716 ms\nGPU rank2_update time: 0.147 ms\nValidating results for rank2_update...\nrank2_update PASSED\nAll operations completed successfully.\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [
+    "modules/03_advanced_math/01_matrix_vector_ops/src/mv_ops.cu"
+   ],
+   "path": "modules/03_advanced_math/01_matrix_vector_ops/src/main.cu",
+   "kind": "single",
+   "seconds": 7.5,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "15153bb61aa2637c1411b3252ea348023636033d4d146693d7ae8fc10a5a0aa2",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": true,
+    "stdout_head": "Radix-2 FFT (normalized):\n0: -1.83784e-08 + 0j\n1: -4.02532e-08 + -0.5j\n2: -1.09278e-08 + -2.23517e-08j\n3: 4.10354e-08 + 0j\n4: -3.47727e-09 + 0j\n5: 4.02532e-08 + -1.49012e-08j\n6: -1.09278e-08 + 2.23517e-08j\n7: 2.67596e-09 + 0.5j\nStockham FFT (normalized):\n0: -1.83784e-08 + 0j\n1: -4.02532e-08 + -0.5j\n2: -1.09278e-08 + -2.23517e-08j\n3: 4.10354e-08 + 0j\n4: -3.47727e-09 + 0j\n5: 4.02532e-08 + -1.49012e-08j\n6: -1.09278e-08 + 2.23517e-08j\n7: 2.67596e-09 + 0.5j\n\nRMS Error vs CPU DFT\nRadix-2 : 1.81928e-07\nStockham: 1.81928e-07\n[PASS] FFT Validation\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.3
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [
+    "modules/03_advanced_math/02_fft/src/fft_radix2.cu",
+    "modules/03_advanced_math/02_fft/src/fft_stockham.cu"
+   ],
+   "path": "modules/03_advanced_math/02_fft/src/main.cu",
+   "kind": "single",
+   "seconds": 12.0,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "05d84034f82891fe3f39970b32095a84c056a62374794989ac3d0e0545edc6df",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Naive Kernel Time: 8.970 ms\nTiled Kernel Time: 5.548 ms\nSpeedup: 1.62x\nRunning CPU reference (this might take a few seconds)...\nCPU Time: 3888.336 ms\nNaive Implementation: PASSED\nTiled Implementation: PASSED\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 4.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 4.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/04_optimizations/01_tiled_matmul/src/tiled_matmul.cu",
+   "kind": "single",
+   "seconds": 12.6,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "8e26cf4d30eaf347fb41c66369d6d0fcc61c4193950236a8d31112c98944fd5e",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Reducing 16777216 elements (64.00 MB)\nInterleaved Reduction: 1.714 ms, Sum: 16777216.00 [PASS]\nSequential Reduction:  1.060 ms, Sum: 16777216.00 [PASS]\nShuffle Optimized:     0.318 ms, Sum: 16777216.00 [PASS]\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/04_optimizations/02_reduction/src/reduction.cu",
+   "kind": "single",
+   "seconds": 4.7,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "6937f52d5856c6ad697ce7bfa935bb01443d7c519c384acae4b8d47642291fa6",
+    "deterministic": false,
+    "pass_marker": false,
+    "fail_marker": false,
+    "stdout_head": "Default Stream (Sync): 2.338 ms\nMulti-Stream (Async):  1.398 ms\nSpeedup: 1.67x\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/05_concurrency/01_streams/src/streams.cu",
+   "kind": "single",
+   "seconds": 4.2,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "81273f6ddfb5f5d5fb388dea13b0f7d6ad0914c62dd3f2abfcf5ba084c6c4f87",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Generating 104857600 bytes of random data...\nRunning Global Atomic Histogram...\nGlobal Atomic Time: 54.463 ms\nRunning Shared Memory Atomic Histogram...\nShared Atomic Time: 1.493 ms\nSpeedup: 36.48x\n[PASSED] Global Atomic Histogram\n[PASSED] Shared Atomic Histogram\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 3.0
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 3.0
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/06_advanced_algorithms/01_histogram/src/histogram.cu",
+   "kind": "single",
+   "seconds": 9.9,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "e35fd919de9772b94f39afa523c75675fc84c66c6f12a3113a2c522ecd574817",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "cuBLAS SGEMM (Matrix Mul) 512x512 * 512x512 = 512x512\ncuBLAS Time: 64.632 ms\nRunning CPU verification...\n[PASSED] cuBLAS SGEMM\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 2.4
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.9
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/07_ecosystem/01_cublas/src/gemm.cu",
+   "kind": "single",
+   "seconds": 7.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "ff3f125c0c3ea323e430a6782d0b331d658cfc5ff4a68642c99a89e737444047",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Generating 1048576 random numbers...\nSorting on GPU using Thrust...\nThrust Sort Time: 1.50326 ms\nSum: 1125894353321862\nVerifying...\n[PASSED] Thrust Sort\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.6
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/07_ecosystem/02_thrust/src/thrust_demo.cu",
+   "kind": "single",
+   "seconds": 23.6,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "94958289ecf18f6ee0f27cb056228234a30628b9ab846d847d7cd4dc085dfc46",
+    "deterministic": false,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "Monte Carlo Pi Estimation using cuRAND + Atomic\nKernel Time: 250.981 ms\nEstimated Pi: 3.140930\nError: 0.000663\n[PASSED] Monte Carlo Pi\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.7
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.5
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/07_ecosystem/03_curand/src/monte_carlo.cu",
+   "kind": "single",
+   "seconds": 5.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "c2c143c3317cc9f893540ff56c737ff0ee4b0eba8219115daa3fdd25ef1a2444",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "cuSPARSE SpMV (Sparse Matrix-Vector Multiplication)\nExecuting SpMV...\n[PASSED] cuSPARSE SpMV\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 1.0
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.4
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/07_ecosystem/04_cusparse/src/sparse.cu",
+   "kind": "single",
+   "seconds": 5.4,
+   "status": "ok"
+  },
+  {
+   "build_rc": 0,
+   "build_log": "",
+   "run": {
+    "rc": 0,
+    "rc2": 0,
+    "stdout_sha256": "4edb0cec12b814396cdb94b67e3a60d568efc1f394b2ba85053916b3359e600a",
+    "deterministic": true,
+    "pass_marker": true,
+    "fail_marker": false,
+    "stdout_head": "cuSOLVER Cholesky Decomposition\nFinding A = L * L^T\nExecuting Cholesky Factorization...\n[PASSED] cuSOLVER Cholesky\n",
+    "stderr_head": "",
+    "rescued": false,
+    "attempts": [
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.7
+     },
+     {
+      "timeout": 60,
+      "rc": 0,
+      "seconds": 0.6
+     }
+    ]
+   },
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/07_ecosystem/05_cusolver/src/cholesky.cu",
+   "kind": "single",
+   "seconds": 5.8,
+   "status": "ok"
+  },
+  {
+   "build_rc": 1,
+   "build_log": "/content/cuda-projects/CUDA_Kernels/modules/07_ecosystem/07_dynamic_parallelism/src/cdp.cu(9): warning #177-D: variable \"tid\" was declared but never referenced\n    int tid = threadIdx.x;\n        ^\n\nRemark: The warnings can be suppressed with \"-diag-suppress <warning-number>\"\n\n/content/cuda-projects/CUDA_Kernels/modules/07_ecosystem/07_dynamic_parallelism/src/cdp.cu(23): error: kernel launch from __device__ or __global__ functions requires separate compilation mode\n      childKernel<<<1, 4>>>(0, data);\n      ^\n\n/content/cuda-projects/CUDA_Kernels/modules/07_ecosystem/07_dynamic_parallelism/src/cdp.cu(47): error: kernel launch from __device__ or __global__ functions requires separate compilation mode\n      recursiveKernel<<<1, 1>>>(count - 1, data);\n      ^\n\n2 errors detected in the compilation of \"/content/cuda-projects/CUDA_Kernels/modules/07_ecosystem/07_dynamic_parallelism/src/cdp.cu\".\n",
+   "run": null,
+   "shortened": false,
+   "patched": "",
+   "linked_with": [],
+   "path": "modules/07_ecosystem/07_dynamic_parallelism/src/cdp.cu",
+   "kind": "single",
+   "seconds": 2.2,
+   "status": "build-fail"
+  }
+ ]
+}

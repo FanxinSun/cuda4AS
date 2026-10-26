@@ -1,0 +1,3083 @@
+{
+ "generated": "2026-10-14T16:41:59+00:00",
+ "note": "commit pins what the translator was fed; the Colab bench checks out exactly these",
+ "repos": [
+  {
+   "slug": "NVIDIA/cuda-samples",
+   "dir": "cuda-samples",
+   "url": "https://github.com/NVIDIA/cuda-samples.git",
+   "tier": "bench",
+   "why": "per-sample CMake; most print PASS/FAIL themselves",
+   "commit": "5443602d89ed99aede2e4b7bf329daddeadb320e",
+   "present": true,
+   "cu": 175,
+   "cuh": 46,
+   "targets": [
+    {
+     "path": "cpp/0_Introduction/UnifiedMemoryStreams",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/asyncAPI",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/clock",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/cudaOpenMP",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/fp16ScalarProduct",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/matrixMul",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/matrixMulDrv",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/matrixMulDynlinkJIT",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleAWBarrier",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleAssert",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleAtomicIntrinsics",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleAttributes",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleCUDA2GL",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleCallback",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleCooperativeGroups",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleCubemapTexture",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleDrvRuntime",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleIPC",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleLayeredTexture",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleMPI",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleMultiCopy",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleMultiGPU",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleP2P",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simplePitchLinearTexture",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simplePrintf",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleStreams",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleSurfaceWrite",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleTexture",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleTexture3D",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleTextureDrv",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleVoteIntrinsics",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/simpleZeroCopy",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/systemWideAtomics",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/vectorAdd",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/vectorAddDrv",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/vectorAddMMAP",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/0_Introduction/vectorAdd_nvrtc",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/1_Utilities/deviceQuery",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/1_Utilities/deviceQueryDrv",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/1_Utilities/topologyQuery",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/EGLStream_CUDA_CrossGPU",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/EGLStream_CUDA_Interop",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/FunctionPointers",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/MC_EstimatePiInlineP",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/MC_EstimatePiInlineQ",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/MC_EstimatePiP",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/MC_EstimatePiQ",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/MC_SingleAsianOptionP",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/boxFilter",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/convolutionSeparable",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/convolutionTexture",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/dct8x8",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/eigenvalues",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/histogram",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/imageDenoising",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/inlinePTX",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/interval",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/particles",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/radixSortThrust",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/reduction",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/reductionMultiBlockCG",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/scalarProd",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/scan",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/segmentationTreeThrust",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/shfl_scan",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/sortingNetworks",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/streamOrderedAllocation",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/streamOrderedAllocationIPC",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/streamOrderedAllocationP2P",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/threadFenceReduction",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/2_Concepts_and_Techniques/threadMigration",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/StreamPriorities",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/bf16TensorCoreGemm",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/binaryPartitionCG",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/bindlessTexture",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/cdpAdvancedQuicksort",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/cdpBezierTessellation",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/cdpQuadtree",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/cdpSimplePrint",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/cdpSimpleQuicksort",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/cudaCompressibleMemory",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/cudaTensorCoreGemm",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/dmabufInterop",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/dmmaTensorCoreGemm",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/globalToShmemAsyncCopy",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/graphConditionalNodes",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/graphMemoryFootprint",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/graphMemoryNodes",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/immaTensorCoreGemm",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/jacobiCudaGraphs",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/localityDomains",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/localityDomainsDrv",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/memMapIPCDrv",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/newdelete",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/ptxjit",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/simpleCudaGraphs",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/tf32TensorCoreGemm",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/3_CUDA_Features/warpAggregatedAtomicsCG",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/4_CUDA_Libraries/conjugateGradientCudaGraphs",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/4_CUDA_Libraries/conjugateGradientMultiBlockCG",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/4_CUDA_Libraries/conjugateGradientMultiDeviceCG",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/4_CUDA_Libraries/cubDeviceFind",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/4_CUDA_Libraries/cubDeviceSegmentedScan",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/4_CUDA_Libraries/cubDeviceTransform",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/4_CUDA_Libraries/cudaNvSci",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/4_CUDA_Libraries/jitLto",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/4_CUDA_Libraries/libcuxxMdspan",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/4_CUDA_Libraries/libcuxxRandom",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/4_CUDA_Libraries/lineOfSight",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/4_CUDA_Libraries/oceanFFT",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/4_CUDA_Libraries/randomFog",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/6_Performance/LargeKernelParameter",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/6_Performance/UnifiedMemoryPerf",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/6_Performance/alignedTypes",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/6_Performance/cudaGraphsPerfScaling",
+     "kind": "cmake-sample"
+    },
+    {
+     "path": "cpp/6_Performance/transpose",
+     "kind": "cmake-sample"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "slug": "CoffeeBeforeArch/cuda_programming",
+   "dir": "cuda_programming",
+   "url": "https://github.com/CoffeeBeforeArch/cuda_programming.git",
+   "tier": "bench",
+   "why": "one program per directory",
+   "commit": "8711be08e2060680820304594f3691cc0016edd1",
+   "present": true,
+   "cu": 23,
+   "cuh": 0,
+   "targets": [
+    {
+     "path": "01_vector_addition/baseline/vectorAdd.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "01_vector_addition/pinned_memory/vectorAdd_pinned.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "01_vector_addition/unified_memory/vectorAdd_um_baseline.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "01_vector_addition/unified_memory/vectorAdd_um_prefetch.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "02_matrix_mul/baseline/mmul.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "02_matrix_mul/noAliasing/restrict/mmul.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "02_matrix_mul/noAliasing/tmp/mmul.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "02_matrix_mul/nonMultiple/mmul.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "02_matrix_mul/rectangular/mmul.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "02_matrix_mul/tiled/mmul.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "03_sum_reduction/bank_conflicts/sumReduction.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "03_sum_reduction/cooperative_groups/sumReduction.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "03_sum_reduction/device_function/sumReduction.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "03_sum_reduction/diverged/sumReduction.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "03_sum_reduction/no_confliicts/sumReduction.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "03_sum_reduction/reduce_idle/sumReduction.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "04_histogram/global_atomic/histogram.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "04_histogram/shmem_atomic/histogram.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "05_convolution/1d_cache/convolution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "05_convolution/1d_constant_memory/convolution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "05_convolution/1d_naive/convolution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "05_convolution/1d_tiled/convolution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "05_convolution/2d_constant_memory/convolution.cu",
+     "kind": "single",
+     "libs": []
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "slug": "olcf/cuda-training-series",
+   "dir": "cuda-training-series",
+   "url": "https://github.com/olcf/cuda-training-series.git",
+   "tier": "bench",
+   "why": "homework templates skipped (FIXME); *_solution.cu run",
+   "commit": "9cd77d539d85ee3457e09a083ba299b787b7a16e",
+   "present": true,
+   "cu": 51,
+   "cuh": 0,
+   "targets": [
+    {
+     "path": "exercises/hw1/hello_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw1/matrix_mul_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw1/vector_add_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw10/streams.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw10/streams_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw12/task1.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw12/task1_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw12/task2.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw12/task2_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw13/axpy_cublas_from_scratch.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "exercises/hw13/axpy_stream_capture_from_scratch.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw13/axpy_stream_capture_timer.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw13/Solutions/axpy_cublas_solution.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "exercises/hw13/Solutions/axpy_stream_capture_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw2/matrix_mul_shared_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw2/stencil_1d_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw3/vector_add_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw4/matrix_sums_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw5/matrix_sums.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw5/matrix_sums_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw5/max_reduction.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw5/max_reduction_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw5/reductions.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw6/array_inc.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw6/array_inc_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw6/linked_list.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw6/linked_list_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw7/multi.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw7/multi_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw7/overlap_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw8/task1/task1_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw8/task2/task2_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw8/task3/task3.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw8/task3/task3_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw9/task1_solution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "exercises/hw9/task2_solution.cu",
+     "kind": "single",
+     "libs": [
+      "-rdc=true",
+      "-lcudadevrt"
+     ]
+    }
+   ],
+   "skipped": [
+    {
+     "path": "exercises/hw1/hello.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "exercises/hw1/matrix_mul.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "exercises/hw1/vector_add.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "exercises/hw11/test.cu",
+     "reason": "needs MPI"
+    },
+    {
+     "path": "exercises/hw13/axpy_cublas_with_fixme.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "exercises/hw13/axpy_stream_capture_with_fixme.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "exercises/hw2/matrix_mul_shared.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "exercises/hw2/stencil_1d.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "exercises/hw3/vector_add.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "exercises/hw4/matrix_sums.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "exercises/hw7/overlap.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "exercises/hw8/task1/task1.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "exercises/hw8/task2/task2.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "exercises/hw9/task1.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "exercises/hw9/task2.cu",
+     "reason": "exercise template"
+    }
+   ]
+  },
+  {
+   "slug": "siboehm/SGEMM_CUDA",
+   "dir": "SGEMM_CUDA",
+   "url": "https://github.com/siboehm/SGEMM_CUDA.git",
+   "tier": "bench",
+   "why": "13 SGEMM kernels checked against cuBLAS; special-cased",
+   "commit": "5a7dcc513d951ba764d51bc9d587b3163f3a894d",
+   "present": true,
+   "cu": 4,
+   "cuh": 14,
+   "targets": [
+    {
+     "path": "sgemm.cu",
+     "kind": "sgemm",
+     "kernels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ]
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "slug": "karpathy/llm.c",
+   "dir": "llm.c",
+   "url": "https://github.com/karpathy/llm.c.git",
+   "tier": "bench",
+   "why": "dev/cuda: each kernel file is standalone with a CPU reference",
+   "commit": "f1e2ace651495b74ae22d45d1723443fd00ecd3a",
+   "present": true,
+   "cu": 28,
+   "cuh": 10,
+   "targets": [
+    {
+     "path": "dev/cuda/adamw.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/attention_backward.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/classifier_fused.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/crossentropy_forward.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/crossentropy_softmax_backward.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/encoder_backward.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/encoder_forward.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/fused_residual_forward.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/gelu_backward.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/gelu_forward.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/global_norm.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/layernorm_backward.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/layernorm_forward.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/matmul_backward.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/matmul_backward_bias.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/matmul_forward.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/permute.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/residual_forward.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/softmax_forward.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "dev/cuda/trimat_forward.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    }
+   ],
+   "skipped": [
+    {
+     "path": "dev/cuda/attention_forward.cu",
+     "reason": "needs cuDNN"
+    },
+    {
+     "path": "dev/cuda/nccl_all_reduce.cu",
+     "reason": "needs NCCL"
+    }
+   ]
+  },
+  {
+   "slug": "NVIDIA-developer-blog/code-samples",
+   "dir": "code-samples",
+   "url": "https://github.com/NVIDIA-developer-blog/code-samples.git",
+   "tier": "bench",
+   "why": "blog posts; standalone programs",
+   "commit": "3350d216083a902ccbf5b31665e3b82096a75b55",
+   "present": true,
+   "cu": 31,
+   "cuh": 0,
+   "targets": [
+    {
+     "path": "c++11_cuda/c++11_cuda.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "posts/american-options/longstaff_schwartz_svd_2.cu",
+     "kind": "single",
+     "libs": [
+      "-lcurand"
+     ]
+    },
+    {
+     "path": "posts/cuda-vmm/sync_main.cu",
+     "kind": "single",
+     "libs": [
+      "-lcuda"
+     ]
+    },
+    {
+     "path": "posts/cufft-callbacks/cufft_callbacks.cu",
+     "kind": "single",
+     "libs": [
+      "-lcufft"
+     ]
+    },
+    {
+     "path": "posts/cufft-callbacks/cufft_no_callbacks.cu",
+     "kind": "single",
+     "libs": [
+      "-lcufft"
+     ]
+    },
+    {
+     "path": "posts/gups/gups.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "posts/math-libraries-intro/cublas-example.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "posts/mixed-precision/haxpy.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "posts/nvml/nvml_test.cu",
+     "kind": "single",
+     "libs": [
+      "-lnvidia-ml"
+     ]
+    },
+    {
+     "path": "posts/nvtx/compiler_inst_nvtx.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "posts/parallel_reduction_with_shfl/main.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "posts/printf-alternative/main.cu",
+     "kind": "single",
+     "libs": [
+      "-lcuda"
+     ]
+    },
+    {
+     "path": "posts/rnn/LSTM.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublas",
+      "-lcurand"
+     ]
+    },
+    {
+     "path": "posts/tensor-cores/simpleTensorCoreGEMM.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublas",
+      "-lcurand"
+     ]
+    },
+    {
+     "path": "posts/unified-memory/dataElem.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "posts/unified-memory/dataElem_um.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "posts/unified-memory/dataElem_um_c++_1.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "posts/unified-memory/dataElem_um_c++_2.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "posts/unified-memory-oversubscription/uvm_oversubs.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "series/cuda-cpp/coalescing-global/coalescing.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "series/cuda-cpp/finite-difference/finite-difference.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "series/cuda-cpp/optimize-data-transfers/bandwidthtest.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "series/cuda-cpp/optimize-data-transfers/profile.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "series/cuda-cpp/overlap-data-transfers/async.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "series/cuda-cpp/shared-memory/shared-memory.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "series/cuda-cpp/transpose/transpose.cu",
+     "kind": "single",
+     "libs": []
+    }
+   ],
+   "skipped": [
+    {
+     "path": "posts/nvtx/manual_nvtx.cu",
+     "reason": "NVTX v2 header was removed from recent toolkits"
+    }
+   ]
+  },
+  {
+   "slug": "yasin-arafat-05/Learning_CUDA_From_Scratch",
+   "dir": "Learning_CUDA_From_Scratch",
+   "url": "https://github.com/yasin-arafat-05/Learning_CUDA_From_Scratch.git",
+   "tier": "bench",
+   "why": "graded problems; standalone",
+   "commit": "adc00f0430fa11730ac042741ee3797a8d0e02cd",
+   "present": true,
+   "cu": 170,
+   "cuh": 0,
+   "targets": [
+    {
+     "path": "Day 11/reduction_kernel_v5.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 11/reduction_kernel_v6.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 11/reduction_kernel_v7.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 12/reduction_kernel_v8.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 13/Flash_Attention_V1.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 14/OptimizedDotProduct.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 14/dotproduct.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 14/leetgpuDotProduct.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 14/reduction_sum_cpu_vs_gpu.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 15/matrixTranspose.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 16/hadamardProduct.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 17/GEMM.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 17/L2Norm.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 17/OptimizedGEMM.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 18/OptimizedL2BlockSizes.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 18/OptimizedL2Norm.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 18/Relu.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 18/SigmoidAct.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 19/max_reduction.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 2/vector_addition.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 20/SoftmaxKernel.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 21/SigmoidLinearUnit.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 3/vector_subtraction.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 4/arrayMultiplication.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 4/vectorAdditionTiming.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 5/additionofvectorby2.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 5/arrayMulCPUvsGPU.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 6/matrixAddition.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 7/matrixAdditionCPUvsGPU.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 8/arrayMulOptimized.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 8/matrixMulTiled.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 9/reduction_kernel_v1.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 9/reduction_kernel_v2.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 9/reduction_kernel_v3.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Day 9/reduction_kernel_v4.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L0-Setup and foundations/hello_from_gpu.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L0-Setup and foundations/mem_cpy.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L0-Setup and foundations/thread_index.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L1-Map Patterns/SAXPY.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L1-Map Patterns/polynomial_Evaluation.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L1-Map Patterns/vector_Subtraction.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L1-Map Patterns/vector_addition.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L1-Map Patterns/vector_division.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L1-Map Patterns/vector_multiply.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L1-Map Patterns/vector_scaling.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L3-Memory Patterns/SOA_VS_AOS.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L3-Memory Patterns/constat memory test.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L3-Memory Patterns/matrix multiplication optimized.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L3-Memory Patterns/matrix transpose (optimized).cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L3-Memory Patterns/matrix transpose(optimized with padding).cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L3-Memory Patterns/matrix_multiply(naive).cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L3-Memory Patterns/shared memory bank conflicts.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L3-Memory Patterns/shared memory double buffering.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L3-Memory Patterns/strided_access_analysis.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L3-Memory Patterns/transpose (naive).cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L4-Scan Pattern - Prefix Sums/Partition.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L4-Scan Pattern - Prefix Sums/Run length encoding.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L4-Scan Pattern - Prefix Sums/prefix sum (Blelloch).cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L4-Scan Pattern - Prefix Sums/prefix sum (Multi Block).cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L4-Scan Pattern - Prefix Sums/prefix-sum (Hills-Steele).cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L4-Scan Pattern - Prefix Sums/scan with comparison.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L4-Scan Pattern - Prefix Sums/scan_with_comparison_hills_steele.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L4-Scan Pattern - Prefix Sums/segmented scan.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L4-Scan Pattern - Prefix Sums/segmented_Scan_blocklevel.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L4-Scan Pattern - Prefix Sums/sparse to dense.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L4-Scan Pattern - Prefix Sums/stream compaction.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L5-Stencil Pattern - Neighbout Access/1D Heat Equation.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L5-Stencil Pattern - Neighbout Access/1D Wave Equation.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L5-Stencil Pattern - Neighbout Access/2D Box Filter.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L5-Stencil Pattern - Neighbout Access/2D Convolution.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L5-Stencil Pattern - Neighbout Access/2D Heat Equation.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L5-Stencil Pattern - Neighbout Access/2D Laplace Equation.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L5-Stencil Pattern - Neighbout Access/Box Filter (1D).cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L5-Stencil Pattern - Neighbout Access/Game of Life.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L5-Stencil Pattern - Neighbout Access/Gaussuan Blur (1D).cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L5-Stencil Pattern - Neighbout Access/sobel edge detection.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L6-Advanced Patterns/Atomic Histogram.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L6-Advanced Patterns/Atomic Operations Comparison.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L6-Advanced Patterns/Connected Components (BFS).cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L6-Advanced Patterns/Graph Traversal.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L6-Advanced Patterns/K-Means Clustering.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L6-Advanced Patterns/LockFreeQueue.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L6-Advanced Patterns/Radix Sort (1 bit).cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L6-Advanced Patterns/Radix Sort (Complete).cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L6-Advanced Patterns/Tree Reduction vs Atomic Reduction.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L6-Advanced Patterns/Triangular Solve.cu",
+     "kind": "single",
+     "libs": [
+      "-lcusparse"
+     ]
+    },
+    {
+     "path": "Problems/L6-Advanced Patterns/sparse matrix vector multiply.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L7-Optimization Masterclass/Fast Math Study.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L7-Optimization Masterclass/Fused Multiply Add.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L7-Optimization Masterclass/Loop Unrolling.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L7-Optimization Masterclass/Pinned Memory Tranfers.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L7-Optimization Masterclass/Register Pressure Tuning.cu",
+     "kind": "single",
+     "libs": [
+      "-lcuda"
+     ]
+    },
+    {
+     "path": "Problems/L7-Optimization Masterclass/Texture Memory Example.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L7-Optimization Masterclass/Unified Memory Perfomance.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L7-Optimization Masterclass/Zero-Copy Memory.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L7-Optimization Masterclass/block size tuning.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L7-Optimization Masterclass/cache blocking study.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L7-Optimization Masterclass/grid stride loop perfomance.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L7-Optimization Masterclass/occupancy calculator.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L8-Production Quality Code/Multi-GPU.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L8-Production Quality Code/Stream Callbacks.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L8-Production Quality Code/basic streams.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L8-Production Quality Code/multi stream data processing.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L8-Production Quality Code/overlapping compute and copy.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L8-Production Quality Code/perfomance benchmarking.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L8-Production Quality Code/template kernel library.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L9-Domain Applications/2D Poisson Solver.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L9-Domain Applications/Matrix Multiply.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Problems/L9-Domain Applications/batch normalization.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Profiling_Lab/Sum Reduction/reduction_kernel2.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "Profiling_Lab/Sum Reduction/reduction_sum.cu",
+     "kind": "single",
+     "libs": []
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "slug": "ridash2005/CUDA_Kernels",
+   "dir": "CUDA_Kernels",
+   "url": "https://github.com/ridash2005/CUDA_Kernels.git",
+   "tier": "bench",
+   "why": "numbered modules with CPU verification",
+   "commit": "95b69c7636e3b6df4e6864f14344cf99b839b0ca",
+   "present": true,
+   "cu": 24,
+   "cuh": 0,
+   "targets": [
+    {
+     "path": "modules/01_fundamentals/01_kernel_basics/src/kernel.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "modules/01_fundamentals/02_grid_block/src/checkDimension.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "modules/01_fundamentals/03_hardware/src/props.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "modules/02_memory_management/01_vector_ops/src/main.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "modules/02_memory_management/02_vector_dot/src/vecDot_non_reduction.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "modules/02_memory_management/03_constant_memory/src/constant_vec_dot.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "modules/02_memory_management/04_unified_memory/src/unified_mem.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "modules/03_advanced_math/01_matrix_vector_ops/src/main.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "modules/03_advanced_math/02_fft/src/main.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "modules/04_optimizations/01_tiled_matmul/src/tiled_matmul.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "modules/04_optimizations/02_reduction/src/reduction.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "modules/05_concurrency/01_streams/src/streams.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "modules/06_advanced_algorithms/01_histogram/src/histogram.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "modules/07_ecosystem/01_cublas/src/gemm.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "modules/07_ecosystem/02_thrust/src/thrust_demo.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "modules/07_ecosystem/03_curand/src/monte_carlo.cu",
+     "kind": "single",
+     "libs": [
+      "-lcurand"
+     ]
+    },
+    {
+     "path": "modules/07_ecosystem/04_cusparse/src/sparse.cu",
+     "kind": "single",
+     "libs": [
+      "-lcusparse"
+     ]
+    },
+    {
+     "path": "modules/07_ecosystem/05_cusolver/src/cholesky.cu",
+     "kind": "single",
+     "libs": [
+      "-lcusolver"
+     ]
+    },
+    {
+     "path": "modules/07_ecosystem/07_dynamic_parallelism/src/cdp.cu",
+     "kind": "single",
+     "libs": []
+    }
+   ],
+   "skipped": [
+    {
+     "path": "modules/07_ecosystem/06_nvtx/src/profiling.cu",
+     "reason": "NVTX v2 header was removed from recent toolkits"
+    }
+   ]
+  },
+  {
+   "slug": "hoshuaclawdbot/cuda-learning-lab",
+   "dir": "cuda-learning-lab",
+   "url": "https://github.com/hoshuaclawdbot/cuda-learning-lab.git",
+   "tier": "bench",
+   "why": "small CMake project",
+   "commit": "074789981264018bb2c8c0e9eb81d33c288693a4",
+   "present": true,
+   "cu": 3,
+   "cuh": 0,
+   "targets": [
+    {
+     "path": "modules/02-first-kernel/solutions/01_hello_gpu.cu",
+     "kind": "single",
+     "libs": []
+    }
+   ],
+   "skipped": [
+    {
+     "path": "modules/01-gpu-architecture/exercises/01_device_query.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "modules/02-first-kernel/exercises/01_hello_gpu.cu",
+     "reason": "exercise template"
+    }
+   ]
+  },
+  {
+   "slug": "Infatoshi/cuda-course",
+   "dir": "cuda-course",
+   "url": "https://github.com/Infatoshi/cuda-course.git",
+   "tier": "bench",
+   "why": "course kernels; cuDNN/Triton/PyTorch parts auto-skipped",
+   "commit": "79681bfd003d403170dd93c0436c6f2a45cb390f",
+   "present": true,
+   "cu": 23,
+   "cuh": 0,
+   "targets": [
+    {
+     "path": "03_C_and_C++_Review/06 Makefiles/03.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "05_Writing_your_First_Kernels/01 CUDA Basics/01_idxing.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "05_Writing_your_First_Kernels/02 Kernels/00_vector_add_v1.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "05_Writing_your_First_Kernels/02 Kernels/01_vector_add_v2.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "05_Writing_your_First_Kernels/02 Kernels/02 matmul.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "05_Writing_your_First_Kernels/03 Profiling/01_naive_matmul.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "05_Writing_your_First_Kernels/03 Profiling/02_tiled_matmul.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "05_Writing_your_First_Kernels/04 Atomics/00_atomicAdd.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "05_Writing_your_First_Kernels/05 Streams/01_stream_basics.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "05_Writing_your_First_Kernels/05 Streams/02_stream_advanced.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "06_CUDA_APIs/01 CUBLAS/01 cuBLAS/01_Hgemm_Sgemm.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "06_CUDA_APIs/01 CUBLAS/02 cuBLASLt/01_LtMatmul.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "06_CUDA_APIs/01 CUBLAS/02 cuBLASLt/02_compare.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublasLt",
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "06_CUDA_APIs/01 CUBLAS/03 cuBLASXt/01_demo.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "06_CUDA_APIs/01 CUBLAS/03 cuBLASXt/02_compare.cu",
+     "kind": "single",
+     "libs": [
+      "-lcublas"
+     ]
+    },
+    {
+     "path": "07_Faster_Matmul/unrolling_example.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "08_Triton/02_softmax.cu",
+     "kind": "single",
+     "libs": []
+    }
+   ],
+   "skipped": [
+    {
+     "path": "05_Writing_your_First_Kernels/03 Profiling/00 nvtx_matmul.cu",
+     "reason": "NVTX v2 header was removed from recent toolkits"
+    },
+    {
+     "path": "06_CUDA_APIs/02 CUDNN/00 Tanh.cu",
+     "reason": "needs cuDNN"
+    },
+    {
+     "path": "06_CUDA_APIs/02 CUDNN/01 Conv2d_NCHW.cu",
+     "reason": "needs cuDNN"
+    },
+    {
+     "path": "06_CUDA_APIs/02 CUDNN/02 compare_conv.cu",
+     "reason": "needs cuDNN"
+    },
+    {
+     "path": "06_CUDA_APIs/optional/CUTLASS/compare.cu",
+     "reason": "needs the CUTLASS include path"
+    }
+   ]
+  },
+  {
+   "slug": "gpu-mode/lectures",
+   "dir": "lectures",
+   "url": "https://github.com/gpu-mode/lectures.git",
+   "tier": "bench",
+   "why": "per-lecture programs; torch-based ones auto-skipped",
+   "commit": "77a8df418834e5789c12da23e7d2719e0efabef1",
+   "present": true,
+   "cu": 23,
+   "cuh": 2,
+   "targets": [
+    {
+     "path": "lecture_002/vector_addition/vector_addition.cu",
+     "kind": "single",
+     "libs": [
+      "-lcuda"
+     ]
+    },
+    {
+     "path": "lecture_008/coalesce.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "lecture_008/coarsening.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "lecture_008/divergence.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "lecture_008/occupancy.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "lecture_008/privatization.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "lecture_008/privatization2.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "lecture_009/control_divergence_reduce.cu",
+     "kind": "single",
+     "libs": [
+      "-lcuda"
+     ]
+    },
+    {
+     "path": "lecture_009/multistream-reduce.cu",
+     "kind": "single",
+     "libs": [
+      "-lcuda"
+     ]
+    },
+    {
+     "path": "lecture_009/reduce_coarsening.cu",
+     "kind": "single",
+     "libs": [
+      "-lcuda"
+     ]
+    },
+    {
+     "path": "lecture_009/segment_reduce.cu",
+     "kind": "single",
+     "libs": [
+      "-lcuda"
+     ]
+    },
+    {
+     "path": "lecture_009/shared_reduce.cu",
+     "kind": "single",
+     "libs": [
+      "-lcuda"
+     ]
+    },
+    {
+     "path": "lecture_009/simple_reduce.cu",
+     "kind": "single",
+     "libs": [
+      "-lcuda"
+     ]
+    },
+    {
+     "path": "lecture_012/main.cu",
+     "kind": "single",
+     "libs": []
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "slug": "rogerallen/raytracinginoneweekendincuda",
+   "dir": "raytracinginoneweekendincuda",
+   "url": "https://github.com/rogerallen/raytracinginoneweekendincuda.git",
+   "tier": "bench",
+   "why": "pinned to branch ch12_where_next_cuda (master is the CPU C++ original, no CUDA); main.cu writes a PPM to stdout",
+   "commit": "ab140b12d4923b75270831baabab5e4d4209f305",
+   "present": true,
+   "cu": 1,
+   "cuh": 0,
+   "targets": [
+    {
+     "path": "main.cu",
+     "kind": "single",
+     "libs": [
+      "-lcurand"
+     ]
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "slug": "rahul238xaviers/cuda_training",
+   "dir": "cuda_training",
+   "url": "https://github.com/rahul238xaviers/cuda_training.git",
+   "tier": "bench",
+   "why": "standalone .cu; templates skipped",
+   "commit": "cf2826dcbb09997011473699498cc9c1ebc48d2f",
+   "present": true,
+   "cu": 152,
+   "cuh": 0,
+   "targets": [
+    {
+     "path": "playground.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "playground_kernel.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "kernels/practice/gpu_check.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "kernels/practice/grid_stride_loop.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "kernels/practice/matrixAddKernel.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "kernels/practice/reduce_block.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "kernels/practice/reduce_two_stage.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "kernels/practice/register_pressure_kernel.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "kernels/practice/tile_reverse.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "kernels/practice/vector_add.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "kernels/practice/vector_dot_reduction.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module2/2.1_lambdas_function_objects/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module2/2.1_lambdas_function_objects/exercise/champion_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module2/2.1_lambdas_function_objects/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module2/2.2_templates_type_traits/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module2/2.2_templates_type_traits/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module2/2.3_raii_smart_pointers_streams/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module2/2.3_raii_smart_pointers_streams/exercise/champion_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module2/2.3_raii_smart_pointers_streams/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module3/3.1_threads_registers/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module3/3.1_threads_registers/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module3/3.2_warps_simt_shuffles/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/champion_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module3/3.3_blocks_shared_banking/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/champion_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module3/3.4_grids_occupancy_strides/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module4/4.2_shared_memory_tiling/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module5/5.1_warp_block_reductions/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module5/5.1_warp_block_reductions/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module5/5.2_atomic_operations/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module5/5.2_atomic_operations/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module6/6.1_bfloat16_math/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module6/6.1_bfloat16_math/exercise/champion_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module6/6.1_bfloat16_math/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/champion_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module6/6.2_wmma_tensor_cores/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.1_elementwise_reshape/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.1_elementwise_reshape/exercise/champion_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.1_elementwise_reshape/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.2_embedding_lookup/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.2_embedding_lookup/exercise/champion_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.2_embedding_lookup/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.3_normalization_rope/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.3_normalization_rope/exercise/champion_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.3_normalization_rope/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/champion_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.4_loss_and_optimizer/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.5_gemm_projections/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.5_gemm_projections/exercise/champion_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.5_gemm_projections/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.6_flash_attention/exercise/beginner_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.6_flash_attention/exercise/champion_workbook.cu",
+     "kind": "single",
+     "libs": []
+    },
+    {
+     "path": "src/cuda_systems/module7/7.6_flash_attention/exercise/intermediate_workbook.cu",
+     "kind": "single",
+     "libs": []
+    }
+   ],
+   "skipped": [
+    {
+     "path": "src/cuda_systems/module2/2.2_templates_type_traits/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/cuda_systems/module2/2.4_move_semantics_views/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/cuda_systems/module2/2.4_move_semantics_views/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/cuda_systems/module2/2.4_move_semantics_views/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/cuda_systems/module2/2.5_stl_parallel_execution/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/cuda_systems/module2/2.5_stl_parallel_execution/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/cuda_systems/module2/2.5_stl_parallel_execution/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/cuda_systems/module3/3.1_threads_registers/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/cuda_systems/module3/3.2_warps_simt_shuffles/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/cuda_systems/module3/3.2_warps_simt_shuffles/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/cuda_systems/module4/4.1_coalescing_readonly_cache/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/cuda_systems/module4/4.2_shared_memory_tiling/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/cuda_systems/module4/4.2_shared_memory_tiling/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/cuda_systems/module5/5.1_warp_block_reductions/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/cuda_systems/module5/5.2_atomic_operations/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/cuda_systems/module5/5.3_numerically_stable_reductions/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module1/1.1_dense_gemv/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module1/1.1_dense_gemv/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module1/1.1_dense_gemv/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module1/1.2_block_tiled_gemm/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module1/1.2_block_tiled_gemm/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module1/1.2_block_tiled_gemm/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module1/1.3_tensor_core_wmma_gemm/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module1/1.3_tensor_core_wmma_gemm/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module1/1.3_tensor_core_wmma_gemm/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module1/1.4_split_k_gemm/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module1/1.4_split_k_gemm/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module1/1.4_split_k_gemm/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module2/2.1_moe_topk_gating/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module2/2.1_moe_topk_gating/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module2/2.1_moe_topk_gating/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module2/2.2_fused_moe_expert_gemm/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module2/2.2_fused_moe_expert_gemm/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module2/2.2_fused_moe_expert_gemm/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module2/2.3_csr_spmv_kernel/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module2/2.3_csr_spmv_kernel/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module2/2.3_csr_spmv_kernel/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module2/2.4_structured_sparsity_2to4/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module2/2.4_structured_sparsity_2to4/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module2/2.4_structured_sparsity_2to4/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module3/3.1_flash_attention_forward/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module3/3.1_flash_attention_forward/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module3/3.1_flash_attention_forward/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module3/3.2_flash_decoding_split_kv/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module3/3.2_flash_decoding_split_kv/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module3/3.2_flash_decoding_split_kv/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module3/3.3_rotary_positional_embedding/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module3/3.3_rotary_positional_embedding/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module3/3.3_rotary_positional_embedding/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module3/3.4_state_space_model_scan/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module3/3.4_state_space_model_scan/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module3/3.4_state_space_model_scan/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module4/4.1_fused_rmsnorm/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module4/4.1_fused_rmsnorm/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module4/4.1_fused_rmsnorm/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module4/4.2_fused_layernorm_residual/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module4/4.2_fused_layernorm_residual/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module4/4.2_fused_layernorm_residual/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module4/4.3_fused_swiglu_activation/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module4/4.3_fused_swiglu_activation/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module4/4.3_fused_swiglu_activation/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module4/4.4_numerically_stable_softmax/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module4/4.4_numerically_stable_softmax/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module4/4.4_numerically_stable_softmax/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module5/5.1_stft_mel_spectrogram/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module5/5.1_stft_mel_spectrogram/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module5/5.1_stft_mel_spectrogram/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module5/5.2_causal_dilated_conv1d/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module5/5.2_causal_dilated_conv1d/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module5/5.2_causal_dilated_conv1d/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module5/5.3_fused_ctc_loss_decode/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module5/5.3_fused_ctc_loss_decode/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module5/5.3_fused_ctc_loss_decode/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module6/6.1_vit_patchify_embedding/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module6/6.1_vit_patchify_embedding/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module6/6.1_vit_patchify_embedding/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module6/6.2_windowed_video_attention/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module6/6.2_windowed_video_attention/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module6/6.2_windowed_video_attention/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module6/6.3_bilinear_bicubic_grid_sample/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module6/6.3_bilinear_bicubic_grid_sample/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module6/6.3_bilinear_bicubic_grid_sample/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module7/7.1_fp8_int4_gemv_dequant/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module7/7.1_fp8_int4_gemv_dequant/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module7/7.1_fp8_int4_gemv_dequant/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module7/7.2_fused_adamw_optimizer/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module7/7.2_fused_adamw_optimizer/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module7/7.2_fused_adamw_optimizer/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module7/7.3_distributed_grad_norm_clipping/exercise/beginner_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module7/7.3_distributed_grad_norm_clipping/exercise/champion_workbook.cu",
+     "reason": "exercise template"
+    },
+    {
+     "path": "src/gpu_kernels/module7/7.3_distributed_grad_norm_clipping/exercise/intermediate_workbook.cu",
+     "reason": "exercise template"
+    }
+   ]
+  },
+  {
+   "slug": "NVIDIA/CUDALibrarySamples",
+   "dir": "CUDALibrarySamples",
+   "url": "https://github.com/NVIDIA/CUDALibrarySamples.git",
+   "tier": "translate-only",
+   "why": "one Makefile/CMake per sample and each needs a CUDA library the translator does not provide yet; add to bench once the library shims exist",
+   "commit": "07c4f09223302ce4310eef945ed458e092598d17",
+   "present": true,
+   "cu": 351,
+   "cuh": 3
+  },
+  {
+   "slug": "NVIDIA/cutlass",
+   "dir": "cutlass",
+   "url": "https://github.com/NVIDIA/cutlass.git",
+   "tier": "translate-only",
+   "why": "G-C1 names the Ampere examples; they need sm_80 and Colab's free T4 is sm_75",
+   "commit": "dfc5d79d6863dc52ac2feace22f3e944b40a91da",
+   "present": true,
+   "cu": 1098,
+   "cuh": 8
+  },
+  {
+   "slug": "NVIDIA/cccl",
+   "dir": "cccl",
+   "url": "https://github.com/NVIDIA/cccl.git",
+   "tier": "translate-only",
+   "why": "Thrust/CUB/libcu++ headers; the translator's stress test, not a program",
+   "commit": "3900e213409f66c9e1460cb0fff95c77c5debbcd",
+   "present": true,
+   "cu": 1633,
+   "cuh": 627
+  },
+  {
+   "slug": "HazyResearch/ThunderKittens",
+   "dir": "ThunderKittens",
+   "url": "https://github.com/HazyResearch/ThunderKittens.git",
+   "tier": "translate-only",
+   "why": "needs sm_90a (H100) for most kernels",
+   "commit": "67845f5fa48d05343dbbc1ba1403f11061f08d2d",
+   "present": true,
+   "cu": 130,
+   "cuh": 173
+  },
+  {
+   "slug": "Dao-AILab/flash-attention",
+   "dir": "flash-attention",
+   "url": "https://github.com/Dao-AILab/flash-attention.git",
+   "tier": "translate-only",
+   "why": "builds as a torch extension; G-C3",
+   "commit": "1fc0221183e799363001394a12dd9e78e15f5dda",
+   "present": true,
+   "cu": 606,
+   "cuh": 7
+  },
+  {
+   "slug": "vllm-project/vllm",
+   "dir": "vllm",
+   "url": "https://github.com/vllm-project/vllm.git",
+   "tier": "translate-only",
+   "why": "csrc/ is torch-bound; G-C3",
+   "commit": "f9b65c30c7b518600b622d4b683c9f2f1eb04370",
+   "present": true,
+   "cu": 96,
+   "cuh": 70
+  },
+  {
+   "slug": "NVIDIA/TensorRT-LLM",
+   "dir": "TensorRT-LLM",
+   "url": "https://github.com/NVIDIA/TensorRT-LLM.git",
+   "tier": "translate-only",
+   "why": "needs TensorRT, H100-class GPUs and engines",
+   "commit": "30dc23ffe58f7ddea5c100a341983b51403c22a9",
+   "present": true,
+   "cu": 348,
+   "cuh": 74
+  },
+  {
+   "slug": "rapidsai/cudf",
+   "dir": "cudf",
+   "url": "https://github.com/rapidsai/cudf.git",
+   "tier": "translate-only",
+   "why": "needs the RAPIDS stack (rmm, libcudf build)",
+   "commit": "69866c121b4cf2d48b6ef631025292547cde528f",
+   "present": true,
+   "cu": 560,
+   "cuh": 230
+  },
+  {
+   "slug": "rapidsai/cuml",
+   "dir": "cuml",
+   "url": "https://github.com/rapidsai/cuml.git",
+   "tier": "translate-only",
+   "why": "needs the RAPIDS stack",
+   "commit": "c7e7738bb6386186bc031d821e71ce1c1abfe3c8",
+   "present": true,
+   "cu": 136,
+   "cuh": 122
+  },
+  {
+   "slug": "ggml-org/llama.cpp",
+   "dir": "llama.cpp",
+   "url": "https://github.com/ggml-org/llama.cpp.git",
+   "tier": "translate-only",
+   "why": "G-C1 names GGML_CUDA=ON; running it needs model weights",
+   "commit": "318a471a6295e53bfce7ca96ae0cf26071cbdd6e",
+   "present": true,
+   "cu": 190,
+   "cuh": 91
+  },
+  {
+   "slug": "ankan-ban/llama_cu_awq",
+   "dir": "llama_cu_awq",
+   "url": "https://github.com/ankan-ban/llama_cu_awq.git",
+   "tier": "translate-only",
+   "why": "needs AWQ model weights",
+   "commit": "d0453fd0803cac9107ee5f1857e1c5654ac598cd",
+   "present": true,
+   "cu": 1,
+   "cuh": 0
+  },
+  {
+   "slug": "xlite-dev/LeetCUDA",
+   "dir": "LeetCUDA",
+   "url": "https://github.com/xlite-dev/LeetCUDA.git",
+   "tier": "translate-only",
+   "why": "kernels are torch extensions; tests need PyTorch",
+   "commit": "23c238ddd789b2e60f30c09a9d23fbce74eb962a",
+   "present": true,
+   "cu": 125,
+   "cuh": 9
+  },
+  {
+   "slug": "hkevin01/cuda-kernel",
+   "dir": "cuda-kernel",
+   "url": "https://github.com/hkevin01/cuda-kernel.git",
+   "tier": "translate-only",
+   "why": "Qt/GUI application around a few kernels",
+   "commit": "b18fa24497771d30444cc4f5185d97f4b2b48639",
+   "present": true,
+   "cu": 6,
+   "cuh": 0
+  },
+  {
+   "slug": "rkinas/cuda-learning",
+   "dir": "cuda-learning",
+   "url": "https://github.com/rkinas/cuda-learning.git",
+   "tier": "reference",
+   "why": "an index of links; no source",
+   "commit": "410013a9d1793e07ac80f0413094ac344c49b5f3",
+   "present": true,
+   "cu": 0,
+   "cuh": 0
+  },
+  {
+   "slug": "srush/GPU-Puzzles",
+   "dir": "GPU-Puzzles",
+   "url": "https://github.com/srush/GPU-Puzzles.git",
+   "tier": "reference",
+   "why": "Numba (Python), not .cu",
+   "commit": "b3c4b237d7f0dc6d82055b753c8ea6e0cbb845eb",
+   "present": true,
+   "cu": 0,
+   "cuh": 0
+  }
+ ]
+}

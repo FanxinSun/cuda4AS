@@ -1,18 +1,14 @@
 # SELF_REVIEW — the probes, and how far they were verified
 
-Nothing in `cuda4AS/probe/` can be compiled on the machine it was written on:
-this box is a Linux/WSL2 host with an NVIDIA card, no Swift compiler, no Metal
-SDK and no Apple GPU. So the acceptance criterion for phase 0a is not "it
-builds" — it is a conservative Swift subset, a bounded loop with its cap stated
-in the source, and this file: what API each probe leans on, and how confident
-each item actually is.
+Probes `p0`–`p8` were originally written on a Linux/WSL2 host before an Apple
+silicon Mac was on the desk, verified first on an M1 Pro (`RESULTS/as-phase0/Studio/`)
+and subsequently executed natively on the Apple M4 Mac mini (`RESULTS/as-phase0/masshjs-Mac-mini/`).
+Probes `p9_lookback` and `p10_fp64` were written, compiled, and executed directly
+on the M4 Mac mini (`RESULTS/s1/`) for Stage S1 of the `caloml` sample plan.
 
-**Be honest about the basis.** Two things here were checked against a live
-source in this session; the rest rest on knowledge of the Metal and Foundation
-API surface, which is good for the common calls and thinner for the mach VM and
-Metal 4 corners. Those corners are called out below, and the drop is built so
-each of them fails alone. Where a claim is not verified, it says so rather
-than naming a documentation page that was not opened.
+**Be honest about the basis.** Items below record how each probe was originally
+constructed for the one-round-trip drop (`p0`–`p8`) as well as the direct M4
+verification of `p9_lookback` and `p10_fp64`.
 
 | verified how | items |
 |---|---|
@@ -181,10 +177,35 @@ compiles its shader at run time, so it needs no Metal toolchain;
 `run.sh` builds it with `swiftc -O` and runs it from its own directory because
 it looks for `lmz_rans.metal` next to itself first.
 
+### `p9_lookback` — decoupled look-back & memory ordering (S1)
+Compiled and verified directly on the Apple M4 (`RESULTS/s1/p9_lookback.json`).
+Tests six properties across separate runtime-compiled MSL libraries:
+1. Co-resident threadgroup measurement (`p9_measure_residency`, bounded by `spinDelay`).
+2. Stock CUB tile assignment (`tile = tgid.x`) with arrival-order tracking alongside,
+   demonstrating out-of-order threadgroup scheduling on M4 above co-residency.
+3. Arrival-ticket remap (`tile = atomic_fetch_add(ticketCounter, 1)`), proving 0 timeouts
+   at 10,240 threadgroups with `SPIN_CAP = 2^20`.
+4. Adversarial reverse ticket (`tile = (N - 1) - ticket`), proving non-preemptive
+   starvation once grid size exceeds co-resident capacity (160 threadgroups on M4).
+5. Single-word 64-bit aligned `ulong` store/load tear test (256M reads, 0 torn reads)
+   and 32-bit packed descriptor control.
+6. Two-word flag+value test with `atomic_thread_fence(mem_flags::mem_device, memory_order_seq_cst)`
+   (51.2M reads, 0 stale reads) and separate MSL compiler probes confirming that
+   `memory_order_acquire` and `memory_order_release` are rejected by MSL 3.0–3.2.
+*Risk:* low (bounded by `SPIN_CAP = 2^20`; verified on M4).
+
+### `p10_fp64` — double-precision emulation (`df64` vs `soft64`, S1)
+Compiled and verified directly on the Apple M4 (`RESULTS/s1/p10_fp64.json`).
+Measures accuracy (`10^6` samples across `[1, 2)`, `[1e-30, 1e30]`, and subnormals/extremes),
+ILP=8 throughput against an FP32 baseline (`ASSUMED_M4_FP32_PEAK_TFLOPS = 3.712`),
+Celeritas physical constant representability (`h^2 = 4.39e-53`), and lock-backed
+64-bit `atomicAdd(double*)` with intra-SIMD-group lane serialization over 65,536 threads.
+*Risk:* low (verified on M4; motivates decision D1 to use IEEE `soft64` rather than `df64`).
+
 ---
 
 ## Lines per probe
 
-All are inside the ~200-line guidance except `p2` and `p3`, whose bodies are
-mostly embedded MSL and the reading-of-the-result strings that make each JSON
-interpretable without this file. The Swift itself is short in both.
+All phase-0a probes (`p0`–`p7`) are inside the ~200-line guidance except `p2` and `p3`,
+whose bodies are mostly embedded MSL and result-interpretation strings. The S1 probes
+(`p9_lookback` and `p10_fp64`) are standalone multi-experiment suites developed directly on the M4.

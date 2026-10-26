@@ -1,0 +1,12 @@
+logging all output to /content/logs/bench_SGEMM_CUDA.log
+name, driver_version, compute_cap
+Tesla T4, 580.82.07, 7.5
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+cmake version 3.31.10
+ok SGEMM_CUDA
+Writing cuda_projects.py
+Writing manifest.json
+timeout    SGEMM_CUDA/sgemm.cu
+== siboehm/SGEMM_CUDA {'timeout': 1}
+siboehm/SGEMM_CUDA                               {'timeout': 1}
