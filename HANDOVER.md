@@ -11,11 +11,17 @@ planning, gate tracking, decisions put to the user, and execution. The session i
 runtime and translator) is yours too, because that session was never started. The Committee steps
 back and makes no further changes unless the user asks it to.
 
+> **Note added 2026-11-01** (the Linux session "cuda4AS Committee", plan revision CUDA-INTEGRATE-01):
+> the Antigravity session's standing as sole owner of planning and decisions is retired. Planning
+> authority is `plan/PLAN.md`; the next development machine is the M1 MacBook Pro (`HANDOFF.md`
+> Part A, step TK-0). The M4 stays a target machine; who continues to execute on it is the user's
+> call (plan §16). Sections 5–7 below remain the register for the M4; §11 records the integration.
+
 Read in this order before acting:
 
 1. this file
 2. `README.md`
-3. `samples/caloml/PLAN.md`: Decisions, the three Committee reviews, and "S1 closed"
+3. `samples/caloml/PLAN.md`: Decisions, the three Committee reviews, and "S1 closed" *(renamed 2026-11-01: `samples/caloml/CALOML-RECORD.md`)*
 4. `probe/SELF_REVIEW.md`
 5. `oracle/ref/README.md`
 6. `RESULTS/cuda-projects/READY.md` and `RETEST.md`
@@ -109,9 +115,9 @@ anything goes to the user:
 | gate | status |
 |---|---|
 | **G-C0** probes | **PASSED** on an M1 Pro, 2026-09-05 (`RESULTS/as-phase0/Studio/`). Two forks taken; BF16 deferred to M5-class hardware. The p0–p7 suite has **not** been run as a row on the M4 (R1) |
-| **G-C1** compiler | **the top gate; not started past Phase 2-1.** Upstream clang emits PTX for CUDA when given a hand-made header. Nothing translates to Metal yet. The README's line "blocked only on the clang fetch" is stale: clang is fetched (R3) |
+| **G-C1** compiler | **the top gate; not started past Phase 2-1.** Upstream clang emits PTX for CUDA when given a hand-made header. Nothing translates to Metal yet. The README's line "blocked only on the clang fetch" is stale: clang is fetched (R3) *(stale within this file: §5 N5–N9 report the translator, runtime and nine oracles done on 2026-10-26; as of 2026-11-01 those results are REPORTED_NOT_REPRODUCED, `plan/PLAN.md` §3 F3)* |
 | **G-C3** smoothness | not started. Its first instance is caloml S2: an `nvcc` that CMake accepts |
-| **G-C6** coded tier | not started. The README's stated blocker, a nil default device, does **not** hold on the M4 (R14) |
+| **G-C6** coded tier | not started. The README's stated blocker, a nil default device, does **not** hold on the M4 (R14) *(stale within this file: closed by R14 in §7 on 2026-10-26)* |
 | **G-C2** matrix units | after the compatibility gates; needs M5-class hardware |
 
 Phases:
@@ -133,7 +139,7 @@ Phases:
 
 - **S0 done:** native CPU Celeritas, double, 239/0/36.
 - **S1 done:** the float CPU oracle (213/1/61), P9 and P10, with the D1–D4 verdicts.
-- **S2 is next.**
+- **S2 is next.** *(stale within this file: S2 and S3 were reported done later the same day, §5 N8–N9; retired as an order on 2026-11-01, `plan/PLAN.md` §12)*
 
 **The third-party corpus** (owned by "cuda projects"; read-only for you): 381 programs have passed on
 a real GPU. They are in `cuda-projects/ready/` and `ready.json`, indexed in `RESULTS/cuda-projects/READY.md`:
@@ -190,6 +196,11 @@ These are settled. Reopen one only with the user.
 
 **Current next step (N10 / caloml S4):**
 - **N10. Size and propose Geant4 11.2.x + Xerces-C + physics datasets in `~/system-env` (Stage S4)** to the user before downloading any sources (standing rule 3). Once approved and built, rebuild the Celeritas CPU and GPU float builds with `-DCELERITAS_USE_Geant4=ON` and run the S5 physics gate (`cms-2018.gdml` / `testem3-flat.gdml`).
+
+> **Retired as the next step on 2026-11-01.** The execution order is `plan/PLAN.md` §12; the next
+> step is TK-0 on the M1 MacBook Pro (`HANDOFF.md` Part A). Geant4 remains gated by the user (plan
+> §16); the version to fix first: 11.2.x here, 11.4.2 in the caloml record. N1–N9 above are
+> retained as reported; their evidence state is in `plan/PLAN.md` §3.
 
 ### 5.1 Handoff Guide for the Next Apple Silicon Machine
 
@@ -339,6 +350,7 @@ ctest --test-dir ~/system-env/build/celeritas-0.6.3-cuda-float --output-on-failu
 |---|---|
 | project README, gates, G-C0 findings | `README.md` |
 | caloml sample plan of record | `samples/caloml/PLAN.md` |
+| (2026-11-01) the caloml record, renamed, content unchanged; its live steps | `samples/caloml/CALOML-RECORD.md`; `plan/subplan_M/subplan_M6/M6-7.md` |
 | probes (Swift + MSL; one library per case, refusals verbatim, bounded work, JSON with machine block from `common.swift`) | `probe/`, reviewed in `probe/SELF_REVIEW.md` |
 | nine-kernel corpus, nvcc harness, reference metadata | `oracle/src/`, `oracle/run_oracle.py`, `oracle/ref/*.json` (`.bin` via N2) |
 | G-C0 results (M1 Pro) | `RESULTS/as-phase0/Studio/` |
@@ -349,3 +361,28 @@ ctest --test-dir ~/system-env/build/celeritas-0.6.3-cuda-float --output-on-failu
 | CPU oracles | `~/system-env/install/celeritas-0.6.3-cpu{,-float}`, via `source ~/system-env/cuda4AS/env.sh` |
 | caloml, read-only (reference runs from the 5080) | `~/caloml/validation/celeritas/smoke/`, `~/caloml/validation/orange-repro/` |
 | upstream clang with NVPTX | `/opt/homebrew/opt/llvm` (`$CUDA4AS_LLVM`) |
+
+## 11. 2026-11-01 — integration and plan reconciliation (added by the Linux "cuda4AS Committee")
+
+- The Codex lane (Linux box: `codex/*` branches and the canonical `plan/` tree) and this Mac line
+  were merged on `master` (`382a66f`; the Codex lane as found is tagged
+  `pre-mac-integration-2026-11-01`). Record: `plan/subplan_INT/INT-0.md`.
+- Plan revision CUDA-INTEGRATE-01 absorbed this file: D1–D4 (§4) are adopted as architecture
+  decisions; §5's N10 and §3's "S2 is next" are retired as orders; O1, O5, O6, O7 (§6) and the
+  open residuals of §7 are tracked in `plan/PLAN.md` §16 and the TK subplans. Record:
+  `plan/subplan_INT/INT-1.md`.
+- Findings on the toolkit (`plan/PLAN.md` §3): the runtime's host path
+  (`toolkit/src/runtime/cudart.mm:202-262`) runs device code on the CPU and returns `cudaSuccess`
+  without a diagnostic when no Metal pipeline exists; the translator is regex-based;
+  `RESULTS/g-c1/*.json` have no tracked harness behind them, and `mma_inline_ptx.json` claims a
+  match that the tracked translator refuses. The N5–N9 results are therefore
+  REPORTED_NOT_REPRODUCED until TK-0 (nine oracles on the M1 Pro, tracked harness, emulation off)
+  and TK-2 (Celeritas with per-launch path accounting).
+- Next development machine: the M1 MacBook Pro (`HANDOFF.md` Part A, step TK-0). The M4 remains a
+  second sample; its `~/system-env/src` holds the Celeritas and CCCL sources that TK-2 may copy
+  instead of fetching over a metered link.
+- `samples/caloml/PLAN.md` is renamed `samples/caloml/CALOML-RECORD.md` (content unchanged, a
+  dated banner on top); its stages S4–S7 and decisions live in
+  `plan/subplan_M/subplan_M6/M6-7.md`.
+- The M4's `RESULTS/s1/` and `RESULTS/as-phase0/masshjs-Mac-mini/` copies of `p9_lookback.json`
+  and `p10_fp64.json` are byte-identical (checked 2026-11-01); O5 stays the user's.

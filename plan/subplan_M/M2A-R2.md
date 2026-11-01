@@ -4,6 +4,18 @@ Parent step: M2A-R2 in [the master](../PLAN.md).
 State: NEXT_ELIGIBLE_NOT_AUTHORIZED. Planning detail dated 2026-09-27.
 This is a proposed bounded attempt, not an instruction to start or run the Mac.
 
+> **Retired on 2026-11-01 (CUDA-INTEGRATE-01): state RETIRED_SUPERSEDED.**
+> M2A-R2 was never dispatched. The M4 Mac mini line built a toolkit that
+> compiles and launches the unchanged oracles on the Mac directly, so the
+> package-to-Mac route below is no longer the smallest eligible unit. Its
+> purpose is carried by [TK-0](../subplan_TK/TK-0.md) (tracked re-run of the
+> nine oracles on the M1 MacBook Pro with dispatch-path evidence; inherits
+> this step's evidence list and adversarial cases) and
+> [TK-3](../subplan_TK/TK-3.md) (live Clang capture and semantic import as
+> the authority). This document and its four children are retained unchanged
+> as history. The recorded Mac inventory in "Objective and entry gate" is
+> still the current description of the M1 MacBook Pro (master §10).
+
 ## Objective and entry gate
 
 Establish whether the corrected frontend can carry the unchanged enrolled

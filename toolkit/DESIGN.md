@@ -4,6 +4,8 @@
 **Date:** 2026-10-26  
 **Status:** Plan of Record for G-C1 Milestone 1 (Oracle Kernels N5–N7)
 
+> 2026-11-01: "Plan of Record" is retired as a label (the plan is `plan/PLAN.md`); the §2 mapping rules below are adopted by `plan/PLAN.md` §3 as the Metal lowering contract. Nothing below changed.
+
 ---
 
 ## 1. Lowering Target Choice: MSL Source vs. AIR Bitcode

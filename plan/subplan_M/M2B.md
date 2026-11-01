@@ -3,6 +3,18 @@
 Parent step: M2B in [the master](../PLAN.md).
 State: PENDING; implementation is not authorized by this plan.
 
+> **Added 2026-11-01:** the prerequisite "accepted positive M2A-R2" below now
+> reads "accepted TK-3" (master §12). Seeds from the merged M4 line: the
+> `nvcc` driver (`toolkit/src/driver/nvcc_main.cpp`) already satisfies CMake's
+> `enable_language(CUDA)` and `find_package(CUDAToolkit)` for Celeritas 0.6.3
+> and handles `-c`, `-o`, `-M*`, `-Xcompiler` (M2B-4's starting point); the
+> merged `nvlink` and `fatbinary` (`toolkit/src/driver/nvlink_main.cpp`,
+> `fatbinary_main.cpp`) are 20-line stubs that print a version and write an
+> empty output file, exactly the no-op dlink this plan calls unacceptable; the
+> Celeritas float build linked 932 targets through them, which proves nothing
+> about device linking. M2B-2 and M2B-3 therefore start from the M2A-R1 module
+> design, not from the stubs.
+
 ## Objective and prerequisites
 
 Turn the single-TU proof into a real separable-compilation contract. One CUDA
