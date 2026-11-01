@@ -21,8 +21,10 @@ why, so it is not reopened by accident.
 README.md          this file
 HANDOVER.md        who owns the project now, its rules, open items, residuals
                    and next step (from 2026-10-26: the agy session "cuda4AS")
+                   (2026-11-01: that ownership statement is retired; see plan/PLAN.md §2)
 HANDOFF.md         handoff guide: setting up and verifying cuda4AS on another
                    Apple Silicon machine
+                   (Part A, 2026-11-01: the M1 MacBook Pro handover, plan step TK-0)
 toolkit/           the cuda4AS compiler driver (nvcc), translator, clean-room
                    CUDA headers, and Metal/unified-memory runtime (libcudart)
 probe/             the Swift + MSL probes -- source of truth
@@ -36,6 +38,7 @@ RESULTS/           where probe, oracle (RESULTS/g-c1/), and S1 (RESULTS/s1/)
                    results are stored
 samples/           real applications as end-to-end tests, each with its plan;
                    samples/caloml/ is Celeritas GPU transport (PLAN.md)
+                   (2026-11-01: its record is CALOML-RECORD.md; the live steps are in plan/)
 tools/             our own preparation scripts (drop data generation)
 ```
 
@@ -48,6 +51,13 @@ with the RTX 5080 (and the Google Colab GPU harness in `oracle/colab/` for
 third-party corpus benches in `cuda-projects/`) serves as the **`nvcc`
 correctness oracle only**: it produces reference outputs (`oracle/ref/` and
 `RESULTS/cuda-projects/`) and nothing else.
+
+> **2026-11-01:** the next development machine is the M1 MacBook Pro
+> (`HANDOFF.md` Part A); the M4 Mac mini is a second sample. The M4 results
+> quoted in the gate table below are reported by the M4 session and not yet
+> reproduced by a tracked harness; their dispatch path (Metal or the
+> runtime's CPU emulation) is unverified until TK-0 and TK-2
+> (`plan/PLAN.md` §3, §9, §12).
 
 The drop/results loop below is for the other direction: running the probes on
 Apple silicon Macs we do not develop on, to collect more samples of the
@@ -124,8 +134,8 @@ is a correctness blocker and outranks any throughput number from the same run.
 | gate | asks | status |
 |---|---|---|
 | **G-C0** probes | the alias, the heap ceiling, co-residency, BF16 on the accelerators | **PASSED** on an M1 Pro (2026-09-05, `RESULTS/as-phase0/Studio/`) and on the M4 Mac mini (2026-10-26, `RESULTS/as-phase0/masshjs-Mac-mini/`). Two forks taken, the BF16 question deferred to M5-class hardware |
-| **G-C1** compiler | nine-kernel oracle corpus, cuda-samples, CUTLASS Ampere examples and llama.cpp `GGML_CUDA=ON` build with **zero edits** and run correctly | **in progress (top gate).** Nine-kernel oracle corpus (`RESULTS/g-c1/`, 9/9) and Celeritas 0.6.3 float build + device test suite (S2/S3, 214/215 tests, 39/39 GPU tests) **PASSED** on M4 |
-| **G-C3** smoothness | drop-in `nvcc` for CMake/setuptools/PyTorch; PyTorch from source; `pip install flash-attn` | second. CMake `enable_language(CUDA)` + `find_package(CUDAToolkit)` working for Celeritas 0.6.3 |
+| **G-C1** compiler | nine-kernel oracle corpus, cuda-samples, CUTLASS Ampere examples and llama.cpp `GGML_CUDA=ON` build with **zero edits** and run correctly | **in progress (top gate).** Nine-kernel oracle corpus (`RESULTS/g-c1/`, 9/9) and Celeritas 0.6.3 float build + device test suite (S2/S3, 214/215 tests, 39/39 GPU tests) **PASSED** on M4 — *2026-11-01: reported by the M4 session; REPORTED_NOT_REPRODUCED (plan §3 F1, F3)* |
+| **G-C3** smoothness | drop-in `nvcc` for CMake/setuptools/PyTorch; PyTorch from source; `pip install flash-attn` | second. CMake `enable_language(CUDA)` + `find_package(CUDAToolkit)` working for Celeritas 0.6.3 — *2026-11-01: the build is TRUST-BUILT evidence; device-test dispatch path unverified (TK-2)* |
 | **G-C6** coded tier | lmz's Metal decoder verifies byte-identical | **PASSED** on the M4 Mac mini (2026-10-26, `RESULTS/as-phase0/masshjs-Mac-mini/run-p8_lmz_decoder.log`, both kernels byte-identical across 512 streams / 16.8 MB) |
 | **G-C2** matrix units | a cuBLAS-ABI GEMM at ≥ 80 % of MLX on the same chip | after the compatibility gates. Needs M5-class hardware to be worth measuring |
 

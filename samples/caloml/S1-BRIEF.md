@@ -94,3 +94,5 @@ When S1 is done:
 - Leave every change uncommitted.
 - Tell the user it's ready for the Committee. The next stage, S2 (the toolkit surface), belongs to
   the projects converter session.
+
+> 2026-11-01: `samples/caloml/PLAN.md` is now `samples/caloml/CALOML-RECORD.md`; the plan is `plan/PLAN.md`.

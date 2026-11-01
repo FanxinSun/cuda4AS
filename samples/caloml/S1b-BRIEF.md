@@ -81,3 +81,5 @@ stands, say so. A per-op hybrid is also a valid answer: for example df64 arithme
 memory format, and soft64 for any op whose result must be exact.
 
 Hand back as before: a short "S1b results" section in PLAN.md, everything uncommitted.
+
+> 2026-11-01: `samples/caloml/PLAN.md` is now `samples/caloml/CALOML-RECORD.md`; the plan is `plan/PLAN.md`.

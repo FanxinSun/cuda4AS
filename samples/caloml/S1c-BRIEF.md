@@ -18,3 +18,5 @@ the JSON, and installs go into `~/system-env` (none are expected).
    next to the Kahan figure.
 
 Hand back with a short "S1c results" section in PLAN.md.
+
+> 2026-11-01: `samples/caloml/PLAN.md` is now `samples/caloml/CALOML-RECORD.md`; the plan is `plan/PLAN.md`.

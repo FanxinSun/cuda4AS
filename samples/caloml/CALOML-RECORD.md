@@ -1,3 +1,12 @@
+> **Record, not a plan (renamed 2026-11-01).** This file was
+> `samples/caloml/PLAN.md`, written on the M4 Mac mini between 2026-10-21 and
+> 2026-10-26. Its content is unchanged below. The project has one plan,
+> `plan/PLAN.md`; the live steps of this route (S4–S7, the double build) are
+> `plan/subplan_M/subplan_M6/M6-7.md`, its decisions D1–D4 are adopted in
+> `plan/PLAN.md` §3, and its S2/S3 results carry the evidence state given
+> there (reported; dispatch path unverified until TK-2). The "plan of record"
+> wording inside this file is retired as a label.
+
 # samples/caloml — Celeritas GPU transport on the M4, unmodified
 
 Written 2026-10-21 by the Committee session. The user, 2026-10-21: *"Make it as a good sample for
