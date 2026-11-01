@@ -1,3 +1,8 @@
+> **Accepted architecture record.** This ADR remains the selected Route B
+> foundation. Its historical scope statements are preserved; current milestone
+> status, workload routes, result contracts, and the sole execution order are in
+> [plan/PLAN.md](../../plan/PLAN.md).
+
 # ADR: cuda4AS Native AOT Core v1
 
 **Status:** Selected replacement architecture; the bounded M2A vector-add slice

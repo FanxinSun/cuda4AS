@@ -1,3 +1,9 @@
+> **Retired completed action — do not rerun from this document.** This file is
+> preserved as the exact historical M2 entry-retry instruction. Its run
+> completed, found a second independent CuMetal build defect, and selected Route
+> B. It is not a current human action or probe delivery. See
+> [plan/PLAN.md](../../plan/PLAN.md) for current status.
+
 # MAC ACTION REQUIRED — CUDA4AS M2 ENTRY RETRY IS READY
 
 The executor prepared a 137,793-byte corrected delta package. It reuses the existing

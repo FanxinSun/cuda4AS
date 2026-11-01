@@ -1,3 +1,8 @@
+> **Historical pre-result rubric; pending statements below are retired.** M1 and
+> M1R completed with valid negative candidate evidence, and Route B was selected.
+> The rubric is retained as the predeclared decision contract. Current status is
+> authoritative only in [plan/PLAN.md](../../plan/PLAN.md).
+
 # M1 recommendation rubric
 
 Status: predeclared before native results. The originating manager retains the

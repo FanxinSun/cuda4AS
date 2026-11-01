@@ -32,3 +32,4 @@ drop/as-phase0/*.tgz
 /RESULTS/m1/incoming/
 /tools/m1/__pycache__/
 /tests/m1/__pycache__/
+cuda-examples

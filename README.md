@@ -1,3 +1,7 @@
+> **Planning authority:** the single current shared project plan is
+> [plan/PLAN.md](plan/PLAN.md). Historical strategy and evidence documents are
+> preserved, but none supplies a competing active execution order.
+
 # cuda4AS — a native CUDA toolchain for Apple silicon
 
 This directory is the code half of `docs/cuda-on-apple-silicon.md`. That

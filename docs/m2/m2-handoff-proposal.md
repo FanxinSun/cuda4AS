@@ -1,3 +1,9 @@
+> **Retired implementation proposal — preserved history.** The proposed M2A
+> slice was separately authorized and implemented. Its first native package
+> failed at device import; M2A-R1 later corrected the portable frontend
+> contract, while live compiler/native/GPU validation remains NOT_RUN. The
+> current plan is [plan/PLAN.md](../../plan/PLAN.md).
+
 # Proposed M2 handoff — Native AOT Core v1 first vertical slice
 
 **State:** Tracked implementation handoff for the separately authorized M2A

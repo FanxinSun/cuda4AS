@@ -1,3 +1,10 @@
+> **Current implementation history, not an execution plan.** The Native AOT
+> design remains accepted. Portable M2A-R1 corrections through commit
+> de69952dc986173d0b30cca77f55c07b4c14b0ed are accepted only as frontend
+> contract evidence; the historical native package failed at device import and
+> live compiler/native/GPU validation is NOT_RUN. Current gates and status are
+> in [plan/PLAN.md](../../plan/PLAN.md).
+
 # M2A Native AOT Core v1 implementation record
 
 This record applies the selected Route B architecture to the single approved

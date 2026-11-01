@@ -1,3 +1,9 @@
+> **Historical M1 evidence; pending language below is retired.** The Mac return
+> and bounded one-patch retry subsequently completed. The exact CuMetal route
+> failed on two independent build boundaries and is closed as a negative reuse
+> result. Current architecture and execution status are in
+> [plan/PLAN.md](../../plan/PLAN.md); all original audit text remains below.
+
 # M1 pinned candidate audit
 
 Status: source and dependency audit complete; every native cuda4AS case remains
