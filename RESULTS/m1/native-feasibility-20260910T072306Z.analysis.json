@@ -1,0 +1,80 @@
+{
+  "schema": "cuda4as-m1-native-feasibility-analysis-v1",
+  "analysis_utc": "2026-09-10T08:07:33Z",
+  "source_archive": {
+    "filename": "cuda4as-m1-native-return-20260910T072306Z.tgz",
+    "bytes": 20934,
+    "sha256": "67e259c2ec17559f94c03bf19ec697fb894d033f23a8b614ac02388c0f73bff5",
+    "storage": "RESULTS/m1/incoming/ (ignored, unchanged)"
+  },
+  "archive_validation": {
+    "safe_members": true,
+    "member_count": 34,
+    "expanded_file_bytes": 145483,
+    "internal_manifest_sha256": "007831bd8d607f06e649f8d308f708a1ac4de01bc13314d6435d978a45c9c26a",
+    "internal_manifest_valid": true,
+    "package_manifest_matches_bound_artifact": true,
+    "package_manifest_entries": 25,
+    "inventory_binding_matches_validated_return": true
+  },
+  "native_run": {
+    "started_utc": "2026-09-10T07:23:06Z",
+    "ended_utc": "2026-09-10T07:23:35Z",
+    "runner_exit_code": 1,
+    "network_operations": "none",
+    "install_update_sudo_operations": "none",
+    "preflight": "PASS",
+    "candidate_source_integrity": "PASS",
+    "candidate_configure": "PASS",
+    "candidate_build": "FAIL"
+  },
+  "validated_machine_summary": {
+    "architecture": "arm64",
+    "cpu_gpu": "Apple M1 Pro",
+    "macos": "14.4 (23E214)",
+    "xcode": "15.2 (15C500b)",
+    "sdk": "14.2",
+    "cmake": "4.3.3",
+    "ninja": "1.12.1",
+    "llvm": "Homebrew LLVM 23.1.0",
+    "metal_device": "Apple M1 Pro"
+  },
+  "candidate_blocker": {
+    "kind": "pinned_candidate_source_compile_error",
+    "translation_unit": "compiler/ptx/src/lower_to_llvm.cpp",
+    "source_lines": [5423, 5424],
+    "compiler": "Homebrew clang++ 23.1.0, C++20, arm64",
+    "diagnostic": "implicit instantiation of undefined template std::array<std::optional<std::string>, 3>",
+    "evidence": "The pinned translation unit uses std::array but does not include <array>.",
+    "consequence": "The CuMetal build stopped before cumetalc/runtime targets completed and before any enrolled case stage ran."
+  },
+  "cases": [
+    {
+      "id": "oracle.vector_add",
+      "classification": "NOT_RUN",
+      "execution_attempted": false,
+      "reason": "Blocked by the preceding candidate build failure."
+    },
+    {
+      "id": "integration.minimal_cmake_cuda",
+      "classification": "NOT_RUN",
+      "execution_attempted": false,
+      "reason": "Blocked by the preceding candidate build failure."
+    },
+    {
+      "id": "integration.multi_tu_device_link",
+      "classification": "NOT_RUN",
+      "execution_attempted": false,
+      "reason": "Blocked by the preceding candidate build failure."
+    }
+  ],
+  "summary": {
+    "PASS_GPU": 0,
+    "FAIL": 0,
+    "SKIP_ENVIRONMENT": 0,
+    "NOT_RUN": 3,
+    "record_status": "INCOMPLETE",
+    "compatibility_claim": "No Apple-GPU launch, output comparison, or compatibility pass was established."
+  },
+  "next_decision": "Manager judgment is required before any separately disclosed patched-candidate M1 retry. No new Mac artifact or rerun is issued by this analysis."
+}

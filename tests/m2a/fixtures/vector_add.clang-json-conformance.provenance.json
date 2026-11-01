@@ -1,0 +1,55 @@
+{
+  "schema": "cuda4as-clang-json-conformance-provenance-v1",
+  "status": "SYNTHETIC_SCHEMA_CONFORMANCE",
+  "fixture": "tests/m2a/fixtures/vector_add.clang-json-conformance.json",
+  "fixture_sha256": "d6b1bf049ee78cdc742bc2bfa772eba0da699c001873f8b79dfab214af89a01f",
+  "producer": "cuda4AS hand-authored Clang JSON schema conformance fixture",
+  "compiler_identity": {
+    "family": "LLVM Clang CUDA frontend",
+    "intended_version": "23.1.0",
+    "validation_status": "NOT_RUN",
+    "reason": "No compatible local Clang is available in WSL and installation/download is forbidden"
+  },
+  "capture": {
+    "native_clang_capture": false,
+    "status": "NOT_CAPTURED",
+    "reason": "The M2A-R1 correction scope forbids a Mac probe"
+  },
+  "location_normalization": {
+    "schema": "cuda4as-clang-json-location-normalization-v1",
+    "serializer_state": ["LastLocFilename", "LastLocLine"],
+    "elided_provenance": ["exact_deelided", "exact_offset_deelided"],
+    "parent_fallback_provenance": "inherited",
+    "relative_recovery_requires_capture_working_directory": true
+  },
+  "inputs": {
+    "source": "oracle/src/vector_add.cu",
+    "source_sha256": "b3f205cabc42a697276244d5810ce62ff40a5c9cc6a8e1078420ccbefa88d0e2",
+    "header": "oracle/src/oracle.h",
+    "header_sha256": "6e7cc4c2e59e10db5b68df4116ed67ec3fe1d88d559c41e0a9feb2da3dd643bc",
+    "facade": "tools/m2a/clang_cuda_facade/cuda_runtime.h",
+    "facade_sha256": "e4fe928dcbe5e80cee2050f9527ca8a0fc22349192033057b56fa5ee0df46cae"
+  },
+  "intended_command": [
+    "clang++",
+    "-x",
+    "cuda",
+    "--cuda-device-only",
+    "--cuda-gpu-arch=sm_86",
+    "-nocudainc",
+    "-nocudalib",
+    "-I",
+    "tools/m2a/clang_cuda_facade",
+    "-Xclang",
+    "-ast-dump=json",
+    "-fsyntax-only",
+    "oracle/src/vector_add.cu"
+  ],
+  "limitations": [
+    "The fixture uses only supported Clang JSON shapes for this slice: declaration loc, statement/expression range, direct inner *Attr children, linkage wrappers, referencedDecl identity, and stateful filename/line elision.",
+    "Clang createQualType data is limited to qualType; plain pointer parameters therefore retain the compiler fact address_space=unknown. The separate pinned kernel ABI record documents any global/device lowering.",
+    "Builtin identity is accepted only when the exact declaration ID, direct CUDADeviceAttr, pinned const dim3 type, and facade source anchor/hash contract all verify; device_builtin remains ignored/non-AST.",
+    "Clang accepts the device_builtin spelling for CUDA frontend semantics but defines it as an ignored, non-AST attribute; no such child record is modeled.",
+    "This fixture establishes importer schema behavior, not native compiler syntax or Mac execution."
+  ]
+}

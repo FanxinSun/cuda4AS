@@ -1,0 +1,78 @@
+{
+  "schema": "cuda4as-m1-mac-inventory-analysis-v1",
+  "analysis_utc": "2026-09-06T11:54:19Z",
+  "source_archive": {
+    "filename": "cuda4as-m1-mac-inventory-return-20260906T114425Z.tgz",
+    "bytes": 9141,
+    "sha256": "0f30104ff27dc8a42b892afff7303966a6bf9e13abbbd3177689cb72be365fad",
+    "storage": "RESULTS/m1/incoming/ (ignored, unchanged)"
+  },
+  "archive_validation": {
+    "safe_members": true,
+    "member_count": 98,
+    "expanded_file_bytes": 28054,
+    "internal_manifest_valid": true,
+    "internal_manifest_sha256": "0782ed6e6f077fee51dba537c205758f63417dd0f997b85744cf5653173f1f36"
+  },
+  "inventory": {
+    "status": "COMPLETE",
+    "machine": "MacBookPro18,3",
+    "cpu": "Apple M1 Pro",
+    "architecture": "arm64",
+    "memory_bytes": 17179869184,
+    "macos": "14.4 (23E214)",
+    "developer_tools": "full Xcode 15.2 (15C500b), macOS SDK 14.2 (23C53)",
+    "task_filesystem_free_kib": 79963964,
+    "metal_devices": [
+      {
+        "name": "Apple M1 Pro",
+        "has_unified_memory": true,
+        "is_headless": false,
+        "is_low_power": false,
+        "is_removable": false,
+        "max_buffer_length": 8589934592,
+        "recommended_max_working_set_size": 11453251584
+      }
+    ],
+    "system_default_metal_device": {
+      "status": "UNAVAILABLE",
+      "name": null,
+      "interpretation": "MTLCreateSystemDefaultDevice() returned null while MTLCopyAllDevices() enumerated one device; no substitute was selected."
+    }
+  },
+  "existing_prerequisites": {
+    "cmake": "4.3.3",
+    "ninja": "1.12.1",
+    "lz4": "1.10.0 via pkg-config",
+    "zstd": "1.5.7 via pkg-config",
+    "llvm": "not found through Homebrew arm64 path, Intel-Homebrew path, or PATH llvm-config"
+  },
+  "readiness": {
+    "ready_for_native_drop": false,
+    "gaps": [
+      "llvm"
+    ],
+    "not_a_native_execution_result": true
+  },
+  "proposed_dependency_if_user_approves": {
+    "formula": "Homebrew llvm",
+    "stable_version": "23.1.0",
+    "target": "/opt/homebrew/Cellar/llvm/23.1.0 on arm64 Sonoma",
+    "llvm_bottle": {
+      "bytes": 457766943,
+      "sha256": "93d3fc19acc5605054408ab47caed44e4d36729cc1cd5a29a524b9d8a312d5e3"
+    },
+    "missing_runtime_dependency": {
+      "formula": "z3",
+      "version": "5.1.0",
+      "bytes": 13865676,
+      "sha256": "36ccc33c5688b5cd5fc08e16ecc769959b3a64095673a8c51e6fe7df6b9f4c9c"
+    },
+    "combined_uncached_bottle_bytes": 471632619,
+    "approval_state": "NOT_AUTHORIZED",
+    "metadata_sources": [
+      "https://formulae.brew.sh/api/formula/llvm.json",
+      "https://formulae.brew.sh/api/formula/z3.json"
+    ]
+  }
+}

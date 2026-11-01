@@ -1,0 +1,112 @@
+{
+  "archive_prefix": "cuda4as-m2a-native-aot-vector-add-v1",
+  "artifact_id": "cuda4as-m2a-native-aot-vector-add-v1",
+  "bytes": 22535,
+  "files": {
+    "README.md": {
+      "bytes": 454,
+      "mode": "0644",
+      "sha256": "ec58071c794f4c1788123f0cf468d5609272b063898a386c57b2fffd8009d973"
+    },
+    "expected.json": {
+      "bytes": 586,
+      "mode": "0644",
+      "sha256": "c84e880a82a861927867911218963e271487ff9fefabd2681d7d761d03abc92a"
+    },
+    "inventory-binding.json": {
+      "bytes": 1320,
+      "mode": "0644",
+      "sha256": "684a1dffe51446707aedf13668c6a7d10f12b311c003dfc1728799d1c21a6722"
+    },
+    "oracle/src/oracle.h": {
+      "bytes": 3697,
+      "mode": "0644",
+      "sha256": "6e7cc4c2e59e10db5b68df4116ed67ec3fe1d88d559c41e0a9feb2da3dd643bc"
+    },
+    "oracle/src/vector_add.cu": {
+      "bytes": 1748,
+      "mode": "0644",
+      "sha256": "b3f205cabc42a697276244d5810ce62ff40a5c9cc6a8e1078420ccbefa88d0e2"
+    },
+    "run-m2a-native.sh": {
+      "bytes": 8916,
+      "mode": "0755",
+      "sha256": "4db303d8745c6f7f1b8d9260455abac520e733999fe034850aa0df03faa7212d"
+    },
+    "tools/m2a/aot_manifest.py": {
+      "bytes": 2269,
+      "mode": "0644",
+      "sha256": "54c451d88927e716a37b357fa123dfc13768d40ed44e1a9f50042cd90d5a4038"
+    },
+    "tools/m2a/native_aot.py": {
+      "bytes": 40052,
+      "mode": "0644",
+      "sha256": "361da38ba65a1d02ec53eb1e837bb5e8492f067b84e4e217bd9fba71c19bc4e2"
+    },
+    "tools/m2a/preflight.py": {
+      "bytes": 4036,
+      "mode": "0644",
+      "sha256": "56acdc5220d6bd3c91bd4dfb6bdab8989bd69fcb3e967892e2db49bc8e5a6503"
+    },
+    "tools/m2a/runtime.mm": {
+      "bytes": 7727,
+      "mode": "0644",
+      "sha256": "e3ee4298add13d3c0e58a3a7b16adb75b7ad8127f3e07bec220e7769c67fa8fe"
+    },
+    "tools/m2a/verify_m2a_package.py": {
+      "bytes": 2735,
+      "mode": "0644",
+      "sha256": "81953e83540e71d223a634fa608f19a6f5f6328258c6759c88368f920718257e"
+    }
+  },
+  "generated_path": "tools/m2a/artifacts/cuda4as-m2a-native-aot-vector-add-v1.tgz",
+  "inventory_binding": {
+    "inventory_archive": {
+      "bytes": 9133,
+      "filename": "cuda4as-m1-mac-inventory-return-20260906T163442Z.tgz",
+      "sha256": "b1a9d5bd34e1b009abf9bc58ff48823b39130af62b7ebcc7f08ce4ee31c8d339"
+    },
+    "limits": {
+      "max_jobs": 4,
+      "max_minutes": 30,
+      "max_task_disk_gib": 20,
+      "min_free_gib": 5
+    },
+    "llvm": {
+      "minimum_major": 18,
+      "origin": "/opt/homebrew/opt/llvm",
+      "version": "23.1.0"
+    },
+    "machine": {
+      "arch": "arm64",
+      "cpu_brand": "Apple M1 Pro",
+      "metal_compiler": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/metal",
+      "metal_devices": [
+        {
+          "has_unified_memory": true,
+          "is_headless": false,
+          "is_low_power": false,
+          "is_removable": false,
+          "max_buffer_length": "8589934592",
+          "max_threads_per_threadgroup": [
+            1024,
+            1024,
+            1024
+          ],
+          "name": "Apple M1 Pro",
+          "recommended_max_working_set_size": "11453251584",
+          "registry_id": "4294969587"
+        }
+      ],
+      "model": "MacBookPro18,3",
+      "os_build": "23E214",
+      "os_version": "14.4",
+      "sdk_version": "14.2",
+      "xcode_version": "Xcode 15.2\nBuild version 15C500b"
+    },
+    "schema": "cuda4as-m2a-inventory-binding-v1",
+    "status": "BOUND_TO_VALIDATED_M1_INVENTORY"
+  },
+  "schema": "cuda4as-m2a-artifact-manifest-v1",
+  "sha256": "1184651ff56d76fbea08fce7c68ca857615d1f27fe78934470d218313fbbe1c0"
+}

@@ -1,0 +1,469 @@
+{
+  "schema_version": 1,
+  "manifest_id": "cuda4as-m0-initial-corpus",
+  "created_on": "2026-09-06",
+  "contract": {
+    "id": "cuda4as-m0-initial-ampere-source-profile",
+    "revision": "0.1",
+    "path": "docs/m0/compatibility.md"
+  },
+  "m0_scope": {
+    "statement": "M0 inventories reference evidence and proposes future tests. It performs no cuda4AS compiler, runtime, native Mac, or Apple-GPU attempt.",
+    "existing_oracle_cases": 9,
+    "proposed_case_specs": 16,
+    "cuda4as_attempts": 0,
+    "current_classification_counts": {
+      "PASS_GPU": 0,
+      "PASS_CPU_EXPLICIT": 0,
+      "FAIL": 0,
+      "UNSUPPORTED": 0,
+      "SKIP_ENVIRONMENT": 0,
+      "NOT_RUN": 25
+    }
+  },
+  "allowed_classifications": [
+    "PASS_GPU",
+    "PASS_CPU_EXPLICIT",
+    "FAIL",
+    "UNSUPPORTED",
+    "SKIP_ENVIRONMENT",
+    "NOT_RUN"
+  ],
+  "baseline": {
+    "repository_commit": "ad30bbd16554da5cea55e13f2c7459ed64b893d5",
+    "annotated_tag": "pre-codex-takeover-2026-09-06",
+    "tag_object": "9342af7e0afa8d8c73cf771bb94d2ffe2f76fd43",
+    "oracle_producer": {
+      "role": "correctness oracle only",
+      "collected_utc": "2026-09-03T07:21:13+00:00",
+      "host": "DESKTOP-V6NN9KI",
+      "platform": "Linux 6.18.33.2-microsoft-standard-WSL2",
+      "gpu": "NVIDIA GeForce RTX 5080, driver 610.88, 16303 MiB, compute capability 12.0",
+      "nvcc": "Build cuda_13.2.r13.2/compiler.37953736_0",
+      "nvcc_path": "/usr/local/cuda-13/bin/nvcc",
+      "arch": "sm_120"
+    }
+  },
+  "initial_profile": {
+    "host": "native arm64 macOS",
+    "device": "one capability-selected Apple GPU in one process",
+    "os": "macOS 14 or later only for configurations that pass the capability and corpus checks",
+    "cuda_source_profile": "provisional Ampere-oriented enrolled slice",
+    "architecture_macro": "provisional __CUDA_ARCH__=860",
+    "compilation": "ahead-of-time host and device compilation",
+    "default_execution": "Apple GPU with contract-preserving behavior or a clear unsupported/error result",
+    "cpu_execution": "explicit selection only",
+    "numerical_default": "faithful declared CUDA behavior",
+    "reduced_precision": "named opt-in mode with separate results"
+  },
+  "acceptance_routes": {
+    "oracle_exact_gpu": {
+      "eligible_classification": "PASS_GPU",
+      "criteria": [
+        "The enrolled .cu source SHA-256 matches this manifest and application source and build files are unchanged.",
+        "The documented cuda4AS selection configures, compiles, device-compiles, device-links when required, and links a native arm64 executable.",
+        "The result proves that the named kernel work was submitted to and completed on the Apple GPU.",
+        "Execution has no unexpected diagnostic, crash, timeout, or undisclosed fallback.",
+        "The full output length and bytes match the enrolled exact reference and the resulting SHA-256 matches this manifest.",
+        "Commands, revisions, machine, OS, SDK/compiler, inputs, backend evidence, assertions, logs, and classification validate against the result schema."
+      ]
+    },
+    "integration_gpu": {
+      "eligible_classification": "PASS_GPU",
+      "criteria": [
+        "The case is pinned and clean, and its declared application source and build files are unchanged.",
+        "Only documented toolchain selection, install prefix, environment, or existing upstream options are used.",
+        "Configure, dependency generation, host/device compilation, device link when applicable, native link, loader discovery, and install checks all succeed.",
+        "The named work is submitted to and completed on the Apple GPU with backend evidence tied to the launch.",
+        "Every declared semantic, output, lifetime, error, and resource assertion passes.",
+        "The complete reproducibility and result record validates against the contract."
+      ]
+    },
+    "semantic_gpu": {
+      "eligible_classification": "PASS_GPU",
+      "criteria": [
+        "The fixture and expected behavior are pinned before execution.",
+        "The unchanged fixture builds through the documented native cuda4AS path.",
+        "Apple-GPU execution is positively established for the operations under test.",
+        "All exact, tolerance, ordering, visibility, lifetime, and error assertions declared before the run pass.",
+        "The complete machine and result record validates against the contract."
+      ]
+    },
+    "unsupported_diagnostic": {
+      "eligible_classification": "UNSUPPORTED",
+      "criteria": [
+        "The unchanged negative fixture reaches the intended cuda4AS analysis or capability gate.",
+        "The rejection names the original source location and unsupported construct and states the declared action.",
+        "No executable is silently substituted and no CPU or Apple-GPU work is reported for the rejected construct.",
+        "The diagnostic assertion is recorded as passed separately while the requested feature remains classified UNSUPPORTED."
+      ]
+    },
+    "cpu_explicit": {
+      "eligible_classification": "PASS_CPU_EXPLICIT",
+      "criteria": [
+        "The user or test explicitly selects the declared CPU execution mode.",
+        "The result reports CPU execution without Apple-GPU attribution.",
+        "Every declared CPU semantic, synchronization, numerical, ordering, and error assertion passes.",
+        "The complete record validates against the contract and is excluded from GPU pass counts."
+      ]
+    }
+  },
+  "oracle_cases": [
+    {
+      "id": "oracle.vector_add",
+      "kind": "existing_oracle",
+      "source": {
+        "path": "oracle/src/vector_add.cu",
+        "sha256": "b3f205cabc42a697276244d5810ce62ff40a5c9cc6a8e1078420ccbefa88d0e2",
+        "unchanged_required": true
+      },
+      "reference": {
+        "metadata_path": "oracle/ref/vector_add.json",
+        "data_path": "oracle/ref/vector_add.bin",
+        "dtype": "f32",
+        "shape": [1048576],
+        "bytes": 4194304,
+        "sha256": "ed551637cf393112d0093037a0b41b9d1e9bd213c6037e8efcde30cf480f0332",
+        "comparison": "exact",
+        "m0_integrity": "MATCH"
+      },
+      "expected_behavior": "Compute one exact-representable FP32 elementwise sum for each of 1,048,576 elements.",
+      "features": ["global indexing", "cudaMalloc", "host-device copies", "kernel launch", "device synchronization"],
+      "acceptance_route": "oracle_exact_gpu",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "oracle.saxpy",
+      "kind": "existing_oracle",
+      "source": {
+        "path": "oracle/src/saxpy.cu",
+        "sha256": "03ccab042fdfb416764ff0e9b6c0c60eb9964f17f9cf2380b6adb0d96522d54a",
+        "unchanged_required": true
+      },
+      "reference": {
+        "metadata_path": "oracle/ref/saxpy.json",
+        "data_path": "oracle/ref/saxpy.bin",
+        "dtype": "f32",
+        "shape": [1048576],
+        "bytes": 4194304,
+        "sha256": "70949ff55979f4a3eaebb6d904fa2115d90328cf4f2d7040460159057f2462ca",
+        "comparison": "exact",
+        "m0_integrity": "MATCH"
+      },
+      "expected_behavior": "Compute y = 2.5*x + y for 1,048,576 exact-representable FP32 elements.",
+      "features": ["scalar kernel argument", "FP32 multiply-add", "memory copies", "launch and synchronization"],
+      "acceptance_route": "oracle_exact_gpu",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "oracle.reduce_sum",
+      "kind": "existing_oracle",
+      "source": {
+        "path": "oracle/src/reduce_sum.cu",
+        "sha256": "34eec8bcf34886b49d4c161de89b6e333013a962510cf7515ec243ffb756dfbd",
+        "unchanged_required": true
+      },
+      "reference": {
+        "metadata_path": "oracle/ref/reduce_sum.json",
+        "data_path": "oracle/ref/reduce_sum.bin",
+        "dtype": "f32",
+        "shape": [4096],
+        "bytes": 16384,
+        "sha256": "1e9a9b2b2a225e70b13ed112181d70b6d6be1cad00577bd0986907fffa3e12b0",
+        "comparison": "exact",
+        "m0_integrity": "MATCH"
+      },
+      "expected_behavior": "Produce all 4,096 exact FP32 block partial sums using shared memory, synchronization, and full-mask shuffle-down operations.",
+      "features": ["1024-thread block", "shared memory", "__syncthreads", "__shfl_down_sync", "warp reduction"],
+      "acceptance_route": "oracle_exact_gpu",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "oracle.matmul_tiled",
+      "kind": "existing_oracle",
+      "source": {
+        "path": "oracle/src/matmul_tiled.cu",
+        "sha256": "dad87624d6e25cba676bf6a8d92d3e9bc5745662d269d8d2627d9f8e15b4f3ac",
+        "unchanged_required": true
+      },
+      "reference": {
+        "metadata_path": "oracle/ref/matmul_tiled.json",
+        "data_path": "oracle/ref/matmul_tiled.bin",
+        "dtype": "f32",
+        "shape": [512, 512],
+        "bytes": 1048576,
+        "sha256": "97f09e437a4f24d2cd22fd5eece3374cc68365fa537c43ee01e859d34472b102",
+        "comparison": "exact",
+        "m0_integrity": "MATCH"
+      },
+      "expected_behavior": "Compute an exact 512x512 FP32 matrix product through 32x32 shared-memory tiles with loop-carried barriers.",
+      "features": ["two-dimensional launch", "static shared arrays", "uniform loop barriers", "FP32 matrix multiply"],
+      "acceptance_route": "oracle_exact_gpu",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "oracle.histogram_atomics",
+      "kind": "existing_oracle",
+      "source": {
+        "path": "oracle/src/histogram_atomics.cu",
+        "sha256": "8d6acb49309e4168146b89cfb82bd53f5c6d16f51b5530fee553886fd2f2a2b8",
+        "unchanged_required": true
+      },
+      "reference": {
+        "metadata_path": "oracle/ref/histogram_atomics.json",
+        "data_path": "oracle/ref/histogram_atomics.bin",
+        "dtype": "u32",
+        "shape": [256],
+        "bytes": 1024,
+        "sha256": "1c3febdc0e0a6affa4a2d05ba1f98d0fe1604d3c3cfdf398a84da96f651ead4c",
+        "comparison": "exact",
+        "m0_integrity": "MATCH"
+      },
+      "expected_behavior": "Count every input byte exactly once through shared-memory and global unsigned atomic additions.",
+      "features": ["shared atomics", "global atomics", "barriers", "grid-stride loop", "cudaMemset"],
+      "acceptance_route": "oracle_exact_gpu",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "oracle.shared_48kb",
+      "kind": "existing_oracle",
+      "source": {
+        "path": "oracle/src/shared_48kb.cu",
+        "sha256": "d35c24654f5f883b297c1e7c4d597c0d4bb81c6840252b33fd526fa0062538f9",
+        "unchanged_required": true
+      },
+      "reference": {
+        "metadata_path": "oracle/ref/shared_48kb.json",
+        "data_path": "oracle/ref/shared_48kb.bin",
+        "dtype": "u32",
+        "shape": [64, 256],
+        "bytes": 65536,
+        "sha256": "02de6cdeaee2558edd7d428420a539a1e9bc68a12722a49d91a522d0098886dc",
+        "comparison": "exact",
+        "m0_integrity": "MATCH"
+      },
+      "expected_behavior": "Preserve addressing, cross-thread visibility, isolation, and exact output for a kernel that touches a 49,152-byte static shared array.",
+      "features": ["shared memory beyond recorded 32 KiB native limit", "barriers", "cross-thread visibility", "resource accounting"],
+      "acceptance_route": "oracle_exact_gpu",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "oracle.mma_inline_ptx",
+      "kind": "existing_oracle",
+      "source": {
+        "path": "oracle/src/mma_inline_ptx.cu",
+        "sha256": "0ea8cdc08e29e53d49d565226c7886aab9d217255e3579b89353db4cf54022dd",
+        "unchanged_required": true
+      },
+      "reference": {
+        "metadata_path": "oracle/ref/mma_inline_ptx.json",
+        "data_path": "oracle/ref/mma_inline_ptx.bin",
+        "dtype": "f32",
+        "shape": [16, 8],
+        "bytes": 512,
+        "sha256": "a1ca504830bd3182aa3a4bdad30e51985fb2ab0cb98c205a74f518dae1e75319",
+        "comparison": "exact",
+        "m0_integrity": "MATCH"
+      },
+      "expected_behavior": "Preserve the PTX m16n8k16 f16-input/f32-accumulate fragment semantics and exact 16x8 output.",
+      "features": ["inline PTX parsing", "mma.sync", "half operands", "warp-fragment layout", "FP32 accumulation"],
+      "acceptance_route": "oracle_exact_gpu",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "oracle.grid_sync",
+      "kind": "existing_oracle",
+      "source": {
+        "path": "oracle/src/grid_sync.cu",
+        "sha256": "2de90bb06407a445f6a9a72bcedc963b9beb81a01cb0b635f6fce6300d38f7c2",
+        "unchanged_required": true
+      },
+      "reference": {
+        "metadata_path": "oracle/ref/grid_sync.json",
+        "data_path": "oracle/ref/grid_sync.bin",
+        "dtype": "u32",
+        "shape": [504],
+        "bytes": 2016,
+        "sha256": "4fbd942528ebeb6cb546cbbbd2177efc399f9ec609356d727d864368cb66b089",
+        "comparison": "exact",
+        "m0_integrity": "MATCH",
+        "scope": "The 504-block shape was derived from occupancy on the NVIDIA producer. It is not an Apple target constant. This exact artifact is applicable only to a qualifying run with the same enrolled shape; a different legitimate device-derived shape needs a separately enrolled expected result or a fixed-shape successor fixture."
+      },
+      "expected_behavior": "A cooperative launch makes every phase-one write visible before cross-grid phase-two reads and produces the exact formula for every enrolled block.",
+      "features": ["separable compilation", "device link", "cooperative launch", "cooperative_groups", "grid.sync", "cross-grid visibility"],
+      "acceptance_route": "oracle_exact_gpu",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "oracle.double_dot",
+      "kind": "existing_oracle",
+      "source": {
+        "path": "oracle/src/double_dot.cu",
+        "sha256": "107886875a914abc7471aa5bad1a89fc67843593ab12a5796ba0f14f464c0f31",
+        "unchanged_required": true
+      },
+      "reference": {
+        "metadata_path": "oracle/ref/double_dot.json",
+        "data_path": "oracle/ref/double_dot.bin",
+        "dtype": "f64",
+        "shape": [4096],
+        "bytes": 32768,
+        "sha256": "10857aa39522c523ccdbc34ff62c041e07c6ae239034003f84bb695942b7891b",
+        "comparison": "exact",
+        "m0_integrity": "MATCH",
+        "scope": "The exact-representable input is necessary but insufficient evidence for faithful general binary64; a reduced-precision implementation can reproduce this narrow fixture."
+      },
+      "expected_behavior": "Produce 4,096 exact binary64 per-block dot products with shared storage and barriers under the declared default faithful-FP64 mode.",
+      "features": ["binary64", "shared double array", "barrier reduction", "memory copies"],
+      "acceptance_route": "oracle_exact_gpu",
+      "additional_pass_condition": "PASS_GPU under the default profile requires a declared faithful-binary64 implementation; reduced-precision and explicit CPU runs receive separately identified results and cannot prove this broader semantic claim.",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    }
+  ],
+  "proposed_cases": [
+    {
+      "id": "integration.minimal_cmake_cuda",
+      "kind": "proposed_integration",
+      "fixture": "A pinned minimal project that enables CUDA in unchanged CMake files and builds one kernel plus native host code.",
+      "expected_behavior": "Selecting cuda4AS through its documented compiler or toolchain interface configures, compiles, links, runs on the Apple GPU, and returns the pinned exact result without project edits.",
+      "acceptance_route": "integration_gpu",
+      "future_eligible_classification": "PASS_GPU",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "integration.multi_tu_device_link",
+      "kind": "proposed_integration",
+      "fixture": "Pinned unchanged CUDA project with kernels and device symbols across translation units, relocatable device code, and a device-link step.",
+      "expected_behavior": "The ordinary build resolves device symbols, links native arm64 host/runtime code, launches each intended Apple-GPU kernel, and matches exact outputs.",
+      "acceptance_route": "integration_gpu",
+      "future_eligible_classification": "PASS_GPU",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "integration.native_macos_aot_install",
+      "kind": "proposed_integration",
+      "fixture": "Pinned install-and-consume project exercising ahead-of-time Metal artifacts, headers, libraries, framework links, prefix discovery, and a clean consumer build.",
+      "expected_behavior": "A documented native macOS install is relocatable within its stated contract, a clean consumer discovers it, and the installed application executes validated work on the Apple GPU.",
+      "acceptance_route": "integration_gpu",
+      "future_eligible_classification": "PASS_GPU",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "semantic.address_space_matrix",
+      "kind": "proposed_semantic",
+      "fixture": "Pinned global, shared, constant, local, generic-pointer, cast, alignment, and address-space diagnostic matrix.",
+      "expected_behavior": "Loads, stores, conversions, alias rules, visibility, and rejected casts match the declared CUDA slice with source-located diagnostics for unsupported forms.",
+      "acceptance_route": "semantic_gpu",
+      "future_eligible_classification": "PASS_GPU",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "semantic.multi_buffer_pointer_aliasing",
+      "kind": "proposed_semantic",
+      "fixture": "Pinned multi-allocation tests with interior pointers, structs, pointer arithmetic, aliases, lifetime changes, touched backing, and bounded memory pressure.",
+      "expected_behavior": "Pointer identity within the declared representation, data coherence, aliasing, bounds, lifetime, and allocation failures remain correct across multiple buffers without relying on a single fixed-address remap result.",
+      "acceptance_route": "semantic_gpu",
+      "future_eligible_classification": "PASS_GPU",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "semantic.warp_masks_partial_shuffle",
+      "kind": "proposed_semantic",
+      "fixture": "Pinned active-mask, vote, shuffle mode/width, partial-warp, divergent-control, and warp-synchronization matrix over varied block sizes.",
+      "expected_behavior": "Each enrolled CUDA warp operation produces its declared value and visibility semantics; width-32 observations alone cannot satisfy the case.",
+      "acceptance_route": "semantic_gpu",
+      "future_eligible_classification": "PASS_GPU",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "semantic.uniform_barrier",
+      "kind": "proposed_semantic",
+      "fixture": "Pinned threadgroup and SIMD-group synchronization cases in which all required participants uniformly enter each barrier, including loop and memory-visibility variants.",
+      "expected_behavior": "All participants observe the declared writes after each valid barrier over the supported control-flow and address-space matrix.",
+      "acceptance_route": "semantic_gpu",
+      "future_eligible_classification": "PASS_GPU",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "diagnostic.divergent_barrier",
+      "kind": "proposed_negative",
+      "fixture": "Pinned source with a CUDA synchronization construct that would lower to a barrier whose required participants diverge.",
+      "expected_behavior": "cuda4AS rejects an unsafe lowering at the original source construct unless it first applies and proves a semantics-preserving uniform transformation.",
+      "acceptance_route": "unsupported_diagnostic",
+      "future_eligible_classification": "UNSUPPORTED",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "semantic.grid_sync_eligible",
+      "kind": "proposed_semantic",
+      "fixture": "Pinned cooperative-grid fixtures eligible for a specified correctness-preserving mechanism, including kernel splitting and live-state transfer where used.",
+      "expected_behavior": "Cross-grid writes and reads obey every grid synchronization point under adversarial occupancy, side-effect, loop, and divergence cases, with the selected mechanism recorded.",
+      "acceptance_route": "semantic_gpu",
+      "future_eligible_classification": "PASS_GPU",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "diagnostic.grid_sync_ineligible",
+      "kind": "proposed_negative",
+      "fixture": "Pinned cooperative-grid source that violates the proof conditions of each implemented grid-wide synchronization mechanism.",
+      "expected_behavior": "cuda4AS rejects the construct with its source location and failed eligibility condition instead of relying on measured co-residency or risking deadlock.",
+      "acceptance_route": "unsupported_diagnostic",
+      "future_eligible_classification": "UNSUPPORTED",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "semantic.atomic64_matrix",
+      "kind": "proposed_semantic",
+      "fixture": "Pinned 64-bit integer atomic operation by address-space, ordering, scope, contention, wraparound, compare-exchange, and visibility matrix, expanded into leaf cases before execution.",
+      "expected_behavior": "Each implemented native or disclosed Apple-GPU emulated operation matches its CUDA contract and progress requirements; unavailable leaf operations receive separate source-located unsupported results.",
+      "acceptance_route": "semantic_gpu",
+      "future_eligible_classification": "PASS_GPU",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "semantic.fp64_edge_suite",
+      "kind": "proposed_semantic",
+      "fixture": "Pinned binary64 rounding, cancellation, subnormal, signed-zero, NaN/infinity, conversion, comparison, aliasing, atomic, and math-function cases with independent references.",
+      "expected_behavior": "Default-mode results satisfy the declared faithful binary64 rules; every reduced representation and explicit CPU route is selected, labeled, and counted separately.",
+      "acceptance_route": "semantic_gpu",
+      "future_eligible_classification": "PASS_GPU",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "semantic.runtime_ordering_errors",
+      "kind": "proposed_semantic",
+      "fixture": "Pinned allocations, copies, streams, events, launches, synchronization, lifetimes, invalid arguments, asynchronous failures, and device-selection cases.",
+      "expected_behavior": "Observable ordering, visibility, completion, ownership, and error reporting match the enrolled CUDA runtime contract, including aggregate test-run failure when a required assertion fails.",
+      "acceptance_route": "semantic_gpu",
+      "future_eligible_classification": "PASS_GPU",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "semantic.architecture_dispatch_supported",
+      "kind": "proposed_semantic",
+      "fixture": "Pinned preprocessor and constexpr dispatch paths exercised through representative -arch and -gencode forms that select only enrolled behavior.",
+      "expected_behavior": "The documented flags consistently select the provisional profile and __CUDA_ARCH__ value, preserve the chosen source path, and execute its assertions on the Apple GPU.",
+      "acceptance_route": "semantic_gpu",
+      "future_eligible_classification": "PASS_GPU",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "diagnostic.architecture_dispatch_unsupported",
+      "kind": "proposed_negative",
+      "fixture": "Pinned architecture-dispatch source whose selected branch requires an unavailable mandatory feature or requests an incoherent architecture flag combination.",
+      "expected_behavior": "cuda4AS issues a source-located or option-located unsupported diagnostic instead of advertising compute-capability behavior that it cannot provide.",
+      "acceptance_route": "unsupported_diagnostic",
+      "future_eligible_classification": "UNSUPPORTED",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    },
+    {
+      "id": "integration.lmz_owned_host_harness",
+      "kind": "proposed_integration",
+      "fixture": "A cuda4AS-owned host harness using the unchanged pinned drop/as-phase0/lmz/lmz_rans.metal shader and existing streams.bin/ref.bin data; the lmz repository remains untouched.",
+      "expected_behavior": "The owned harness selects the recorded device deterministically, proves Apple-GPU execution, validates barrier participation for each enabled path, and produces all 512 streams byte-identical to ref.bin; direct and prefetch paths are reported separately.",
+      "acceptance_route": "integration_gpu",
+      "future_eligible_classification": "PASS_GPU",
+      "current_result": {"attempted": false, "classification": "NOT_RUN"}
+    }
+  ]
+}

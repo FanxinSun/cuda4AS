@@ -1,0 +1,71 @@
+{
+  "schema": "cuda4as-clang-cuda-facade-manifest-v1",
+  "version": "1.0.0",
+  "header": {
+    "path": "tools/m2a/clang_cuda_facade/cuda_runtime.h",
+    "sha256": "e4fe928dcbe5e80cee2050f9527ca8a0fc22349192033057b56fa5ee0df46cae"
+  },
+  "builtin_contract": {
+    "schema": "cuda4as-clang-cuda-facade-builtins-v1",
+    "device_builtin_semantics": {
+      "spelling": "device_builtin",
+      "status": "IGNORED_NON_AST",
+      "ast_node": 0,
+      "ast_json_child": false
+    },
+    "header_path": "tools/m2a/clang_cuda_facade/cuda_runtime.h",
+    "header_sha256": "e4fe928dcbe5e80cee2050f9527ca8a0fc22349192033057b56fa5ee0df46cae",
+    "declarations": {
+      "blockIdx": {
+        "line": 62,
+        "column": 53,
+        "qual_type": "const dim3",
+        "source_anchor": "extern \"C\" __device__ __device_builtin__ const dim3 blockIdx;"
+      },
+      "blockDim": {
+        "line": 63,
+        "column": 53,
+        "qual_type": "const dim3",
+        "source_anchor": "extern \"C\" __device__ __device_builtin__ const dim3 blockDim;"
+      },
+      "threadIdx": {
+        "line": 64,
+        "column": 53,
+        "qual_type": "const dim3",
+        "source_anchor": "extern \"C\" __device__ __device_builtin__ const dim3 threadIdx;"
+      }
+    }
+  },
+  "supported_clang": {
+    "family": "LLVM Clang CUDA frontend",
+    "minimum_major": 18,
+    "maximum_major_exclusive": 24,
+    "intended_identity": "Homebrew LLVM 23.1.0",
+    "intended_major": 23,
+    "validation_status": "NOT_RUN",
+    "required_features": [
+      "cuda-device-only",
+      "cuda-gpu-arch=sm_86",
+      "ast-dump=json"
+    ]
+  },
+  "target": {
+    "host_arch": "arm64",
+    "host_triple_prefix": "arm64-apple-darwin",
+    "cuda_gpu_arch": "sm_86"
+  },
+  "compiler_arguments": [
+    "-x",
+    "cuda",
+    "--cuda-device-only",
+    "--cuda-gpu-arch=sm_86",
+    "-nocudainc",
+    "-nocudalib",
+    "-I",
+    "<FACADE_DIR>",
+    "-Xclang",
+    "-ast-dump=json",
+    "-fsyntax-only",
+    "<SOURCE>"
+  ]
+}

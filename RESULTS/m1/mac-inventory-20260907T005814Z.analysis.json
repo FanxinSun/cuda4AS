@@ -1,0 +1,60 @@
+{
+  "schema": "cuda4as-m1-mac-inventory-analysis-v1",
+  "analysis_utc": "2026-09-06T17:05:40Z",
+  "source_archive": {
+    "filename": "cuda4as-m1-mac-inventory-return-20260906T163442Z.tgz",
+    "bytes": 9133,
+    "sha256": "b1a9d5bd34e1b009abf9bc58ff48823b39130af62b7ebcc7f08ce4ee31c8d339",
+    "storage": "RESULTS/m1/incoming/ (ignored, unchanged)"
+  },
+  "archive_validation": {
+    "safe_members": true,
+    "member_count": 98,
+    "expanded_file_bytes": 27910,
+    "internal_manifest_sha256": "88ee3552d55ca5854c10171f7360bb747b652cf0d2da3107580d4468bb46f536",
+    "internal_manifest_valid": true
+  },
+  "inventory": {
+    "status": "COMPLETE",
+    "machine": "MacBookPro18,3",
+    "cpu": "Apple M1 Pro",
+    "architecture": "arm64",
+    "macos": "14.4 (23E214)",
+    "developer_tools": "full Xcode 15.2 (15C500b), macOS SDK 14.2 (23C53)",
+    "task_filesystem_free_kib": 79963964,
+    "metal_devices": [
+      {
+        "name": "Apple M1 Pro",
+        "has_unified_memory": true,
+        "is_headless": false,
+        "is_low_power": false,
+        "is_removable": false,
+        "max_buffer_length": 8589934592,
+        "recommended_max_working_set_size": 11453251584
+      }
+    ],
+    "system_default_metal_device": {
+      "status": "UNAVAILABLE",
+      "name": null,
+      "interpretation": "MTLCreateSystemDefaultDevice() returned null while MTLCopyAllDevices() enumerated one device; no substitute was selected."
+    }
+  },
+  "existing_prerequisites": {
+    "cmake": "4.3.3",
+    "ninja": "1.12.1",
+    "llvm": "23.1.0 at /opt/homebrew/opt/llvm; llvm-config and clang++ available",
+    "lz4": "1.10.0 via pkg-config",
+    "zstd": "1.5.7 via pkg-config"
+  },
+  "readiness": {
+    "ready_for_native_drop": true,
+    "gaps": [],
+    "not_a_native_execution_result": true
+  },
+  "native_drop": {
+    "status": "BOUND_TO_RETURNED_INVENTORY",
+    "filename": "cuda4as-m1-native-feasibility-v1.tgz",
+    "bytes": 8549223,
+    "sha256": "dbb390b4f470b8f286ccb65a2b8565a235e749d9122c16e8e92ade96e0099bc7"
+  }
+}

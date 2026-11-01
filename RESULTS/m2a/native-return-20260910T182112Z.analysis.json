@@ -1,0 +1,51 @@
+{
+  "aot_manifest": null,
+  "archive": {
+    "bytes": 15186,
+    "members": 18,
+    "path": "RESULTS/m2a/incoming/cuda4as-m2a-native-return-20260910T182112Z.tgz",
+    "sha256": "1dd8134c7635ca7b4fdc18dcfdc88f0d401d0d3976a5fd5a0131798db622a903"
+  },
+  "checks": {
+    "fallback_prohibited": true,
+    "immutable_source_hashes_bound": true,
+    "inventory_binding": true,
+    "safe_archive_members": true
+  },
+  "classification": "FAIL",
+  "device": null,
+  "diagnostics": {
+    "environment_gap": false,
+    "message": null
+  },
+  "failed_stage": "device_import",
+  "output": null,
+  "reported_classification": "FAIL",
+  "schema": "cuda4as-m2a-analysis-v1",
+  "source_hashes": {
+    "cuda": "b3f205cabc42a697276244d5810ce62ff40a5c9cc6a8e1078420ccbefa88d0e2",
+    "header": "6e7cc4c2e59e10db5b68df4116ed67ec3fe1d88d559c41e0a9feb2da3dd643bc"
+  },
+  "stage_record": {
+    "classification": "FAIL",
+    "cpu_fallback": false,
+    "runner_exit": 1,
+    "runtime_compilation": false,
+    "schema": "cuda4as-m2a-stage-record-v1",
+    "stages": {
+      "aot_manifest": "NOT_RUN",
+      "device-import": "FAIL",
+      "device_link": "NOT_RUN",
+      "host_compile": "NOT_RUN",
+      "ir_verify": "NOT_RUN",
+      "metal_compile": "NOT_RUN",
+      "metallib_link": "NOT_RUN",
+      "msl_generation": "NOT_RUN",
+      "native_link": "NOT_RUN",
+      "package-verify": "PASS",
+      "preflight": "PASS",
+      "runtime_launch": "NOT_RUN"
+    }
+  },
+  "stages": null
+}
